@@ -38,8 +38,8 @@ public class Hand {
     }
 
     public void switchTiles(Tile myTile, Tile pickedUpTile) {
-        TileBag.removeTile(pickedUpTile);
-        TileBag.addTile(myTile);
+        //TileBag.removeTile(pickedUpTile);
+        //TileBag.addTile(myTile);
         tilesInHand.remove(myTile);
         tilesInHand.add(pickedUpTile);
     }
