@@ -15,10 +15,25 @@
  */
 package Scrabble.controller;
 
+import java.awt.event.ActionEvent;
+
 /**
  *
  * @author jms107
  */
 public class GameManager {
 // connects model to view
+    public GameManager() {
+
+    }
+
+    public void turn(ActionEvent e) {
+//        if(e.getSource() == playWord)
+//            //check validity, score word, and end turn
+//        else if(e.getSource() == pass)
+//            //change current player to next player, and end turn
+//        else if(e.getSource() == switchTiles)
+//            //pickUp tile from Bag, switch with tile selected, and end turn
+
+    }
 }
