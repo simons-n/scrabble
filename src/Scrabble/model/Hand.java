@@ -29,7 +29,13 @@ public class Hand {
         this.tilesInHand = tilesInHand;
     }
 
-    public void addTile(Tile tile) {
+    public void addTileFromBag(TileBag bag) {
+        Tile tile;
+        tile = bag.draw();
+        this.tilesInHand.add(tile);
+    }
+
+    public void addTileFromBoard(Tile tile) {
         this.tilesInHand.add(tile);
     }
 
