@@ -30,9 +30,8 @@ public class Player {
         this.myHand = myHand;
     }
 
-    public void setMyHand(Hand myHand, Tile newTile) {
+    public void setMyHand(Hand myHand) {
         this.myHand = myHand;
-        this.myHand.addTile(newTile);
     }
 
     public void playWord() {
