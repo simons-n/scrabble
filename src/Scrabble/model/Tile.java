@@ -44,4 +44,8 @@ public class Tile {
         this.letter = letter;
     }
 
+    public int getScore() {
+        return this.score;
+    }
+
 }

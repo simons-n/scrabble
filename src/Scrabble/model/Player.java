@@ -24,6 +24,10 @@ public class Player {
     private int totalScore = 0;
     private Hand myHand;
 
+    public Player(String name) {
+        this.name = name;
+    }
+
     public Player(String name, int totalScore, Hand myHand) {
         this.name = name;
         this.totalScore = totalScore;
@@ -54,5 +58,10 @@ public class Player {
 
     }
     //rearrange tiles will be handled in GUI
+
+    @Override
+    public String toString() {
+        return this.name;
+    }
 
 }

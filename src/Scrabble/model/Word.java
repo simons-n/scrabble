@@ -39,4 +39,12 @@ public class Word {
         return true;
     }
 
+    public int scoreWord() {
+        int score = 0;
+        for (int i = 0; i < tilesInWord.size(); i++) {
+            score += tilesInWord.get(i).getScore();
+        }
+        return score;
+    }
+
 }
