@@ -28,7 +28,7 @@ public class ScrabbleServer {
     public static void main(String args[]) {
         Player me = new Player("Caroline");
         try {
-            ServerSocket srvr = new ServerSocket(1234);
+            ServerSocket srvr = new ServerSocket(80);
             Socket skt = srvr.accept();
             System.out.print("Server has connected!\n");
             PrintWriter out = new PrintWriter(skt.getOutputStream(), true);

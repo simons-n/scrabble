@@ -15,27 +15,47 @@
  */
 package Scrabble.model;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
  * @author jms107
  */
 public class Word {
-    private List<Tile> tilesInWord = new ArrayList<>();
+    private ArrayList<Tile> tilesInWord = new ArrayList<>();
 
     public Word(ArrayList tilesInWord) {
         this.tilesInWord = tilesInWord;
     }
 
-    public void setTilesInWord(List<Tile> tilesInWord, Tile placedTile) {
+    public void setTilesInWord(ArrayList<Tile> tilesInWord, Tile placedTile) {
         this.tilesInWord = tilesInWord;
         //add the tiles that are placed from the GUI
     }
 
+    /**
+     * https://docs.oracle.com/javase/tutorial/networking/urls/connecting.html
+     *
+     * @return
+     */
     public boolean check() {
         //check if word is in scrabble dictionary
+        try {
+            URL scrabbleDict = new URL(
+                    "http://www.hasbro.com/scrabble-2/en_US/search.cfm");
+            URLConnection scrabbleDictConnection = scrabbleDict.openConnection();
+            scrabbleDictConnection.connect();
+
+            System.out.println("connected");
+        } catch (MalformedURLException e) {
+            // URL failed
+        } catch (IOException e) {
+            // openConnection() failed
+        }
         return true;
     }
 
@@ -45,6 +65,32 @@ public class Word {
             score += tilesInWord.get(i).getScore();
         }
         return score;
+    }
+
+    public ArrayList<Tile> getTilesInWord() {
+        return tilesInWord;
+    }
+
+    public String toString() {
+        String s = "";
+        for (Tile tile : getTilesInWord()) {
+            s += tile.getLetter();
+        }
+        return s;
+    }
+
+    // checking if scoreWord() works
+    public static void main(String args[]) {
+        ArrayList<Tile> list = new ArrayList<>();
+        list.add(new Tile(Val.C));
+        list.add(new Tile(Val.A));
+        list.add(new Tile(Val.T));
+        System.out.println(list);
+
+        Word w = new Word(list);
+        w.check();
+        System.out.println("word " + w);
+        System.out.println(w.scoreWord());
     }
 
 }
