@@ -15,11 +15,13 @@
  */
 package Scrabble.view;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  *
@@ -41,8 +43,10 @@ public class Board extends javax.swing.JPanel {
     private ImageIcon starImage = new ImageIcon("centerStar.png");
 
     public Board() {
+
         this.grid = new JLabel[15][15];
         setLayout(new GridLayout(15, 15));
+
         javax.swing.border.Border grayBorder = BorderFactory.createLineBorder(
                 Color.WHITE);
         setBorder(grayBorder);
@@ -57,12 +61,14 @@ public class Board extends javax.swing.JPanel {
 //                    addDWS(this.grid,x,y);
 //
 //                }
+                JPanel panel = new JPanel();
+                panel.setSize(20, 20);
 
                 this.grid[x][y] = blankBoardSquare;
-                this.grid[x][y].setSize(50, 50);
                 this.grid[x][y].setBorder(BorderFactory.createLineBorder(
                         Color.WHITE));
-                add(this.grid[x][y]);
+                panel.add(this.grid[x][y]);
+                add(panel, BorderLayout.CENTER);
             }
         }
     }
