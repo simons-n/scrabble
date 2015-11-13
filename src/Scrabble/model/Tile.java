@@ -43,6 +43,19 @@ public class Tile {
     public Tile(Val letter) { //use getOrdinal to get index position of enum
         //use getValue to get the letter
         this.letter = letter;
+        this.score = letter.getScore();
+    }
+
+    public int getScore() {
+        return this.score;
+    }
+
+    public Val getLetter() {
+        return letter;
+    }
+
+    public String toString() {
+        return this.letter + "(" + this.score + ")";
     }
 
 }

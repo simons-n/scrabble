@@ -16,7 +16,6 @@
 package Scrabble.model;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 /**
@@ -24,7 +23,7 @@ import java.util.Random;
  * @author jms107
  */
 public class TileBag {
-    private List<Tile> tilesInBag = new ArrayList<>();
+    private ArrayList<Tile> tilesInBag = new ArrayList<>();
 
     public TileBag(ArrayList tilesInBag) {
         this.tilesInBag = tilesInBag;
@@ -130,7 +129,7 @@ public class TileBag {
 
     }
 
-    public void setTilesInBag(List<Tile> tilesInBag) {
+    public void setTilesInBag(ArrayList<Tile> tilesInBag) {
         this.tilesInBag = tilesInBag;
 
     }

@@ -16,14 +16,13 @@
 package Scrabble.model;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
  * @author jms107
  */
 public class Hand {
-    private List<Tile> tilesInHand = new ArrayList<>(7);
+    private ArrayList<Tile> tilesInHand = new ArrayList<>(7);
 
     public Hand(ArrayList tilesInHand) {
         this.tilesInHand = tilesInHand;

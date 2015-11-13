@@ -15,6 +15,8 @@
  */
 package Scrabble.model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author jms107
@@ -23,6 +25,19 @@ public class Player {
     private String name;
     private int totalScore = 0;
     private Hand myHand;
+    // tileBag object will be same for all players
+    private TileBag tileBag;
+
+    public Player(String name) {
+        this.name = name;
+    }
+
+    // instantiating a player without a hand already created
+    public Player(String name, int totalScore) {
+        this.name = name;
+        this.totalScore = totalScore;
+        this.myHand = new Hand(newHand());
+    }
 
     public Player(String name, int totalScore, Hand myHand) {
         this.name = name;
@@ -30,11 +45,20 @@ public class Player {
         this.myHand = myHand;
     }
 
+    public ArrayList<Tile> newHand() {
+        ArrayList<Tile> hand = new ArrayList<>(7);
+        hand.add(tileBag.draw());
+        return hand;
+    }
+
     public void setMyHand(Hand myHand) {
         this.myHand = myHand;
     }
 
-    public void playWord() {
+    public void playWord(Word word) {
+        if (word.check()) {
+            this.totalScore += word.scoreWord();
+        }
 
     }
 
@@ -42,11 +66,7 @@ public class Player {
 
     }
 
-    public void newHand() {
-
-    }
-
-    public void siwtchTilesInHand() {
+    public void switchTilesInHand() {
 
     }
 
@@ -54,5 +74,10 @@ public class Player {
 
     }
     //rearrange tiles will be handled in GUI
+
+    @Override
+    public String toString() {
+        return this.name;
+    }
 
 }
