@@ -33,7 +33,6 @@ public class Scrabbleboard extends javax.swing.JFrame {
         pack();
         setVisible(true);
         initComponents();
-        initComponents();
     }
 
     /**
