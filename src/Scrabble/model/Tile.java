@@ -30,7 +30,7 @@ enum Val {
         this.score = score;
     }
 
-    int getScore() {
+    int getScore() { // use to get score of tile
         return this.score;
     }
 }
@@ -40,7 +40,8 @@ public class Tile {
     private Val letter;
     private int score;
 
-    public Tile(Val letter) {
+    public Tile(Val letter) { //use getOrdinal to get index position of enum
+        //use getValue to get the letter
         this.letter = letter;
     }
 

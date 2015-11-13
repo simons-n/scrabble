@@ -25,20 +25,22 @@ import javax.swing.SwingUtilities;
  *
  * @author jms107
  */
-public class ScrabbleBoard {
-    JFrame frame = new JFrame("Scrabble");
-    JPanel panel = new JPanel();
+public class ScrabbleBoard extends JFrame {
+    JPanel boardPanel = new JPanel();
+    JPanel handPanel = new JPanel();
+    JPanel resultsPanel = new JPanel();
     JButton playbtn = new JButton("Play");
     JButton swapbtn = new JButton("Swap");
     JButton passbtn = new JButton("Pass");
     JButton shufflebtn = new JButton("Shuffle");
 
     public ScrabbleBoard() {
-        panel.setLayout(new GridLayout(2, 2, 3, 3));
-        panel.add(playbtn);
-        panel.add(swapbtn);
-        panel.add(passbtn);
-        panel.add(shufflebtn);
+        boardPanel.setLayout(new GridLayout(15, 15));
+        boardPanel.add(playbtn);
+        boardPanel.add(swapbtn);
+        boardPanel.add(passbtn);
+        boardPanel.add(shufflebtn);
+        //frame.setVisible(true);
     }
 
     /**
@@ -48,7 +50,10 @@ public class ScrabbleBoard {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new ScrabbleBoard();
+                ScrabbleBoard window = new ScrabbleBoard();
+                window.setTitle("Scrabble Game");
+                window.setSize(800, 500);
+                window.setVisible(true);
             }
         });
         //create GUI
