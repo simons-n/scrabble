@@ -29,14 +29,14 @@ import javax.swing.JLabel;
 public class Board extends javax.swing.JPanel {
     private JLabel[][] grid;
 
-    private JLabel doubleLetterScoreSquare = new JLabel();
-    private JLabel doubleWordScoreSquare = new JLabel();
-    private JLabel tripleLetterScoreSquare = new JLabel();
-    private JLabel tripleWordScoreSquare = new JLabel();
-    private JLabel starCenterSquare = new JLabel();
+//    private JLabel doubleLetterScoreSquare = new JLabel();
+//    private JLabel doubleWordScoreSquare = new JLabel();
+//    private JLabel tripleLetterScoreSquare = new JLabel();
+//    private JLabel tripleWordScoreSquare = new JLabel();
+//    private JLabel starCenterSquare = new JLabel();
     private ImageIcon backgroundImage = new ImageIcon(
-            "Images/rsz_backgroundsquare.png");
-    private JLabel blankBoardSquare = new JLabel(backgroundImage);
+            "Images/BackgroundSquare.png");
+//    private JLabel blankBoardSquare = new JLabel(backgroundImage);
     private ImageIcon tripleLetterImage = new ImageIcon("Images/tls.png");
     private ImageIcon doubleLetterImage = new ImageIcon("Images/dls.png");
     private ImageIcon tripleWordImage = new ImageIcon("Images/tws.png");
@@ -48,7 +48,7 @@ public class Board extends javax.swing.JPanel {
         this.grid = new JLabel[15][15];
         this.setLayout(new GridLayout(15, 15));
 //        this.setLayout(new FlowLayout());
-        this.setBackground(Color.gray);
+        this.setBackground(Color.WHITE);
         //this.setSize(new Dimension(10, 10));
 //        this.add(blankBoardSquare);
 //        this.add(doubleWordScoreSquare);
@@ -57,26 +57,30 @@ public class Board extends javax.swing.JPanel {
         javax.swing.border.Border grayBorder = BorderFactory.createLineBorder(
                 Color.WHITE);
         setBorder(grayBorder);
-//        blankBoardSquare = new JLabel(backgroundImage);
-        blankBoardSquare.setPreferredSize(new Dimension(30, 30));
 
         for (int x = 0; x < 15; x++) {
             for (int y = 0; y < 15; y++) {
-//                if ((x == 0 & y == 0) || (x == 0 & y == 14) || (x == 14 & y == 0) || (x == 14 & y == 14) || (x == 14 & y == 7) || (x == 7 & y == 14) || (x == 0 & y == 7) || (x == 7 & y == 7)) {
-//                    addTWS(this.grid, x, y);
-//                } else if ((x == 7 & y == 7)) {
-//                    addStar(this.grid, x, y);
-//                } else if ((x != 0 & x != 14) & (y != 0 & y != 14) & y == x) {
-//                    addDWS(this.grid, x, y);
-//
-//                } else {
+                if ((x == 0 & y == 0) || (x == 0 & y == 14) || (x == 14 & y == 0) || (x == 14 & y == 14) || (x == 14 & y == 7) || (x == 7 & y == 14) || (x == 0 & y == 7) || (x == 7 & y == 0)) {
+                    addTWS(this.grid, x, y);
+                } else if (x == 7 & y == 7) {
+                    addStar(this.grid, x, y);
+                } else if (((x != 0 & x != 14) & (y != 0 & y != 14) & (x != 7 & y != 7) & (x != 6 & y != 6) & (x != 8 & y != 8) & (x != 5 & y != 5) & (x != 9 & y != 9) & y == x) || (x == 13 & y == 1) || (x == 12 & y == 2) || (x == 11 & y == 3) || (x == 10 & y == 4) || (y == 13 & x == 1) || (y == 12 & x == 2) || (y == 11 & x == 3) || (y == 10 & x == 4)) {
+                    addDWS(this.grid, x, y);
 
-                this.grid[x][y] = new JLabel(backgroundImage);
-                this.grid[x][y].setPreferredSize(new Dimension(30, 30));
-                ;
-                this.grid[x][y].setBorder(BorderFactory.createLineBorder(
-                        Color.WHITE));
-                add(this.grid[x][y]);
+                } else if ((x == 6 & y == 6) || (x == 8 & y == 8) || (x == 6 & y == 8) || (x == 8 & y == 6) || (x == 0 & y == 3) || (x == 0 & y == 11) || (x == 11 & y == 0) || (x == 3 & y == 0) || (x == 14 & y == 3) || (x == 14 & y == 11) || (x == 11 & y == 14) || (x == 3 & y == 14) || (x == 6 & y == 2) || (x == 7 & y == 3) || (x == 8 & y == 2) || (x == 12 & y == 6) || (x == 12 & y == 8) || (x == 11 & y == 7) || (y == 6 & x == 2) || (y == 7 & x == 3) || (y == 8 & x == 2) || (y == 12 & x == 6) || (y == 12 & x == 8) || (y == 11 & x == 7)) {
+                    addDLS(this.grid, x, y);
+
+                } else if ((x == 5 & y == 5) || (x == 9 & y == 9) || (x == 5 & y == 9) || (x == 9 & y == 5) || (x == 1 & y == 5) || (x == 1 & y == 9) || (x == 13 & y == 5) || (x == 13 & y == 9) || (y == 1 & x == 5) || (y == 1 & x == 9) || (y == 13 & x == 5) || (y == 13 & x == 9)) {
+                    addTLS(this.grid, x, y);
+
+                } else {
+
+                    this.grid[x][y] = new JLabel(backgroundImage);
+                    this.grid[x][y].setPreferredSize(new Dimension(30, 30));
+                    this.grid[x][y].setBorder(BorderFactory.createLineBorder(
+                            Color.WHITE));
+                    add(this.grid[x][y]);
+                }
             }
         }
     }
@@ -85,29 +89,44 @@ public class Board extends javax.swing.JPanel {
 //        }
 
     public void addTWS(JLabel[][] grid, int x, int y) {
-        tripleWordScoreSquare.setIcon(tripleWordImage);
-        grid[x][y] = tripleWordScoreSquare;
+        grid[x][y] = new JLabel(tripleWordImage);
+        grid[x][y].setPreferredSize(new Dimension(30, 30));
+        grid[x][y].setBorder(BorderFactory.createLineBorder(
+                Color.WHITE));
+        add(grid[x][y]);
 
     }
 
     public void addTLS(JLabel[][] grid, int x, int y) {
-        tripleLetterScoreSquare.setIcon(tripleLetterImage);
-        grid[x][y] = tripleLetterScoreSquare;
+        grid[x][y] = new JLabel(tripleLetterImage);
+        grid[x][y].setPreferredSize(new Dimension(30, 30));
+        grid[x][y].setBorder(BorderFactory.createLineBorder(
+                Color.WHITE));
+        add(grid[x][y]);
     }
 
     public void addDWS(JLabel[][] grid, int x, int y) {
-        doubleWordScoreSquare.setIcon(doubleWordImage);
-        grid[x][y] = doubleWordScoreSquare;
+        grid[x][y] = new JLabel(doubleWordImage);
+        grid[x][y].setPreferredSize(new Dimension(30, 30));
+        grid[x][y].setBorder(BorderFactory.createLineBorder(
+                Color.WHITE));
+        add(grid[x][y]);
     }
 
     public void addDLS(JLabel[][] grid, int x, int y) {
-        doubleLetterScoreSquare.setIcon(doubleLetterImage);
-        grid[x][y] = doubleLetterScoreSquare;
+        grid[x][y] = new JLabel(doubleLetterImage);
+        grid[x][y].setPreferredSize(new Dimension(30, 30));
+        grid[x][y].setBorder(BorderFactory.createLineBorder(
+                Color.WHITE));
+        add(grid[x][y]);
     }
 
     public void addStar(JLabel[][] grid, int x, int y) {
-        starCenterSquare.setIcon(starImage);
-        grid[x][y] = doubleLetterScoreSquare;
+        grid[x][y] = new JLabel(starImage);
+        grid[x][y].setPreferredSize(new Dimension(30, 30));
+        grid[x][y].setBorder(BorderFactory.createLineBorder(
+                Color.WHITE));
+        add(grid[x][y]);
     }
 
 }
