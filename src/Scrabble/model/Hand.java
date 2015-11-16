@@ -22,7 +22,7 @@ import java.util.ArrayList;
  * @author jms107
  */
 public class Hand {
-    private ArrayList<Tile> tilesInHand = new ArrayList<>(7);
+    private ArrayList<Tile> tilesInHand = new ArrayList<>();
 
     public Hand(ArrayList tilesInHand) {
         this.tilesInHand = tilesInHand;

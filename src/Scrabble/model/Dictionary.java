@@ -22,28 +22,26 @@ import java.io.IOException;
 import java.util.HashMap;
 
 /**
+ * Our scrabble dictionary was found on www.github.com
  *
- * @author calw001
+ * @see
+ * <https://raw.githubusercontent.com/jonbcard/scrabble-bot/master/src/dictionary.txt>
+ * @author Caroline and Nick
  */
-public class Dictionary {
+public class Dictionary extends HashMap {
 
-    private HashMap<Integer, String> dict = new HashMap<Integer, String>();
-    private String text;
-
-    public void textToHashMap() throws FileNotFoundException, IOException {
+    public Dictionary() throws FileNotFoundException, IOException {
         String line;
         BufferedReader in = new BufferedReader(new FileReader("dictionary.txt"));
 
         line = in.readLine();
         while (line != null) {
+            this.put(line, line.length());
             line = in.readLine();
-            dict.put(line.length(), line);
         }
     }
 
-    public static void main(String[] args) throws IOException {
-        Dictionary dictionary = new Dictionary();
-        dictionary.textToHashMap();
-    }
-
+//    public static void main(String[] args) throws IOException {
+//        Dictionary dictionary = new Dictionary();
+//    }
 }

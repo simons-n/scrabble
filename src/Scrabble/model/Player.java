@@ -27,9 +27,35 @@ public class Player {
     private Hand myHand;
     // tileBag object will be same for all players
     private TileBag tileBag;
+    private boolean skipTurn = false;
+    private ArrayList<Tile> discardPile;
 
     public Player(String name) {
         this.name = name;
+    }
+
+    public void setSkipTurn() {
+        if (skipTurn == false) {
+            this.skipTurn = true;
+        } else {
+            this.skipTurn = false;
+        }
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getTotalScore() {
+        return totalScore;
+    }
+
+    public Hand getMyHand() {
+        return myHand;
+    }
+
+    public boolean isSkipTurn() {
+        return skipTurn;
     }
 
     // instantiating a player without a hand already created
@@ -47,7 +73,9 @@ public class Player {
 
     public ArrayList<Tile> newHand() {
         ArrayList<Tile> hand = new ArrayList<>(7);
-        hand.add(tileBag.draw());
+        for (int i = 0; i < 7; i++) {
+            hand.add(tileBag.draw());
+        }
         return hand;
     }
 
@@ -63,11 +91,17 @@ public class Player {
     }
 
     public void pass() {
-
+        // This will pass the turn to the next player in the network, somehow
     }
 
     public void switchTilesInHand() {
-
+        setSkipTurn();
+        for (Tile tile : discardPile) {
+            myHand.addTileFromBag(tileBag);
+        }
+        for (Tile tile : discardPile) {
+            tileBag.addTile(tile);
+        }
     }
 
     public void shuffleTiles() {
