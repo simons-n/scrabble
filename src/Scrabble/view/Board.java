@@ -16,7 +16,6 @@
 package Scrabble.view;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.GridLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -47,7 +46,7 @@ public class Board extends javax.swing.JPanel {
         this.grid = new JLabel[15][15];
         this.setLayout(new GridLayout(15, 15));
         this.setBackground(Color.gray);
-        this.setSize(new Dimension(10, 10));
+        //this.setSize(new Dimension(10, 10));
         this.add(blankBoardSquare);
         this.add(blankBoardSquare);
 //        JFrame board = new JFrame();

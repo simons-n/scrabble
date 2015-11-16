@@ -27,8 +27,11 @@ public class ScrabbleServer {
 
     public static void main(String args[]) {
         Player me = new Player("Caroline");
+        System.out.println("x");
         try {
-            ServerSocket srvr = new ServerSocket(80);
+            System.out.println("x");
+            ServerSocket srvr = new ServerSocket(100);
+            System.out.println("x");
             Socket skt = srvr.accept();
             System.out.print("Server has connected!\n");
             PrintWriter out = new PrintWriter(skt.getOutputStream(), true);
@@ -38,6 +41,7 @@ public class ScrabbleServer {
             skt.close();
             srvr.close();
         } catch (Exception e) {
+            System.out.println(e);
             System.out.print("Whoops! It didn't work!\n");
         }
     }

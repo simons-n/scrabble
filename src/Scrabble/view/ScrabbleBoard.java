@@ -53,8 +53,8 @@ public class ScrabbleBoard extends JFrame {
 
         //center panel
         Board grid = new Board();
-        boardPanel.setSize(new Dimension(400, 400));
-        //boardPanel.setLayout(new GridLayout(15, 15));
+        boardPanel.setPreferredSize(new Dimension(400, 400));
+        boardPanel.setLayout(new GridLayout(15, 15));
         //boardPanel.setBackground(Color.black);
         boardPanel.add(grid);
 
