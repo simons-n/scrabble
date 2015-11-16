@@ -17,6 +17,7 @@ package Scrabble.model;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
 
@@ -32,7 +33,7 @@ public class ScrabbleClient {
 
             System.out.println("Local IP Address : " + localaddr);
             System.out.println("Local hostname : " + localaddr.getHostName());
-            Socket skt = new Socket("134.82.132.165", 100);
+            Socket skt = new Socket("134.82.132.134", 1025);
             BufferedReader in = new BufferedReader(new InputStreamReader(
                     skt.getInputStream()));
             System.out.print("Received string: ");
@@ -42,7 +43,15 @@ public class ScrabbleClient {
             System.out.println(in.readLine()); // Read one line and output it
 
             System.out.print("'\n");
-            in.close();
+            //in.close();
+
+            Player nick = new Player("Nick");
+
+            PrintWriter out = new PrintWriter(skt.getOutputStream(), true);
+            System.out.print("Sending string: '" + nick + "'\n");
+            out.print(nick);
+            //out.close();
+            //skt.close();
         } catch (Exception e) {
             System.out.println(e);
             System.out.print("Whoops! It didn't work!\n");

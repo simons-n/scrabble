@@ -15,6 +15,8 @@
  */
 package Scrabble.model;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -27,19 +29,27 @@ public class ScrabbleServer {
 
     public static void main(String args[]) {
         Player me = new Player("Caroline");
-        System.out.println("x");
         try {
-            System.out.println("x");
-            ServerSocket srvr = new ServerSocket(100);
-            System.out.println("x");
+            ServerSocket srvr = new ServerSocket(1025);
             Socket skt = srvr.accept();
             System.out.print("Server has connected!\n");
             PrintWriter out = new PrintWriter(skt.getOutputStream(), true);
             System.out.print("Sending string: '" + me + "'\n");
             out.print(me);
             out.close();
-            skt.close();
-            srvr.close();
+            //skt.close();
+            //srvr.close();
+
+            BufferedReader in = new BufferedReader(new InputStreamReader(
+                    skt.getInputStream()));
+            System.out.print("Received string: ");
+
+            while (!in.ready()) {
+            }
+            System.out.println(in.readLine()); // Read one line and output it
+
+            System.out.print("'\n");
+            in.close();
         } catch (Exception e) {
             System.out.println(e);
             System.out.print("Whoops! It didn't work!\n");

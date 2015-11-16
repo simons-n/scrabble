@@ -69,8 +69,8 @@ public class Board extends javax.swing.JPanel {
 //                } else if ((x != 0 & x != 14) & (y != 0 & y != 14) & y == x) {
 //                    addDWS(this.grid, x, y);
 //
-//                } else {
 
+//                } else {
                 this.grid[x][y] = new JLabel(backgroundImage);
                 this.grid[x][y].setPreferredSize(new Dimension(30, 30));
                 ;
