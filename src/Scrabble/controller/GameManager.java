@@ -29,19 +29,25 @@ public class GameManager {
         GameManager game = new GameManager();
     }
 
-    public GameManager() {
+    public GameManager(ScrabbleBoard view, ) {
+
+    }
+
+    public void updateViewFromModel() {
 
     }
 
     public void actionPerformed(ActionEvent e) {
-//        if(e.getSource() == playWord)
-//            //check validity, score word, and end turn
-//        else if(e.getSource() == pass)
-//            //change current player to next player, and end turn
-//        else if(e.getSource() == switchTiles)
-//            //pickUp tile from Bag, switch with tile selected, and end turn
-//        if (e.getSource() == view.getDirectionsBtn()) {
-//            view.getDirectionsPanel().setVisible(true);
+        if (e.getSource() == playWord) //check validity, score word, and end turn
+        {
+            else if (e.getSource() == pass) //change current player to next player, and end turn
+                    {
+                        else if(e.getSource() == switchTiles)
+            //pickUp tile from Bag, switch with tile selected, and end turn
+        if (e.getSource() == view.getDirectionsBtn()) {
+            view.getDirectionsPanel().setVisible(true);
     }
+                    }
+        }
 
-}
+    }
