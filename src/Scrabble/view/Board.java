@@ -17,6 +17,7 @@ package Scrabble.view;
 
 import java.awt.Color;
 import java.awt.GridLayout;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
@@ -45,28 +46,21 @@ public class Board extends javax.swing.JPanel {
 
         this.grid = new JLabel[15][15];
         this.setLayout(new GridLayout(15, 15));
+//        this.setLayout(new FlowLayout());
         this.setBackground(Color.gray);
         //this.setSize(new Dimension(10, 10));
-        this.add(blankBoardSquare);
-        this.add(blankBoardSquare);
-//        JFrame board = new JFrame();
-//        board.setLayout(new GridLayout(15, 15));
-//        board.add(blankBoardSquare);
-//        board.pack();
-//        board.setVisible(true);
+//        this.add(blankBoardSquare);
+//        this.add(doubleWordScoreSquare);
+//        this.add(blankBoardSquare);
 
-//        for (int m = 0; m < 15; m++) {
-//            for (int n = 0; n < 15; n++) {
-//                this.grid[m][n] = blankBoardSquare;
-//                add(this.grid[m][n]);
-//            }
-//        }
-//        javax.swing.border.Border grayBorder = BorderFactory.createLineBorder(
-//                Color.WHITE);
-//        setBorder(grayBorder);
+        javax.swing.border.Border grayBorder = BorderFactory.createLineBorder(
+                Color.WHITE);
+        setBorder(grayBorder);
 //        blankBoardSquare = new JLabel(backgroundImage);
-//        for (int x = 0; x < 15; x++) {
-//            for (int y = 0; y < 15; y++) {
+        blankBoardSquare.setPreferredSize(new Dimension(30, 30));
+
+        for (int x = 0; x < 15; x++) {
+            for (int y = 0; y < 15; y++) {
 //                if ((x == 0 & y == 0) || (x == 0 & y == 14) || (x == 14 & y == 0) || (x == 14 & y == 14) || (x == 14 & y == 7) || (x == 7 & y == 14) || (x == 0 & y == 7) || (x == 7 & y == 7)) {
 //                    addTWS(this.grid, x, y);
 //                } else if ((x == 7 & y == 7)) {
@@ -75,15 +69,19 @@ public class Board extends javax.swing.JPanel {
 //                    addDWS(this.grid, x, y);
 //
 //                } else {
-//
-//                    this.grid[x][y] = blankBoardSquare;
-//                    this.grid[x][y].setBorder(BorderFactory.createLineBorder(
-//                            Color.WHITE));
-//                    add(this.grid[x][y]);
-//                }
-//            }
-//        }
+
+                this.grid[x][y] = new JLabel(backgroundImage);
+                this.grid[x][y].setPreferredSize(new Dimension(30, 30));
+                ;
+                this.grid[x][y].setBorder(BorderFactory.createLineBorder(
+                        Color.WHITE));
+                add(this.grid[x][y]);
+            }
+        }
     }
+//        for (int x = 0; x < 225; x++) {
+//            this.add(doubleWordScoreSquare);
+//        }
 
     public void addTWS(JLabel[][] grid, int x, int y) {
         tripleWordScoreSquare.setIcon(tripleWordImage);

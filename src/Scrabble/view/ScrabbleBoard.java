@@ -33,7 +33,7 @@ import javax.swing.border.Border;
  * @author jms107
  */
 public class ScrabbleBoard extends JFrame {
-    JPanel boardPanel = new JPanel();
+    //JPanel boardPanel = new JPanel();
     JPanel handPanel = new JPanel();
     JLabel handLabel = new JLabel();
     JPanel actionPanel = new JPanel();
@@ -52,11 +52,11 @@ public class ScrabbleBoard extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //center panel
-        Board grid = new Board();
-        boardPanel.setPreferredSize(new Dimension(400, 400));
-        boardPanel.setLayout(new GridLayout(15, 15));
+        Board board = new Board();
+        //boardPanel.setSize(new Dimension(400, 400));
+        //boardPanel.setLayout(new GridLayout(15, 15));
         //boardPanel.setBackground(Color.black);
-        boardPanel.add(grid);
+        //boardPanel.add(grid);
 
         //left panel
         leftPanel.setSize(new Dimension(60, 300));
@@ -99,7 +99,7 @@ public class ScrabbleBoard extends JFrame {
         add(handPanel, BorderLayout.SOUTH);
         add(leftPanel, BorderLayout.WEST);
         add(actionPanel, BorderLayout.EAST);
-        add(boardPanel, BorderLayout.CENTER);
+        add(board, BorderLayout.CENTER);
         pack();
         //frame.setVisible(true);
     }
