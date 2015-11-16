@@ -15,11 +15,18 @@
  */
 package Scrabble.view;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
+import javax.swing.border.Border;
 
 /**
  *
@@ -28,18 +35,71 @@ import javax.swing.SwingUtilities;
 public class ScrabbleBoard extends JFrame {
     JPanel boardPanel = new JPanel();
     JPanel handPanel = new JPanel();
-    JPanel resultsPanel = new JPanel();
-    JButton playbtn = new JButton("Play");
+    JLabel handLabel = new JLabel();
+    JPanel actionPanel = new JPanel();
+    JButton playbtn = new JButton("Play Word");
     JButton swapbtn = new JButton("Swap");
     JButton passbtn = new JButton("Pass");
     JButton shufflebtn = new JButton("Shuffle");
+    JPanel leftPanel = new JPanel();
+    JTextArea scoresLabel = new JTextArea(10, 10);
+    JTextArea letterDistribLabel = new JTextArea(20, 10);
+    JTextArea tileBagLabel = new JTextArea(10, 10);
 
     public ScrabbleBoard() {
+        Border blackBorder = BorderFactory.createLineBorder(
+                Color.BLACK);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        //center panel
+        Board grid = new Board();
+        boardPanel.setSize(new Dimension(400, 400));
         boardPanel.setLayout(new GridLayout(15, 15));
-        boardPanel.add(playbtn);
-        boardPanel.add(swapbtn);
-        boardPanel.add(passbtn);
-        boardPanel.add(shufflebtn);
+        boardPanel.add(grid);
+
+        //left panel
+        leftPanel.setSize(new Dimension(60, 300));
+        leftPanel.setLayout(new GridLayout(2, 1));
+        scoresLabel.setText("SCORES \n Player 1: 0 \n Player 2: 0"); // get players scores from scoring method, and get amount of players from JOptionPane
+        scoresLabel.setEditable(false);
+        scoresLabel.setBorder(blackBorder);
+        scoresLabel.setBackground(Color.PINK);
+        leftPanel.add(scoresLabel);
+        letterDistribLabel.setText(
+                "LETTER DISTRIBUTION \n A:1   N:1 \n B:3   0:1 \n C:3   P:3 \n D:2  Q:10 \n E:1   R:1 \n F:4    S:1 \n G:2   T:1 \n H:4   U:1 \n I:1     V:4 \n J:8    W:4 \n K:5    X:8 \n L:1    Y:4 \n M:3   Z:10 \n Blank:0");
+        letterDistribLabel.setEditable(false);
+        letterDistribLabel.setBorder(blackBorder);
+        letterDistribLabel.setBackground(Color.ORANGE);
+        leftPanel.add(letterDistribLabel);
+
+        //right panel
+        actionPanel.setLayout(new GridLayout(8, 1));
+        tileBagLabel.setText("TILES LEFT \n -100-"); // get the number of tiles from size of bag using getTileBagSize()
+        tileBagLabel.setEditable(false);
+        tileBagLabel.setBorder(blackBorder);
+        tileBagLabel.setBackground(Color.ORANGE);
+        playbtn.setBackground(Color.GREEN);
+        actionPanel.add(playbtn);
+        swapbtn.setBackground(Color.PINK);
+        actionPanel.add(swapbtn);
+        passbtn.setBackground(Color.ORANGE);
+        actionPanel.add(passbtn);
+        shufflebtn.setBackground(Color.PINK);
+        actionPanel.add(shufflebtn);
+        actionPanel.add(tileBagLabel);
+
+        //bottom panel -- where tiles are added to hand
+        handPanel.setPreferredSize(new Dimension(100, 50));
+        handLabel.setPreferredSize(new Dimension(100, 50));
+        handLabel.setBackground(Color.cyan);
+        handPanel.add(handLabel);
+
+        //put into frame
+        add(handPanel, BorderLayout.SOUTH);
+        add(leftPanel, BorderLayout.WEST);
+        add(actionPanel, BorderLayout.EAST);
+        add(boardPanel, BorderLayout.CENTER);
+        pack();
         //frame.setVisible(true);
     }
 
@@ -51,8 +111,9 @@ public class ScrabbleBoard extends JFrame {
             @Override
             public void run() {
                 ScrabbleBoard window = new ScrabbleBoard();
+                window.setBackground(Color.BLUE);
                 window.setTitle("Scrabble Game");
-                window.setSize(800, 500);
+                window.setSize(900, 600);
                 window.setVisible(true);
             }
         });

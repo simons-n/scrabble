@@ -129,6 +129,10 @@ public class TileBag {
 
     }
 
+    public int getTileBagSize() {
+        return this.tilesInBag.size();
+    }
+
     public void setTilesInBag(ArrayList<Tile> tilesInBag) {
         this.tilesInBag = tilesInBag;
 
