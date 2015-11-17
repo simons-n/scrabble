@@ -33,7 +33,7 @@ public class ScrabbleClient {
 
             System.out.println("Local IP Address : " + localaddr);
             System.out.println("Local hostname : " + localaddr.getHostName());
-            Socket skt = new Socket("134.82.132.134", 1025);
+            Socket skt = new Socket("134.82.132.209", 1025);
             BufferedReader in = new BufferedReader(new InputStreamReader(
                     skt.getInputStream()));
             System.out.print("Received string: ");
@@ -50,7 +50,8 @@ public class ScrabbleClient {
             PrintWriter out = new PrintWriter(skt.getOutputStream(), true);
             System.out.print("Sending string: '" + nick + "'\n");
             out.print(nick);
-            //out.close();
+            //out.flush();
+            out.close();
             //skt.close();
         } catch (Exception e) {
             System.out.println(e);

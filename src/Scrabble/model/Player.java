@@ -15,6 +15,7 @@
  */
 package Scrabble.model;
 
+import Scrabble.view.ScrabbleBoard;
 import java.util.ArrayList;
 
 /**
@@ -29,9 +30,17 @@ public class Player {
     private TileBag tileBag;
     private boolean skipTurn = false;
     private ArrayList<Tile> discardPile;
+    private ScrabbleBoard currBoard;
+
+    // in action performed, when pass button is pressed, change this back to false
+    private boolean hasPassed = true;
+
+    // this is used in the server to see if the player is still in a game, or if someone has won
+    boolean inGame = false;
 
     public Player(String name) {
         this.name = name;
+        this.inGame = true;
     }
 
     public void setSkipTurn() {
@@ -108,6 +117,14 @@ public class Player {
 
     }
     //rearrange tiles will be handled in GUI
+
+    public boolean isInGame() {
+        return inGame;
+    }
+
+    public boolean hasPassed() {
+        return hasPassed;
+    }
 
     @Override
     public String toString() {
