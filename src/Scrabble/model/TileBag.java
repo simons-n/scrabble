@@ -133,6 +133,12 @@ public class TileBag {
         return this.tilesInBag.size();
     }
 
+    public String getTileBagSizeStr() {
+        int size = getTileBagSize();
+        String sizeStr = "-" + size + "-";
+        return sizeStr;
+    }
+
     public void setTilesInBag(ArrayList<Tile> tilesInBag) {
         this.tilesInBag = tilesInBag;
 

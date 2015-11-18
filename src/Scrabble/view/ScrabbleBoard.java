@@ -75,7 +75,8 @@ public class ScrabbleBoard extends JFrame {
 
         //right panel
         actionPanel.setLayout(new GridLayout(8, 1));
-        tileBagLabel.setText("TILES LEFT \n -100-"); // get the number of tiles from size of bag using getTileBagSize()
+        //String size = TileBag.getTileBagSizeStr();
+        tileBagLabel.setText("TILES LEFT \n " + "-100-");//size); // get the number of tiles from size of bag using getTileBagSize()
         tileBagLabel.setEditable(false);
         tileBagLabel.setBorder(blackBorder);
         tileBagLabel.setBackground(Color.ORANGE);
@@ -91,6 +92,8 @@ public class ScrabbleBoard extends JFrame {
 
         //bottom panel -- where tiles are added to hand
         handPanel.setPreferredSize(new Dimension(100, 50));
+        handPanel.setLayout(new GridLayout(1, 7));
+        //JLabel hand
         handLabel.setPreferredSize(new Dimension(100, 50));
         handLabel.setBackground(Color.cyan);
         handPanel.add(handLabel);
