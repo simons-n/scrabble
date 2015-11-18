@@ -73,9 +73,21 @@ public class StartBoxController implements ActionListener {
         }
         if (e.getSource() == view.getStartNewGameBtn()) {
             // ask for name and create a player
+
             String name = JOptionPane.showInputDialog(null, "What's your name?",
                                                       "Enter Name",
                                                       JOptionPane.WARNING_MESSAGE);
+
+            String[] numPlayers = {"2", "3", "4"};
+            String n = (String) JOptionPane.showInputDialog(null,
+                                                            "How many players would you like in this game?",
+                                                            "Number of Players",
+                                                            JOptionPane.QUESTION_MESSAGE,
+                                                            null,
+                                                            numPlayers,
+                                                            numPlayers[0]);
+            // number of players to wait
+            int gameSize = Integer.valueOf(n);
 
             try {
                 scrabbleServer = new ScrabbleServer();
@@ -85,7 +97,9 @@ public class StartBoxController implements ActionListener {
                         null,
                         ex);
             }
-            Player p1 = new Player(name, scrabbleServer);
+            Player p1 = new Player(name,
+                                   scrabbleServer
+            );
             System.out.println(p1);
         }
 
