@@ -17,6 +17,7 @@ package Scrabble.model;
 
 import Scrabble.view.ScrabbleBoard;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
@@ -33,8 +34,49 @@ public class ScrabbleServer {
      *
      * @param args
      */
-    public static void main(String args[]) {
-        Player me = new Player("Caroline");
+    private boolean newGame = true;
+    private boolean gameOver = false;
+    private ServerSocket srvr;
+    private Socket skt;
+
+    public ScrabbleServer() throws IOException {
+        createServer();
+    }
+
+    public void createServer() throws IOException {
+        try {
+            srvr = new ServerSocket(1025);
+            skt = srvr.accept();
+            skt.setKeepAlive(true);
+            if (newGame) {
+                System.out.print("Server has connected!\n");
+                String message = "Game starting!";
+                PrintWriter out = new PrintWriter(skt.getOutputStream(), true);
+                System.out.print("Sending string: '" + message + "'\n");
+                out.print(message + '\n');
+                out.flush();
+                //out.close();
+                //skt.close();
+                //srvr.close();
+                newGame = false;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            System.out.print("Whoops! It didn't work!\n");
+        }
+    }
+
+    public void updateClients(Player updatedPlayer) throws IOException {
+        PrintWriter out = new PrintWriter(skt.getOutputStream(), true);
+        System.out.println("Updating clients..." + '\n');
+        out.print(updatedPlayer);
+        out.flush();
+    }
+
+    public static void main(String args[]) throws IOException {
+
+        ScrabbleServer ss = new ScrabbleServer();
+
         ScrabbleBoard currBoard = new ScrabbleBoard();
         boolean gameOver = false;
         boolean newGame = true;
@@ -42,6 +84,8 @@ public class ScrabbleServer {
             ServerSocket srvr = new ServerSocket(1025);
             Socket skt = srvr.accept();
             skt.setKeepAlive(true);
+
+            Player me = new Player("Caroline", ss);
 
             if (newGame) {
 

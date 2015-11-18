@@ -31,6 +31,7 @@ public class Player {
     private boolean skipTurn = false;
     private ArrayList<Tile> discardPile;
     private ScrabbleBoard currBoard;
+    private ScrabbleServer scrabbleServer;
 
     // in action performed, when pass button is pressed, change this back to false
     private boolean hasPassed = true;
@@ -40,7 +41,12 @@ public class Player {
 
     public Player(String name) {
         this.name = name;
-        this.inGame = true;
+    }
+
+    public Player(String name, ScrabbleServer server) {
+        this.name = name;
+        //this.inGame = true;
+        this.scrabbleServer = server;
     }
 
     public void setSkipTurn() {
