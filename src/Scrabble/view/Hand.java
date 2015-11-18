@@ -71,60 +71,89 @@ public class Hand extends javax.swing.JPanel {
         for (int x = 0; x < 7; x++) {
             for (int y = 0; y < 1; y++) {
                 Tile newTile = tileBag.draw();//get tiles from tile bag
-                if (newTile.getLetter() ==) {
-                    addATile(this.hand, x, y);
-                } else if (newTile.getLetter() == Val.B) {
-                    addBTile(this.hand, x, y);
-                } else if (newTile.getLetter() == Val.C) {
-                    addCTile(this.hand, x, y);
-                } else if (newTile.getLetter() == Val.D) {
-                    addDTile(this.hand, x, y);
-                } else if (newTile.getLetter() == Val.E) {
-                    addETile(this.hand, x, y);
-                } else if (newTile.getLetter() == Val.F) {
-                    addFTile(this.hand, x, y);
-                } else if (newTile.getLetter() == Val.G) {
-                    addGTile(this.hand, x, y);
-                } else if (newTile.getLetter() == Val.H) {
-                    addHTile(this.hand, x, y);
-                } else if (newTile.getLetter() == Val.I) {
-                    addITile(this.hand, x, y);
-                } else if (newTile.getLetter() == Val.J) {
-                    addJTile(this.hand, x, y);
-                } else if (newTile.getLetter() == Val.K) {
-                    addKTile(this.hand, x, y);
-                } else if (newTile.getLetter() == Val.L) {
-                    addLTile(this.hand, x, y);
-                } else if (newTile.getLetter() == Val.M) {
-                    addMTile(this.hand, x, y);
-                } else if (newTile.getLetter() == Val.N) {
-                    addNTile(this.hand, x, y);
-                } else if (newTile.getLetter() == Val.O) {
-                    addOTile(this.hand, x, y);
-                } else if (newTile.getLetter() == Val.P) {
-                    addPTile(this.hand, x, y);
-                } else if (newTile.getLetter() == Val.Q) {
-                    addQTile(this.hand, x, y);
-                } else if (newTile.getLetter() == Val.R) {
-                    addRTile(this.hand, x, y);
-                } else if (newTile.getLetter() == Val.S) {
-                    addSTile(this.hand, x, y);
-                } else if (newTile.getLetter() == Val.T) {
-                    addTTile(this.hand, x, y);
-                } else if (newTile.getLetter() == Val.U) {
-                    addUTile(this.hand, x, y);
-                } else if (newTile.getLetter() == Val.V) {
-                    addVTile(this.hand, x, y);
-                } else if (newTile.getLetter() == Val.W) {
-                    addWTile(this.hand, x, y);
-                } else if (newTile.getLetter() == Val.X) {
-                    addXTile(this.hand, x, y);
-                } else if (newTile.getLetter() == Val.Y) {
-                    addYTile(this.hand, x, y);
-                } else if (newTile.getLetter() == Val.Z) {
-                    addZTile(this.hand, x, y);
-                } else {
-                    addBlankTile(this.hand, x, y);
+                Val letter = newTile.getLetter();
+                switch letter  {
+                    case A:
+                        addATile(this.hand, x, y);
+                        break;
+                    case B:
+                        addBTile(this.hand, x, y);
+                        break;
+                    case C:
+                        addCTile(this.hand, x, y);
+                        break;
+                    case D:
+                        addDTile(this.hand, x, y);
+                        break;
+                    case E:
+                        addETile(this.hand, x, y);
+                        break;
+                    case F:
+                        addFTile(this.hand, x, y);
+                        break;
+                    case G:
+                        addGTile(this.hand, x, y);
+                        break;
+                    case H:
+                        addHTile(this.hand, x, y);
+                        break;
+                    case I:
+                        addITile(this.hand, x, y);
+                        break;
+                    case J:
+                        addJTile(this.hand, x, y);
+                        break;
+                    case K:
+                        addKTile(this.hand, x, y);
+                        break;
+                    case L:
+                        addLTile(this.hand, x, y);
+                        break;
+                    case M:
+                        addMTile(this.hand, x, y);
+                        break;
+                    case N:
+                        addNTile(this.hand, x, y);
+                        break;
+                    case O:
+                        addOTile(this.hand, x, y);
+                        break;
+                    case P:
+                        addPTile(this.hand, x, y);
+                        break;
+                    case Q:
+                        addQTile(this.hand, x, y);
+                        break;
+                    case R:
+                        addRTile(this.hand, x, y);
+                        break;
+                    case S:
+                        addSTile(this.hand, x, y);
+                        break;
+                    case T:
+                        addTTile(this.hand, x, y);
+                        break;
+                    case U:
+                        addUTile(this.hand, x, y);
+                        break;
+                    case V:
+                        addVTile(this.hand, x, y);
+                        break;
+                    case W:
+                        addWTile(this.hand, x, y);
+                        break;
+                    case X:
+                        addXTile(this.hand, x, y);
+                        break;
+                    case Y:
+                        addYTile(this.hand, x, y);
+                        break;
+                    case Z:
+                        addZTile(this.hand, x, y);
+                        break;
+                    default:
+                        addBlankTile(this.hand, x, y);
+                        break;
                 }
             }
         }
