@@ -15,10 +15,13 @@
  */
 package Scrabble.view;
 
+import Scrabble.model.Tile;
+import Scrabble.model.TileBag;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -34,6 +37,8 @@ import javax.swing.border.Border;
  */
 public class ScrabbleBoard extends JFrame {
     //JPanel boardPanel = new JPanel();
+    private ArrayList<Tile> tilesInBag = new ArrayList<>();
+    TileBag tileBag = new TileBag(tilesInBag);
     JPanel handPanel = new JPanel();
     JLabel handLabel = new JLabel();
     JPanel actionPanel = new JPanel();
@@ -54,11 +59,7 @@ public class ScrabbleBoard extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //center panel
-        board = new Board();
-        //boardPanel.setSize(new Dimension(400, 400));
-        //boardPanel.setLayout(new GridLayout(15, 15));
-        //boardPanel.setBackground(Color.black);
-        //boardPanel.add(grid);
+        Board board = new Board();
 
         //left panel
         leftPanel.setSize(new Dimension(60, 300));
@@ -77,8 +78,8 @@ public class ScrabbleBoard extends JFrame {
 
         //right panel
         actionPanel.setLayout(new GridLayout(8, 1));
-        //String size = TileBag.getTileBagSizeStr();
-        tileBagLabel.setText("TILES LEFT \n " + "-100-");//size); // get the number of tiles from size of bag using getTileBagSize()
+        String size = tileBag.getTileBagSizeStr();
+        tileBagLabel.setText("TILES LEFT \n " + size); // get the number of tiles from size of bag using getTileBagSize()
         tileBagLabel.setEditable(false);
         tileBagLabel.setBorder(blackBorder);
         tileBagLabel.setBackground(Color.ORANGE);

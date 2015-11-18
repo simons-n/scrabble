@@ -19,6 +19,7 @@ import Scrabble.model.Tile;
 import Scrabble.model.TileBag;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -57,6 +58,9 @@ public class Hand extends javax.swing.JPanel {
     private ImageIcon zTileImage = new ImageIcon("Images/zTile.png");
     private ImageIcon blankTileImage = new ImageIcon("Images/blankTile.png");
 
+    private ArrayList<Tile> tilesInBag = new ArrayList<>();
+    TileBag tileBag = new TileBag(tilesInBag);
+
     public Hand() {
         this.hand = new JLabel[7][1];
         this.setLayout(new GridLayout(7, 1));
@@ -66,8 +70,8 @@ public class Hand extends javax.swing.JPanel {
         setBorder(grayBorder);
         for (int x = 0; x < 7; x++) {
             for (int y = 0; y < 1; y++) {
-                Tile newTile = TileBag.draw();//get tiles from tile bag
-                if (newTile.getLetter() == Val.A) {
+                Tile newTile = tileBag.draw();//get tiles from tile bag
+                if (newTile.getLetter() ==) {
                     addATile(this.hand, x, y);
                 } else if (newTile.getLetter() == Val.B) {
                     addBTile(this.hand, x, y);
