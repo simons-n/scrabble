@@ -44,11 +44,7 @@ public class Player {
     }
 
     public void setSkipTurn() {
-        if (skipTurn == false) {
-            this.skipTurn = true;
-        } else {
-            this.skipTurn = false;
-        }
+        this.skipTurn = !skipTurn;
     }
 
     public String getName() {

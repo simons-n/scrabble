@@ -16,9 +16,6 @@
 package Scrabble.model;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 
 /**
@@ -26,10 +23,19 @@ import java.util.ArrayList;
  * @author jms107
  */
 public class Word {
-    private ArrayList<Tile> tilesInWord = new ArrayList<>();
 
-    public Word(ArrayList tilesInWord) {
+    private ScrabbleDictionary dictionary;
+    private ArrayList<Tile> tilesInWord;
+    private String word;
+
+    public Word(ArrayList<Tile> tilesInWord, ScrabbleDictionary dict) {
+        this.dictionary = dict;
         this.tilesInWord = tilesInWord;
+        this.word = "";
+        for (Tile tile : tilesInWord) {
+            word += tile.getLetter();
+        }
+
     }
 
     public void setTilesInWord(ArrayList<Tile> tilesInWord, Tile placedTile) {
@@ -44,19 +50,7 @@ public class Word {
      */
     public boolean check() {
         //check if word is in scrabble dictionary
-        try {
-            URL scrabbleDict = new URL(
-                    "http://www.hasbro.com/scrabble-2/en_US/search.cfm");
-            URLConnection scrabbleDictConnection = scrabbleDict.openConnection();
-            scrabbleDictConnection.connect();
-
-            System.out.println("connected");
-        } catch (MalformedURLException e) {
-            // URL failed
-        } catch (IOException e) {
-            // openConnection() failed
-        }
-        return true;
+        return dictionary.containsKey(word);
     }
 
     public int scoreWord() {
@@ -80,14 +74,15 @@ public class Word {
     }
 
     // checking if scoreWord() works
-    public static void main(String args[]) {
+    public static void main(String args[]) throws IOException {
         ArrayList<Tile> list = new ArrayList<>();
         list.add(new Tile(Val.C));
         list.add(new Tile(Val.A));
         list.add(new Tile(Val.T));
         System.out.println(list);
 
-        Word w = new Word(list);
+        ScrabbleDictionary dict = new ScrabbleDictionary();
+        Word w = new Word(list, dict);
         w.check();
         System.out.println("word " + w);
         System.out.println(w.scoreWord());
