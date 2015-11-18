@@ -46,13 +46,15 @@ public class ScrabbleBoard extends JFrame {
     JTextArea letterDistribLabel = new JTextArea(20, 10);
     JTextArea tileBagLabel = new JTextArea(10, 10);
 
+    Board board;
+
     public ScrabbleBoard() {
         Border blackBorder = BorderFactory.createLineBorder(
                 Color.BLACK);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //center panel
-        Board board = new Board();
+        board = new Board();
         //boardPanel.setSize(new Dimension(400, 400));
         //boardPanel.setLayout(new GridLayout(15, 15));
         //boardPanel.setBackground(Color.black);
@@ -118,6 +120,10 @@ public class ScrabbleBoard extends JFrame {
 
     public JButton getShuffleBtn() {
         return shuffleBtn;
+    }
+
+    public JLabel[][] getGrid() {
+        return board.getGrid();
     }
 
     /**

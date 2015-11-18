@@ -110,4 +110,8 @@ public class Board extends javax.swing.JPanel {
         grid[x][y] = doubleLetterScoreSquare;
     }
 
+    public JLabel[][] getGrid() {
+        return grid;
+    }
+
 }

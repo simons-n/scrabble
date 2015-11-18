@@ -17,18 +17,25 @@ package Scrabble.controller;
 
 import Scrabble.view.ScrabbleBoard;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  *
  * @author jms107
  */
-public class ScrabbleController {
+public class ScrabbleController implements ActionListener {
 // connects model to view
 
     private ScrabbleBoard view;
 
     public ScrabbleController(ScrabbleBoard view) {
         this.view = view;
+
+        for (int i = 0; i < view.getGrid().length; i++) {
+            for (int j = 0; i < view.getGrid()[0].length; j++) {
+                view.getGrid()[i][j].addActionListener(this);
+            }
+        }
     }
 
     public void updateViewFromModel() {
@@ -39,14 +46,14 @@ public class ScrabbleController {
         if (e.getSource() == view.getPlayBtn()) //check validity, score word, and end turn
         {
 
-        } else if (e.getSource() == view.getDirectionsBtn()) {
-            view.getDirectionsPanel().setVisible(true);
         } else if (e.getSource() == view.getSwapBtn()) //pickUp tile from Bag, switch with tile selected, and end turn
         {
 
         } else if (e.getSource() == view.getPassBtn()) //change current player to next player, and end turn
         {
-
+//        } else if (e.getSource() == view.getDirectionsBtn()) {
+//            view.getDirectionsPanel().setVisible(true);
+//        }
         }
     }
 }

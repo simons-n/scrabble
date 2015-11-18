@@ -49,6 +49,19 @@ public class Player {
         this.scrabbleServer = server;
     }
 
+    // instantiating a player without a hand already created
+    public Player(String name, int totalScore) {
+        this.name = name;
+        this.totalScore = totalScore;
+        this.myHand = new Hand(newHand());
+    }
+
+    public Player(String name, int totalScore, Hand myHand) {
+        this.name = name;
+        this.totalScore = totalScore;
+        this.myHand = myHand;
+    }
+
     public void setSkipTurn() {
         this.skipTurn = !skipTurn;
     }
@@ -67,19 +80,6 @@ public class Player {
 
     public boolean isSkipTurn() {
         return skipTurn;
-    }
-
-    // instantiating a player without a hand already created
-    public Player(String name, int totalScore) {
-        this.name = name;
-        this.totalScore = totalScore;
-        this.myHand = new Hand(newHand());
-    }
-
-    public Player(String name, int totalScore, Hand myHand) {
-        this.name = name;
-        this.totalScore = totalScore;
-        this.myHand = myHand;
     }
 
     public ArrayList<Tile> newHand() {
