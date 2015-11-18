@@ -22,9 +22,9 @@ import java.util.ArrayList;
  * @author jms107
  */
 public class Hand {
-    private ArrayList<Tile> tilesInHand = new ArrayList<>();
+    private ArrayList<Tile> tilesInHand;
 
-    public Hand(ArrayList tilesInHand) {
+    public Hand(ArrayList<Tile> tilesInHand) {
         this.tilesInHand = tilesInHand;
     }
 

@@ -145,4 +145,8 @@ public class Board extends javax.swing.JPanel {
         add(grid[x][y]);
     }
 
+    public JLabel[][] getGrid() {
+        return grid;
+    }
+
 }

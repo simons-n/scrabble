@@ -31,6 +31,7 @@ public class Player {
     private boolean skipTurn = false;
     private ArrayList<Tile> discardPile;
     private ScrabbleBoard currBoard;
+    private ScrabbleServer scrabbleServer;
 
     // in action performed, when pass button is pressed, change this back to false
     private boolean hasPassed = true;
@@ -40,15 +41,29 @@ public class Player {
 
     public Player(String name) {
         this.name = name;
-        this.inGame = true;
+    }
+
+    public Player(String name, ScrabbleServer server) {
+        this.name = name;
+        //this.inGame = true;
+        this.scrabbleServer = server;
+    }
+
+    // instantiating a player without a hand already created
+    public Player(String name, int totalScore) {
+        this.name = name;
+        this.totalScore = totalScore;
+        this.myHand = new Hand(newHand());
+    }
+
+    public Player(String name, int totalScore, Hand myHand) {
+        this.name = name;
+        this.totalScore = totalScore;
+        this.myHand = myHand;
     }
 
     public void setSkipTurn() {
-        if (skipTurn == false) {
-            this.skipTurn = true;
-        } else {
-            this.skipTurn = false;
-        }
+        this.skipTurn = !skipTurn;
     }
 
     public String getName() {
@@ -65,19 +80,6 @@ public class Player {
 
     public boolean isSkipTurn() {
         return skipTurn;
-    }
-
-    // instantiating a player without a hand already created
-    public Player(String name, int totalScore) {
-        this.name = name;
-        this.totalScore = totalScore;
-        this.myHand = new Hand(newHand());
-    }
-
-    public Player(String name, int totalScore, Hand myHand) {
-        this.name = name;
-        this.totalScore = totalScore;
-        this.myHand = myHand;
     }
 
     public ArrayList<Tile> newHand() {

@@ -23,9 +23,9 @@ import java.util.Random;
  * @author jms107
  */
 public class TileBag {
-    private ArrayList<Tile> tilesInBag = new ArrayList<>();
+    private ArrayList<Tile> tilesInBag;
 
-    public TileBag(ArrayList tilesInBag) {
+    public TileBag(ArrayList<Tile> tilesInBag) {
         this.tilesInBag = tilesInBag;
 
         // 9 A tiles

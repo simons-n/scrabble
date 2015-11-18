@@ -37,14 +37,16 @@ public class ScrabbleBoard extends JFrame {
     JPanel handPanel = new JPanel();
     JLabel handLabel = new JLabel();
     JPanel actionPanel = new JPanel();
-    JButton playbtn = new JButton("Play Word");
-    JButton swapbtn = new JButton("Swap");
-    JButton passbtn = new JButton("Pass");
-    JButton shufflebtn = new JButton("Shuffle");
+    JButton playBtn = new JButton("Play Word");
+    JButton swapBtn = new JButton("Swap");
+    JButton passBtn = new JButton("Pass");
+    JButton shuffleBtn = new JButton("Shuffle");
     JPanel leftPanel = new JPanel();
     JTextArea scoresLabel = new JTextArea(10, 10);
     JTextArea letterDistribLabel = new JTextArea(20, 10);
     JTextArea tileBagLabel = new JTextArea(10, 10);
+
+    Board board;
 
     public ScrabbleBoard() {
         Border blackBorder = BorderFactory.createLineBorder(
@@ -52,7 +54,7 @@ public class ScrabbleBoard extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //center panel
-        Board board = new Board();
+        board = new Board();
         //boardPanel.setSize(new Dimension(400, 400));
         //boardPanel.setLayout(new GridLayout(15, 15));
         //boardPanel.setBackground(Color.black);
@@ -80,14 +82,14 @@ public class ScrabbleBoard extends JFrame {
         tileBagLabel.setEditable(false);
         tileBagLabel.setBorder(blackBorder);
         tileBagLabel.setBackground(Color.ORANGE);
-        playbtn.setBackground(Color.GREEN);
-        actionPanel.add(playbtn);
-        swapbtn.setBackground(Color.PINK);
-        actionPanel.add(swapbtn);
-        passbtn.setBackground(Color.ORANGE);
-        actionPanel.add(passbtn);
-        shufflebtn.setBackground(Color.PINK);
-        actionPanel.add(shufflebtn);
+        playBtn.setBackground(Color.GREEN);
+        actionPanel.add(playBtn);
+        swapBtn.setBackground(Color.PINK);
+        actionPanel.add(swapBtn);
+        passBtn.setBackground(Color.ORANGE);
+        actionPanel.add(passBtn);
+        shuffleBtn.setBackground(Color.PINK);
+        actionPanel.add(shuffleBtn);
         actionPanel.add(tileBagLabel);
 
         //bottom panel -- where tiles are added to hand
@@ -105,6 +107,26 @@ public class ScrabbleBoard extends JFrame {
         add(board, BorderLayout.CENTER);
         pack();
         //frame.setVisible(true);
+    }
+
+    public JButton getPlayBtn() {
+        return playBtn;
+    }
+
+    public JButton getSwapBtn() {
+        return swapBtn;
+    }
+
+    public JButton getPassBtn() {
+        return passBtn;
+    }
+
+    public JButton getShuffleBtn() {
+        return shuffleBtn;
+    }
+
+    public JLabel[][] getGrid() {
+        return board.getGrid();
     }
 
     /**
