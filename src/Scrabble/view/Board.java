@@ -48,12 +48,14 @@ public class Board extends javax.swing.JPanel {
         this.grid = new JLabel[15][15];
         this.setLayout(new GridLayout(15, 15));
 //        this.setLayout(new FlowLayout());
+
         this.setBackground(Color.WHITE);
+
+        //this.setBackground(Color.gray);
         //this.setSize(new Dimension(10, 10));
 //        this.add(blankBoardSquare);
 //        this.add(doubleWordScoreSquare);
 //        this.add(blankBoardSquare);
-
         javax.swing.border.Border grayBorder = BorderFactory.createLineBorder(
                 Color.WHITE);
         setBorder(grayBorder);
@@ -66,7 +68,13 @@ public class Board extends javax.swing.JPanel {
                     addStar(this.grid, x, y);
                 } else if (((x != 0 & x != 14) & (y != 0 & y != 14) & (x != 7 & y != 7) & (x != 6 & y != 6) & (x != 8 & y != 8) & (x != 5 & y != 5) & (x != 9 & y != 9) & y == x) || (x == 13 & y == 1) || (x == 12 & y == 2) || (x == 11 & y == 3) || (x == 10 & y == 4) || (y == 13 & x == 1) || (y == 12 & x == 2) || (y == 11 & x == 3) || (y == 10 & x == 4)) {
                     addDWS(this.grid, x, y);
-
+//                if ((x == 0 & y == 0) || (x == 0 & y == 14) || (x == 14 & y == 0) || (x == 14 & y == 14) || (x == 14 & y == 7) || (x == 7 & y == 14) || (x == 0 & y == 7) || (x == 7 & y == 7)) {
+//                    addTWS(this.grid, x, y);
+//                } else if ((x == 7 & y == 7)) {
+//                    addStar(this.grid, x, y);
+//                } else if ((x != 0 & x != 14) & (y != 0 & y != 14) & y == x) {
+//                    addDWS(this.grid, x, y);
+//
                 } else if ((x == 6 & y == 6) || (x == 8 & y == 8) || (x == 6 & y == 8) || (x == 8 & y == 6) || (x == 0 & y == 3) || (x == 0 & y == 11) || (x == 11 & y == 0) || (x == 3 & y == 0) || (x == 14 & y == 3) || (x == 14 & y == 11) || (x == 11 & y == 14) || (x == 3 & y == 14) || (x == 6 & y == 2) || (x == 7 & y == 3) || (x == 8 & y == 2) || (x == 12 & y == 6) || (x == 12 & y == 8) || (x == 11 & y == 7) || (y == 6 & x == 2) || (y == 7 & x == 3) || (y == 8 & x == 2) || (y == 12 & x == 6) || (y == 12 & x == 8) || (y == 11 & x == 7)) {
                     addDLS(this.grid, x, y);
 
@@ -81,6 +89,14 @@ public class Board extends javax.swing.JPanel {
                             Color.WHITE));
                     add(this.grid[x][y]);
                 }
+
+//                } else {
+                this.grid[x][y] = new JLabel(backgroundImage);
+                this.grid[x][y].setPreferredSize(new Dimension(30, 30));
+                ;
+                this.grid[x][y].setBorder(BorderFactory.createLineBorder(
+                        Color.WHITE));
+                add(this.grid[x][y]);
             }
         }
     }
