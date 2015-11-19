@@ -40,10 +40,10 @@ public class ScrabbleBoard extends JFrame {
     //private final JPanel handPanel = new JPanel();
     //private final JLabel handLabel = new JLabel();
     private final JPanel actionPanel = new JPanel();
-    private final JButton playbtn = new JButton("Play Word");
-    private final JButton swapbtn = new JButton("Swap");
-    private final JButton passbtn = new JButton("Pass");
-    private final JButton shufflebtn = new JButton("Shuffle");
+    private final JButton playBtn = new JButton("Play Word");
+    private final JButton swapBtn = new JButton("Swap");
+    private final JButton passBtn = new JButton("Pass");
+    private final JButton shuffleBtn = new JButton("Shuffle");
     private final JPanel leftPanel = new JPanel();
     private final JTextArea scoresLabel = new JTextArea(10, 10);
     private final JTextArea letterDistribLabel = new JTextArea(20, 10);
@@ -122,10 +122,9 @@ public class ScrabbleBoard extends JFrame {
         return shuffleBtn;
     }
 
-    public JLabel[][] getGrid() {
-        return board.getGrid();
-    }
-
+//    public JLabel[][] getGrid() {
+//        return board.getGrid();
+//    }
     /**
      * @param args the command line arguments
      */
