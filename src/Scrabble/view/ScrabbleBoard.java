@@ -91,7 +91,7 @@ public class ScrabbleBoard extends JFrame {
 
         //bottom panel -- where tiles are added to hand
         Hand hand = new Hand();
-        hand.setSize(new Dimension(20, 100));
+        hand.setMaximumSize(new Dimension(20, 100));
 //        handPanel.setPreferredSize(new Dimension(100, 50));
 //        handPanel.setLayout(new GridLayout(1, 7));
 //        //JLabel hand
