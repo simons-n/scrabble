@@ -15,14 +15,16 @@
  */
 package Scrabble.view;
 
+import Scrabble.model.Tile;
+import Scrabble.model.TileBag;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
@@ -33,20 +35,19 @@ import javax.swing.border.Border;
  * @author jms107
  */
 public class ScrabbleBoard extends JFrame {
-    //JPanel boardPanel = new JPanel();
-    JPanel handPanel = new JPanel();
-    JLabel handLabel = new JLabel();
-    JPanel actionPanel = new JPanel();
-    JButton playBtn = new JButton("Play Word");
-    JButton swapBtn = new JButton("Swap");
-    JButton passBtn = new JButton("Pass");
-    JButton shuffleBtn = new JButton("Shuffle");
-    JPanel leftPanel = new JPanel();
-    JTextArea scoresLabel = new JTextArea(10, 10);
-    JTextArea letterDistribLabel = new JTextArea(20, 10);
-    JTextArea tileBagLabel = new JTextArea(10, 10);
-
-    Board board;
+    private ArrayList<Tile> tilesInBag = new ArrayList<>();
+    private TileBag tileBag = new TileBag(tilesInBag);
+    //private final JPanel handPanel = new JPanel();
+    //private final JLabel handLabel = new JLabel();
+    private final JPanel actionPanel = new JPanel();
+    private final JButton playBtn = new JButton("Play Word");
+    private final JButton swapBtn = new JButton("Swap");
+    private final JButton passBtn = new JButton("Pass");
+    private final JButton shuffleBtn = new JButton("Shuffle");
+    private final JPanel leftPanel = new JPanel();
+    private final JTextArea scoresLabel = new JTextArea(10, 10);
+    private final JTextArea letterDistribLabel = new JTextArea(20, 10);
+    private final JTextArea tileBagLabel = new JTextArea(10, 10);
 
     public ScrabbleBoard() {
         Border blackBorder = BorderFactory.createLineBorder(
@@ -54,11 +55,7 @@ public class ScrabbleBoard extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //center panel
-        board = new Board();
-        //boardPanel.setSize(new Dimension(400, 400));
-        //boardPanel.setLayout(new GridLayout(15, 15));
-        //boardPanel.setBackground(Color.black);
-        //boardPanel.add(grid);
+        Board board = new Board();
 
         //left panel
         leftPanel.setSize(new Dimension(60, 300));
@@ -77,7 +74,8 @@ public class ScrabbleBoard extends JFrame {
 
         //right panel
         actionPanel.setLayout(new GridLayout(8, 1));
-        tileBagLabel.setText("TILES LEFT \n -100-"); // get the number of tiles from size of bag using getTileBagSize()
+        String size = tileBag.getTileBagSizeStr();
+        tileBagLabel.setText("TILES LEFT \n " + size); // get the number of tiles from size of bag using getTileBagSize()
         tileBagLabel.setEditable(false);
         tileBagLabel.setBorder(blackBorder);
         tileBagLabel.setBackground(Color.ORANGE);
@@ -92,18 +90,20 @@ public class ScrabbleBoard extends JFrame {
         actionPanel.add(tileBagLabel);
 
         //bottom panel -- where tiles are added to hand
-        handPanel.setPreferredSize(new Dimension(100, 50));
-        handLabel.setPreferredSize(new Dimension(100, 50));
-        handLabel.setBackground(Color.cyan);
-        handPanel.add(handLabel);
+        Hand hand = new Hand();
+//        handPanel.setPreferredSize(new Dimension(100, 50));
+//        handPanel.setLayout(new GridLayout(1, 7));
+//        //JLabel hand
+//        handLabel.setPreferredSize(new Dimension(100, 50));
+//        handLabel.setBackground(Color.cyan);
+//        handPanel.add(handLabel);
 
         //put into frame
-        add(handPanel, BorderLayout.SOUTH);
+        add(hand, BorderLayout.SOUTH);
         add(leftPanel, BorderLayout.WEST);
         add(actionPanel, BorderLayout.EAST);
         add(board, BorderLayout.CENTER);
         pack();
-        //frame.setVisible(true);
     }
 
     public JButton getPlayBtn() {
@@ -122,10 +122,9 @@ public class ScrabbleBoard extends JFrame {
         return shuffleBtn;
     }
 
-    public JLabel[][] getGrid() {
-        return board.getGrid();
-    }
-
+//    public JLabel[][] getGrid() {
+//        return board.getGrid();
+//    }
     /**
      * @param args the command line arguments
      */
