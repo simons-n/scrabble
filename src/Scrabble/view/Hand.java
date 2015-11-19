@@ -62,98 +62,99 @@ public class Hand extends javax.swing.JPanel {
     TileBag tileBag = new TileBag(tilesInBag);
 
     public Hand() {
-        this.hand = new JLabel[7][1];
-        this.setLayout(new GridLayout(7, 1));
+        this.hand = new JLabel[1][7];
+        this.setLayout(new GridLayout(1, 7));
         this.setBackground(java.awt.Color.PINK);
         javax.swing.border.Border grayBorder = BorderFactory.createLineBorder(
                 java.awt.Color.WHITE);
         setBorder(grayBorder);
-        for (int x = 0; x < 7; x++) {
-            for (int y = 0; y < 1; y++) {
-                Tile newTile = tileBag.draw();//get tiles from tile bag
-                switch (newTile.getLetter()) {
-                    case A:
-                        addATile(this.hand, x, y);
-                        break;
-                    case B:
-                        addBTile(this.hand, x, y);
-                        break;
-                    case C:
-                        addCTile(this.hand, x, y);
-                        break;
-                    case D:
-                        addDTile(this.hand, x, y);
-                        break;
-                    case E:
-                        addETile(this.hand, x, y);
-                        break;
-                    case F:
-                        addFTile(this.hand, x, y);
-                        break;
-                    case G:
-                        addGTile(this.hand, x, y);
-                        break;
-                    case H:
-                        addHTile(this.hand, x, y);
-                        break;
-                    case I:
-                        addITile(this.hand, x, y);
-                        break;
-                    case J:
-                        addJTile(this.hand, x, y);
-                        break;
-                    case K:
-                        addKTile(this.hand, x, y);
-                        break;
-                    case L:
-                        addLTile(this.hand, x, y);
-                        break;
-                    case M:
-                        addMTile(this.hand, x, y);
-                        break;
-                    case N:
-                        addNTile(this.hand, x, y);
-                        break;
-                    case O:
-                        addOTile(this.hand, x, y);
-                        break;
-                    case P:
-                        addPTile(this.hand, x, y);
-                        break;
-                    case Q:
-                        addQTile(this.hand, x, y);
-                        break;
-                    case R:
-                        addRTile(this.hand, x, y);
-                        break;
-                    case S:
-                        addSTile(this.hand, x, y);
-                        break;
-                    case T:
-                        addTTile(this.hand, x, y);
-                        break;
-                    case U:
-                        addUTile(this.hand, x, y);
-                        break;
-                    case V:
-                        addVTile(this.hand, x, y);
-                        break;
-                    case W:
-                        addWTile(this.hand, x, y);
-                        break;
-                    case X:
-                        addXTile(this.hand, x, y);
-                        break;
-                    case Y:
-                        addYTile(this.hand, x, y);
-                        break;
-                    case Z:
-                        addZTile(this.hand, x, y);
-                        break;
-                    default:
-                        addBlankTile(this.hand, x, y);
-                        break;
-                }
+        for (int x = 0; x < 1; x++) {
+            for (int y = 0; y < 7; y++) {
+                addATile(this.hand, x, y);
+//                Tile newTile = tileBag.draw();//get tiles from tile bag
+//                switch (newTile.getLetter()) {
+//                    case A:
+//                        addATile(this.hand, x, y);
+//                        break;
+//                    case B:
+//                        addBTile(this.hand, x, y);
+//                        break;
+//                    case C:
+//                        addCTile(this.hand, x, y);
+//                        break;
+//                    case D:
+//                        addDTile(this.hand, x, y);
+//                        break;
+//                    case E:
+//                        addETile(this.hand, x, y);
+//                        break;
+//                    case F:
+//                        addFTile(this.hand, x, y);
+//                        break;
+//                    case G:
+//                        addGTile(this.hand, x, y);
+//                        break;
+//                    case H:
+//                        addHTile(this.hand, x, y);
+//                        break;
+//                    case I:
+//                        addITile(this.hand, x, y);
+//                        break;
+//                    case J:
+//                        addJTile(this.hand, x, y);
+//                        break;
+//                    case K:
+//                        addKTile(this.hand, x, y);
+//                        break;
+//                    case L:
+//                        addLTile(this.hand, x, y);
+//                        break;
+//                    case M:
+//                        addMTile(this.hand, x, y);
+//                        break;
+//                    case N:
+//                        addNTile(this.hand, x, y);
+//                        break;
+//                    case O:
+//                        addOTile(this.hand, x, y);
+//                        break;
+//                    case P:
+//                        addPTile(this.hand, x, y);
+//                        break;
+//                    case Q:
+//                        addQTile(this.hand, x, y);
+//                        break;
+//                    case R:
+//                        addRTile(this.hand, x, y);
+//                        break;
+//                    case S:
+//                        addSTile(this.hand, x, y);
+//                        break;
+//                    case T:
+//                        addTTile(this.hand, x, y);
+//                        break;
+//                    case U:
+//                        addUTile(this.hand, x, y);
+//                        break;
+//                    case V:
+//                        addVTile(this.hand, x, y);
+//                        break;
+//                    case W:
+//                        addWTile(this.hand, x, y);
+//                        break;
+//                    case X:
+//                        addXTile(this.hand, x, y);
+//                        break;
+//                    case Y:
+//                        addYTile(this.hand, x, y);
+//                        break;
+//                    case Z:
+//                        addZTile(this.hand, x, y);
+//                        break;
+//                    default:
+//                        addBlankTile(this.hand, x, y);
+//                        break;
+//                }
             }
         }
 
