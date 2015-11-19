@@ -48,6 +48,7 @@ public class ScrabbleBoard extends JFrame {
     private final JTextArea scoresLabel = new JTextArea(10, 10);
     private final JTextArea letterDistribLabel = new JTextArea(20, 10);
     private final JTextArea tileBagLabel = new JTextArea(10, 10);
+    //   private Board board;
 
     public ScrabbleBoard() {
         Border blackBorder = BorderFactory.createLineBorder(
