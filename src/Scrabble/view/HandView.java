@@ -19,7 +19,6 @@ import Scrabble.model.Tile;
 import Scrabble.model.TileBag;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -58,13 +57,11 @@ public class HandView extends javax.swing.JPanel {
     private ImageIcon zTileImage = new ImageIcon("Images/zTile.png");
     private ImageIcon blankTileImage = new ImageIcon("Images/blankTile.png");
 
-    private ArrayList<Tile> tilesInBag = new ArrayList<>();
-    TileBag tileBag = new TileBag(tilesInBag);
+    //private ArrayList<Tile> tilesInBag = new ArrayList<>();
+    private TileBag tileBag;
 
-    public HandView() {
-        for (Tile tile : tileBag) {
-            System.out.println("Tile: " + tile);
-        }
+    public HandView(TileBag tileBag) {
+        this.tileBag = tileBag;
         this.hand = new JLabel[7];
         this.setLayout(new GridLayout(1, 7));
         this.setBackground(java.awt.Color.PINK);

@@ -23,114 +23,112 @@ import java.util.Random;
  * @author jms107
  */
 public class TileBag extends ArrayList<Tile> {
-    private ArrayList<Tile> tilesInBag;
 
-    public TileBag(ArrayList<Tile> tilesInBag) {
-        this.tilesInBag = tilesInBag;
+    public TileBag() {
 
         // 9 A tiles
         for (int i = 0; i < 9; i++) {
-            this.tilesInBag.add(new Tile(Val.A));
+            this.add(new Tile(Val.A));
         }
         // 2 B tiles
         for (int i = 0; i < 2; i++) {
-            this.tilesInBag.add(new Tile(Val.B));
+            this.add(new Tile(Val.B));
         }
         // 2 C tiles
         for (int i = 0; i < 2; i++) {
-            this.tilesInBag.add(new Tile(Val.C));
+            this.add(new Tile(Val.C));
         }
         // 4 D tiles
         for (int i = 0; i < 4; i++) {
-            this.tilesInBag.add(new Tile(Val.D));
+            this.add(new Tile(Val.D));
         }
         // 12 E tiles
         for (int i = 0; i < 12; i++) {
-            this.tilesInBag.add(new Tile(Val.E));
+            this.add(new Tile(Val.E));
         }
         // 2 F tiles
         for (int i = 0; i < 2; i++) {
-            this.tilesInBag.add(new Tile(Val.F));
+            this.add(new Tile(Val.F));
         }
         // 3 G tiles
         for (int i = 0; i < 3; i++) {
-            this.tilesInBag.add(new Tile(Val.G));
+            this.add(new Tile(Val.G));
         }
         // 2 H tiles
         for (int i = 0; i < 2; i++) {
-            this.tilesInBag.add(new Tile(Val.H));
+            this.add(new Tile(Val.H));
         }
         // 9 I tiles
         for (int i = 0; i < 9; i++) {
-            this.tilesInBag.add(new Tile(Val.I));
+            this.add(new Tile(Val.I));
         }
         // 1 J tile
-        this.tilesInBag.add(new Tile(Val.J));
+        this.add(new Tile(Val.J));
         // 1 K tile
-        this.tilesInBag.add(new Tile(Val.K));
+        this.add(new Tile(Val.K));
         // 4 L tiles
         for (int i = 0; i < 4; i++) {
-            this.tilesInBag.add(new Tile(Val.L));
+            this.add(new Tile(Val.L));
         }
         // 2 M tiles
         for (int i = 0; i < 2; i++) {
-            this.tilesInBag.add(new Tile(Val.M));
+            this.add(new Tile(Val.M));
         }
         // 6 N tiles
         for (int i = 0; i < 6; i++) {
-            this.tilesInBag.add(new Tile(Val.N));
+            this.add(new Tile(Val.N));
         }
         // 8 O tiles
         for (int i = 0; i < 8; i++) {
-            this.tilesInBag.add(new Tile(Val.O));
+            this.add(new Tile(Val.O));
         }
         // 2 P tiles
         for (int i = 0; i < 2; i++) {
-            this.tilesInBag.add(new Tile(Val.P));
+            this.add(new Tile(Val.P));
         }
         // 1 Q tile
-        this.tilesInBag.add(new Tile(Val.Q));
+        this.add(new Tile(Val.Q));
         // 6 R tiles
         for (int i = 0; i < 6; i++) {
-            this.tilesInBag.add(new Tile(Val.R));
+            this.add(new Tile(Val.R));
         }
         // 4 S tiles
         for (int i = 0; i < 4; i++) {
-            this.tilesInBag.add(new Tile(Val.S));
+            this.add(new Tile(Val.S));
         }
         // 6 T tiles
         for (int i = 0; i < 6; i++) {
-            this.tilesInBag.add(new Tile(Val.T));
+            this.add(new Tile(Val.T));
         }
         // 4 U tiles
         for (int i = 0; i < 4; i++) {
-            this.tilesInBag.add(new Tile(Val.U));
+            this.add(new Tile(Val.U));
         }
         // 2 V tiles
         for (int i = 0; i < 2; i++) {
-            this.tilesInBag.add(new Tile(Val.V));
+            this.add(new Tile(Val.V));
         }
         // 2 W tiles
         for (int i = 0; i < 2; i++) {
-            this.tilesInBag.add(new Tile(Val.W));
+            this.add(new Tile(Val.W));
         }
         // 1 X tile
-        this.tilesInBag.add(new Tile(Val.X));
+        this.add(new Tile(Val.X));
         // 2 Y tiles
         for (int i = 0; i < 2; i++) {
-            this.tilesInBag.add(new Tile(Val.Y));
+            this.add(new Tile(Val.Y));
         }
         // 1 Z tile
-        this.tilesInBag.add(new Tile(Val.Z));
+        this.add(new Tile(Val.Z));
         // 2 BlANK tiles
         for (int i = 0; i < 2; i++) {
-            this.tilesInBag.add(new Tile(Val.BLANK));
+            this.add(new Tile(Val.BLANK));
         }
 
     }
 
     public int getTileBagSize() {
-        return this.tilesInBag.size();
+        return this.size();
     }
 
     public String getTileBagSizeStr() {
@@ -139,28 +137,24 @@ public class TileBag extends ArrayList<Tile> {
         return sizeStr;
     }
 
-    public void setTilesInBag(ArrayList<Tile> tilesInBag) {
-        this.tilesInBag = tilesInBag;
-
-    }
-
+//    public void setTilesInBag(ArrayList<Tile> tilesInBag) {
+//        this.tilesInBag = tilesInBag;
+//
+//    }
     public void addTile(Tile tile) {
-        tilesInBag.add(tile);
+        this.add(tile);
 
     }
 
     public void removeTile(Tile tile) {
-        tilesInBag.remove(tile);
+        this.remove(tile);
 
     }
 
     public Tile draw() {
-        for (Tile tile : this) {
-            System.out.println("Tile: " + tile);
-        }
         Random generator = new Random();
-        int index = generator.nextInt(tilesInBag.size());
-        Tile tile = tilesInBag.get(index);
+        int index = generator.nextInt(this.size());
+        Tile tile = this.get(index);
         removeTile(tile);
         return tile;
     }
