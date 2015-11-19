@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
@@ -48,6 +49,7 @@ public class ScrabbleBoard extends JFrame {
     private final JTextArea scoresLabel = new JTextArea(10, 10);
     private final JTextArea letterDistribLabel = new JTextArea(20, 10);
     private final JTextArea tileBagLabel = new JTextArea(10, 10);
+    private Board board;
 
     public ScrabbleBoard() {
         Border blackBorder = BorderFactory.createLineBorder(
@@ -90,7 +92,7 @@ public class ScrabbleBoard extends JFrame {
         actionPanel.add(tileBagLabel);
 
         //bottom panel -- where tiles are added to hand
-        Hand hand = new Hand();
+        HandView hand = new HandView();
 //        handPanel.setPreferredSize(new Dimension(100, 50));
 //        handPanel.setLayout(new GridLayout(1, 7));
 //        //JLabel hand
@@ -122,9 +124,10 @@ public class ScrabbleBoard extends JFrame {
         return shuffleBtn;
     }
 
-//    public JLabel[][] getGrid() {
-//        return board.getGrid();
-//    }
+    public JLabel[][] getGrid() {
+        return board.getGrid();
+    }
+
     /**
      * @param args the command line arguments
      */

@@ -22,7 +22,7 @@ import java.util.Random;
  *
  * @author jms107
  */
-public class TileBag {
+public class TileBag extends ArrayList<Tile> {
     private ArrayList<Tile> tilesInBag;
 
     public TileBag(ArrayList<Tile> tilesInBag) {
@@ -155,7 +155,10 @@ public class TileBag {
     }
 
     public Tile draw() {
-        Random generator = null;
+        for (Tile tile : this) {
+            System.out.println("Tile: " + tile);
+        }
+        Random generator = new Random();
         int index = generator.nextInt(tilesInBag.size());
         Tile tile = tilesInBag.get(index);
         removeTile(tile);
