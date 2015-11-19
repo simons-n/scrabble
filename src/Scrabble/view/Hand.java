@@ -71,8 +71,7 @@ public class Hand extends javax.swing.JPanel {
         for (int x = 0; x < 7; x++) {
             for (int y = 0; y < 1; y++) {
                 Tile newTile = tileBag.draw();//get tiles from tile bag
-                Val letter = newTile.getLetter();
-                switch letter  {
+                switch (newTile.getLetter()) {
                     case A:
                         addATile(this.hand, x, y);
                         break;

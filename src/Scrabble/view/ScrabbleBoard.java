@@ -25,7 +25,6 @@ import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
@@ -36,22 +35,19 @@ import javax.swing.border.Border;
  * @author jms107
  */
 public class ScrabbleBoard extends JFrame {
-    //JPanel boardPanel = new JPanel();
     private ArrayList<Tile> tilesInBag = new ArrayList<>();
-    TileBag tileBag = new TileBag(tilesInBag);
-    JPanel handPanel = new JPanel();
-    JLabel handLabel = new JLabel();
-    JPanel actionPanel = new JPanel();
-    JButton playBtn = new JButton("Play Word");
-    JButton swapBtn = new JButton("Swap");
-    JButton passBtn = new JButton("Pass");
-    JButton shuffleBtn = new JButton("Shuffle");
-    JPanel leftPanel = new JPanel();
-    JTextArea scoresLabel = new JTextArea(10, 10);
-    JTextArea letterDistribLabel = new JTextArea(20, 10);
-    JTextArea tileBagLabel = new JTextArea(10, 10);
-
-    Board board;
+    private TileBag tileBag = new TileBag(tilesInBag);
+    //private final JPanel handPanel = new JPanel();
+    //private final JLabel handLabel = new JLabel();
+    private final JPanel actionPanel = new JPanel();
+    private final JButton playbtn = new JButton("Play Word");
+    private final JButton swapbtn = new JButton("Swap");
+    private final JButton passbtn = new JButton("Pass");
+    private final JButton shufflebtn = new JButton("Shuffle");
+    private final JPanel leftPanel = new JPanel();
+    private final JTextArea scoresLabel = new JTextArea(10, 10);
+    private final JTextArea letterDistribLabel = new JTextArea(20, 10);
+    private final JTextArea tileBagLabel = new JTextArea(10, 10);
 
     public ScrabbleBoard() {
         Border blackBorder = BorderFactory.createLineBorder(
@@ -94,20 +90,20 @@ public class ScrabbleBoard extends JFrame {
         actionPanel.add(tileBagLabel);
 
         //bottom panel -- where tiles are added to hand
-        handPanel.setPreferredSize(new Dimension(100, 50));
-        handPanel.setLayout(new GridLayout(1, 7));
-        //JLabel hand
-        handLabel.setPreferredSize(new Dimension(100, 50));
-        handLabel.setBackground(Color.cyan);
-        handPanel.add(handLabel);
+        Hand hand = new Hand();
+//        handPanel.setPreferredSize(new Dimension(100, 50));
+//        handPanel.setLayout(new GridLayout(1, 7));
+//        //JLabel hand
+//        handLabel.setPreferredSize(new Dimension(100, 50));
+//        handLabel.setBackground(Color.cyan);
+//        handPanel.add(handLabel);
 
         //put into frame
-        add(handPanel, BorderLayout.SOUTH);
+        add(hand, BorderLayout.SOUTH);
         add(leftPanel, BorderLayout.WEST);
         add(actionPanel, BorderLayout.EAST);
         add(board, BorderLayout.CENTER);
         pack();
-        //frame.setVisible(true);
     }
 
     public JButton getPlayBtn() {

@@ -70,13 +70,6 @@ public class Board extends javax.swing.JPanel {
                     add(this.grid[x][y]);
                 }
 
-//                } else {
-                this.grid[x][y] = new JLabel(backgroundImage);
-                this.grid[x][y].setPreferredSize(new Dimension(30, 30));
-                ;
-                this.grid[x][y].setBorder(BorderFactory.createLineBorder(
-                        Color.WHITE));
-                add(this.grid[x][y]);
             }
         }
     }
