@@ -18,6 +18,7 @@ package Scrabble.controller;
 import Scrabble.view.ScrabbleBoard;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 
 /**
  *
@@ -31,9 +32,18 @@ public class ScrabbleController implements ActionListener {
     public ScrabbleController(ScrabbleBoard view) {
         this.view = view;
 
+    }
+
+    public void createScrabbleController() {
+//        for (JLabel[] row : view.getGrid()) {
+//            for (JLabel square : row) {
+//               square.addActionListener(this);
+//            }
+//        }
         for (int i = 0; i < view.getGrid().length; i++) {
             for (int j = 0; i < view.getGrid()[0].length; j++) {
-                view.getGrid()[i][j].addActionListener(this);
+                view.getGrid()[i][j].addMouseListener(
+                        (MouseListener) view.getGrid()[i][j]);
             }
         }
     }
