@@ -70,7 +70,7 @@ public class Hand extends javax.swing.JPanel {
         setBorder(grayBorder);
         for (int x = 0; x < 1; x++) {
             for (int y = 0; y < 7; y++) {
-                //addATile(this.hand, x, y);
+                //addJTile(this.hand, x, y);
                 Tile newTile = tileBag.draw();//get tiles from tile bag
                 switch (newTile.getLetter()) {
                     case A:
@@ -162,163 +162,163 @@ public class Hand extends javax.swing.JPanel {
 
     public void addATile(JLabel[][] hand, int x, int y) {
         hand[x][y] = new JLabel(aTileImage);
-        hand[x][y].setPreferredSize(new Dimension(30, 30));
+        hand[x][y].setPreferredSize(new Dimension(30, 50));
         add(hand[x][y]);
     }
 
     public void addBTile(JLabel[][] hand, int x, int y) {
         hand[x][y] = new JLabel(bTileImage);
-        hand[x][y].setPreferredSize(new Dimension(30, 30));
+        hand[x][y].setPreferredSize(new Dimension(30, 50));
         add(hand[x][y]);
     }
 
     public void addCTile(JLabel[][] hand, int x, int y) {
         hand[x][y] = new JLabel(cTileImage);
-        hand[x][y].setPreferredSize(new Dimension(30, 30));
+        hand[x][y].setPreferredSize(new Dimension(30, 50));
         add(hand[x][y]);
     }
 
     public void addDTile(JLabel[][] hand, int x, int y) {
         hand[x][y] = new JLabel(dTileImage);
-        hand[x][y].setPreferredSize(new Dimension(30, 30));
+        hand[x][y].setPreferredSize(new Dimension(30, 50));
         add(hand[x][y]);
     }
 
     public void addETile(JLabel[][] hand, int x, int y) {
         hand[x][y] = new JLabel(eTileImage);
-        hand[x][y].setPreferredSize(new Dimension(30, 30));
+        hand[x][y].setPreferredSize(new Dimension(30, 50));
         add(hand[x][y]);
     }
 
     public void addFTile(JLabel[][] hand, int x, int y) {
         hand[x][y] = new JLabel(fTileImage);
-        hand[x][y].setPreferredSize(new Dimension(30, 30));
+        hand[x][y].setPreferredSize(new Dimension(30, 50));
         add(hand[x][y]);
     }
 
     public void addGTile(JLabel[][] hand, int x, int y) {
         hand[x][y] = new JLabel(gTileImage);
-        hand[x][y].setPreferredSize(new Dimension(30, 30));
+        hand[x][y].setPreferredSize(new Dimension(30, 50));
         add(hand[x][y]);
     }
 
     public void addHTile(JLabel[][] hand, int x, int y) {
         hand[x][y] = new JLabel(hTileImage);
-        hand[x][y].setPreferredSize(new Dimension(30, 30));
+        hand[x][y].setPreferredSize(new Dimension(30, 50));
         add(hand[x][y]);
     }
 
     public void addITile(JLabel[][] hand, int x, int y) {
         hand[x][y] = new JLabel(iTileImage);
-        hand[x][y].setPreferredSize(new Dimension(30, 30));
+        hand[x][y].setPreferredSize(new Dimension(30, 50));
         add(hand[x][y]);
     }
 
     public void addJTile(JLabel[][] hand, int x, int y) {
         hand[x][y] = new JLabel(jTileImage);
-        hand[x][y].setPreferredSize(new Dimension(30, 30));
+        hand[x][y].setPreferredSize(new Dimension(30, 50));
         add(hand[x][y]);
     }
 
     public void addKTile(JLabel[][] hand, int x, int y) {
         hand[x][y] = new JLabel(kTileImage);
-        hand[x][y].setPreferredSize(new Dimension(30, 30));
+        hand[x][y].setPreferredSize(new Dimension(30, 50));
         add(hand[x][y]);
     }
 
     public void addLTile(JLabel[][] hand, int x, int y) {
         hand[x][y] = new JLabel(lTileImage);
-        hand[x][y].setPreferredSize(new Dimension(30, 30));
+        hand[x][y].setPreferredSize(new Dimension(30, 50));
         add(hand[x][y]);
     }
 
     public void addMTile(JLabel[][] hand, int x, int y) {
         hand[x][y] = new JLabel(mTileImage);
-        hand[x][y].setPreferredSize(new Dimension(30, 30));
+        hand[x][y].setPreferredSize(new Dimension(30, 50));
         add(hand[x][y]);
     }
 
     public void addNTile(JLabel[][] hand, int x, int y) {
         hand[x][y] = new JLabel(nTileImage);
-        hand[x][y].setPreferredSize(new Dimension(30, 30));
+        hand[x][y].setPreferredSize(new Dimension(30, 50));
         add(hand[x][y]);
     }
 
     public void addOTile(JLabel[][] hand, int x, int y) {
         hand[x][y] = new JLabel(oTileImage);
-        hand[x][y].setPreferredSize(new Dimension(30, 30));
+        hand[x][y].setPreferredSize(new Dimension(30, 50));
         add(hand[x][y]);
     }
 
     public void addPTile(JLabel[][] hand, int x, int y) {
         hand[x][y] = new JLabel(pTileImage);
-        hand[x][y].setPreferredSize(new Dimension(30, 30));
+        hand[x][y].setPreferredSize(new Dimension(30, 50));
         add(hand[x][y]);
     }
 
     public void addQTile(JLabel[][] hand, int x, int y) {
         hand[x][y] = new JLabel(qTileImage);
-        hand[x][y].setPreferredSize(new Dimension(30, 30));
+        hand[x][y].setPreferredSize(new Dimension(30, 50));
         add(hand[x][y]);
     }
 
     public void addRTile(JLabel[][] hand, int x, int y) {
         hand[x][y] = new JLabel(rTileImage);
-        hand[x][y].setPreferredSize(new Dimension(30, 30));
+        hand[x][y].setPreferredSize(new Dimension(30, 50));
         add(hand[x][y]);
     }
 
     public void addSTile(JLabel[][] hand, int x, int y) {
         hand[x][y] = new JLabel(sTileImage);
-        hand[x][y].setPreferredSize(new Dimension(30, 30));
+        hand[x][y].setPreferredSize(new Dimension(30, 50));
         add(hand[x][y]);
     }
 
     public void addTTile(JLabel[][] hand, int x, int y) {
         hand[x][y] = new JLabel(tTileImage);
-        hand[x][y].setPreferredSize(new Dimension(30, 30));
+        hand[x][y].setPreferredSize(new Dimension(30, 50));
         add(hand[x][y]);
     }
 
     public void addUTile(JLabel[][] hand, int x, int y) {
         hand[x][y] = new JLabel(uTileImage);
-        hand[x][y].setPreferredSize(new Dimension(30, 30));
+        hand[x][y].setPreferredSize(new Dimension(30, 50));
         add(hand[x][y]);
     }
 
     public void addVTile(JLabel[][] hand, int x, int y) {
         hand[x][y] = new JLabel(vTileImage);
-        hand[x][y].setPreferredSize(new Dimension(30, 30));
+        hand[x][y].setPreferredSize(new Dimension(30, 50));
         add(hand[x][y]);
     }
 
     public void addWTile(JLabel[][] hand, int x, int y) {
         hand[x][y] = new JLabel(wTileImage);
-        hand[x][y].setPreferredSize(new Dimension(30, 30));
+        hand[x][y].setPreferredSize(new Dimension(30, 50));
         add(hand[x][y]);
     }
 
     public void addXTile(JLabel[][] hand, int x, int y) {
         hand[x][y] = new JLabel(xTileImage);
-        hand[x][y].setPreferredSize(new Dimension(30, 30));
+        hand[x][y].setPreferredSize(new Dimension(30, 50));
         add(hand[x][y]);
     }
 
     public void addYTile(JLabel[][] hand, int x, int y) {
         hand[x][y] = new JLabel(yTileImage);
-        hand[x][y].setPreferredSize(new Dimension(30, 30));
+        hand[x][y].setPreferredSize(new Dimension(30, 50));
         add(hand[x][y]);
     }
 
     public void addZTile(JLabel[][] hand, int x, int y) {
         hand[x][y] = new JLabel(zTileImage);
-        hand[x][y].setPreferredSize(new Dimension(30, 30));
+        hand[x][y].setPreferredSize(new Dimension(30, 50));
         add(hand[x][y]);
     }
 
     public void addBlankTile(JLabel[][] hand, int x, int y) {
         hand[x][y] = new JLabel(blankTileImage);
-        hand[x][y].setPreferredSize(new Dimension(30, 30));
+        hand[x][y].setPreferredSize(new Dimension(30, 50));
         add(hand[x][y]);
     }
 
