@@ -62,7 +62,7 @@ public class ScrabbleBoard extends JFrame {
         //left panel
         leftPanel.setSize(new Dimension(60, 300));
         leftPanel.setLayout(new GridLayout(2, 1));
-        scoresLabel.setText("SCORES \n Player 1: 0 \n Player 2: 0"); // get players scores from scoring method, and get amount of players from JOptionPane
+        scoresLabel.setText("SCORES \n Player 1: 0 \n Player 2: 0"); // get players scores from scoring method from word class, and get amount of players from JOptionPane
         scoresLabel.setEditable(false);
         scoresLabel.setBorder(blackBorder);
         scoresLabel.setBackground(Color.PINK);
@@ -93,12 +93,6 @@ public class ScrabbleBoard extends JFrame {
 
         //bottom panel -- where tiles are added to hand
         HandView hand = new HandView(); // make hand panel smaller
-//        handPanel.setPreferredSize(new Dimension(100, 50));
-//        handPanel.setLayout(new GridLayout(1, 7));
-//        //JLabel hand
-//        handLabel.setPreferredSize(new Dimension(100, 50));
-//        handLabel.setBackground(Color.cyan);
-//        handPanel.add(handLabel);
 
         //put into frame
         add(hand, BorderLayout.SOUTH);
