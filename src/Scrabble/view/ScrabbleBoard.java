@@ -90,7 +90,7 @@ public class ScrabbleBoard extends JFrame {
         actionPanel.add(tileBagLabel);
 
         //bottom panel -- where tiles are added to hand
-        HandView hand = new HandView(); // make hand panel smaller
+        HandView hand = new HandView(tileBag);
 
         //put into frame
         add(hand, BorderLayout.SOUTH);
