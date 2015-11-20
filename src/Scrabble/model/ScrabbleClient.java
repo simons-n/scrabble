@@ -45,7 +45,7 @@ public class ScrabbleClient {
 
             System.out.println("Local IP Address : " + localaddr);
             System.out.println("Local hostname : " + localaddr.getHostName());
-            Socket skt = new Socket("134.82.132.137", 1025);
+            Socket skt = new Socket("134.82.132.139", 1025);
             BufferedReader in = new BufferedReader(new InputStreamReader(
                     skt.getInputStream()));
             System.out.print("Received string: ");

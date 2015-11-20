@@ -15,6 +15,8 @@
  */
 package Scrabble.controller;
 
+import Scrabble.model.Game;
+import Scrabble.model.GameSize;
 import Scrabble.model.Player;
 import Scrabble.model.ScrabbleClient;
 import Scrabble.model.ScrabbleServer;
@@ -23,6 +25,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -41,6 +44,7 @@ public class StartBoxController implements ActionListener {
         this.view = window;
         view.getJoinExistingGameBtn().addActionListener(this);
         view.getStartNewGameBtn().addActionListener(this);
+        view.getIPAddressBtn().addActionListener(this);
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -86,8 +90,18 @@ public class StartBoxController implements ActionListener {
                                                             null,
                                                             numPlayers,
                                                             numPlayers[0]);
+
             // number of players to wait
-            int gameSize = Integer.valueOf(n);
+            int size = Integer.valueOf(n);
+            // sets default game to a two-player game
+            GameSize gameSize = GameSize.TWO_PLAYER;
+
+            if (size == 3) {
+                gameSize = GameSize.THREE_PLAYER;
+            }
+            if (size == 4) {
+                gameSize = GameSize.FOUR_PLAYER;
+            }
 
             try {
                 scrabbleServer = new ScrabbleServer();
@@ -97,10 +111,29 @@ public class StartBoxController implements ActionListener {
                         null,
                         ex);
             }
+
+            Game theGame = new Game(gameSize);
             Player p1 = new Player(name,
                                    scrabbleServer
             );
             System.out.println(p1);
+        }
+        if (e.getSource() == view.getIPAddressBtn()) {
+            System.out.println("ip address button pressed");
+
+            InetAddress localaddr;
+            try {
+                localaddr = InetAddress.getLocalHost();
+                System.out.println(localaddr);
+                JOptionPane.showMessageDialog(null,
+                                              "This computer's IP address: " + "\n" + localaddr);
+            } catch (UnknownHostException ex) {
+                Logger.getLogger(StartBoxController.class.getName()).log(
+                        Level.SEVERE,
+                        null,
+                        ex);
+            }
+
         }
 
     }

@@ -42,6 +42,7 @@ public class StartBox extends javax.swing.JFrame {
         startNewGameBtn = new javax.swing.JButton();
         joinExistingGameBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        getIPAddressBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -56,6 +57,13 @@ public class StartBox extends javax.swing.JFrame {
 
         jLabel1.setText("Welcome to Scrabble!");
 
+        getIPAddressBtn.setText("Get IP Address of This Computer");
+        getIPAddressBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                getIPAddressBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -67,18 +75,24 @@ public class StartBox extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel1)
                         .addComponent(startNewGameBtn)))
-                .addContainerGap(119, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(88, Short.MAX_VALUE)
+                .addComponent(getIPAddressBtn)
+                .addGap(84, 84, 84))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(58, 58, 58)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
-                .addComponent(startNewGameBtn)
                 .addGap(40, 40, 40)
+                .addComponent(startNewGameBtn)
+                .addGap(29, 29, 29)
                 .addComponent(joinExistingGameBtn)
-                .addGap(51, 51, 51))
+                .addGap(29, 29, 29)
+                .addComponent(getIPAddressBtn)
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         pack();
@@ -87,6 +101,10 @@ public class StartBox extends javax.swing.JFrame {
     private void joinExistingGameBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joinExistingGameBtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_joinExistingGameBtnActionPerformed
+
+    private void getIPAddressBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getIPAddressBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_getIPAddressBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -138,7 +156,12 @@ public class StartBox extends javax.swing.JFrame {
         return startNewGameBtn;
     }
 
+    public JButton getIPAddressBtn() {
+        return getIPAddressBtn;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton getIPAddressBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton joinExistingGameBtn;
     private javax.swing.JButton startNewGameBtn;
