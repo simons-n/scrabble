@@ -15,13 +15,11 @@
  */
 package Scrabble.view;
 
-import Scrabble.model.Tile;
 import Scrabble.model.TileBag;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -36,8 +34,8 @@ import javax.swing.border.Border;
  * @author jms107
  */
 public class ScrabbleBoard extends JFrame {
-    private ArrayList<Tile> tilesInBag = new ArrayList<>();
-    private TileBag tileBag = new TileBag(tilesInBag);
+    //private ArrayList<Tile> tilesInBag = new ArrayList<>();
+    private TileBag tileBag = new TileBag();
     //private final JPanel handPanel = new JPanel();
     //private final JLabel handLabel = new JLabel();
     private final JPanel actionPanel = new JPanel();
@@ -134,6 +132,7 @@ public class ScrabbleBoard extends JFrame {
                 window.setTitle("Scrabble Game");
                 window.setSize(900, 600);
                 window.setVisible(true);
+
             }
         });
         //create GUI
