@@ -76,8 +76,8 @@ public class ScrabbleBoard extends JFrame {
 
         //right panel
         actionPanel.setLayout(new GridLayout(8, 1));
-        String size = tileBag.getTileBagSizeStr();
-        tileBagLabel.setText("TILES LEFT \n " + size); // get the number of tiles from size of bag using getTileBagSize()
+        String size = tileBag.getTileBagSizeStr();// try to center letters or bold them
+        tileBagLabel.setText("TILES LEFT \n " + size); // get the number of tiles from size of bag using getTileBagSize() //should equal 93!! fix
         tileBagLabel.setEditable(false);
         tileBagLabel.setBorder(blackBorder);
         tileBagLabel.setBackground(Color.ORANGE);
@@ -92,7 +92,7 @@ public class ScrabbleBoard extends JFrame {
         actionPanel.add(tileBagLabel);
 
         //bottom panel -- where tiles are added to hand
-        HandView hand = new HandView();
+        HandView hand = new HandView(); // make hand panel smaller
 //        handPanel.setPreferredSize(new Dimension(100, 50));
 //        handPanel.setLayout(new GridLayout(1, 7));
 //        //JLabel hand
