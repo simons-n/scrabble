@@ -70,253 +70,257 @@ public class HandView extends javax.swing.JPanel {
         setBorder(grayBorder);
         for (int x = 0; x < 7; x++) {
             Tile newTile = tileBag.draw();//get tiles from tile bag
-            switch (newTile.getLetter()) {
-                case A:
-                    addATile(this.hand, x);
-                    break;
-                case B:
-                    addBTile(this.hand, x);
-                    break;
-                case C:
-                    addCTile(this.hand, x);
-                    break;
-                case D:
-                    addDTile(this.hand, x);
-                    break;
-                case E:
-                    addETile(this.hand, x);
-                    break;
-                case F:
-                    addFTile(this.hand, x);
-                    break;
-                case G:
-                    addGTile(this.hand, x);
-                    break;
-                case H:
-                    addHTile(this.hand, x);
-                    break;
-                case I:
-                    addITile(this.hand, x);
-                    break;
-                case J:
-                    addJTile(this.hand, x);
-                    break;
-                case K:
-                    addKTile(this.hand, x);
-                    break;
-                case L:
-                    addLTile(this.hand, x);
-                    break;
-                case M:
-                    addMTile(this.hand, x);
-                    break;
-                case N:
-                    addNTile(this.hand, x);
-                    break;
-                case O:
-                    addOTile(this.hand, x);
-                    break;
-                case P:
-                    addPTile(this.hand, x);
-                    break;
-                case Q:
-                    addQTile(this.hand, x);
-                    break;
-                case R:
-                    addRTile(this.hand, x);
-                    break;
-                case S:
-                    addSTile(this.hand, x);
-                    break;
-                case T:
-                    addTTile(this.hand, x);
-                    break;
-                case U:
-                    addUTile(this.hand, x);
-                    break;
-                case V:
-                    addVTile(this.hand, x);
-                    break;
-                case W:
-                    addWTile(this.hand, x);
-                    break;
-                case X:
-                    addXTile(this.hand, x);
-                    break;
-                case Y:
-                    addYTile(this.hand, x);
-                    break;
-                case Z:
-                    addZTile(this.hand, x);
-                    break;
-                default:
-                    addBlankTile(this.hand, x);
-                    break;
-            }
+            drawTile(newTile, x);
         }
 
     }
 
-    public void addATile(JLabel[] hand, int x) {
-        hand[x] = new JLabel(aTileImage);
-        hand[x].setPreferredSize(new Dimension(30, 30));
-        add(hand[x]);
+    public void drawTile(Tile newTile, int handLocation) {
+        switch (newTile.getLetter()) {
+            case A:
+                addATile(this.hand, handLocation);
+                break;
+            case B:
+                addBTile(this.hand, handLocation);
+                break;
+            case C:
+                addCTile(this.hand, handLocation);
+                break;
+            case D:
+                addDTile(this.hand, handLocation);
+                break;
+            case E:
+                addETile(this.hand, handLocation);
+                break;
+            case F:
+                addFTile(this.hand, handLocation);
+                break;
+            case G:
+                addGTile(this.hand, handLocation);
+                break;
+            case H:
+                addHTile(this.hand, handLocation);
+                break;
+            case I:
+                addITile(this.hand, handLocation);
+                break;
+            case J:
+                addJTile(this.hand, handLocation);
+                break;
+            case K:
+                addKTile(this.hand, handLocation);
+                break;
+            case L:
+                addLTile(this.hand, handLocation);
+                break;
+            case M:
+                addMTile(this.hand, handLocation);
+                break;
+            case N:
+                addNTile(this.hand, handLocation);
+                break;
+            case O:
+                addOTile(this.hand, handLocation);
+                break;
+            case P:
+                addPTile(this.hand, handLocation);
+                break;
+            case Q:
+                addQTile(this.hand, handLocation);
+                break;
+            case R:
+                addRTile(this.hand, handLocation);
+                break;
+            case S:
+                addSTile(this.hand, handLocation);
+                break;
+            case T:
+                addTTile(this.hand, handLocation);
+                break;
+            case U:
+                addUTile(this.hand, handLocation);
+                break;
+            case V:
+                addVTile(this.hand, handLocation);
+                break;
+            case W:
+                addWTile(this.hand, handLocation);
+                break;
+            case X:
+                addXTile(this.hand, handLocation);
+                break;
+            case Y:
+                addYTile(this.hand, handLocation);
+                break;
+            case Z:
+                addZTile(this.hand, handLocation);
+                break;
+            default:
+                addBlankTile(this.hand, handLocation);
+                break;
+        }
     }
 
-    public void addBTile(JLabel[] hand, int x) {
-        hand[x] = new JLabel(bTileImage);
-        hand[x].setPreferredSize(new Dimension(30, 30));
-        add(hand[x]);
+    public void addATile(JLabel[] hand, int handLocation) {
+        hand[handLocation] = new JLabel(aTileImage);
+        hand[handLocation].setPreferredSize(new Dimension(30, 30));
+        add(hand[handLocation]);
     }
 
-    public void addCTile(JLabel[] hand, int x) {
-        hand[x] = new JLabel(cTileImage);
-        hand[x].setPreferredSize(new Dimension(30, 30));
-        add(hand[x]);
+    public void addBTile(JLabel[] hand, int handLocation) {
+        hand[handLocation] = new JLabel(bTileImage);
+        hand[handLocation].setPreferredSize(new Dimension(30, 30));
+        add(hand[handLocation]);
     }
 
-    public void addDTile(JLabel[] hand, int x) {
-        hand[x] = new JLabel(dTileImage);
-        hand[x].setPreferredSize(new Dimension(30, 30));
-        add(hand[x]);
+    public void addCTile(JLabel[] hand, int handLocation) {
+        hand[handLocation] = new JLabel(cTileImage);
+        hand[handLocation].setPreferredSize(new Dimension(30, 30));
+        add(hand[handLocation]);
     }
 
-    public void addETile(JLabel[] hand, int x) {
-        hand[x] = new JLabel(eTileImage);
-        hand[x].setPreferredSize(new Dimension(30, 30));
-        add(hand[x]);
+    public void addDTile(JLabel[] hand, int handLocation) {
+        hand[handLocation] = new JLabel(dTileImage);
+        hand[handLocation].setPreferredSize(new Dimension(30, 30));
+        add(hand[handLocation]);
     }
 
-    public void addFTile(JLabel[] hand, int x) {
-        hand[x] = new JLabel(fTileImage);
-        hand[x].setPreferredSize(new Dimension(30, 30));
-        add(hand[x]);
+    public void addETile(JLabel[] hand, int handLocation) {
+        hand[handLocation] = new JLabel(eTileImage);
+        hand[handLocation].setPreferredSize(new Dimension(30, 30));
+        add(hand[handLocation]);
     }
 
-    public void addGTile(JLabel[] hand, int x) {
-        hand[x] = new JLabel(gTileImage);
-        hand[x].setPreferredSize(new Dimension(30, 30));
-        add(hand[x]);
+    public void addFTile(JLabel[] hand, int handLocation) {
+        hand[handLocation] = new JLabel(fTileImage);
+        hand[handLocation].setPreferredSize(new Dimension(30, 30));
+        add(hand[handLocation]);
     }
 
-    public void addHTile(JLabel[] hand, int x) {
-        hand[x] = new JLabel(hTileImage);
-        hand[x].setPreferredSize(new Dimension(30, 30));
-        add(hand[x]);
+    public void addGTile(JLabel[] hand, int handLocation) {
+        hand[handLocation] = new JLabel(gTileImage);
+        hand[handLocation].setPreferredSize(new Dimension(30, 30));
+        add(hand[handLocation]);
     }
 
-    public void addITile(JLabel[] hand, int x) {
-        hand[x] = new JLabel(iTileImage);
-        hand[x].setPreferredSize(new Dimension(30, 30));
-        add(hand[x]);
+    public void addHTile(JLabel[] hand, int handLocation) {
+        hand[handLocation] = new JLabel(hTileImage);
+        hand[handLocation].setPreferredSize(new Dimension(30, 30));
+        add(hand[handLocation]);
     }
 
-    public void addJTile(JLabel[] hand, int x) {
-        hand[x] = new JLabel(jTileImage);
-        hand[x].setPreferredSize(new Dimension(30, 30));
-        add(hand[x]);
+    public void addITile(JLabel[] hand, int handLocation) {
+        hand[handLocation] = new JLabel(iTileImage);
+        hand[handLocation].setPreferredSize(new Dimension(30, 30));
+        add(hand[handLocation]);
     }
 
-    public void addKTile(JLabel[] hand, int x) {
-        hand[x] = new JLabel(kTileImage);
-        hand[x].setPreferredSize(new Dimension(30, 30));
-        add(hand[x]);
+    public void addJTile(JLabel[] hand, int handLocation) {
+        hand[handLocation] = new JLabel(jTileImage);
+        hand[handLocation].setPreferredSize(new Dimension(30, 30));
+        add(hand[handLocation]);
     }
 
-    public void addLTile(JLabel[] hand, int x) {
-        hand[x] = new JLabel(lTileImage);
-        hand[x].setPreferredSize(new Dimension(30, 30));
-        add(hand[x]);
+    public void addKTile(JLabel[] hand, int handLocation) {
+        hand[handLocation] = new JLabel(kTileImage);
+        hand[handLocation].setPreferredSize(new Dimension(30, 30));
+        add(hand[handLocation]);
     }
 
-    public void addMTile(JLabel[] hand, int x) {
-        hand[x] = new JLabel(mTileImage);
-        hand[x].setPreferredSize(new Dimension(30, 30));
-        add(hand[x]);
+    public void addLTile(JLabel[] hand, int handLocation) {
+        hand[handLocation] = new JLabel(lTileImage);
+        hand[handLocation].setPreferredSize(new Dimension(30, 30));
+        add(hand[handLocation]);
     }
 
-    public void addNTile(JLabel[] hand, int x) {
-        hand[x] = new JLabel(nTileImage);
-        hand[x].setPreferredSize(new Dimension(30, 30));
-        add(hand[x]);
+    public void addMTile(JLabel[] hand, int handLocation) {
+        hand[handLocation] = new JLabel(mTileImage);
+        hand[handLocation].setPreferredSize(new Dimension(30, 30));
+        add(hand[handLocation]);
     }
 
-    public void addOTile(JLabel[] hand, int x) {
-        hand[x] = new JLabel(oTileImage);
-        hand[x].setPreferredSize(new Dimension(30, 30));
-        add(hand[x]);
+    public void addNTile(JLabel[] hand, int handLocation) {
+        hand[handLocation] = new JLabel(nTileImage);
+        hand[handLocation].setPreferredSize(new Dimension(30, 30));
+        add(hand[handLocation]);
     }
 
-    public void addPTile(JLabel[] hand, int x) {
-        hand[x] = new JLabel(pTileImage);
-        hand[x].setPreferredSize(new Dimension(30, 30));
-        add(hand[x]);
+    public void addOTile(JLabel[] hand, int handLocation) {
+        hand[handLocation] = new JLabel(oTileImage);
+        hand[handLocation].setPreferredSize(new Dimension(30, 30));
+        add(hand[handLocation]);
     }
 
-    public void addQTile(JLabel[] hand, int x) {
-        hand[x] = new JLabel(qTileImage);
-        hand[x].setPreferredSize(new Dimension(30, 30));
-        add(hand[x]);
+    public void addPTile(JLabel[] hand, int handLocation) {
+        hand[handLocation] = new JLabel(pTileImage);
+        hand[handLocation].setPreferredSize(new Dimension(30, 30));
+        add(hand[handLocation]);
     }
 
-    public void addRTile(JLabel[] hand, int x) {
-        hand[x] = new JLabel(rTileImage);
-        hand[x].setPreferredSize(new Dimension(30, 30));
-        add(hand[x]);
+    public void addQTile(JLabel[] hand, int handLocation) {
+        hand[handLocation] = new JLabel(qTileImage);
+        hand[handLocation].setPreferredSize(new Dimension(30, 30));
+        add(hand[handLocation]);
     }
 
-    public void addSTile(JLabel[] hand, int x) {
-        hand[x] = new JLabel(sTileImage);
-        hand[x].setPreferredSize(new Dimension(30, 30));
-        add(hand[x]);
+    public void addRTile(JLabel[] hand, int handLocation) {
+        hand[handLocation] = new JLabel(rTileImage);
+        hand[handLocation].setPreferredSize(new Dimension(30, 30));
+        add(hand[handLocation]);
     }
 
-    public void addTTile(JLabel[] hand, int x) {
-        hand[x] = new JLabel(tTileImage);
-        hand[x].setPreferredSize(new Dimension(30, 30));
-        add(hand[x]);
+    public void addSTile(JLabel[] hand, int handLocation) {
+        hand[handLocation] = new JLabel(sTileImage);
+        hand[handLocation].setPreferredSize(new Dimension(30, 30));
+        add(hand[handLocation]);
     }
 
-    public void addUTile(JLabel[] hand, int x) {
-        hand[x] = new JLabel(uTileImage);
-        hand[x].setPreferredSize(new Dimension(30, 30));
-        add(hand[x]);
+    public void addTTile(JLabel[] hand, int handLocation) {
+        hand[handLocation] = new JLabel(tTileImage);
+        hand[handLocation].setPreferredSize(new Dimension(30, 30));
+        add(hand[handLocation]);
     }
 
-    public void addVTile(JLabel[] hand, int x) {
-        hand[x] = new JLabel(vTileImage);
-        hand[x].setPreferredSize(new Dimension(30, 30));
-        add(hand[x]);
+    public void addUTile(JLabel[] hand, int handLocation) {
+        hand[handLocation] = new JLabel(uTileImage);
+        hand[handLocation].setPreferredSize(new Dimension(30, 30));
+        add(hand[handLocation]);
     }
 
-    public void addWTile(JLabel[] hand, int x) {
-        hand[x] = new JLabel(wTileImage);
-        hand[x].setPreferredSize(new Dimension(30, 30));
-        add(hand[x]);
+    public void addVTile(JLabel[] hand, int handLocation) {
+        hand[handLocation] = new JLabel(vTileImage);
+        hand[handLocation].setPreferredSize(new Dimension(30, 30));
+        add(hand[handLocation]);
     }
 
-    public void addXTile(JLabel[] hand, int x) {
-        hand[x] = new JLabel(xTileImage);
-        hand[x].setPreferredSize(new Dimension(30, 30));
-        add(hand[x]);
+    public void addWTile(JLabel[] hand, int handLocation) {
+        hand[handLocation] = new JLabel(wTileImage);
+        hand[handLocation].setPreferredSize(new Dimension(30, 30));
+        add(hand[handLocation]);
     }
 
-    public void addYTile(JLabel[] hand, int x) {
-        hand[x] = new JLabel(yTileImage);
-        hand[x].setPreferredSize(new Dimension(30, 30));
-        add(hand[x]);
+    public void addXTile(JLabel[] hand, int handLocation) {
+        hand[handLocation] = new JLabel(xTileImage);
+        hand[handLocation].setPreferredSize(new Dimension(30, 30));
+        add(hand[handLocation]);
     }
 
-    public void addZTile(JLabel[] hand, int x) {
-        hand[x] = new JLabel(zTileImage);
-        hand[x].setPreferredSize(new Dimension(30, 30));
-        add(hand[x]);
+    public void addYTile(JLabel[] hand, int handLocation) {
+        hand[handLocation] = new JLabel(yTileImage);
+        hand[handLocation].setPreferredSize(new Dimension(30, 30));
+        add(hand[handLocation]);
     }
 
-    public void addBlankTile(JLabel[] hand, int x) {
-        hand[x] = new JLabel(blankTileImage);
-        hand[x].setPreferredSize(new Dimension(30, 30));
-        add(hand[x]);
+    public void addZTile(JLabel[] hand, int handLocation) {
+        hand[handLocation] = new JLabel(zTileImage);
+        hand[handLocation].setPreferredSize(new Dimension(30, 30));
+        add(hand[handLocation]);
+    }
+
+    public void addBlankTile(JLabel[] hand, int handLocation) {
+        hand[handLocation] = new JLabel(blankTileImage);
+        hand[handLocation].setPreferredSize(new Dimension(30, 30));
+        add(hand[handLocation]);
     }
 
 }
