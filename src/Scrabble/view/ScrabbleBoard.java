@@ -60,7 +60,7 @@ public class ScrabbleBoard extends JFrame {
         //left panel
         leftPanel.setSize(new Dimension(60, 300));
         leftPanel.setLayout(new GridLayout(2, 1));
-        scoresLabel.setText("SCORES \n Player 1: 0 \n Player 2: 0"); // get players scores from scoring method, and get amount of players from JOptionPane
+        scoresLabel.setText("SCORES \n Player 1: 0 \n Player 2: 0"); // get players scores from scoring method from word class, and get amount of players from JOptionPane
         scoresLabel.setEditable(false);
         scoresLabel.setBorder(blackBorder);
         scoresLabel.setBackground(Color.PINK);
@@ -74,8 +74,8 @@ public class ScrabbleBoard extends JFrame {
 
         //right panel
         actionPanel.setLayout(new GridLayout(8, 1));
-        String size = tileBag.getTileBagSizeStr();
-        tileBagLabel.setText("TILES LEFT \n " + size); // get the number of tiles from size of bag using getTileBagSize()
+        String size = tileBag.getTileBagSizeStr();// try to center letters or bold them
+        tileBagLabel.setText("TILES LEFT \n " + size); // get the number of tiles from size of bag using getTileBagSize() //should equal 93!! fix
         tileBagLabel.setEditable(false);
         tileBagLabel.setBorder(blackBorder);
         tileBagLabel.setBackground(Color.ORANGE);
@@ -91,12 +91,6 @@ public class ScrabbleBoard extends JFrame {
 
         //bottom panel -- where tiles are added to hand
         HandView hand = new HandView(tileBag);
-//        handPanel.setPreferredSize(new Dimension(100, 50));
-//        handPanel.setLayout(new GridLayout(1, 7));
-//        //JLabel hand
-//        handLabel.setPreferredSize(new Dimension(100, 50));
-//        handLabel.setBackground(Color.cyan);
-//        handPanel.add(handLabel);
 
         //put into frame
         add(hand, BorderLayout.SOUTH);
