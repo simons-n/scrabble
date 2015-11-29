@@ -87,6 +87,9 @@ public class HandView extends javax.swing.JPanel {
         setBorder(grayBorder);
         for (int x = 0; x < 7; x++) {
             Tile tile = myHand.getTile(x);
+            if (tile == null) {
+                tile = tileBag.draw();
+            }
             drawTile(tile, x);
         }
     }

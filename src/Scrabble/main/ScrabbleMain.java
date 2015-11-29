@@ -17,6 +17,7 @@ package Scrabble.main;
 
 import Scrabble.controller.ScrabbleController;
 import Scrabble.view.ScrabbleBoard;
+import java.awt.Color;
 import javax.swing.UIManager;
 
 /**
@@ -70,6 +71,10 @@ public class ScrabbleMain {
 //                StartBoxController startBoxController = new StartBoxController(
 //                        startBoxView);
                 ScrabbleBoard scrabbleBoardView = new ScrabbleBoard();
+
+                scrabbleBoardView.setBackground(Color.BLUE);
+                scrabbleBoardView.setTitle("Scrabble Game");
+                scrabbleBoardView.setSize(900, 600);
 
                 scrabbleBoardView.setVisible(true);
 

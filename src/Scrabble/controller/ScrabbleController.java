@@ -55,6 +55,10 @@ public class ScrabbleController implements ActionListener {
     }
 
     public void updateViewFromModel() {
+        // when shuffle is pressed change HandView to HandView(Hand myhand)
+        // when pass is pressed change view to next players hand
+        // when swap is pressed change HandView to HandView(Hand myhand) *** make the dialog box show up
+        // when play is pressed if not valid show error message, if valid update show message of how much they just scored, update total score, show new hand with drawn tiles, change player to next players hand
 
     }
 
