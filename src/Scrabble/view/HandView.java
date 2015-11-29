@@ -15,10 +15,12 @@
  */
 package Scrabble.view;
 
+import Scrabble.model.Hand;
 import Scrabble.model.Tile;
 import Scrabble.model.TileBag;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -57,11 +59,12 @@ public class HandView extends javax.swing.JPanel {
     private ImageIcon zTileImage = new ImageIcon("Images/zTile.png");
     private ImageIcon blankTileImage = new ImageIcon("Images/blankTile.png");
 
-    //private ArrayList<Tile> tilesInBag = new ArrayList<>();
+    private ArrayList<Tile> tilesInHand = new ArrayList<>();
     private TileBag tileBag;
 
     public HandView(TileBag tileBag) {
         this.tileBag = tileBag;
+        Hand newHand = new Hand(tilesInHand);
         this.hand = new JLabel[7];
         this.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
         //this.setBackground(java.awt.Color.PINK);
@@ -70,6 +73,7 @@ public class HandView extends javax.swing.JPanel {
         setBorder(grayBorder);
         for (int x = 0; x < 7; x++) {
             Tile newTile = tileBag.draw();//get tiles from tile bag
+            newHand.addTileFromBoard(newTile); //addTiles to hand class
             drawTile(newTile, x);
         }
 

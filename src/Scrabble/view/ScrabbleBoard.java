@@ -66,16 +66,19 @@ public class ScrabbleBoard extends JFrame {
         scoresLabel.setBackground(Color.PINK);
         leftPanel.add(scoresLabel);
         letterDistribLabel.setText(
-                "LETTER DISTRIBUTION \n A:1   N:1 \n B:3   0:1 \n C:3   P:3 \n D:2  Q:10 \n E:1   R:1 \n F:4    S:1 \n G:2   T:1 \n H:4   U:1 \n I:1     V:4 \n J:8    W:4 \n K:5    X:8 \n L:1    Y:4 \n M:3   Z:10 \n Blank:0");
+                "LETTER DISTRIBUTION \n         A:1   N:1 \n         B:3   0:1 \n         C:3   P:3 \n         D:2  Q:10 \n         E:1   R:1 \n         F:4    S:1 \n         G:2   T:1 \n         H:4   U:1 \n         I:1     V:4 \n         J:8    W:4 \n         K:5    X:8 \n         L:1    Y:4 \n         M:3   Z:10 \n         Blank:0");
         letterDistribLabel.setEditable(false);
         letterDistribLabel.setBorder(blackBorder);
         letterDistribLabel.setBackground(Color.ORANGE);
         leftPanel.add(letterDistribLabel);
 
+        //bottom panel -- where tiles are added to hand
+        HandView hand = new HandView(tileBag);
+
         //right panel
         actionPanel.setLayout(new GridLayout(8, 1));
         String size = tileBag.getTileBagSizeStr();// try to center letters or bold them
-        tileBagLabel.setText("TILES LEFT \n " + size); // get the number of tiles from size of bag using getTileBagSize() //should equal 93!! fix
+        tileBagLabel.setText("      TILES LEFT \n          " + size); // get the number of tiles from size of bag using getTileBagSize() //should equal 93!! fix
         tileBagLabel.setEditable(false);
         tileBagLabel.setBorder(blackBorder);
         tileBagLabel.setBackground(Color.ORANGE);
@@ -88,9 +91,6 @@ public class ScrabbleBoard extends JFrame {
         shuffleBtn.setBackground(Color.PINK);
         actionPanel.add(shuffleBtn);
         actionPanel.add(tileBagLabel);
-
-        //bottom panel -- where tiles are added to hand
-        HandView hand = new HandView(tileBag);
 
         //put into frame
         add(hand, BorderLayout.SOUTH);
