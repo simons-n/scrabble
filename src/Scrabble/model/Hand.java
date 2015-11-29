@@ -35,9 +35,14 @@ public class Hand {
     private ArrayList<Tile> tilesInHand;
     private ScrabbleBoard view;
     private TileBag bag;
+    private Val val;
 
     public Hand(ArrayList<Tile> tilesInHand) {
         this.tilesInHand = tilesInHand;
+    }
+
+    public Tile getTile(int x) {
+        return this.tilesInHand.get(x);
     }
 
     public void addTileFromBag(TileBag bag) {
@@ -85,9 +90,9 @@ public class Hand {
         switchOKBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String tileStr = tileTextField.getText();
-//                Tile tile = new Tile(Val.tileStr); //get text and turn into Val enum
-//                Tile newTile = bag.draw();
-//                switchTiles(tile, newTile, bag);
+                Tile tile = new Tile(val.valueOf(tileStr));
+                Tile newTile = bag.draw();
+                switchTiles(tile, newTile);
             }
         });
     }

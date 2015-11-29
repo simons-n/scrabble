@@ -62,7 +62,7 @@ public class HandView extends javax.swing.JPanel {
     private ArrayList<Tile> tilesInHand = new ArrayList<>();
     private TileBag tileBag;
 
-    public HandView(TileBag tileBag) {
+    public HandView(TileBag tileBag) { //use this one to start the game
         this.tileBag = tileBag;
         Hand newHand = new Hand(tilesInHand);
         this.hand = new JLabel[7];
@@ -77,6 +77,18 @@ public class HandView extends javax.swing.JPanel {
             drawTile(newTile, x);
         }
 
+    }
+
+    public HandView(Hand myHand) {  //use this one during the game when updated view
+        this.hand = new JLabel[7];
+        this.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
+        javax.swing.border.Border grayBorder = BorderFactory.createLineBorder(
+                java.awt.Color.WHITE);
+        setBorder(grayBorder);
+        for (int x = 0; x < 7; x++) {
+            Tile tile = myHand.getTile(x);
+            drawTile(tile, x);
+        }
     }
 
     public void drawTile(Tile newTile, int handLocation) {
