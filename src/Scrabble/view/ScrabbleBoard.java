@@ -73,7 +73,8 @@ public class ScrabbleBoard extends JFrame {
         leftPanel.add(letterDistribLabel);
 
         //bottom panel -- where tiles are added to hand
-        HandView hand = new HandView(tileBag);
+        HandView hand = new HandView();
+        hand.createNewHand(tileBag);
 
         //right panel
         actionPanel.setLayout(new GridLayout(8, 1));

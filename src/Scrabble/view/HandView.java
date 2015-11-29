@@ -62,8 +62,11 @@ public class HandView extends javax.swing.JPanel {
     private ArrayList<Tile> tilesInHand = new ArrayList<>();
     private TileBag tileBag;
 
-    public HandView(TileBag tileBag) { //use this one to start the game
-        this.tileBag = tileBag;
+    public HandView() { //use this one to start the game
+
+    }
+
+    public Hand createNewHand(TileBag tilebag) {
         Hand newHand = new Hand(tilesInHand);
         this.hand = new JLabel[7];
         this.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
@@ -72,14 +75,14 @@ public class HandView extends javax.swing.JPanel {
                 java.awt.Color.WHITE);
         setBorder(grayBorder);
         for (int x = 0; x < 7; x++) {
-            Tile newTile = tileBag.draw();//get tiles from tile bag
+            Tile newTile = tilebag.draw();//get tiles from tile bag
             newHand.addTileFromBoard(newTile); //addTiles to hand class
             drawTile(newTile, x);
         }
-
+        return newHand;
     }
 
-    public HandView(Hand myHand) {  //use this one during the game when updated view
+    public Hand createHand(Hand myHand) {  //use this one during the game when updated view
         this.hand = new JLabel[7];
         this.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
         javax.swing.border.Border grayBorder = BorderFactory.createLineBorder(
@@ -89,9 +92,11 @@ public class HandView extends javax.swing.JPanel {
             Tile tile = myHand.getTile(x);
             if (tile == null) {
                 tile = tileBag.draw();
+                myHand.addTileFromBoard(tile);
             }
             drawTile(tile, x);
         }
+        return myHand;
     }
 
     public void drawTile(Tile newTile, int handLocation) {

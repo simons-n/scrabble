@@ -17,11 +17,9 @@ package Scrabble.model;
 
 import Scrabble.view.ScrabbleBoard;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.Collections;
-import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -67,34 +65,36 @@ public class Hand {
     }
 
     public void shuffle() {
+        System.out.println("it shuffled the list");
         Collections.shuffle(tilesInHand);
-        //randomly change the positions of tiles in array
 
+        //randomly change the positions of tiles in array
     }
 
     public void createSwitch() {
+        System.out.println("tried to create switch");
         JDialog dBoxSwitch = new JDialog(view, "Switch");
-        JButton switchOKBtn = new JButton();
+        dBoxSwitch.setLayout(new GridLayout(4, 1));
+        //JButton switchOKBtn = new JButton();
         dBoxSwitch.setPreferredSize(new Dimension(500, 485));
         JLabel tileToSwitchLabel = new JLabel(
                 "Type the letter of the tile you would like to switch: ");
         dBoxSwitch.getContentPane().add(tileToSwitchLabel);
         JTextField tileTextField = new JTextField();
         dBoxSwitch.getContentPane().add(tileTextField);
-        switchOKBtn.setText("OK");
-        dBoxSwitch.getContentPane().add(switchOKBtn);
+        //switchOKBtn.setText("OK");
+        //dBoxSwitch.getContentPane().add(switchOKBtn);
         dBoxSwitch.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         dBoxSwitch.pack();
         dBoxSwitch.setVisible(true);
 
-        switchOKBtn.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                String tileStr = tileTextField.getText();
-                Tile tile = new Tile(val.valueOf(tileStr));
-                Tile newTile = bag.draw();
-                switchTiles(tile, newTile);
-            }
-        });
+//        //switchOKBtn.addActionListener(new ActionListener() {
+//            public void actionPerformed(ActionEvent e) {
+//                String tileStr = tileTextField.getText();
+//                Tile tile = new Tile(val.valueOf(tileStr));
+//                Tile newTile = bag.draw();
+//                switchTiles(tile, newTile);
+//            }
+//        });
     }
-
 }
