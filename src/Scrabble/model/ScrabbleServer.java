@@ -49,6 +49,10 @@ public class ScrabbleServer {
         //createServer();
     }
 
+    public ScrabbleServer() {
+
+    }
+
     public Game createGame(GameSize gameSize, Player creator) {
         this.theGame = new Game(gameSize, creator);
         return this.theGame;

@@ -135,7 +135,12 @@ public class StartBoxController implements ActionListener {
 
             try {
                 System.out.println("x");
-                scrabbleServer = new ScrabbleServer(gameSize.getValue());
+                if (gameSize.getValue() != 1) {
+                    scrabbleServer = new ScrabbleServer(gameSize.getValue());
+                } else {
+                    scrabbleServer = new ScrabbleServer();
+                }
+                //
                 System.out.println("a");
             } catch (IOException ex) {
                 Logger.getLogger(StartBoxController.class.getName()).log(

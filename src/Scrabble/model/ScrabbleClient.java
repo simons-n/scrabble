@@ -81,7 +81,7 @@ public class ScrabbleClient {
 
         ScrabbleClient client;
         try {
-            client = new ScrabbleClient("134.82.132.197");
+            client = new ScrabbleClient("134.82.132.133");
             Player nick = new Player("Nick");
 
             client.updateServer(nick);
