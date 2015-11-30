@@ -28,6 +28,7 @@ public class Game {
 
     ScrabbleBoard theBoard;
     GameSize gameSize;
+
     TileBag tileBag;
     ArrayList playerList = new ArrayList();
 //    Player curPlayer = (Player) playerList.get(0);
@@ -35,7 +36,7 @@ public class Game {
     public Game(GameSize gameSize, Player creatorOfGame) {
         theBoard = new ScrabbleBoard();
         this.gameSize = gameSize;
-        this.tileBag = new TileBag();
+        this.tileBag = theBoard.getTileBag();
         playerList.add(creatorOfGame);
     }
 
@@ -69,6 +70,10 @@ public class Game {
 //    }
     public ArrayList getPlayerList() {
         return playerList;
+    }
+
+    public ScrabbleBoard getTheBoard() {
+        return theBoard;
     }
 
     public static void main(String[] args) {

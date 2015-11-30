@@ -27,10 +27,12 @@ public class Player {
     private int totalScore = 0;
     private Hand myHand;
     // tileBag object will be same for all players
-    private TileBag tileBag;
+
     private boolean skipTurn = false;
     private ArrayList<Tile> discardPile;
-    private ScrabbleBoard currBoard;
+    private Game game;
+    private ScrabbleBoard currBoard = game.getTheBoard();
+    private TileBag tileBag = currBoard.getTileBag();
     private ScrabbleServer scrabbleServer;
 
     // in action performed, when pass button is pressed, change this back to false
@@ -50,8 +52,9 @@ public class Player {
     }
 
     // instantiating a player without a hand already created
-    public Player(String name, int totalScore) {
+    public Player(String name, int totalScore, Game game) {
         this.name = name;
+        this.game = game;
         this.totalScore = totalScore;
         this.myHand = new Hand(newHand());
     }
