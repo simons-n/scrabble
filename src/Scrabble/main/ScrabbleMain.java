@@ -16,7 +16,9 @@
 package Scrabble.main;
 
 import Scrabble.controller.ScrabbleController;
+import Scrabble.model.Player;
 import Scrabble.view.ScrabbleBoard;
+import java.awt.Color;
 import javax.swing.UIManager;
 
 /**
@@ -24,6 +26,7 @@ import javax.swing.UIManager;
  * @author calw001
  */
 public class ScrabbleMain {
+    private static Player player;
 
     /**
      * @param args the command line arguments
@@ -71,6 +74,10 @@ public class ScrabbleMain {
 //                        startBoxView);
                 ScrabbleBoard scrabbleBoardView = new ScrabbleBoard();
 
+                scrabbleBoardView.setBackground(Color.BLUE);
+                scrabbleBoardView.setTitle("Scrabble Game");
+                scrabbleBoardView.setSize(900, 600);
+                //Hand playerHand = player.getMyHand();
                 scrabbleBoardView.setVisible(true);
 
                 ScrabbleController scrabbleController = new ScrabbleController(
