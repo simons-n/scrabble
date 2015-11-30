@@ -56,12 +56,11 @@ public class Player {
         this.myHand = new Hand(newHand());
     }
 
-    public Player(String name, int totalScore, Hand myHand) {
-        this.name = name;
-        this.totalScore = totalScore;
-        this.myHand = myHand;
-    }
-
+//    public Player(String name, int totalScore, Hand myHand) {
+//        this.name = name;
+//        this.totalScore = totalScore;
+//        this.myHand = myHand;
+//    }
     public void setSkipTurn() {
         this.skipTurn = !skipTurn;
     }
@@ -90,7 +89,7 @@ public class Player {
         return hand;
     }
 
-    public void setMyHand(Hand myHand) {
+    public void updateHand(Hand myHand) {
         this.myHand = myHand;
     }
 
@@ -104,6 +103,10 @@ public class Player {
 //    public Hand getHandView() {
 //        return HandView.setHand(myHand);
 //    }
+    public void setName(String newName) {
+        this.name = newName;
+    }
+
     public void pass() {
         // This will pass the turn to the next player in the network, somehow
     }

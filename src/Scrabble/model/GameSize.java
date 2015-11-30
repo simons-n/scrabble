@@ -20,6 +20,20 @@ package Scrabble.model;
  * @author calw001
  */
 public enum GameSize {
-    TWO_PLAYER, THREE_PLAYER, FOUR_PLAYER;
+    ONE_PLAYER(1), TWO_PLAYER(2), THREE_PLAYER(3), FOUR_PLAYER(4);
+
+    private int value;
+
+    private GameSize() {
+
+    }
+
+    private GameSize(int value) {
+        this.value = value;
+    }
+
+    public int getValue() {
+        return this.value;
+    }
 
 }
