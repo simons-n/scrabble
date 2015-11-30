@@ -49,6 +49,10 @@ public class ScrabbleServer {
         //createServer();
     }
 
+    public ScrabbleServer() {
+
+    }
+
     public Game createGame(GameSize gameSize, Player creator) {
         this.theGame = new Game(gameSize, creator);
         return this.theGame;
@@ -66,7 +70,7 @@ public class ScrabbleServer {
 
             PrintWriter out;
 
-            if (!sentGame) {
+            if (sentGame == false) {
                 // send the game to the clients
                 out = new PrintWriter(skt.getOutputStream(), true);
                 out.print(theGame);

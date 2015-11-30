@@ -30,6 +30,7 @@ public class Game {
     GameSize gameSize;
     TileBag tileBag;
     ArrayList playerList = new ArrayList();
+    Player curPlayer = (Player) playerList.get(0);
 
     public Game(GameSize gameSize, Player creatorOfGame) {
         theBoard = new ScrabbleBoard();
@@ -61,6 +62,14 @@ public class Game {
                                           "Game is Full",
                                           JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    public Player getCurPlayer() {
+        return curPlayer;
+    }
+
+    public ArrayList getPlayerList() {
+        return playerList;
     }
 
     public static void main(String[] args) {
