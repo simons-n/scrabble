@@ -65,7 +65,7 @@ public class HandView extends javax.swing.JPanel {
     private TileBag tileBag;
 
     public HandView() { //use this one to start the game
-        setHand(player.hand);
+//        setHand(player.hand);
     }
 
     public Hand createNewHand(TileBag tilebag) {
@@ -81,6 +81,7 @@ public class HandView extends javax.swing.JPanel {
             newHand.addTileFromBoard(newTile); //addTiles to hand class
             drawTile(newTile, x);
         }
+        createTileListeners();
         return newHand;
     }
 
@@ -98,6 +99,7 @@ public class HandView extends javax.swing.JPanel {
             }
             drawTile(tile, x);
         }
+        createTileListeners();
         return myHand;
     }
 
@@ -468,6 +470,7 @@ public class HandView extends javax.swing.JPanel {
                 }
             });
         }
+        System.out.println("created listeners");
     }
 
 }
