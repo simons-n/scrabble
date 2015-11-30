@@ -17,7 +17,6 @@ package Scrabble.model;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -65,10 +64,10 @@ public class ScrabbleClient {
     public void updateServer(Player player) throws IOException {
 
         //Player jenna = new Player("Jenna");
-        PrintWriter out = new PrintWriter(skt.getOutputStream(), true);
-        System.out.print("Sending string: '" + player + "\n");
-        out.print(player);
-        out.flush();
+////        PrintWriter out = new PrintWriter(skt.getOutputStream(), true);
+////        System.out.print("Sending string: '" + player + "\n");
+////        out.print(player);
+////        out.flush();
         //out.close();
         //skt.close();
     }

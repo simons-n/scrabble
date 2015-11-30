@@ -18,6 +18,8 @@ package Scrabble.model;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -68,20 +70,21 @@ public class ScrabbleServer {
         while (true) {
             skt = srvr.accept();
 
-            PrintWriter out;
-
+//            PrintWriter out;
             if (sentGame == false) {
                 // send the game to the clients
-                out = new PrintWriter(skt.getOutputStream(), true);
-                out.print(theGame);
+                OutputStream os = skt.getOutputStream();
+                ObjectOutputStream oos = new ObjectOutputStream(os);
+                oos.writeObject(theGame);
+//                out = new PrintWriter(skt.getOutputStream(), true);
+//                out.print(theGame);
                 sentGame = true;
             }
 
             // update clients
-            out = new PrintWriter(skt.getOutputStream(), true);
-            out.print(updatedPlayer);
+//            out = new PrintWriter(skt.getOutputStream(), true);
+//            out.print(updatedPlayer);
             //out.flush();
-
             // look for updates FROM clients
             BufferedReader in = new BufferedReader(new InputStreamReader(
                     skt.getInputStream()));
