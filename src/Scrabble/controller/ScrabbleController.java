@@ -119,6 +119,8 @@ public class ScrabbleController implements ActionListener {
     }
 
     public void mouseClicked(MouseEvent e) {
+        System.out.println("handlist: " + handView.getHand());
+        System.out.println("moueseevent source: " + e);
         for (int i = 0; i < handView.getHand().length; i++) {
             if (e.getSource() == handView.getHand()[i]) {
                 tileSelected = handView.getHand()[i];
