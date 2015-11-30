@@ -18,6 +18,8 @@ package Scrabble.model;
 import Scrabble.view.ScrabbleBoard;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import javax.swing.JButton;
@@ -90,14 +92,14 @@ public class Hand {
         dBoxSwitch.pack();
         dBoxSwitch.setVisible(true);
 
-//        //switchOKBtn.addActionListener(new ActionListener() {
-//            public void actionPerformed(ActionEvent e) {
-//                String tileStr = tileTextField.getText();
-//                Tile tile = new Tile(val.valueOf(tileStr));
-//                Tile newTile = bag.draw();
-//                switchTiles(tile, newTile);
-//            }
-//        });
+        switchOKBtn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String tileStr = tileTextField.getText();
+                Tile tile = new Tile(val.valueOf(tileStr));
+                Tile newTile = bag.draw();
+                switchTiles(tile, newTile);
+            }
+        });
     }
 
     public ArrayList<Tile> getTilesInHand() {

@@ -16,6 +16,7 @@
 package Scrabble.controller;
 
 import Scrabble.model.Hand;
+import Scrabble.model.Player;
 import Scrabble.model.Tile;
 import Scrabble.model.TileBag;
 import Scrabble.model.Word;
@@ -39,14 +40,18 @@ public class ScrabbleController implements ActionListener {
     private HandView handView;
     private static TileBag tilebag = new TileBag();
     private static Hand hand;
-    // private Player player = Game.getCurPlayer();
+    //private Player player = Game.getCurPlayer();
     private Word word;
     private ArrayList<Tile> tilesInHand = new ArrayList<>();
     private JLabel tileSelected = null;
+    //private Player player = new Player("Jenna", 0);
+    private Player player;
 
     public ScrabbleController(ScrabbleBoard view) {
         this.view = view;
+        this.player = view.getPlayer();
         this.handView = view.getHandView();
+        this.hand = player.getMyHand();
         //this.hand = player.getMyHand();
         this.view.getShuffleBtn().addActionListener(this);
         this.view.getSwapBtn().addActionListener(this);
@@ -92,7 +97,7 @@ public class ScrabbleController implements ActionListener {
 
         } else if (e.getSource() == view.getPassBtn()) //change current player to next player, and end turn
         {
-            player.pass();
+            //player.pass();
 
         } else if (e.getSource() == view.getShuffleBtn()) {
             System.out.println("tried to shuffle");
