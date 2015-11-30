@@ -30,13 +30,15 @@ public class Game {
     GameSize gameSize;
     TileBag tileBag;
     ArrayList playerList = new ArrayList();
-    Player curPlayer = (Player) playerList.get(0);
 
     public Game(GameSize gameSize, Player creatorOfGame) {
         theBoard = new ScrabbleBoard();
         this.gameSize = gameSize;
         this.tileBag = new TileBag();
         playerList.add(creatorOfGame);
+        //System.out.println(playerList.get(0));
+        //System.out.println("num players: " + playerList.size());
+        //this.curPlayer = (Player) playerList.get(0);
     }
 
     public int getNumConnectedPlayers() {
@@ -64,10 +66,9 @@ public class Game {
         }
     }
 
-    public Player getCurPlayer() {
-        return curPlayer;
-    }
-
+//    public Player getCurPlayer() {
+//        return curPlayer;
+//    }
     public ArrayList getPlayerList() {
         return playerList;
     }
