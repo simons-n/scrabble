@@ -81,6 +81,7 @@ public class HandView extends javax.swing.JPanel {
             newHand.addTileFromBoard(newTile); //addTiles to hand class
             drawTile(newTile, x);
         }
+        createTileListeners();
         return newHand;
     }
 
@@ -98,6 +99,7 @@ public class HandView extends javax.swing.JPanel {
             }
             drawTile(tile, x);
         }
+        createTileListeners();
         return myHand;
     }
 
@@ -468,6 +470,7 @@ public class HandView extends javax.swing.JPanel {
                 }
             });
         }
+        System.out.println("created listeners");
     }
 
 }
