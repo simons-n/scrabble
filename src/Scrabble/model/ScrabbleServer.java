@@ -70,7 +70,7 @@ public class ScrabbleServer {
 
             PrintWriter out;
 
-            if (!sentGame) {
+            if (sentGame == false) {
                 // send the game to the clients
                 out = new PrintWriter(skt.getOutputStream(), true);
                 out.print(theGame);

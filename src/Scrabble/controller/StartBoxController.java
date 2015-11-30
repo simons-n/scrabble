@@ -138,9 +138,9 @@ public class StartBoxController implements ActionListener {
                 if (gameSize.getValue() != 1) {
                     scrabbleServer = new ScrabbleServer(gameSize.getValue());
                 } else {
+                    // create a dummy server so I can get the Game
                     scrabbleServer = new ScrabbleServer();
                 }
-                //
                 System.out.println("a");
             } catch (IOException ex) {
                 Logger.getLogger(StartBoxController.class.getName()).log(
@@ -152,7 +152,9 @@ public class StartBoxController implements ActionListener {
 
             Player gameCreator = new Player(name,
                                             scrabbleServer);
-            this.theGame = scrabbleServer.createGame(gameSize, gameCreator);
+
+            //this.theGame = scrabbleServer.createGame(gameSize, gameCreator);
+            this.theGame = new Game(gameSize, gameCreator);
 
             System.out.println(theGame.getNumConnectedPlayers());
             System.out.println(gameSize.getValue());
