@@ -68,22 +68,21 @@ public class HandView extends javax.swing.JPanel {
 
     }
 
-    public Hand createNewHand(TileBag tilebag) {
-        Hand newHand = new Hand(tilesInHand);
-        this.hand = new JLabel[7];
-        this.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
-        //this.setBackground(java.awt.Color.PINK);
-        javax.swing.border.Border grayBorder = BorderFactory.createLineBorder(
-                java.awt.Color.WHITE);
-        setBorder(grayBorder);
-        for (int x = 0; x < 7; x++) {
-            Tile newTile = tilebag.draw();//get tiles from tile bag
-            newHand.addTileFromBoard(newTile); //addTiles to hand class
-            drawTile(newTile, x);
-        }
-        return newHand;
-    }
-
+//    public Hand createNewHand(TileBag tilebag) {
+//        Hand newHand = new Hand(tilesInHand);
+//        this.hand = new JLabel[7];
+//        this.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
+//        //this.setBackground(java.awt.Color.PINK);
+//        javax.swing.border.Border grayBorder = BorderFactory.createLineBorder(
+//                java.awt.Color.WHITE);
+//        setBorder(grayBorder);
+//        for (int x = 0; x < 7; x++) {
+//            Tile newTile = tilebag.draw();//get tiles from tile bag
+//            newHand.addTileFromBoard(newTile); //addTiles to hand class
+//            drawTile(newTile, x);
+//        }
+//        return newHand;
+//    }
     public Hand setHand(Hand myHand) {  //use this one during the game when updated view
         this.hand = new JLabel[7];
         this.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));

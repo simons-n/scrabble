@@ -16,7 +16,6 @@
 package Scrabble.controller;
 
 import Scrabble.model.Hand;
-import Scrabble.model.Player;
 import Scrabble.model.Tile;
 import Scrabble.model.TileBag;
 import Scrabble.model.Word;
@@ -40,7 +39,7 @@ public class ScrabbleController implements ActionListener {
     private HandView handView;
     private static TileBag tilebag = new TileBag();
     private static Hand hand;
-    private Player player;
+    // private Player player = Game.getCurPlayer();
     private Word word;
     private ArrayList<Tile> tilesInHand = new ArrayList<>();
     private JLabel tileSelected = null;
@@ -48,7 +47,7 @@ public class ScrabbleController implements ActionListener {
     public ScrabbleController(ScrabbleBoard view) {
         this.view = view;
         this.handView = view.getHandView();
-        this.hand = handView.createNewHand(tilebag);
+        //this.hand = player.getMyHand();
         this.view.getShuffleBtn().addActionListener(this);
         this.view.getSwapBtn().addActionListener(this);
         this.view.getPlayBtn().addActionListener(this);

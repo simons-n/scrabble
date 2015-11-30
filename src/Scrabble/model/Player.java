@@ -101,6 +101,9 @@ public class Player {
 
     }
 
+//    public Hand getHandView() {
+//        return HandView.setHand(myHand);
+//    }
     public void pass() {
         // This will pass the turn to the next player in the network, somehow
     }
