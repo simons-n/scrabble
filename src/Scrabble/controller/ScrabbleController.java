@@ -24,8 +24,10 @@ import Scrabble.view.HandView;
 import Scrabble.view.ScrabbleBoard;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import javax.swing.JLabel;
 
 /**
  *
@@ -35,16 +37,18 @@ public class ScrabbleController implements ActionListener {
 // connects model to view
 
     private ScrabbleBoard view;
-    private HandView handview = new HandView();
+    private HandView handView;
     private static TileBag tilebag = new TileBag();
     private static Hand hand;
     private Player player;
     private Word word;
     private ArrayList<Tile> tilesInHand = new ArrayList<>();
+    private JLabel tileSelected = null;
 
     public ScrabbleController(ScrabbleBoard view) {
         this.view = view;
-        hand = handview.createNewHand(tilebag);
+        this.handView = view.getHandView();
+        this.hand = handView.createNewHand(tilebag);
         this.view.getShuffleBtn().addActionListener(this);
         this.view.getSwapBtn().addActionListener(this);
         this.view.getPlayBtn().addActionListener(this);
@@ -68,12 +72,13 @@ public class ScrabbleController implements ActionListener {
 
     public void updateViewFromModel() {
         // when shuffle is pressed change HandView to HandView(Hand myhand)
+        handView.setHand(hand);
         // when pass is pressed change view to next players hand
         // when swap is pressed change HandView to HandView(Hand myhand) *** make the dialog box show up
         // when play is pressed if not valid show error message, if valid update show message of how much they just scored, update total score, show new hand with drawn tiles, change player to next players hand
-
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == view.getPlayBtn()) //check validity, score word, and end turn
         {
@@ -91,13 +96,34 @@ public class ScrabbleController implements ActionListener {
 
         } else if (e.getSource() == view.getShuffleBtn()) {
             System.out.println("tried to shuffle");
+            System.out.println("pre-hand: " + hand);
             this.hand.shuffle();
-            handview.createHand(hand);
+            System.out.println("post-hand: " + hand);
 
 //        } else if (e.getSource() == view.getDirectionsBtn()) {
 //            view.getDirectionsPanel().setVisible(true);
 //        }
+        } else if (tileSelected != null) {
+            for (int x = 0; x < 15; x++) {
+                for (int y = 0; y < 15; y++) {
+                    if (e.getSource() == view.getGrid()[x][y]) {
+                        view.remove(view.getGrid()[x][y]);
+                        view.getGrid()[x][y] = tileSelected;
+                        tileSelected = null;
+                    }
+                }
+            }
         }
         updateViewFromModel();
     }
+
+    public void mouseClicked(MouseEvent e) {
+        for (int i = 0; i < handView.getHand().length; i++) {
+            if (e.getSource() == handView.getHand()[i]) {
+                tileSelected = handView.getHand()[i];
+                handView.remove(handView.getHand()[i]);
+            }
+        }
+    }
+
 }
