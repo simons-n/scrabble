@@ -84,7 +84,8 @@ public class Player {
     public ArrayList<Tile> newHand() {
         ArrayList<Tile> hand = new ArrayList<>(7);
         for (int i = 0; i < 7; i++) {
-            hand.add(tileBag.draw());
+            Tile tile = tileBag.draw();
+            hand.add(tile);
         }
         return hand;
     }
@@ -100,6 +101,9 @@ public class Player {
 
     }
 
+//    public Hand getHandView() {
+//        return HandView.setHand(myHand);
+//    }
     public void setName(String newName) {
         this.name = newName;
     }

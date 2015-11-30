@@ -40,15 +40,19 @@ public class ScrabbleController implements ActionListener {
     private HandView handView;
     private static TileBag tilebag = new TileBag();
     private static Hand hand;
-    private Player player;
+    //private Player player = Game.getCurPlayer();
     private Word word;
     private ArrayList<Tile> tilesInHand = new ArrayList<>();
     private JLabel tileSelected = null;
+    //private Player player = new Player("Jenna", 0);
+    private Player player;
 
     public ScrabbleController(ScrabbleBoard view) {
         this.view = view;
+        this.player = view.getPlayer();
         this.handView = view.getHandView();
-        this.hand = handView.createNewHand(tilebag);
+        this.hand = player.getMyHand();
+        //this.hand = player.getMyHand();
         this.view.getShuffleBtn().addActionListener(this);
         this.view.getSwapBtn().addActionListener(this);
         this.view.getPlayBtn().addActionListener(this);
@@ -71,6 +75,7 @@ public class ScrabbleController implements ActionListener {
     }
 
     public void updateViewFromModel() {
+        //this only updates the board not hand
         // when shuffle is pressed change HandView to HandView(Hand myhand)
         handView.setHand(hand);
         // when pass is pressed change view to next players hand
@@ -92,7 +97,7 @@ public class ScrabbleController implements ActionListener {
 
         } else if (e.getSource() == view.getPassBtn()) //change current player to next player, and end turn
         {
-            player.pass();
+            //player.pass();
 
         } else if (e.getSource() == view.getShuffleBtn()) {
             System.out.println("tried to shuffle");
