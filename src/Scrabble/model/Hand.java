@@ -20,6 +20,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.Collections;
+import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -82,8 +83,9 @@ public class Hand {
         dBoxSwitch.getContentPane().add(tileToSwitchLabel);
         JTextField tileTextField = new JTextField();
         dBoxSwitch.getContentPane().add(tileTextField);
-        //switchOKBtn.setText("OK");
-        //dBoxSwitch.getContentPane().add(switchOKBtn);
+        JButton switchOKBtn = new JButton("OK");
+//        switchOKBtn.setText("OK");
+        dBoxSwitch.getContentPane().add(switchOKBtn);
         dBoxSwitch.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         dBoxSwitch.pack();
         dBoxSwitch.setVisible(true);
@@ -97,4 +99,18 @@ public class Hand {
 //            }
 //        });
     }
+
+    public ArrayList<Tile> getTilesInHand() {
+        return tilesInHand;
+    }
+
+    @Override
+    public String toString() {
+        String s = "";
+        for (Tile tile : this.tilesInHand) {
+            s += tile.getLetter();
+        }
+        return s;
+    }
+
 }
