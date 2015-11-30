@@ -52,7 +52,7 @@ public class ScrabbleBoard extends JFrame {
     private final JTextArea tileBagLabel = new JTextArea(10, 10);
     private Board board;
     private HandView handView;
-    private Player player = new Player("Jenna", 0,);
+    private Player player = new Player("Jenna", 0);
     //private Player player = Game.getCurPlayer();
 
     public ScrabbleBoard() {

@@ -31,8 +31,8 @@ public class Player {
     private boolean skipTurn = false;
     private ArrayList<Tile> discardPile;
     private Game game;
-    private ScrabbleBoard currBoard = game.getTheBoard();
-    private TileBag tileBag = currBoard.getTileBag();
+    private ScrabbleBoard currBoard;
+    private TileBag tileBag;
     private ScrabbleServer scrabbleServer;
 
     // in action performed, when pass button is pressed, change this back to false
@@ -52,11 +52,15 @@ public class Player {
     }
 
     // instantiating a player without a hand already created
-    public Player(String name, int totalScore, Game game) {
+    public Player(String name, int totalScore) {
         this.name = name;
-        this.game = game;
+        Game newGame = game.getGame(); //somehow have to instantiate game
+        this.game = newGame;
+        this.currBoard = game.getTheBoard();
+        this.tileBag = currBoard.getTileBag();
         this.totalScore = totalScore;
         this.myHand = new Hand(newHand());
+
     }
 
 //    public Player(String name, int totalScore, Hand myHand) {

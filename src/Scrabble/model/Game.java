@@ -33,6 +33,8 @@ public class Game {
     ArrayList playerList = new ArrayList();
 //    Player curPlayer = (Player) playerList.get(0);
 
+    //make game take no parameters
+    //create an addPlayer class to add player to the game once it is already created
     public Game(GameSize gameSize, Player creatorOfGame) {
         theBoard = new ScrabbleBoard();
         this.gameSize = gameSize;
@@ -74,6 +76,10 @@ public class Game {
 
     public ScrabbleBoard getTheBoard() {
         return theBoard;
+    }
+
+    public Game getGame() {
+        return this;
     }
 
     public static void main(String[] args) {
