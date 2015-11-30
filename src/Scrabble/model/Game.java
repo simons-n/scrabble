@@ -37,9 +37,6 @@ public class Game {
         this.gameSize = gameSize;
         this.tileBag = new TileBag();
         playerList.add(creatorOfGame);
-        //System.out.println(playerList.get(0));
-        //System.out.println("num players: " + playerList.size());
-        //this.curPlayer = (Player) playerList.get(0);
     }
 
     public int getNumConnectedPlayers() {
