@@ -65,7 +65,7 @@ public class HandView extends javax.swing.JPanel {
     private TileBag tileBag;
 
     public HandView() { //use this one to start the game
-        setHand(player.hand);
+//        setHand(player.hand);
     }
 
     public Hand createNewHand(TileBag tilebag) {
