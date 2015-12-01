@@ -37,7 +37,7 @@ import javax.swing.border.Border;
  */
 public class ScrabbleBoard extends JFrame {
     //private ArrayList<Tile> tilesInBag = new ArrayList<>();
-    private TileBag tileBag = new TileBag();
+    private TileBag tileBag;// = new TileBag();
 
     //private final JPanel handPanel = new JPanel();
     //private final JLabel handLabel = new JLabel();
@@ -61,6 +61,7 @@ public class ScrabbleBoard extends JFrame {
         Border blackBorder = BorderFactory.createLineBorder(
                 Color.BLACK);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        tileBag = game.getTileBag();
 
         //center panel
         Board board = new Board();
@@ -81,6 +82,7 @@ public class ScrabbleBoard extends JFrame {
         leftPanel.add(letterDistribLabel);
 
         //bottom panel -- where tiles are added to hand
+        player = game.getCurPlayer();
         Hand myHand = player.getMyHand();
         handView = new HandView(myHand);
         //hand.createNewHand(tileBag);

@@ -50,20 +50,10 @@ public class Player {
         //this.inGame = true;
         this.scrabbleServer = server;
         this.game = this.scrabbleServer.getTheGame();
+        this.tileBag = this.game.getTileBag();
+        this.myHand = new Hand(newHand());
     }
 
-    // instantiating a player without a hand already created
-//    public Player(String name, int totalScore) {
-//        this.name = name;
-////        Game newGame = game.getGame(); //somehow have to instantiate game
-////        this.game = newGame;
-//        this.game = scrabbleServer.getTheGame();
-//        this.currBoard = game.getTheBoard();
-//        this.tileBag = currBoard.getTileBag();
-//        this.totalScore = totalScore;
-//        this.myHand = new Hand(newHand());
-//
-//    }
 //    public Player(String name, int totalScore, Hand myHand) {
 //        this.name = name;
 //        this.totalScore = totalScore;
@@ -92,7 +82,7 @@ public class Player {
     public ArrayList<Tile> newHand() {
         ArrayList<Tile> hand = new ArrayList<>(7);
         for (int i = 0; i < 7; i++) {
-            Tile tile = tileBag.draw();
+            Tile tile = this.tileBag.draw();
             hand.add(tile);
         }
         return hand;

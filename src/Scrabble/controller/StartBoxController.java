@@ -172,6 +172,7 @@ public class StartBoxController implements ActionListener {
 
             // add gameCreator to the game
             this.theGame.addPlayer(gameCreator);
+            this.theGame.setCurPlayer(gameCreator);
 
             System.out.println(theGame.getNumConnectedPlayers());
             System.out.println(gameSize.getValue());
@@ -227,6 +228,7 @@ public class StartBoxController implements ActionListener {
 //                        startBoxView);
                         ScrabbleBoard scrabbleBoardView = new ScrabbleBoard(
                                 theGame);
+
                         theGame.setTheBoard(scrabbleBoardView);
 
                         scrabbleBoardView.setBackground(Color.BLUE);

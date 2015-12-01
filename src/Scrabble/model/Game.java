@@ -27,30 +27,19 @@ public class Game {
 
     ScrabbleBoard theBoard;
     GameSize gameSize;
-
-    TileBag tileBag;
-    ArrayList<Player> playerList = new ArrayList();
+    TileBag tileBag = new TileBag();
+    ArrayList playerList = new ArrayList();
     Player curPlayer;
 
     //make game take no parameters
     //create an addPlayer class to add player to the game once it is already created
-//    public Game(GameSize gameSize, Player creatorOfGame) {
-//        //this.theBoard = new ScrabbleBoard(this);
-//        this.tileBag = theBoard.getTileBag();
-//        this.gameSize = gameSize;
-//        playerList.add(creatorOfGame);
-//    }
     public Game(GameSize gameSize) {
         //this.theBoard = new ScrabbleBoard(this);
-        if (theBoard != null) {
-            this.tileBag = theBoard.getTileBag();
-        }
         this.gameSize = gameSize;
     }
 
     public void setTheBoard(ScrabbleBoard board) {
         this.theBoard = board;
-        this.tileBag = theBoard.getTileBag();
     }
 
     public void setCurPlayer(Player playah) {
@@ -87,6 +76,7 @@ public class Game {
     }
 
     public Player getCurPlayer() {
+
         return curPlayer;
     }
 
@@ -96,6 +86,10 @@ public class Game {
 
     public ScrabbleBoard getTheBoard() {
         return theBoard;
+    }
+
+    public TileBag getTileBag() {
+        return tileBag;
     }
 
     public Game getGame() {
