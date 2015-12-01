@@ -55,13 +55,16 @@ public class ScrabbleServer {
 
     }
 
-    public Game createGame(GameSize gameSize, Player creator) {
-        this.theGame = new Game(gameSize, creator);
-        return this.theGame;
+//    public Game createGame(GameSize gameSize, Player creator) {
+//        this.theGame = new Game(gameSize, creator);
+//        return this.theGame;
+//    }
+    public void createGame(GameSize gameSize) {
+        this.theGame = new Game(gameSize);
     }
 
     public Game getTheGame() {
-        return theGame;
+        return this.theGame;
     }
 
     public void runServer() throws IOException {

@@ -36,10 +36,20 @@ public class Game {
     //make game take no parameters
     //create an addPlayer class to add player to the game once it is already created
     public Game(GameSize gameSize, Player creatorOfGame) {
-        theBoard = new ScrabbleBoard();
-        this.gameSize = gameSize;
+        this.theBoard = new ScrabbleBoard();
         this.tileBag = theBoard.getTileBag();
+        this.gameSize = gameSize;
         playerList.add(creatorOfGame);
+    }
+
+    public Game(GameSize gameSize) {
+        this.theBoard = new ScrabbleBoard();
+        this.tileBag = theBoard.getTileBag();
+        this.gameSize = gameSize;
+    }
+
+    public GameSize getGameSize() {
+        return gameSize;
     }
 
     public int getNumConnectedPlayers() {

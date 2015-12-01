@@ -30,8 +30,7 @@ public class ClientServerTest {
         ss.createServer();
 
         // create a client and connect it to the server
-        ScrabbleClient client = new ScrabbleClient("134.82.132.197");
-
+//        ScrabbleClient client = new ScrabbleClient("134.82.132.197");
         // create a player
         Player jenna = new Player("Jenna");
 

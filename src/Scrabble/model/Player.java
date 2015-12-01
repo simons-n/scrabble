@@ -49,13 +49,15 @@ public class Player {
         this.name = name;
         //this.inGame = true;
         this.scrabbleServer = server;
+        this.game = this.scrabbleServer.getTheGame();
     }
 
     // instantiating a player without a hand already created
     public Player(String name, int totalScore) {
         this.name = name;
-        Game newGame = game.getGame(); //somehow have to instantiate game
-        this.game = newGame;
+//        Game newGame = game.getGame(); //somehow have to instantiate game
+//        this.game = newGame;
+        this.game = scrabbleServer.getTheGame();
         this.currBoard = game.getTheBoard();
         this.tileBag = currBoard.getTileBag();
         this.totalScore = totalScore;
