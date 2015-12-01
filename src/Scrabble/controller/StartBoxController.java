@@ -224,7 +224,8 @@ public class StartBoxController implements ActionListener {
 
 //                StartBoxController startBoxController = new StartBoxController(
 //                        startBoxView);
-                        ScrabbleBoard scrabbleBoardView = new ScrabbleBoard();
+                        ScrabbleBoard scrabbleBoardView = new ScrabbleBoard(
+                                theGame);
 
                         scrabbleBoardView.setBackground(Color.BLUE);
                         scrabbleBoardView.setTitle("Scrabble Game");
