@@ -15,6 +15,7 @@
  */
 package Scrabble.view;
 
+import Scrabble.model.Game;
 import Scrabble.model.Hand;
 import Scrabble.model.Player;
 import Scrabble.model.TileBag;
@@ -55,7 +56,7 @@ public class ScrabbleBoard extends JFrame {
     private Player player = new Player("Jenna", 0);
     //private Player player = Game.getCurPlayer();
 
-    public ScrabbleBoard() {
+    public ScrabbleBoard(Game game) {
         Border blackBorder = BorderFactory.createLineBorder(
                 Color.BLACK);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -79,6 +80,7 @@ public class ScrabbleBoard extends JFrame {
         leftPanel.add(letterDistribLabel);
 
         //bottom panel -- where tiles are added to hand
+        //player= game.getCurPlayer();
         Hand myHand = player.getMyHand();
         handView = new HandView(myHand);
         //hand.createNewHand(tileBag);
