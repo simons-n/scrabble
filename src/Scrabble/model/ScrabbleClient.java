@@ -17,6 +17,8 @@ package Scrabble.model;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -57,12 +59,17 @@ public class ScrabbleClient {
 //        System.out.println(in.readLine()); // Read one line and output it
 //
 //        System.out.print("'\n");
-        ois.close();
-
+        //ois.close();
         System.out.println("client socket created");
     }
 
     public void updateServer(Player player) throws IOException {
+
+        OutputStream os = skt.getOutputStream();
+        ObjectOutputStream oos = new ObjectOutputStream(os);
+        oos.writeObject(player);
+
+        System.out.println("wrote player");
 
         //Player jenna = new Player("Jenna");
 ////        PrintWriter out = new PrintWriter(skt.getOutputStream(), true);
@@ -81,7 +88,7 @@ public class ScrabbleClient {
 
         ScrabbleClient client;
         try {
-            client = new ScrabbleClient("134.82.132.133");
+            client = new ScrabbleClient("134.82.132.177");
             Player nick = new Player("Nick");
 
             client.updateServer(nick);
@@ -93,6 +100,7 @@ public class ScrabbleClient {
             Player jenna = new Player("Jenna");
 
             client.updateServer(jenna);
+
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ScrabbleClient.class.getName()).log(Level.SEVERE,
                                                                  null, ex);

@@ -15,9 +15,8 @@
  */
 package Scrabble.model;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
@@ -44,7 +43,7 @@ public class ScrabbleServer {
     private int maxPlayers;
     private boolean sentGame = false;
 
-    public ScrabbleServer(int gameSize) throws IOException {
+    public ScrabbleServer(int gameSize) throws IOException, ClassNotFoundException {
         this.maxPlayers = gameSize;
 
         runServer();
@@ -67,7 +66,7 @@ public class ScrabbleServer {
         return this.theGame;
     }
 
-    public void runServer() throws IOException {
+    public void runServer() throws IOException, ClassNotFoundException {
         srvr = new ServerSocket(1025);
         Player updatedPlayer = new Player("null");
         while (true) {
@@ -84,19 +83,21 @@ public class ScrabbleServer {
                 sentGame = true;
             }
 
+            updateClients(acceptUpdateFromClient());
+
             // update clients
 //            out = new PrintWriter(skt.getOutputStream(), true);
 //            out.print(updatedPlayer);
             //out.flush();
             // look for updates FROM clients
-            BufferedReader in = new BufferedReader(new InputStreamReader(
-                    skt.getInputStream()));
-            //System.out.println("b");
-            System.out.print("Received string: \n");
-
-            while (!in.ready()) {
-            }
-            System.out.println(in.readLine() + "\n");
+//            BufferedReader in = new BufferedReader(new InputStreamReader(
+//                    skt.getInputStream()));
+//            //System.out.println("b");
+//            System.out.print("Received string: \n");
+//
+//            while (!in.ready()) {
+//            }
+//            System.out.println(in.readLine() + "\n");
         }
     }
 
@@ -132,32 +133,44 @@ public class ScrabbleServer {
         System.out.println("created server");
     }
 
-    public void acceptUpdateFromClient(Player updatedPlayer) throws IOException {
-        BufferedReader in = new BufferedReader(new InputStreamReader(
-                skt.getInputStream()));
+    public Player acceptUpdateFromClient() throws IOException, ClassNotFoundException {
+//        BufferedReader in = new BufferedReader(new InputStreamReader(
+//                skt.getInputStream()));
+
+        ObjectInputStream ois = new ObjectInputStream(skt.getInputStream());
         //System.out.println("b");
-        System.out.print("Received string: ");
+//        System.out.print("Received string: ");
 
-        while (!in.ready()) {
-        }
-        System.out.println(in.readLine()); // Read one line and output it
-
+//        while (!in.ready()) {
+//        }
+//        System.out.println(in.readLine()); // Read one line and output it
+        Player updatedPlayer = (Player) ois.readObject();
+        //ois.close();
         //System.out.print("'\n");
         //in.close();
         //out.close();
+
+        return updatedPlayer;
     }
 
     public void updateClients(Player updatedPlayer) throws IOException {
-        PrintWriter out = new PrintWriter(skt.getOutputStream(), true);
-        System.out.println("Updating clients..." + '\n');
 
-        updatedPlayer.setName("Jenna 2.0");
+        OutputStream os = skt.getOutputStream();
+        ObjectOutputStream oos = new ObjectOutputStream(os);
+        oos.writeObject(updatedPlayer);
 
-        out.print(updatedPlayer);
-        out.flush();
+        System.out.println("received player update");
+        //oos.flush();
+//        PrintWriter out = new PrintWriter(skt.getOutputStream(), true);
+//        System.out.println("Updating clients..." + '\n');
+//
+//        updatedPlayer.setName("Jenna 2.0");
+//
+//        out.print(updatedPlayer);
+//        out.flush();
     }
 
-    public static void main(String args[]) throws IOException {
+    public static void main(String args[]) throws IOException, ClassNotFoundException {
 
         ScrabbleServer ss = new ScrabbleServer(1);
 

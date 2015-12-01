@@ -16,13 +16,14 @@
 package Scrabble.model;
 
 import Scrabble.view.ScrabbleBoard;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author jms107
  */
-public class Player {
+public class Player implements Serializable {
     private String name;
     private int totalScore = 0;
     private Hand myHand;
@@ -50,6 +51,8 @@ public class Player {
         //this.inGame = true;
         this.scrabbleServer = server;
         this.game = this.scrabbleServer.getTheGame();
+        this.myHand = new Hand(newHand());
+        this.tileBag = game.getTileBag();
     }
 
     // instantiating a player without a hand already created
