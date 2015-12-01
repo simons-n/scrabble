@@ -45,8 +45,10 @@ public class Game {
 
     public Game(GameSize gameSize) {
         this.theBoard = new ScrabbleBoard(this);
-        this.tileBag = tileBag;
         this.gameSize = gameSize;
+        this.tileBag = theBoard.getTileBag();
+        this.gameSize = gameSize;
+        this.curPlayer = (Player) playerList.get(0);
     }
 
     public GameSize getGameSize() {
