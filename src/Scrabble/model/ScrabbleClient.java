@@ -36,7 +36,7 @@ public class ScrabbleClient {
     }
 
     public Game getTheGame() {
-        return theGame;
+        return this.theGame;
     }
 
     public void connectToServer(String ipAddress) throws IOException, ClassNotFoundException {
@@ -46,6 +46,7 @@ public class ScrabbleClient {
         // accept the game from the server
         ObjectInputStream ois = new ObjectInputStream(skt.getInputStream());
         this.theGame = (Game) ois.readObject();
+
 //        BufferedReader in = new BufferedReader(new InputStreamReader(
 //                skt.getInputStream()));
 //        System.out.print("Received string: ");

@@ -39,7 +39,18 @@ public class Game {
         theBoard = new ScrabbleBoard(this);
         this.gameSize = gameSize;
         this.tileBag = theBoard.getTileBag();
+        this.gameSize = gameSize;
         playerList.add(creatorOfGame);
+    }
+
+    public Game(GameSize gameSize) {
+        this.theBoard = new ScrabbleBoard();
+        this.tileBag = theBoard.getTileBag();
+        this.gameSize = gameSize;
+    }
+
+    public GameSize getGameSize() {
+        return gameSize;
     }
 
     public int getNumConnectedPlayers() {
