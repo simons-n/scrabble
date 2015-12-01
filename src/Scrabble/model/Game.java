@@ -34,13 +34,12 @@ public class Game {
     //make game take no parameters
     //create an addPlayer class to add player to the game once it is already created
     public Game(GameSize gameSize) {
-        this.theBoard = new ScrabbleBoard(this);
+        //this.theBoard = new ScrabbleBoard(this);
         this.gameSize = gameSize;
     }
 
     public void setTheBoard(ScrabbleBoard board) {
         this.theBoard = board;
-        this.tileBag = theBoard.getTileBag();
     }
 
     public void setCurPlayer(Player playah) {

@@ -50,6 +50,7 @@ public class Player {
         //this.inGame = true;
         this.scrabbleServer = server;
         this.game = this.scrabbleServer.getTheGame();
+        this.tileBag = this.game.getTileBag();
         this.myHand = new Hand(newHand());
     }
 
@@ -81,7 +82,7 @@ public class Player {
     public ArrayList<Tile> newHand() {
         ArrayList<Tile> hand = new ArrayList<>(7);
         for (int i = 0; i < 7; i++) {
-            Tile tile = tileBag.draw();
+            Tile tile = this.tileBag.draw();
             hand.add(tile);
         }
         return hand;
