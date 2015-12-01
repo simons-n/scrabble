@@ -15,6 +15,7 @@
  */
 package Scrabble.view;
 
+import Scrabble.model.Game;
 import Scrabble.model.Hand;
 import Scrabble.model.Player;
 import Scrabble.model.TileBag;
@@ -28,7 +29,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
 
 /**
@@ -52,10 +52,12 @@ public class ScrabbleBoard extends JFrame {
     private final JTextArea tileBagLabel = new JTextArea(10, 10);
     private Board board;
     private HandView handView;
-////    private Player player = new Player("Jenna", 0);
-    //private Player player = Game.getCurPlayer();
+    private Player player;
+    private Game game;
 
-    public ScrabbleBoard() {
+    public ScrabbleBoard(Game theGame) {
+        this.game = theGame;
+        this.player = theGame.getCurPlayer();
         Border blackBorder = BorderFactory.createLineBorder(
                 Color.BLACK);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -140,28 +142,26 @@ public class ScrabbleBoard extends JFrame {
         return board.getGrid();
     }
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                ScrabbleBoard window = new ScrabbleBoard();
-                window.setBackground(Color.BLUE);
-                window.setTitle("Scrabble Game");
-                window.setSize(900, 600);
-                window.setVisible(true);
-
-            }
-        });
-        //create GUI
+//    /**
+//     * @param args the command line arguments
+//     */
+//    public static void main(String[] args) {
+//        SwingUtilities.invokeLater(new Runnable() {
+//            @Override
+//            public void run() {
+//                ScrabbleBoard window = new ScrabbleBoard();
+//                window.setBackground(Color.BLUE);
+//                window.setTitle("Scrabble Game");
+//                window.setSize(900, 600);
+//                window.setVisible(true);
+//
+//            }
+//        });
+    //create GUI
 //display scores of all players
 //display player's hand
 //Play word button
 //Pass button (or skip turn)
 //Swap Tiles button
 //display how many tiles are left in bag
-    }
-
 }

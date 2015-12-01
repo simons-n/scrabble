@@ -15,7 +15,6 @@
  */
 package Scrabble.model;
 
-import Scrabble.main.ScrabbleMain;
 import Scrabble.view.ScrabbleBoard;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -30,22 +29,32 @@ public class Game {
     GameSize gameSize;
 
     TileBag tileBag;
-    ArrayList playerList = new ArrayList();
-//    Player curPlayer = (Player) playerList.get(0);
+    ArrayList<Player> playerList = new ArrayList();
+    Player curPlayer;
 
     //make game take no parameters
     //create an addPlayer class to add player to the game once it is already created
-    public Game(GameSize gameSize, Player creatorOfGame) {
-        this.theBoard = new ScrabbleBoard();
-        this.tileBag = theBoard.getTileBag();
+//    public Game(GameSize gameSize, Player creatorOfGame) {
+//        //this.theBoard = new ScrabbleBoard(this);
+//        this.tileBag = theBoard.getTileBag();
+//        this.gameSize = gameSize;
+//        playerList.add(creatorOfGame);
+//    }
+    public Game(GameSize gameSize) {
+        //this.theBoard = new ScrabbleBoard(this);
+        if (theBoard != null) {
+            this.tileBag = theBoard.getTileBag();
+        }
         this.gameSize = gameSize;
-        playerList.add(creatorOfGame);
     }
 
-    public Game(GameSize gameSize) {
-        this.theBoard = new ScrabbleBoard();
+    public void setTheBoard(ScrabbleBoard board) {
+        this.theBoard = board;
         this.tileBag = theBoard.getTileBag();
-        this.gameSize = gameSize;
+    }
+
+    public void setCurPlayer(Player playah) {
+        curPlayer = playah;
     }
 
     public GameSize getGameSize() {
@@ -77,9 +86,10 @@ public class Game {
         }
     }
 
-//    public Player getCurPlayer() {
-//       return curPlayer;
-//    }
+    public Player getCurPlayer() {
+        return curPlayer;
+    }
+
     public ArrayList getPlayerList() {
         return playerList;
     }
@@ -92,11 +102,10 @@ public class Game {
         return this;
     }
 
-    public static void main(String[] args) {
-        Game g = new Game(GameSize.TWO_PLAYER, new Player("Caroline"));
-        g.addPlayer(new Player("Jenna"));
-        String[] a = {""};
-        ScrabbleMain.main(a);
-    }
-
+//    public static void main(String[] args) {
+//        Game g = new Game(GameSize.TWO_PLAYER, new Player("Caroline"));
+//        g.addPlayer(new Player("Jenna"));
+//        String[] a = {""};
+//        ScrabbleMain.main(a);
+//    }
 }
