@@ -78,6 +78,7 @@ public class StartBoxController implements ActionListener {
                                                           JOptionPane.WARNING_MESSAGE);
                 Player newPlayer = new Player(name, scrabbleServer);
                 theGame.addPlayer(newPlayer);
+                theGame.setCurPlayer(newPlayer);
                 System.out.println("Added player: " + newPlayer);
                 if (theGame.hasEnoughPlayers()) {
                     System.out.println("starting game");
@@ -224,7 +225,9 @@ public class StartBoxController implements ActionListener {
 
 //                StartBoxController startBoxController = new StartBoxController(
 //                        startBoxView);
-                        ScrabbleBoard scrabbleBoardView = new ScrabbleBoard();
+                        ScrabbleBoard scrabbleBoardView = new ScrabbleBoard(
+                                theGame);
+                        theGame.setTheBoard(scrabbleBoardView);
 
                         scrabbleBoardView.setBackground(Color.BLUE);
                         scrabbleBoardView.setTitle("Scrabble Game");
