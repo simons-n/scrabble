@@ -53,9 +53,11 @@ public class ScrabbleBoard extends JFrame {
     private Board board;
     private HandView handView;
     private Player player;
-    //private Player player = Game.getCurPlayer();
+    private Game game;
 
-    public ScrabbleBoard(Game game) {
+    public ScrabbleBoard(Game theGame) {
+        this.game = theGame;
+        this.player = theGame.getCurPlayer();
         Border blackBorder = BorderFactory.createLineBorder(
                 Color.BLACK);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

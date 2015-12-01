@@ -15,7 +15,6 @@
  */
 package Scrabble.model;
 
-import Scrabble.main.ScrabbleMain;
 import Scrabble.view.ScrabbleBoard;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -30,25 +29,22 @@ public class Game {
     GameSize gameSize;
     TileBag tileBag = new TileBag();
     ArrayList playerList = new ArrayList();
-    Player curPlayer; //= (Player) playerList.get(0);
+    Player curPlayer;
 
     //make game take no parameters
     //create an addPlayer class to add player to the game once it is already created
-    public Game(GameSize gameSize, Player creatorOfGame) {
-        theBoard = new ScrabbleBoard(this);
-        this.gameSize = gameSize;
-        this.tileBag = theBoard.getTileBag();
-        this.gameSize = gameSize;
-        this.curPlayer = (Player) playerList.get(0);
-        playerList.add(creatorOfGame);
-    }
-
     public Game(GameSize gameSize) {
         this.theBoard = new ScrabbleBoard(this);
         this.gameSize = gameSize;
+    }
+
+    public void setTheBoard(ScrabbleBoard board) {
+        this.theBoard = board;
         this.tileBag = theBoard.getTileBag();
-        this.gameSize = gameSize;
-        this.curPlayer = (Player) playerList.get(0);
+    }
+
+    public void setCurPlayer(Player playah) {
+        curPlayer = playah;
     }
 
     public GameSize getGameSize() {
@@ -81,7 +77,8 @@ public class Game {
     }
 
     public Player getCurPlayer() {
-        return this.curPlayer;
+
+        return curPlayer;
     }
 
     public ArrayList getPlayerList() {
@@ -100,11 +97,10 @@ public class Game {
         return this;
     }
 
-    public static void main(String[] args) {
-        Game g = new Game(GameSize.TWO_PLAYER, new Player("Caroline"));
-        g.addPlayer(new Player("Jenna"));
-        String[] a = {""};
-        ScrabbleMain.main(a);
-    }
-
+//    public static void main(String[] args) {
+//        Game g = new Game(GameSize.TWO_PLAYER, new Player("Caroline"));
+//        g.addPlayer(new Player("Jenna"));
+//        String[] a = {""};
+//        ScrabbleMain.main(a);
+//    }
 }

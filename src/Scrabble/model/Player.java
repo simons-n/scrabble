@@ -50,6 +50,7 @@ public class Player {
         //this.inGame = true;
         this.scrabbleServer = server;
         this.game = this.scrabbleServer.getTheGame();
+        this.myHand = new Hand(newHand());
     }
 
 //    public Player(String name, int totalScore, Hand myHand) {
