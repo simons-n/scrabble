@@ -21,6 +21,7 @@ import Scrabble.model.Player;
 import Scrabble.model.Tile;
 import Scrabble.model.TileBag;
 import Scrabble.model.Word;
+import Scrabble.view.Board;
 import Scrabble.view.HandView;
 import Scrabble.view.ScrabbleBoard;
 import java.awt.event.ActionEvent;
@@ -37,10 +38,11 @@ import javax.swing.JLabel;
  *
  * @author jms107
  */
-public class ScrabbleController implements ActionListener {
+public class ScrabbleController implements ActionListener, MouseListener {
 // connects model to view
 
     private ScrabbleBoard view;
+    private Board board;
     private HandView handView;
     private static TileBag tilebag = new TileBag();
     private static Hand hand;
@@ -51,6 +53,7 @@ public class ScrabbleController implements ActionListener {
     //private Player player = new Player("Jenna", 0);
     private Player player;
     private Game game;
+    private JLabel[] jLabelHand;
 
     public ScrabbleController(ScrabbleBoard view) {
         this.view = view;
@@ -58,12 +61,27 @@ public class ScrabbleController implements ActionListener {
         this.game = player.getGame();
         this.handView = view.getHandView();
         this.hand = player.getMyHand();
+        this.jLabelHand = this.handView.getJLabelHand();
+        this.board = view.getPlayerBoard();
         //this.hand = player.getMyHand();
         this.view.getShuffleBtn().addActionListener(this);
         this.view.getSwapBtn().addActionListener(this);
         this.view.getPlayBtn().addActionListener(this);
         this.view.getPassBtn().addActionListener(this);
+        //this.board.getGrid()[0][0].addMouseListener(this);
 
+//        this.board.addMouseListener(this);
+//        this.view.addMouseListener(this);
+//        this.handView.addMouseListener(this);
+        for (int i = 0; i < 15; i++) {
+            for (int j = 0; j < 15; j++) {
+                this.board.getGrid()[i][j].addMouseListener(this);
+            }
+        }
+
+        for (JLabel tileLabel : this.jLabelHand) {
+            tileLabel.addMouseListener(this);
+        }
     }
 
     public void createScrabbleController() {
@@ -81,7 +99,7 @@ public class ScrabbleController implements ActionListener {
     }
 
     public void updateViewFromModel() {
-        //this only updates the board not hand
+        //this only updates the board not handhandView.addMouseListener();
         // when shuffle is pressed change HandView to HandView(Hand myhand)
         //handView.addCTile(handView.getHand(), 0);
         handView.setHand(hand);
@@ -146,14 +164,47 @@ public class ScrabbleController implements ActionListener {
     }
 
     public void mouseClicked(MouseEvent e) {
-        System.out.println("handlist: " + handView.getHand());
+        System.out.println("handlist: " + handView.getJLabelHand());
         System.out.println("moueseevent source: " + e);
-        for (int i = 0; i < handView.getHand().length; i++) {
-            if (e.getSource() == handView.getHand()[i]) {
-                tileSelected = handView.getHand()[i];
-                handView.remove(handView.getHand()[i]);
+        for (int i = 0; i < handView.getJLabelHand().length; i++) {
+            if ((JLabel) e.getSource() == handView.getJLabelHand()[i]) {
+                tileSelected = handView.getJLabelHand()[i];
+                handView.remove(handView.getJLabelHand()[i]);
             }
         }
+        //this.board.getGrid()[i][j]
+
+        for (int i = 0; i < board.getGrid().length; i++) {
+            for (int j = 0; j < board.getGrid()[0].length; j++) {
+                if ((JLabel) e.getSource() == board.getGrid()[i][j]) {
+                    System.out.println("xxxx");
+                    tileSelected = board.getGrid()[i][j];
+                }
+            }
+        }
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+        System.out.println("mouse pressed");
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        System.out.println("mouse released");
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
