@@ -133,16 +133,15 @@ public class Player {
         // This will pass the turn to the next player in the network, somehow
     }
 
-    public void switchTilesInHand() {
-        setSkipTurn();
-        for (Tile tile : discardPile) {
-            myHand.addTileFromBag(tileBag);
-        }
-        for (Tile tile : discardPile) {
-            tileBag.addTile(tile);
-        }
-    }
-
+//    public void switchTilesInHand() {
+//        setSkipTurn();
+//        for (Tile tile : discardPile) {
+//            myHand.addTileFromBag(tileBag);
+//        }
+//        for (Tile tile : discardPile) {
+//            tileBag.addTile(tile);
+//        }
+//    }
     public void shuffleTiles() {
 
     }
