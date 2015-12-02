@@ -65,7 +65,9 @@ public class Hand {
         System.out.println("tried to create switch");
 
         String tileStr = JOptionPane.showInputDialog(view,
-                                                     "Type the letter of the tile you would like to swap: ");
+                                                     "Type the letter of the tile you would like to swap: ",
+                                                     "Swap",
+                                                     DISPOSE_ON_CLOSE);
         Tile tile = new Tile(val.valueOf(tileStr));
         Tile newTile = bag.draw();
         JOptionPane.showInternalMessageDialog(view, "New Tile",
