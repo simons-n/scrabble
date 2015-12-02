@@ -78,15 +78,13 @@ public class Hand {
         System.out.println("tried to create switch");
         JDialog dBoxSwitch = new JDialog(view, "Switch");
         dBoxSwitch.setLayout(new GridLayout(4, 1));
-        //JButton switchOKBtn = new JButton();
-        dBoxSwitch.setPreferredSize(new Dimension(500, 485));
+        dBoxSwitch.setPreferredSize(new Dimension(300, 350));
         JLabel tileToSwitchLabel = new JLabel(
                 "Type the letter of the tile you would like to switch: ");
         dBoxSwitch.getContentPane().add(tileToSwitchLabel);
         JTextField tileTextField = new JTextField();
         dBoxSwitch.getContentPane().add(tileTextField);
         JButton switchOKBtn = new JButton("OK");
-//        switchOKBtn.setText("OK");
         dBoxSwitch.getContentPane().add(switchOKBtn);
         dBoxSwitch.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         dBoxSwitch.pack();
