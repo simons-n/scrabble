@@ -31,6 +31,7 @@ public class Hand {
     private TileBag bag;
     private Val val;
     private Game game;
+    private int index;
 
     public Hand(ArrayList<Tile> tilesInHand, Player player) {
         this.tilesInHand = tilesInHand;
@@ -51,16 +52,18 @@ public class Hand {
     }
 
     public void switchTiles(Tile myTile, Tile pickedUpTile) {
+        System.out.println("Pre-hand :" + tilesInHand);
         bag.removeTile(pickedUpTile);
         bag.addTile(myTile);
-        int index = 0;
         for (int x = 0; x < tilesInHand.size(); x++) {
             if (tilesInHand.get(x) == myTile) {
                 index = x;
             }
         }
-        tilesInHand.remove(tilesInHand.indexOf(myTile));
+        System.out.println("The index of your tile is: " + index);
+        tilesInHand.remove(index);
         tilesInHand.add(index, pickedUpTile);
+        System.out.println("Post-hand: " + tilesInHand);
     }
 
     public void shuffle() {
@@ -89,8 +92,6 @@ public class Hand {
                                       "New Tile",
                                       DISPOSE_ON_CLOSE);
         switchTiles(tile, newTile);
-        ArrayList<Tile> newHand = this.getTilesInHand();
-        System.out.println(" the new hand" + newHand);
     }
 
     public ArrayList<Tile> getTilesInHand() {
