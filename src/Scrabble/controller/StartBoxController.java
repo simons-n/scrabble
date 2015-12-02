@@ -64,6 +64,9 @@ public class StartBoxController implements ActionListener {
                 ScrabbleClient client = new ScrabbleClient(iPOfExistingGame);
                 System.out.println("created client");
                 this.theGame = client.getTheGame();
+                if (theGame == null) {
+                    System.out.println("game is null");
+                }
                 System.out.println(
                         "got the game, size of game is " + theGame.getGameSize().getValue());
 
@@ -74,11 +77,14 @@ public class StartBoxController implements ActionListener {
                 Player newPlayer = new Player(name, scrabbleServer);
                 theGame.addPlayer(newPlayer);
                 theGame.setCurPlayer(newPlayer);
+
+                newPlayer.setClientServer(client);
                 System.out.println("Added player: " + newPlayer);
                 if (theGame.hasEnoughPlayers()) {
                     System.out.println("starting game");
                     for (Player player : theGame.getPlayerList()) {
                         player.createScrabbleMain();
+                        //newPlayer.getClientServer().runClient();
                     }
                     //ScrabbleMain startScrabbleGame = new ScrabbleMain();
                     // start the Scrabble game!
@@ -140,7 +146,14 @@ public class StartBoxController implements ActionListener {
             try {
                 System.out.println("x");
                 if (gameSize.getValue() != 1) {
-                    scrabbleServer = new ScrabbleServer(gameSize.getValue());
+                    try {
+                        scrabbleServer = new ScrabbleServer(gameSize.getValue());
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(StartBoxController.class.getName()).log(
+                                Level.SEVERE,
+                                null,
+                                ex);
+                    }
                 } else {
                     // create a dummy server so I can get the Game
                     scrabbleServer = new ScrabbleServer();
@@ -156,10 +169,10 @@ public class StartBoxController implements ActionListener {
 
             //this.theGame = scrabbleServer.createGame(gameSize, gameCreator);
             scrabbleServer.createGame(gameSize);
-            theGame = scrabbleServer.getTheGame();
-            //this.theGame = new Game(gameSize, gameCreator);
-
             System.out.println("created theGame");
+            this.theGame = scrabbleServer.getTheGame();
+            //this.theGame = new Game(gameSize, gameCreator);
+            System.out.println("got the game");
 
             // create gameCreator player
             Player gameCreator = new Player(name,
@@ -170,6 +183,9 @@ public class StartBoxController implements ActionListener {
 
             // add gameCreator to the game
             this.theGame.addPlayer(gameCreator);
+            this.theGame.setCurPlayer(gameCreator);
+
+            // set gameCreator to curPlayer so program will be happy
             this.theGame.setCurPlayer(gameCreator);
 
             System.out.println(theGame.getNumConnectedPlayers());

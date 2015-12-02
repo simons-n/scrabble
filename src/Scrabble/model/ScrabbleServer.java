@@ -15,12 +15,10 @@
  */
 package Scrabble.model;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -35,7 +33,7 @@ public class ScrabbleServer {
      *
      * @param args
      */
-    private Game theGame;
+    private transient Game theGame;
     private boolean newGame = true;
     private boolean gameOver = false;
     private ServerSocket srvr;
@@ -43,8 +41,11 @@ public class ScrabbleServer {
     private int curPlayers = 0;
     private int maxPlayers;
     private boolean sentGame = false;
+    private transient ObjectOutputStream oos;
+    private transient ObjectInputStream ois;
+    private transient OutputStream os;
 
-    public ScrabbleServer(int gameSize) throws IOException {
+    public ScrabbleServer(int gameSize) throws IOException, ClassNotFoundException {
         this.maxPlayers = gameSize;
 
         runServer();
@@ -60,106 +61,107 @@ public class ScrabbleServer {
 //        return this.theGame;
 //    }
     public void createGame(GameSize gameSize) {
-        this.theGame = new Game(gameSize);
+        this.theGame = new Game(gameSize, new Player("caroline"));
     }
 
     public Game getTheGame() {
         return this.theGame;
     }
 
-    public void runServer() throws IOException {
+    public void runServer() throws IOException, ClassNotFoundException {
         srvr = new ServerSocket(1025);
-        Player updatedPlayer = new Player("null");
         while (true) {
             skt = srvr.accept();
 
-//            PrintWriter out;
             if (sentGame == false) {
                 // send the game to the clients
-                OutputStream os = skt.getOutputStream();
-                ObjectOutputStream oos = new ObjectOutputStream(os);
-                oos.writeObject(theGame);
-//                out = new PrintWriter(skt.getOutputStream(), true);
-//                out.print(theGame);
+                os = skt.getOutputStream();
+                oos = new ObjectOutputStream(os);
+                oos.writeObject(getTheGame());
+
                 sentGame = true;
             }
 
-            // update clients
-//            out = new PrintWriter(skt.getOutputStream(), true);
-//            out.print(updatedPlayer);
-            //out.flush();
-            // look for updates FROM clients
-            BufferedReader in = new BufferedReader(new InputStreamReader(
-                    skt.getInputStream()));
-            //System.out.println("b");
-            System.out.print("Received string: \n");
+            updateClients(acceptUpdateFromClient());
 
-            while (!in.ready()) {
-            }
-            System.out.println(in.readLine() + "\n");
         }
     }
 
-    public void createServer() throws IOException {
-        System.out.println("createServer()");
-        try {
-            System.out.println("in try");
-            srvr = new ServerSocket(1025);
-            System.out.println("created server socket");
-            while (curPlayers < maxPlayers) {
-                skt = srvr.accept();
-                curPlayers += 1;
-                System.out.println("created socket");
-            }
-            //skt.setKeepAlive(true);
-            if (newGame) {
-                System.out.println("entered if");
-                System.out.print("Server has connected!\n");
-                String message = "Game starting!";
-                PrintWriter out = new PrintWriter(skt.getOutputStream(), true);
-                System.out.print("Sending string: '" + message + "'\n");
-                out.print(message + '\n');
-                out.flush();
-                //out.close();
-                //skt.close();
-                //srvr.close();
-                newGame = false;
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-            System.out.print("Whoops! It didn't work!\n");
-        }
-        System.out.println("created server");
-    }
+//    public void createServer() throws IOException {
+//        System.out.println("createServer()");
+//        try {
+//            System.out.println("in try");
+//            srvr = new ServerSocket(1025);
+//            System.out.println("created server socket");
+//            while (curPlayers < maxPlayers) {
+//                skt = srvr.accept();
+//                curPlayers += 1;
+//                System.out.println("created socket");
+//            }
+//            //skt.setKeepAlive(true);
+//            if (newGame) {
+//                System.out.println("entered if");
+//                System.out.print("Server has connected!\n");
+//                String message = "Game starting!";
+//                PrintWriter out = new PrintWriter(skt.getOutputStream(), true);
+//                System.out.print("Sending string: '" + message + "'\n");
+//                out.print(message + '\n');
+//                out.flush();
+//                //out.close();
+//                //skt.close();
+//                //srvr.close();
+//                newGame = false;
+//            }
+//        } catch (Exception e) {
+//            System.out.println(e);
+//            System.out.print("Whoops! It didn't work!\n");
+//        }
+//        System.out.println("created server");
+//    }
+    public Game acceptUpdateFromClient() throws IOException, ClassNotFoundException {
+//        BufferedReader in = new BufferedReader(new InputStreamReader(
+//                skt.getInputStream()));
 
-    public void acceptUpdateFromClient(Player updatedPlayer) throws IOException {
-        BufferedReader in = new BufferedReader(new InputStreamReader(
-                skt.getInputStream()));
+        ois = new ObjectInputStream(skt.getInputStream());
         //System.out.println("b");
-        System.out.print("Received string: ");
+//        System.out.print("Received string: ");
 
-        while (!in.ready()) {
-        }
-        System.out.println(in.readLine()); // Read one line and output it
-
+//        while (!in.ready()) {
+//        }
+//        System.out.println(in.readLine()); // Read one line and output it
+        Game updatedGame = (Game) ois.readObject();
+        //ois.close();
         //System.out.print("'\n");
         //in.close();
         //out.close();
+
+        //System.out.println(updatedGame.getGameOwner());
+        System.out.println("accepted update");
+
+        return updatedGame;
     }
 
-    public void updateClients(Player updatedPlayer) throws IOException {
-        PrintWriter out = new PrintWriter(skt.getOutputStream(), true);
-        System.out.println("Updating clients..." + '\n');
+    public void updateClients(Game updatedGame) throws IOException {
 
-        updatedPlayer.setName("Jenna 2.0");
+        os = skt.getOutputStream();
+        oos = new ObjectOutputStream(os);
+        oos.writeObject(updatedGame);
 
-        out.print(updatedPlayer);
-        out.flush();
+        System.out.println("sent game update");
+        //oos.flush();
+//        PrintWriter out = new PrintWriter(skt.getOutputStream(), true);
+//        System.out.println("Updating clients..." + '\n');
+//
+//        updatedPlayer.setName("Jenna 2.0");
+//
+//        out.print(updatedPlayer);
+//        out.flush();
     }
 
-    public static void main(String args[]) throws IOException {
+    public static void main(String args[]) throws IOException, ClassNotFoundException {
 
         ScrabbleServer ss = new ScrabbleServer(1);
+        ss.createGame(GameSize.TWO_PLAYER);
 
         //ss.createServer();
         ss.runServer();

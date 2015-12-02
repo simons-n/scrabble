@@ -16,6 +16,7 @@
 package Scrabble.model;
 
 import Scrabble.view.Board;
+import java.io.Serializable;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -23,19 +24,25 @@ import javax.swing.JOptionPane;
  *
  * @author calw001
  */
-public class Game {
+public class Game implements Serializable {
 
     Board mainBoard;
     GameSize gameSize;
-    TileBag tileBag = new TileBag();
+    transient TileBag tileBag = new TileBag();
     ArrayList<Player> playerList = new ArrayList();
     Player curPlayer;
+    transient Player gameOwner;
 
     //make game take no parameters
     //create an addPlayer class to add player to the game once it is already created
     public Game(GameSize gameSize) {
         //this.mainBoard = new ScrabbleBoard(this);
         this.gameSize = gameSize;
+    }
+
+    public Game(GameSize gameSize, Player gameOwner) {
+        this.gameSize = gameSize;
+        this.gameOwner = gameOwner;
     }
 
     public void setTheBoard(Board board) {
@@ -48,6 +55,10 @@ public class Game {
 
     public GameSize getGameSize() {
         return gameSize;
+    }
+
+    public Player getGameOwner() {
+        return gameOwner;
     }
 
     public int getNumConnectedPlayers() {

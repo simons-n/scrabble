@@ -38,6 +38,7 @@ public class Player {
     private Board mainBoard;
     private TileBag tileBag;
     private ScrabbleServer scrabbleServer;
+    private ScrabbleClient clientServer;
 
     // in action performed, when pass button is pressed, change this back to false
     private boolean hasPassed = true;
@@ -63,6 +64,10 @@ public class Player {
         ScrabbleMain newScrabbleMain = new ScrabbleMain(this);
         String[] a = {""};
         newScrabbleMain.main(a);
+    }
+
+    public void setClientServer(ScrabbleClient sc) {
+        this.clientServer = sc;
     }
 
     public void setScrabbleBoard(ScrabbleBoard scrabbleBoard) {
@@ -96,6 +101,10 @@ public class Player {
 
     public Game getGame() {
         return game;
+    }
+
+    public ScrabbleClient getClientServer() {
+        return clientServer;
     }
 
     public boolean isSkipTurn() {

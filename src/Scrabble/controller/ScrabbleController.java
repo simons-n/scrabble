@@ -27,7 +27,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
 
 /**
@@ -80,8 +83,10 @@ public class ScrabbleController implements ActionListener {
     public void updateViewFromModel() {
         //this only updates the board not hand
         // when shuffle is pressed change HandView to HandView(Hand myhand)
-
+        //handView.addCTile(handView.getHand(), 0);
+        handView.setHand(hand);
         view.repaint();
+        //
         // when pass is pressed change view to next players hand
         // when swap is pressed change HandView to HandView(Hand myhand) *** make the dialog box show up
         // when play is pressed if not valid show error message, if valid update show message of how much they just scored, update total score, show new hand with drawn tiles, change player to next players hand
@@ -101,6 +106,15 @@ public class ScrabbleController implements ActionListener {
 
         } else if (e.getSource() == view.getPassBtn()) {
             //change current player to next player, and end turn
+            try {
+
+                player.getClientServer().updateServer();
+            } catch (IOException ex) {
+                Logger.getLogger(ScrabbleController.class.getName()).log(
+                        Level.SEVERE,
+                        null,
+                        ex);
+            }
 
             game.setTheBoard(view.getMainBoard());
             game.updatePlayerBoards();
@@ -111,7 +125,6 @@ public class ScrabbleController implements ActionListener {
             System.out.println("pre-hand: " + hand);
 
             //Testing by replacing the first tile with a C. (doesn't work)
-            handView.addCTile(handView.getHand(), 0);
             this.hand.shuffle();
             System.out.println("post-hand: " + hand);
 
