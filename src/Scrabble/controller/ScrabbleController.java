@@ -108,7 +108,7 @@ public class ScrabbleController implements ActionListener {
             //change current player to next player, and end turn
             try {
 
-                player.getClientServer().updateServer(game);
+                player.getClientServer().updateServer();
             } catch (IOException ex) {
                 Logger.getLogger(ScrabbleController.class.getName()).log(
                         Level.SEVERE,
