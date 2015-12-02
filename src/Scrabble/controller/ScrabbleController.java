@@ -103,6 +103,9 @@ public class ScrabbleController implements ActionListener {
         {
             this.hand.createSwap();
 
+            game.setTheBoard(view.getMainBoard());
+            game.updatePlayerBoards();
+
         } else if (e.getSource() == view.getPassBtn()) {
             //change current player to next player, and end turn
             try {
