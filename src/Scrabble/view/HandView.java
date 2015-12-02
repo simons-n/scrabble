@@ -104,6 +104,10 @@ public class HandView extends javax.swing.JPanel {
         removeAll();
         for (int x = 0; x < myHand.getTilesInHand().size(); x++) {
             Tile tile = myHand.getTilesInHand().get(x);
+            if (tile == null) {
+                tile = tileBag.draw();
+                myHand.addTileFromBoard(tile);
+            }
             int handLocation = x;
             switch (tile.getLetter()) {
                 case A:
