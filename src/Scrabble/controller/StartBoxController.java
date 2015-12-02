@@ -15,16 +15,12 @@
  */
 package Scrabble.controller;
 
-import Scrabble.main.ScrabbleMain;
-import Scrabble.main.StartBoxMain;
 import Scrabble.model.Game;
 import Scrabble.model.GameSize;
 import Scrabble.model.Player;
 import Scrabble.model.ScrabbleClient;
 import Scrabble.model.ScrabbleServer;
-import Scrabble.view.ScrabbleBoard;
 import Scrabble.view.StartBox;
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -33,7 +29,6 @@ import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.UIManager;
 
 /**
  *
@@ -82,7 +77,10 @@ public class StartBoxController implements ActionListener {
                 System.out.println("Added player: " + newPlayer);
                 if (theGame.hasEnoughPlayers()) {
                     System.out.println("starting game");
-                    ScrabbleMain startScrabbleGame = new ScrabbleMain();
+                    for (Player player : theGame.getPlayerList()) {
+                        player.createScrabbleMain();
+                    }
+                    //ScrabbleMain startScrabbleGame = new ScrabbleMain();
                     // start the Scrabble game!
                 }
             } catch (IOException ex) {
@@ -179,69 +177,72 @@ public class StartBoxController implements ActionListener {
 
             if (theGame.hasEnoughPlayers()) {
                 System.out.println("hopefully Scrabble window pops up");
+                for (Player player : theGame.getPlayerList()) {
+                    player.createScrabbleMain();
+                }
 //                String[] a = {""};
 //                ScrabbleMain.main(a);
 
-                /* Set the Nimbus look and feel */
-                //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-                 * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-                 */
-                try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
+//                /* Set the Nimbus look and feel */
+//                //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//                 * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+//                 */
+//                try {
+////            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+////                if ("Nimbus".equals(info.getName())) {
+////                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+////                    break;
+////                }
+////            }
+//                    UIManager.setLookAndFeel(
+//                            UIManager.getSystemLookAndFeelClassName());
+//                } catch (ClassNotFoundException ex) {
+//                    java.util.logging.Logger.getLogger(
+//                            StartBoxMain.class.getName()).log(
+//                                    java.util.logging.Level.SEVERE, null, ex);
+//                } catch (InstantiationException ex) {
+//                    java.util.logging.Logger.getLogger(
+//                            StartBoxMain.class.getName()).log(
+//                                    java.util.logging.Level.SEVERE, null, ex);
+//                } catch (IllegalAccessException ex) {
+//                    java.util.logging.Logger.getLogger(
+//                            StartBoxMain.class.getName()).log(
+//                                    java.util.logging.Level.SEVERE, null, ex);
+//                } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//                    java.util.logging.Logger.getLogger(
+//                            StartBoxMain.class.getName()).log(
+//                                    java.util.logging.Level.SEVERE, null, ex);
 //                }
-//            }
-                    UIManager.setLookAndFeel(
-                            UIManager.getSystemLookAndFeelClassName());
-                } catch (ClassNotFoundException ex) {
-                    java.util.logging.Logger.getLogger(
-                            StartBoxMain.class.getName()).log(
-                                    java.util.logging.Level.SEVERE, null, ex);
-                } catch (InstantiationException ex) {
-                    java.util.logging.Logger.getLogger(
-                            StartBoxMain.class.getName()).log(
-                                    java.util.logging.Level.SEVERE, null, ex);
-                } catch (IllegalAccessException ex) {
-                    java.util.logging.Logger.getLogger(
-                            StartBoxMain.class.getName()).log(
-                                    java.util.logging.Level.SEVERE, null, ex);
-                } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-                    java.util.logging.Logger.getLogger(
-                            StartBoxMain.class.getName()).log(
-                                    java.util.logging.Level.SEVERE, null, ex);
-                }
-                //</editor-fold>
-                //</editor-fold>
-
-                java.awt.EventQueue.invokeLater(new Runnable() {
-                    public void run() {
-
-//                StartBox startBoxView = new StartBox();
+//                //</editor-fold>
+//                //</editor-fold>
 //
-//                startBoxView.setVisible(true);
-                        StartBoxMain sbm = new StartBoxMain();
-
-//                StartBoxController startBoxController = new StartBoxController(
-//                        startBoxView);
-                        ScrabbleBoard scrabbleBoardView = new ScrabbleBoard(
-                                theGame);
-
-                        theGame.setTheBoard(scrabbleBoardView);
-
-                        scrabbleBoardView.setBackground(Color.BLUE);
-                        scrabbleBoardView.setTitle("Scrabble Game");
-                        scrabbleBoardView.setSize(900, 600);
-                        //Hand playerHand = player.getMyHand();
-                        scrabbleBoardView.setVisible(true);
-
-                        ScrabbleController scrabbleController = new ScrabbleController(
-                                scrabbleBoardView);
-
-                    }
-                });
+//                java.awt.EventQueue.invokeLater(new Runnable() {
+//                    public void run() {
+//
+////                StartBox startBoxView = new StartBox();
+////
+////                startBoxView.setVisible(true);
+//                        StartBoxMain sbm = new StartBoxMain();
+//
+////                StartBoxController startBoxController = new StartBoxController(
+////                        startBoxView);
+//                        ScrabbleBoard scrabbleBoardView = new ScrabbleBoard(
+//                                theGame, null);
+//
+//                        theGame.setTheBoard(scrabbleBoardView);
+//
+//                        scrabbleBoardView.setBackground(Color.BLUE);
+//                        scrabbleBoardView.setTitle("Scrabble Game");
+//                        scrabbleBoardView.setSize(900, 600);
+//                        //Hand playerHand = player.getMyHand();
+//                        scrabbleBoardView.setVisible(true);
+//
+//                        ScrabbleController scrabbleController = new ScrabbleController(
+//                                scrabbleBoardView);
+//
+//                    }
+//                });
                 // start the Scrabble game!
             }
 

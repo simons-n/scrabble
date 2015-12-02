@@ -15,6 +15,7 @@
  */
 package Scrabble.controller;
 
+import Scrabble.model.Game;
 import Scrabble.model.Hand;
 import Scrabble.model.Player;
 import Scrabble.model.Tile;
@@ -46,10 +47,12 @@ public class ScrabbleController implements ActionListener {
     private JLabel tileSelected = null;
     //private Player player = new Player("Jenna", 0);
     private Player player;
+    private Game game;
 
     public ScrabbleController(ScrabbleBoard view) {
         this.view = view;
         this.player = view.getPlayer();
+        this.game = player.getGame();
         this.handView = view.getHandView();
         this.hand = player.getMyHand();
         //this.hand = player.getMyHand();
@@ -66,10 +69,10 @@ public class ScrabbleController implements ActionListener {
 //               square.addActionListener(this);
 //            }
 //        }
-        for (int i = 0; i < view.getGrid().length; i++) {
-            for (int j = 0; i < view.getGrid()[0].length; j++) {
-                view.getGrid()[i][j].addMouseListener(
-                        (MouseListener) view.getGrid()[i][j]);
+        for (int i = 0; i < view.getMyGrid().length; i++) {
+            for (int j = 0; i < view.getMyGrid()[0].length; j++) {
+                view.getMyGrid()[i][j].addMouseListener(
+                        (MouseListener) view.getMyGrid()[i][j]);
             }
         }
     }
@@ -95,13 +98,19 @@ public class ScrabbleController implements ActionListener {
         {
             this.hand.createSwitch();
 
-        } else if (e.getSource() == view.getPassBtn()) //change current player to next player, and end turn
-        {
+        } else if (e.getSource() == view.getPassBtn()) {
+            //change current player to next player, and end turn
+
+            game.setTheBoard(view.getMainBoard());
+            game.updatePlayerBoards();
             //player.pass();
 
         } else if (e.getSource() == view.getShuffleBtn()) {
             System.out.println("tried to shuffle");
             System.out.println("pre-hand: " + hand);
+
+            //Testing by replacing the first tile with a C. (doesn't work)
+            handView.addCTile(handView.getHand(), 0);
             this.hand.shuffle();
             System.out.println("post-hand: " + hand);
 
@@ -111,9 +120,9 @@ public class ScrabbleController implements ActionListener {
         } else if (tileSelected != null) {
             for (int x = 0; x < 15; x++) {
                 for (int y = 0; y < 15; y++) {
-                    if (e.getSource() == view.getGrid()[x][y]) {
-                        view.remove(view.getGrid()[x][y]);
-                        view.getGrid()[x][y] = tileSelected;
+                    if (e.getSource() == view.getMyGrid()[x][y]) {
+                        view.remove(view.getMyGrid()[x][y]);
+                        view.getMyGrid()[x][y] = tileSelected;
                         tileSelected = null;
                     }
                 }
