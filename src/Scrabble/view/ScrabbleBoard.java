@@ -84,6 +84,7 @@ public class ScrabbleBoard extends JFrame {
         //bottom panel -- where tiles are added to hand
         player = game.getCurPlayer();
         Hand myHand = player.getMyHand();
+        System.out.println(myHand);
         handView = new HandView(myHand);
         //hand.createNewHand(tileBag);
 

@@ -102,4 +102,7 @@ public class Game {
 //        String[] a = {""};
 //        ScrabbleMain.main(a);
 //    }
+    public TileBag getTileBag() {
+        return tileBag;
+    }
 }

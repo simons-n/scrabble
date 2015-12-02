@@ -174,6 +174,9 @@ public class StartBoxController implements ActionListener {
             this.theGame.addPlayer(gameCreator);
             this.theGame.setCurPlayer(gameCreator);
 
+            // set gameCreator to curPlayer so program will be happy
+            this.theGame.setCurPlayer(gameCreator);
+
             System.out.println(theGame.getNumConnectedPlayers());
             System.out.println(gameSize.getValue());
 
