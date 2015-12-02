@@ -80,7 +80,8 @@ public class ScrabbleController implements ActionListener {
     public void updateViewFromModel() {
         //this only updates the board not hand
         // when shuffle is pressed change HandView to HandView(Hand myhand)
-        handView.setHand(hand); //repaint
+
+        view.repaint();
         // when pass is pressed change view to next players hand
         // when swap is pressed change HandView to HandView(Hand myhand) *** make the dialog box show up
         // when play is pressed if not valid show error message, if valid update show message of how much they just scored, update total score, show new hand with drawn tiles, change player to next players hand
@@ -96,7 +97,7 @@ public class ScrabbleController implements ActionListener {
 
         } else if (e.getSource() == view.getSwapBtn()) //pickUp tile from Bag, switch with tile selected, and end turn
         {
-            this.hand.createSwitch();
+            this.hand.createSwap();
 
         } else if (e.getSource() == view.getPassBtn()) {
             //change current player to next player, and end turn

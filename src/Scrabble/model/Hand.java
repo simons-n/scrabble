@@ -16,16 +16,9 @@
 package Scrabble.model;
 
 import Scrabble.view.ScrabbleBoard;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collections;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
+import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 
 /**
@@ -44,12 +37,6 @@ public class Hand {
 
     public Tile getTile(int x) {
         return this.tilesInHand.get(x);
-    }
-
-    public void addTileFromBag(TileBag bag) {
-        Tile tile;
-        tile = bag.draw();
-        this.tilesInHand.add(tile);
     }
 
     public void addTileFromBoard(Tile tile) {
@@ -74,30 +61,17 @@ public class Hand {
         //randomly change the positions of tiles in array
     }
 
-    public void createSwitch() {
+    public void createSwap() {
         System.out.println("tried to create switch");
-        JDialog dBoxSwitch = new JDialog(view, "Switch");
-        dBoxSwitch.setLayout(new GridLayout(4, 1));
-        dBoxSwitch.setPreferredSize(new Dimension(300, 350));
-        JLabel tileToSwitchLabel = new JLabel(
-                "Type the letter of the tile you would like to switch: ");
-        dBoxSwitch.getContentPane().add(tileToSwitchLabel);
-        JTextField tileTextField = new JTextField();
-        dBoxSwitch.getContentPane().add(tileTextField);
-        JButton switchOKBtn = new JButton("OK");
-        dBoxSwitch.getContentPane().add(switchOKBtn);
-        dBoxSwitch.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        dBoxSwitch.pack();
-        dBoxSwitch.setVisible(true);
 
-        switchOKBtn.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                String tileStr = tileTextField.getText();
-                Tile tile = new Tile(val.valueOf(tileStr));
-                Tile newTile = bag.draw();
-                switchTiles(tile, newTile);
-            }
-        });
+        String tileStr = JOptionPane.showInputDialog(view,
+                                                     "Type the letter of the tile you would like to swap: ");
+        Tile tile = new Tile(val.valueOf(tileStr));
+        Tile newTile = bag.draw();
+        JOptionPane.showInternalMessageDialog(view, "New Tile",
+                                              newTile.toString(),
+                                              DISPOSE_ON_CLOSE);
+        switchTiles(tile, newTile);
     }
 
     public ArrayList<Tile> getTilesInHand() {
