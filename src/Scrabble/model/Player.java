@@ -57,7 +57,7 @@ public class Player {
         this.game = this.scrabbleServer.getTheGame();
         this.mainBoard = game.getTheBoard();
         this.tileBag = this.game.getTileBag();
-        this.myHand = new Hand(newHand());
+        this.myHand = new Hand(newHand(), this);
     }
 
     public void createScrabbleMain() {
