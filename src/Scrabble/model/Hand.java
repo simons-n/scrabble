@@ -53,8 +53,14 @@ public class Hand {
     public void switchTiles(Tile myTile, Tile pickedUpTile) {
         bag.removeTile(pickedUpTile);
         bag.addTile(myTile);
-        tilesInHand.remove(myTile);
-        tilesInHand.add(pickedUpTile);
+        int index = 0;
+        for (int x = 0; x < tilesInHand.size(); x++) {
+            if (tilesInHand.get(x) == myTile) {
+                index = x;
+            }
+        }
+        tilesInHand.remove(tilesInHand.indexOf(myTile));
+        tilesInHand.add(index, pickedUpTile);
     }
 
     public void shuffle() {
@@ -79,7 +85,7 @@ public class Hand {
         Tile newTile = bag.draw();
         System.out.println("The new tile from bag is: " + newTile);
         JOptionPane.showMessageDialog(view,
-                                      "New tile is:   " + newTile.toString(),
+                                      "Your new tile is:   " + newTile.toString(),
                                       "New Tile",
                                       DISPOSE_ON_CLOSE);
         switchTiles(tile, newTile);
