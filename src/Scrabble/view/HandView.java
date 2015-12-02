@@ -20,8 +20,6 @@ import Scrabble.model.Tile;
 import Scrabble.model.TileBag;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -94,7 +92,7 @@ public class HandView extends javax.swing.JPanel {
             Tile tile = myHand.getTile(x);
             drawTile(tile, x);
         }
-        createTileListeners();
+//        createTileListeners();
     }
 
     public void setHand(Hand myHand) {
@@ -479,32 +477,31 @@ public class HandView extends javax.swing.JPanel {
         return hand;
     }
 
-    public void createTileListeners() {
-        for (JLabel tile : hand) {
-            tile.addMouseListener(new MouseListener() {
-
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                }
-
-                @Override
-                public void mousePressed(MouseEvent e) {
-                }
-
-                @Override
-                public void mouseReleased(MouseEvent e) {
-                }
-
-                @Override
-                public void mouseEntered(MouseEvent e) {
-                }
-
-                @Override
-                public void mouseExited(MouseEvent e) {
-                }
-            });
-        }
-        System.out.println("created listeners");
-    }
-
+//    public void createTileListeners() {
+//        for (JLabel tile : hand) {
+//            tile.addMouseListener(new MouseListener() {
+//
+//                @Override
+//                public void mouseClicked(MouseEvent e) {
+//                }
+//
+//                @Override
+//                public void mousePressed(MouseEvent e) {
+//                }
+//
+//                @Override
+//                public void mouseReleased(MouseEvent e) {
+//                }
+//
+//                @Override
+//                public void mouseEntered(MouseEvent e) {
+//                }
+//
+//                @Override
+//                public void mouseExited(MouseEvent e) {
+//                }
+//            });
+//        }
+//        System.out.println("created listeners");
+//    }
 }

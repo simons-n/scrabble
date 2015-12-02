@@ -87,37 +87,6 @@ public class ScrabbleServer {
         }
     }
 
-//    public void createServer() throws IOException {
-//        System.out.println("createServer()");
-//        try {
-//            System.out.println("in try");
-//            srvr = new ServerSocket(1025);
-//            System.out.println("created server socket");
-//            while (curPlayers < maxPlayers) {
-//                skt = srvr.accept();
-//                curPlayers += 1;
-//                System.out.println("created socket");
-//            }
-//            //skt.setKeepAlive(true);
-//            if (newGame) {
-//                System.out.println("entered if");
-//                System.out.print("Server has connected!\n");
-//                String message = "Game starting!";
-//                PrintWriter out = new PrintWriter(skt.getOutputStream(), true);
-//                System.out.print("Sending string: '" + message + "'\n");
-//                out.print(message + '\n');
-//                out.flush();
-//                //out.close();
-//                //skt.close();
-//                //srvr.close();
-//                newGame = false;
-//            }
-//        } catch (Exception e) {
-//            System.out.println(e);
-//            System.out.print("Whoops! It didn't work!\n");
-//        }
-//        System.out.println("created server");
-//    }
     public Game acceptUpdateFromClient() throws IOException, ClassNotFoundException {
 //        BufferedReader in = new BufferedReader(new InputStreamReader(
 //                skt.getInputStream()));
