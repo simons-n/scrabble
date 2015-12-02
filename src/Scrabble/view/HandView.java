@@ -63,6 +63,7 @@ public class HandView extends javax.swing.JPanel {
 
     private ArrayList<Tile> tilesInHand = new ArrayList<>();
     private TileBag tileBag;
+    private boolean isDrawing;
 
     public HandView(Hand myHand) { //use this one to start the game
 //        setHand(player.hand);
@@ -91,108 +92,31 @@ public class HandView extends javax.swing.JPanel {
         setBorder(grayBorder);
         for (int x = 0; x < 7; x++) {
             Tile tile = myHand.getTile(x);
-            if (tile == null) {
-                tile = tileBag.draw();
-                myHand.addTileFromBoard(tile);
-            }
             drawTile(tile, x);
         }
         createTileListeners();
     }
 
     public void setHand(Hand myHand) {
-        removeAll();
+        this.isDrawing = false;
         for (int x = 0; x < myHand.getTilesInHand().size(); x++) {
             Tile tile = myHand.getTilesInHand().get(x);
-            int handLocation = x;
-            switch (tile.getLetter()) {
-                case A:
-                    addATile(this.hand, handLocation);
-                    break;
-                case B:
-                    addBTile(this.hand, handLocation);
-                    break;
-                case C:
-                    addCTile(this.hand, handLocation);
-                    break;
-                case D:
-                    addDTile(this.hand, handLocation);
-                    break;
-                case E:
-                    addETile(this.hand, handLocation);
-                    break;
-                case F:
-                    addFTile(this.hand, handLocation);
-                    break;
-                case G:
-                    addGTile(this.hand, handLocation);
-                    break;
-                case H:
-                    addHTile(this.hand, handLocation);
-                    break;
-                case I:
-                    addITile(this.hand, handLocation);
-                    break;
-                case J:
-                    addJTile(this.hand, handLocation);
-                    break;
-                case K:
-                    addKTile(this.hand, handLocation);
-                    break;
-                case L:
-                    addLTile(this.hand, handLocation);
-                    break;
-                case M:
-                    addMTile(this.hand, handLocation);
-                    break;
-                case N:
-                    addNTile(this.hand, handLocation);
-                    break;
-                case O:
-                    addOTile(this.hand, handLocation);
-                    break;
-                case P:
-                    addPTile(this.hand, handLocation);
-                    break;
-                case Q:
-                    addQTile(this.hand, handLocation);
-                    break;
-                case R:
-                    addRTile(this.hand, handLocation);
-                    break;
-                case S:
-                    addSTile(this.hand, handLocation);
-                    break;
-                case T:
-                    addTTile(this.hand, handLocation);
-                    break;
-                case U:
-                    addUTile(this.hand, handLocation);
-                    break;
-                case V:
-                    addVTile(this.hand, handLocation);
-                    break;
-                case W:
-                    addWTile(this.hand, handLocation);
-                    break;
-                case X:
-                    addXTile(this.hand, handLocation);
-                    break;
-                case Y:
-                    addYTile(this.hand, handLocation);
-                    break;
-                case Z:
-                    addZTile(this.hand, handLocation);
-                    break;
-                default:
-                    addBlankTile(this.hand, handLocation);
-                    break;
+            if (tile == null) {
+                tile = tileBag.draw();
+                myHand.addTileFromBoard(tile);
             }
+            int handLocation = x;
+            findTileInHand(tile, x);
         }
     }
 
     public void drawTile(Tile newTile, int handLocation) {
-        switch (newTile.getLetter()) {
+        this.isDrawing = true;
+        findTileInHand(newTile, handLocation);
+    }
+
+    public void findTileInHand(Tile tile, int handLocation) {
+        switch (tile.getLetter()) {
             case A:
                 addATile(this.hand, handLocation);
                 break;
@@ -278,165 +202,277 @@ public class HandView extends javax.swing.JPanel {
     }
 
     public void addATile(JLabel[] hand, int handLocation) {
+        if (this.isDrawing == false) {
+            this.remove(hand[handLocation]);
+        }
         hand[handLocation] = new JLabel(aTileImage);
         hand[handLocation].setPreferredSize(new Dimension(30, 30));
         add(hand[handLocation]);
+        this.revalidate();
+
     }
 
     public void addBTile(JLabel[] hand, int handLocation) {
+        if (this.isDrawing == false) {
+            this.remove(hand[handLocation]);
+        }
         hand[handLocation] = new JLabel(bTileImage);
         hand[handLocation].setPreferredSize(new Dimension(30, 30));
         add(hand[handLocation]);
+        this.revalidate();
+
     }
 
     public void addCTile(JLabel[] hand, int handLocation) {
+        if (this.isDrawing == false) {
+            this.remove(hand[handLocation]);
+        }
         hand[handLocation] = new JLabel(cTileImage);
         hand[handLocation].setPreferredSize(new Dimension(30, 30));
         add(hand[handLocation]);
+        this.revalidate();
+
     }
 
     public void addDTile(JLabel[] hand, int handLocation) {
+        if (this.isDrawing == false) {
+            this.remove(hand[handLocation]);
+        }
         hand[handLocation] = new JLabel(dTileImage);
         hand[handLocation].setPreferredSize(new Dimension(30, 30));
         add(hand[handLocation]);
+        this.revalidate();
     }
 
     public void addETile(JLabel[] hand, int handLocation) {
+        if (this.isDrawing == false) {
+            this.remove(hand[handLocation]);
+        }
         hand[handLocation] = new JLabel(eTileImage);
         hand[handLocation].setPreferredSize(new Dimension(30, 30));
         add(hand[handLocation]);
+        this.revalidate();
+
     }
 
     public void addFTile(JLabel[] hand, int handLocation) {
+        if (this.isDrawing == false) {
+            this.remove(hand[handLocation]);
+        }
         hand[handLocation] = new JLabel(fTileImage);
         hand[handLocation].setPreferredSize(new Dimension(30, 30));
         add(hand[handLocation]);
+        this.revalidate();
     }
 
     public void addGTile(JLabel[] hand, int handLocation) {
+        if (this.isDrawing == false) {
+            this.remove(hand[handLocation]);
+        }
         hand[handLocation] = new JLabel(gTileImage);
         hand[handLocation].setPreferredSize(new Dimension(30, 30));
         add(hand[handLocation]);
+        this.revalidate();
     }
 
     public void addHTile(JLabel[] hand, int handLocation) {
+        if (this.isDrawing == false) {
+            this.remove(hand[handLocation]);
+        }
         hand[handLocation] = new JLabel(hTileImage);
         hand[handLocation].setPreferredSize(new Dimension(30, 30));
         add(hand[handLocation]);
+        this.revalidate();
     }
 
     public void addITile(JLabel[] hand, int handLocation) {
+        if (this.isDrawing == false) {
+            this.remove(hand[handLocation]);
+        }
         hand[handLocation] = new JLabel(iTileImage);
         hand[handLocation].setPreferredSize(new Dimension(30, 30));
         add(hand[handLocation]);
+        this.revalidate();
     }
 
     public void addJTile(JLabel[] hand, int handLocation) {
+        if (this.isDrawing == false) {
+            this.remove(hand[handLocation]);
+        }
         hand[handLocation] = new JLabel(jTileImage);
         hand[handLocation].setPreferredSize(new Dimension(30, 30));
         add(hand[handLocation]);
+        this.revalidate();
     }
 
     public void addKTile(JLabel[] hand, int handLocation) {
+        if (this.isDrawing == false) {
+            this.remove(hand[handLocation]);
+        }
         hand[handLocation] = new JLabel(kTileImage);
         hand[handLocation].setPreferredSize(new Dimension(30, 30));
         add(hand[handLocation]);
+        this.revalidate();
     }
 
     public void addLTile(JLabel[] hand, int handLocation) {
+        if (this.isDrawing == false) {
+            this.remove(hand[handLocation]);
+        }
         hand[handLocation] = new JLabel(lTileImage);
         hand[handLocation].setPreferredSize(new Dimension(30, 30));
         add(hand[handLocation]);
+        this.revalidate();
     }
 
     public void addMTile(JLabel[] hand, int handLocation) {
+        if (this.isDrawing == false) {
+            this.remove(hand[handLocation]);
+        }
         hand[handLocation] = new JLabel(mTileImage);
         hand[handLocation].setPreferredSize(new Dimension(30, 30));
         add(hand[handLocation]);
+        this.revalidate();
     }
 
     public void addNTile(JLabel[] hand, int handLocation) {
+        if (this.isDrawing == false) {
+            this.remove(hand[handLocation]);
+        }
         hand[handLocation] = new JLabel(nTileImage);
         hand[handLocation].setPreferredSize(new Dimension(30, 30));
         add(hand[handLocation]);
+        this.revalidate();
     }
 
     public void addOTile(JLabel[] hand, int handLocation) {
+        if (this.isDrawing == false) {
+            this.remove(hand[handLocation]);
+        }
         hand[handLocation] = new JLabel(oTileImage);
         hand[handLocation].setPreferredSize(new Dimension(30, 30));
         add(hand[handLocation]);
+        this.revalidate();
     }
 
     public void addPTile(JLabel[] hand, int handLocation) {
+        if (this.isDrawing == false) {
+            this.remove(hand[handLocation]);
+        }
         hand[handLocation] = new JLabel(pTileImage);
         hand[handLocation].setPreferredSize(new Dimension(30, 30));
         add(hand[handLocation]);
+        this.revalidate();
     }
 
     public void addQTile(JLabel[] hand, int handLocation) {
+        if (this.isDrawing == false) {
+            this.remove(hand[handLocation]);
+        }
         hand[handLocation] = new JLabel(qTileImage);
         hand[handLocation].setPreferredSize(new Dimension(30, 30));
         add(hand[handLocation]);
+        this.revalidate();
     }
 
     public void addRTile(JLabel[] hand, int handLocation) {
+        if (this.isDrawing == false) {
+            this.remove(hand[handLocation]);
+        }
         hand[handLocation] = new JLabel(rTileImage);
         hand[handLocation].setPreferredSize(new Dimension(30, 30));
         add(hand[handLocation]);
+        this.revalidate();
     }
 
     public void addSTile(JLabel[] hand, int handLocation) {
+        if (this.isDrawing == false) {
+            this.remove(hand[handLocation]);
+        }
         hand[handLocation] = new JLabel(sTileImage);
         hand[handLocation].setPreferredSize(new Dimension(30, 30));
         add(hand[handLocation]);
+        this.revalidate();
     }
 
     public void addTTile(JLabel[] hand, int handLocation) {
+        if (this.isDrawing == false) {
+            this.remove(hand[handLocation]);
+        }
         hand[handLocation] = new JLabel(tTileImage);
         hand[handLocation].setPreferredSize(new Dimension(30, 30));
         add(hand[handLocation]);
+        this.revalidate();
     }
 
     public void addUTile(JLabel[] hand, int handLocation) {
+        if (this.isDrawing == false) {
+            this.remove(hand[handLocation]);
+        }
         hand[handLocation] = new JLabel(uTileImage);
         hand[handLocation].setPreferredSize(new Dimension(30, 30));
         add(hand[handLocation]);
+        this.revalidate();
     }
 
     public void addVTile(JLabel[] hand, int handLocation) {
+        if (this.isDrawing == false) {
+            this.remove(hand[handLocation]);
+        }
         hand[handLocation] = new JLabel(vTileImage);
         hand[handLocation].setPreferredSize(new Dimension(30, 30));
         add(hand[handLocation]);
+        this.revalidate();
     }
 
     public void addWTile(JLabel[] hand, int handLocation) {
+        if (this.isDrawing == false) {
+            this.remove(hand[handLocation]);
+        }
         hand[handLocation] = new JLabel(wTileImage);
         hand[handLocation].setPreferredSize(new Dimension(30, 30));
         add(hand[handLocation]);
+        this.revalidate();
     }
 
     public void addXTile(JLabel[] hand, int handLocation) {
+        if (this.isDrawing == false) {
+            this.remove(hand[handLocation]);
+        }
         hand[handLocation] = new JLabel(xTileImage);
         hand[handLocation].setPreferredSize(new Dimension(30, 30));
         add(hand[handLocation]);
+        this.revalidate();
     }
 
     public void addYTile(JLabel[] hand, int handLocation) {
+        if (this.isDrawing == false) {
+            this.remove(hand[handLocation]);
+        }
         hand[handLocation] = new JLabel(yTileImage);
         hand[handLocation].setPreferredSize(new Dimension(30, 30));
         add(hand[handLocation]);
+        this.revalidate();
     }
 
     public void addZTile(JLabel[] hand, int handLocation) {
+        if (this.isDrawing == false) {
+            this.remove(hand[handLocation]);
+        }
         hand[handLocation] = new JLabel(zTileImage);
         hand[handLocation].setPreferredSize(new Dimension(30, 30));
         add(hand[handLocation]);
+        this.revalidate();
     }
 
     public void addBlankTile(JLabel[] hand, int handLocation) {
+        if (this.isDrawing == false) {
+            this.remove(hand[handLocation]);
+        }
         hand[handLocation] = new JLabel(blankTileImage);
         hand[handLocation].setPreferredSize(new Dimension(30, 30));
         add(hand[handLocation]);
+        this.revalidate();
     }
 
     public JLabel[] getHand() {
