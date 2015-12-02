@@ -30,9 +30,12 @@ public class Hand {
     private ScrabbleBoard view;
     private TileBag bag;
     private Val val;
+    private Game game;
 
-    public Hand(ArrayList<Tile> tilesInHand) {
+    public Hand(ArrayList<Tile> tilesInHand, Player player) {
         this.tilesInHand = tilesInHand;
+        this.game = player.getGame();
+        this.bag = this.game.getTileBag();
     }
 
     public Tile getTile(int x) {
