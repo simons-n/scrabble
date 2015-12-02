@@ -83,7 +83,6 @@ public class ScrabbleController implements ActionListener {
     public void updateViewFromModel() {
         //this only updates the board not hand
         // when shuffle is pressed change HandView to HandView(Hand myhand)
-        //handView.addCTile(handView.getHand(), 0);
         handView.setHand(hand);
         view.repaint();
         //
@@ -118,13 +117,10 @@ public class ScrabbleController implements ActionListener {
 
             game.setTheBoard(view.getMainBoard());
             game.updatePlayerBoards();
-            //player.pass();
 
         } else if (e.getSource() == view.getShuffleBtn()) {
             System.out.println("tried to shuffle");
             System.out.println("pre-hand: " + hand);
-
-            //Testing by replacing the first tile with a C. (doesn't work)
             this.hand.shuffle();
             System.out.println("post-hand: " + hand);
 
