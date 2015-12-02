@@ -53,10 +53,10 @@ public class Hand {
 
     public void switchTiles(Tile myTile, Tile pickedUpTile) {
         System.out.println("Pre-hand :" + tilesInHand);
-        bag.removeTile(pickedUpTile);
-        bag.addTile(myTile);
+
         for (int x = 0; x < tilesInHand.size(); x++) {
-            if (tilesInHand.get(x) == myTile) {
+            if (tilesInHand.get(x).getLetter() == myTile.getLetter()) {
+                System.out.println("x is: " + x);
                 index = x;
             }
         }
@@ -64,6 +64,8 @@ public class Hand {
         tilesInHand.remove(index);
         tilesInHand.add(index, pickedUpTile);
         System.out.println("Post-hand: " + tilesInHand);
+        bag.removeTile(pickedUpTile);
+        bag.addTile(myTile);
     }
 
     public void shuffle() {
