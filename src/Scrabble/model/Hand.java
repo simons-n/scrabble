@@ -71,11 +71,15 @@ public class Hand {
                                                      "Type the letter of the tile you would like to swap: ",
                                                      "Swap",
                                                      DISPOSE_ON_CLOSE);
-        Tile tile = new Tile(val.valueOf(tileStr));
+        String upCaseStr = tileStr.toUpperCase();
+        System.out.println("tile str : " + upCaseStr);
+        Val tileValue = val.valueOf(upCaseStr);
+        Tile tile = new Tile(tileValue);
         System.out.println("The tile they want to switch is: " + tile);
         Tile newTile = bag.draw();
         System.out.println("The new tile from bag is: " + newTile);
-        JOptionPane.showMessageDialog(view, "New tile is: " + newTile.toString(),
+        JOptionPane.showMessageDialog(view,
+                                      "New tile is:   " + newTile.toString(),
                                       "New Tile",
                                       DISPOSE_ON_CLOSE);
         switchTiles(tile, newTile);
