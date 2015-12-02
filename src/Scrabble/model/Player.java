@@ -15,6 +15,8 @@
  */
 package Scrabble.model;
 
+import Scrabble.main.ScrabbleMain;
+import Scrabble.view.Board;
 import Scrabble.view.ScrabbleBoard;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -32,7 +34,9 @@ public class Player implements Serializable {
     private boolean skipTurn = false;
     private ArrayList<Tile> discardPile;
     private Game game;
-    private ScrabbleBoard currBoard;
+    private ScrabbleBoard myScrabbleBoard;
+    private Board myBoard;
+    private Board mainBoard;
     private TileBag tileBag;
     private ScrabbleServer scrabbleServer;
 
@@ -51,8 +55,19 @@ public class Player implements Serializable {
         //this.inGame = true;
         this.scrabbleServer = server;
         this.game = this.scrabbleServer.getTheGame();
+        this.mainBoard = game.getTheBoard();
         this.tileBag = this.game.getTileBag();
         this.myHand = new Hand(newHand());
+    }
+
+    public void createScrabbleMain() {
+        ScrabbleMain newScrabbleMain = new ScrabbleMain(this);
+        String[] a = {""};
+        newScrabbleMain.main(a);
+    }
+
+    public void setScrabbleBoard(ScrabbleBoard scrabbleBoard) {
+        this.myScrabbleBoard = scrabbleBoard;
     }
 
 //    public Player(String name, int totalScore, Hand myHand) {
@@ -60,6 +75,10 @@ public class Player implements Serializable {
 //        this.totalScore = totalScore;
 //        this.myHand = myHand;
 //    }
+    public void setMyBoard(Board newBoard) {
+        this.myBoard = newBoard;
+    }
+
     public void setSkipTurn() {
         this.skipTurn = !skipTurn;
     }
@@ -74,6 +93,10 @@ public class Player implements Serializable {
 
     public Hand getMyHand() {
         return myHand;
+    }
+
+    public Game getGame() {
+        return game;
     }
 
     public boolean isSkipTurn() {

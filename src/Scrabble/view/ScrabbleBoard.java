@@ -50,14 +50,16 @@ public class ScrabbleBoard extends JFrame {
     private final JTextArea scoresLabel = new JTextArea(10, 10);
     private final JTextArea letterDistribLabel = new JTextArea(20, 10);
     private final JTextArea tileBagLabel = new JTextArea(10, 10);
-    private Board board;
+    private Board playerBoard;
+    private Board mainBoard;
     private HandView handView;
     private Player player;
     private Game game;
 
-    public ScrabbleBoard(Game theGame) {
-        this.game = theGame;
-        this.player = theGame.getCurPlayer();
+    public ScrabbleBoard(Player player) {
+
+        this.player = player;
+        this.game = player.getGame();
         Border blackBorder = BorderFactory.createLineBorder(
                 Color.BLACK);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -113,6 +115,12 @@ public class ScrabbleBoard extends JFrame {
         pack();
     }
 
+    public void setMyBoard() {
+        JLabel[][] newGrid = mainBoard.getGrid();
+        playerBoard.setGrid(newGrid);
+        add(playerBoard, BorderLayout.CENTER);
+    }
+
     public TileBag getTileBag() {
         return tileBag;
     }
@@ -141,8 +149,16 @@ public class ScrabbleBoard extends JFrame {
         return shuffleBtn;
     }
 
-    public JLabel[][] getGrid() {
-        return board.getGrid();
+    public JLabel[][] getMyGrid() {
+        return playerBoard.getGrid();
+    }
+
+    public JLabel[][] getMainGrid() {
+        return mainBoard.getGrid();
+    }
+
+    public Board getMainBoard() {
+        return mainBoard;
     }
 
 //    /**

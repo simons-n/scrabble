@@ -119,4 +119,8 @@ public class Board extends javax.swing.JPanel {
         return grid;
     }
 
+    public void setGrid(JLabel[][] grid) {
+        this.grid = grid;
+    }
+
 }

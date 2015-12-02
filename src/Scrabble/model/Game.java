@@ -15,7 +15,7 @@
  */
 package Scrabble.model;
 
-import Scrabble.view.ScrabbleBoard;
+import Scrabble.view.Board;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -25,21 +25,21 @@ import javax.swing.JOptionPane;
  */
 public class Game {
 
-    ScrabbleBoard theBoard;
+    Board mainBoard;
     GameSize gameSize;
     TileBag tileBag = new TileBag();
-    ArrayList playerList = new ArrayList();
+    ArrayList<Player> playerList = new ArrayList();
     Player curPlayer;
 
     //make game take no parameters
     //create an addPlayer class to add player to the game once it is already created
     public Game(GameSize gameSize) {
-        //this.theBoard = new ScrabbleBoard(this);
+        //this.mainBoard = new ScrabbleBoard(this);
         this.gameSize = gameSize;
     }
 
-    public void setTheBoard(ScrabbleBoard board) {
-        this.theBoard = board;
+    public void setTheBoard(Board board) {
+        this.mainBoard = board;
     }
 
     public void setCurPlayer(Player playah) {
@@ -80,12 +80,18 @@ public class Game {
         return curPlayer;
     }
 
-    public ArrayList getPlayerList() {
+    public ArrayList<Player> getPlayerList() {
         return playerList;
     }
 
-    public ScrabbleBoard getTheBoard() {
-        return theBoard;
+    public void updatePlayerBoards() {
+        for (Player player : playerList) {
+            player.setMyBoard(mainBoard);
+        }
+    }
+
+    public Board getTheBoard() {
+        return mainBoard;
     }
 
     public TileBag getTileBag() {
