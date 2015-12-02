@@ -72,11 +72,15 @@ public class Hand {
                                                      "Swap",
                                                      DISPOSE_ON_CLOSE);
         Tile tile = new Tile(val.valueOf(tileStr));
+        System.out.println("The tile they want to switch is: " + tile);
         Tile newTile = bag.draw();
+        System.out.println("The new tile from bag is: " + newTile);
         JOptionPane.showInternalMessageDialog(view, "New Tile",
                                               newTile.toString(),
                                               DISPOSE_ON_CLOSE);
         switchTiles(tile, newTile);
+        ArrayList<Tile> newHand = this.getTilesInHand();
+        System.out.println(" the new hand" + newHand);
     }
 
     public ArrayList<Tile> getTilesInHand() {
