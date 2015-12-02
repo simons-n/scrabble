@@ -15,11 +15,13 @@
  */
 package Scrabble.model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author calw001
  */
-public class Tile {
+public class Tile implements Serializable {
 
     private Val letter;
     private int score;

@@ -27,7 +27,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
 
 /**
@@ -100,6 +103,15 @@ public class ScrabbleController implements ActionListener {
 
         } else if (e.getSource() == view.getPassBtn()) {
             //change current player to next player, and end turn
+            try {
+
+                player.getClientServer().updateServer(game);
+            } catch (IOException ex) {
+                Logger.getLogger(ScrabbleController.class.getName()).log(
+                        Level.SEVERE,
+                        null,
+                        ex);
+            }
 
             game.setTheBoard(view.getMainBoard());
             game.updatePlayerBoards();

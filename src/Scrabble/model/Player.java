@@ -18,14 +18,13 @@ package Scrabble.model;
 import Scrabble.main.ScrabbleMain;
 import Scrabble.view.Board;
 import Scrabble.view.ScrabbleBoard;
-import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author jms107
  */
-public class Player implements Serializable {
+public class Player {
     private String name;
     private int totalScore = 0;
     private Hand myHand;
@@ -39,6 +38,7 @@ public class Player implements Serializable {
     private Board mainBoard;
     private TileBag tileBag;
     private ScrabbleServer scrabbleServer;
+    private ScrabbleClient clientServer;
 
     // in action performed, when pass button is pressed, change this back to false
     private boolean hasPassed = true;
@@ -64,6 +64,10 @@ public class Player implements Serializable {
         ScrabbleMain newScrabbleMain = new ScrabbleMain(this);
         String[] a = {""};
         newScrabbleMain.main(a);
+    }
+
+    public void setClientServer(ScrabbleClient sc) {
+        this.clientServer = sc;
     }
 
     public void setScrabbleBoard(ScrabbleBoard scrabbleBoard) {
@@ -97,6 +101,10 @@ public class Player implements Serializable {
 
     public Game getGame() {
         return game;
+    }
+
+    public ScrabbleClient getClientServer() {
+        return clientServer;
     }
 
     public boolean isSkipTurn() {
