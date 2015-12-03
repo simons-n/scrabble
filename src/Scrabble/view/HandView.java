@@ -477,6 +477,15 @@ public class HandView extends javax.swing.JPanel {
         return jLabelHand;
     }
 
+    @Override
+    public String toString() {
+        String s = "";
+        for (Tile tile : tilesInHand) {
+            s += tile.toString();
+        }
+        return s;
+    }
+
 //    public void createTileListeners() {
 //        for (JLabel tile : jLabelHand) {
 //            tile.addMouseListener(new MouseListener() {

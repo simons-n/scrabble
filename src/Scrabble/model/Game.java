@@ -26,7 +26,7 @@ import javax.swing.JOptionPane;
  */
 public class Game implements Serializable {
 
-    Board mainBoard;
+    Board mainBoard = new Board();
     GameSize gameSize;
     transient TileBag tileBag = new TileBag();
     ArrayList<Player> playerList = new ArrayList();

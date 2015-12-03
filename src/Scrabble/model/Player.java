@@ -91,6 +91,10 @@ public class Player {
         return name;
     }
 
+    public Board getMyBoard() {
+        return myBoard;
+    }
+
     public int getTotalScore() {
         return totalScore;
     }

@@ -54,6 +54,7 @@ public class ScrabbleController implements ActionListener, MouseListener {
     private Player player;
     private Game game;
     private JLabel[] jLabelHand;
+    private JLabel[][] grid;
 
     public ScrabbleController(ScrabbleBoard view) {
         this.view = view;
@@ -62,7 +63,8 @@ public class ScrabbleController implements ActionListener, MouseListener {
         this.handView = view.getHandView();
         this.hand = player.getMyHand();
         this.jLabelHand = this.handView.getJLabelHand();
-        this.board = view.getPlayerBoard();
+        this.board = view.getMainBoard();
+        //this.grid = view.getPlayerBoard().getGrid();
         //this.hand = player.getMyHand();
         this.view.getShuffleBtn().addActionListener(this);
         this.view.getSwapBtn().addActionListener(this);
@@ -73,12 +75,11 @@ public class ScrabbleController implements ActionListener, MouseListener {
 //        this.board.addMouseListener(this);
 //        this.view.addMouseListener(this);
 //        this.handView.addMouseListener(this);
-        for (int i = 0; i < 15; i++) {
-            for (int j = 0; j < 15; j++) {
-                this.board.getGrid()[i][j].addMouseListener(this);
-            }
-        }
-
+//        for (int i = 0; i < 15; i++) {
+//            for (int j = 0; j < 15; j++) {
+//                this.board.getGrid()[i][j].addMouseListener(this);
+//            }
+//        }
         for (JLabel tileLabel : this.jLabelHand) {
             tileLabel.addMouseListener(this);
         }
@@ -164,17 +165,22 @@ public class ScrabbleController implements ActionListener, MouseListener {
     }
 
     public void mouseClicked(MouseEvent e) {
-        System.out.println("handlist: " + handView.getJLabelHand());
-        System.out.println("moueseevent source: " + e);
+        System.out.println("handlist: " + handView);
+        System.out.println("mouese event source: " + e);
         for (int i = 0; i < handView.getJLabelHand().length; i++) {
             if ((JLabel) e.getSource() == handView.getJLabelHand()[i]) {
                 tileSelected = handView.getJLabelHand()[i];
+                System.out.println("tile selected " + tileSelected);
+                System.out.println(handView.getJLabelHand()[i]);
                 handView.remove(handView.getJLabelHand()[i]);
             }
         }
-        //this.board.getGrid()[i][j]
 
-        for (int i = 0; i < board.getGrid().length; i++) {
+        if (this.board == null) {
+            System.out.println("board null");
+        }
+
+        for (int i = 0; i < player.getMyBoard().getGrid().length; i++) {
             for (int j = 0; j < board.getGrid()[0].length; j++) {
                 if ((JLabel) e.getSource() == board.getGrid()[i][j]) {
                     System.out.println("xxxx");
@@ -182,7 +188,6 @@ public class ScrabbleController implements ActionListener, MouseListener {
                 }
             }
         }
-
     }
 
     @Override
@@ -199,12 +204,12 @@ public class ScrabbleController implements ActionListener, MouseListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("mouse entered");
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("mouse exited");
     }
 
 }
