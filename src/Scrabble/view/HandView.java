@@ -92,7 +92,7 @@ public class HandView extends javax.swing.JPanel {
             Tile tile = myHand.getTile(x);
             drawTile(tile, x);
         }
-        //createTileListeners();
+//        createTileListeners();
     }
 
     public void setHand(Hand myHand) {

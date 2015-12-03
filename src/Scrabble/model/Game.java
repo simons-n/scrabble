@@ -68,7 +68,7 @@ public class Game implements Serializable {
     public void playGame() {
     }
 
-    public boolean hasEnoughPlayers() {
+    public boolean getHasEnoughPlayers() {
         if (playerList.size() == gameSize.getValue()) {
             return true;
         }

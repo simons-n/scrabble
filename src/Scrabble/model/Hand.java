@@ -16,16 +16,9 @@
 package Scrabble.model;
 
 import Scrabble.view.ScrabbleBoard;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collections;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
+import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 
 /**
@@ -37,19 +30,27 @@ public class Hand {
     private ScrabbleBoard view;
     private TileBag bag;
     private Val val;
+    private Game game;
+    private int index;
 
-    public Hand(ArrayList<Tile> tilesInHand) {
+    public Hand(ArrayList<Tile> tilesInHand, Player player) {
         this.tilesInHand = tilesInHand;
+        this.game = player.getGame();
+        this.bag = this.game.getTileBag();
     }
 
     public Tile getTile(int x) {
         return this.tilesInHand.get(x);
     }
 
-    public void addTileFromBag(TileBag bag) {
-        Tile tile;
-        tile = bag.draw();
-        this.tilesInHand.add(tile);
+    public boolean containsTile(Tile tile) {
+        boolean contains = false;
+        for (int x = 0; x < tilesInHand.size(); x++) {
+            if (tilesInHand.get(x).getLetter() == tile.getLetter()) {
+                contains = true;
+            }
+        }
+        return contains;
     }
 
     public void addTileFromBoard(Tile tile) {
@@ -61,10 +62,20 @@ public class Hand {
     }
 
     public void switchTiles(Tile myTile, Tile pickedUpTile) {
+        System.out.println("Pre-hand :" + tilesInHand);
+
+        for (int x = 0; x < tilesInHand.size(); x++) {
+            if (tilesInHand.get(x).getLetter() == myTile.getLetter()) {
+                System.out.println("x is: " + x);
+                index = x;
+            }
+        }
+        System.out.println("The index of your tile is: " + index);
+        tilesInHand.remove(index);
+        tilesInHand.add(index, pickedUpTile);
+        System.out.println("Post-hand: " + tilesInHand);
         bag.removeTile(pickedUpTile);
         bag.addTile(myTile);
-        tilesInHand.remove(myTile);
-        tilesInHand.add(pickedUpTile);
     }
 
     public void shuffle() {
@@ -74,30 +85,49 @@ public class Hand {
         //randomly change the positions of tiles in array
     }
 
-    public void createSwitch() {
+    public void createSwap() {
         System.out.println("tried to create switch");
-        JDialog dBoxSwitch = new JDialog(view, "Switch");
-        dBoxSwitch.setLayout(new GridLayout(4, 1));
-        dBoxSwitch.setPreferredSize(new Dimension(300, 350));
-        JLabel tileToSwitchLabel = new JLabel(
-                "Type the letter of the tile you would like to switch: ");
-        dBoxSwitch.getContentPane().add(tileToSwitchLabel);
-        JTextField tileTextField = new JTextField();
-        dBoxSwitch.getContentPane().add(tileTextField);
-        JButton switchOKBtn = new JButton("OK");
-        dBoxSwitch.getContentPane().add(switchOKBtn);
-        dBoxSwitch.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        dBoxSwitch.pack();
-        dBoxSwitch.setVisible(true);
 
-        switchOKBtn.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                String tileStr = tileTextField.getText();
-                Tile tile = new Tile(val.valueOf(tileStr));
-                Tile newTile = bag.draw();
-                switchTiles(tile, newTile);
+        String tileStr = JOptionPane.showInputDialog(view,
+                                                     "Type the letter of the tile you would like to swap (or blank for a blank tile): ",
+                                                     "Swap",
+                                                     DISPOSE_ON_CLOSE);
+        if (tileStr == null) {
+            //do nothing
+        } else {
+            String upCaseStr = tileStr.toUpperCase();
+            System.out.println("tile str : " + upCaseStr);
+            try {
+                Val tileValue = val.valueOf(upCaseStr);
+                Tile tile = new Tile(tileValue);
+                boolean contains = containsTile(tile);
+                if (contains == true) {
+                    System.out.println("went through if statement");
+                    System.out.println(
+                            "The tile they want to switch is: " + tile);
+                    Tile newTile = bag.draw();
+                    System.out.println("The new tile from bag is: " + newTile);
+                    JOptionPane.showMessageDialog(view,
+                                                  "Your new tile is:   " + newTile.toString(),
+                                                  "New Tile",
+                                                  DISPOSE_ON_CLOSE);
+                    switchTiles(tile, newTile);
+                } else {
+                    JOptionPane.showMessageDialog(view,
+                                                  "You do not have a " + tile.toString() + " tile in your hand to swap. You have to choose a tile in your hand.",
+                                                  "Error", DISPOSE_ON_CLOSE);
+                    createSwap();
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(view,
+                                              tileStr + " is an illegal input, you need to only type the letter of a tile.",
+                                              "Error", DISPOSE_ON_CLOSE);
+                createSwap();
+
             }
-        });
+
+        }
+
     }
 
     public ArrayList<Tile> getTilesInHand() {

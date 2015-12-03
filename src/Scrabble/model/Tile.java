@@ -40,6 +40,7 @@ public class Tile implements Serializable {
         return letter;
     }
 
+    @Override
     public String toString() {
         return this.letter + "(" + this.score + ")";
     }

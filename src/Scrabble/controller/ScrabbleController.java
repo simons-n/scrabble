@@ -102,7 +102,6 @@ public class ScrabbleController implements ActionListener, MouseListener {
     public void updateViewFromModel() {
         //this only updates the board not handhandView.addMouseListener();
         // when shuffle is pressed change HandView to HandView(Hand myhand)
-        //handView.addCTile(handView.getHand(), 0);
         handView.setHand(hand);
         view.repaint();
         //
@@ -121,7 +120,10 @@ public class ScrabbleController implements ActionListener, MouseListener {
 
         } else if (e.getSource() == view.getSwapBtn()) //pickUp tile from Bag, switch with tile selected, and end turn
         {
-            this.hand.createSwitch();
+            this.hand.createSwap();
+
+            game.setTheBoard(view.getMainBoard());
+            game.updatePlayerBoards();
 
         } else if (e.getSource() == view.getPassBtn()) {
             //change current player to next player, and end turn
@@ -137,13 +139,10 @@ public class ScrabbleController implements ActionListener, MouseListener {
 
             game.setTheBoard(view.getMainBoard());
             game.updatePlayerBoards();
-            //player.pass();
 
         } else if (e.getSource() == view.getShuffleBtn()) {
             System.out.println("tried to shuffle");
             System.out.println("pre-hand: " + hand);
-
-            //Testing by replacing the first tile with a C. (doesn't work)
             this.hand.shuffle();
             System.out.println("post-hand: " + hand);
 

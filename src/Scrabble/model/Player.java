@@ -54,10 +54,12 @@ public class Player {
         this.name = name;
         //this.inGame = true;
         this.scrabbleServer = server;
+        System.out.println(
+                "this is the scrabbleServer in player: " + scrabbleServer);
         this.game = this.scrabbleServer.getTheGame();
         this.mainBoard = game.getTheBoard();
         this.tileBag = this.game.getTileBag();
-        this.myHand = new Hand(newHand());
+        this.myHand = new Hand(newHand(), this);
     }
 
     public void createScrabbleMain() {
@@ -146,16 +148,15 @@ public class Player {
         // This will pass the turn to the next player in the network, somehow
     }
 
-    public void switchTilesInHand() {
-        setSkipTurn();
-        for (Tile tile : discardPile) {
-            myHand.addTileFromBag(tileBag);
-        }
-        for (Tile tile : discardPile) {
-            tileBag.addTile(tile);
-        }
-    }
-
+//    public void switchTilesInHand() {
+//        setSkipTurn();
+//        for (Tile tile : discardPile) {
+//            myHand.addTileFromBag(tileBag);
+//        }
+//        for (Tile tile : discardPile) {
+//            tileBag.addTile(tile);
+//        }
+//    }
     public void shuffleTiles() {
 
     }
