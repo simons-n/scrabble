@@ -45,9 +45,9 @@ public class ScrabbleServer {
     private transient ObjectInputStream ois;
     private transient OutputStream os;
 
-    public ScrabbleServer(int gameSize) throws IOException, ClassNotFoundException {
-        this.maxPlayers = gameSize;
-
+    public ScrabbleServer(GameSize gameSize) throws IOException, ClassNotFoundException {
+        this.maxPlayers = gameSize.getValue();
+        createGame(gameSize);
         runServer();
         //createServer();
     }
@@ -62,7 +62,7 @@ public class ScrabbleServer {
 //    }
     public void createGame(GameSize gameSize) {
         this.theGame = new Game(gameSize, new Player("caroline"));
-        System.out.println("created theGame");
+
     }
 
     public Game getTheGame() {
@@ -71,30 +71,41 @@ public class ScrabbleServer {
 
     public void runServer() throws IOException, ClassNotFoundException {
         srvr = new ServerSocket(1025);
-        while (true) {
-            skt = srvr.accept();
-
-            if (sentGame == false) {
-                // send the game to the clients
-                os = skt.getOutputStream();
-                oos = new ObjectOutputStream(os);
-                System.out.println(
-                        "this is the game in scrabbleserver: " + getTheGame());
-                oos.writeObject(getTheGame());
-
-                sentGame = true;
-            }
-
-            updateClients(acceptUpdateFromClient());
-
+//        while (true) {
+//            skt = srvr.accept();
+//
+//            if (sentGame == false) {
+//                // send the game to the clients
+//                os = skt.getOutputStream();
+//                oos = new ObjectOutputStream(os);
+//                System.out.println(
+//                        "this is the game in scrabbleserver: " + getTheGame());
+//                oos.writeObject(getTheGame());
+//
+//                sentGame = true;
+//            }
+        skt = srvr.accept();
+        while (sentGame == false) {
+            os = skt.getOutputStream();
+            oos = new ObjectOutputStream(os);
+            System.out.println(
+                    "this is the game in scrabbleserver: " + getTheGame());
+            oos.writeObject(getTheGame());
+            sentGame = true;
         }
+        updateClients(acceptUpdateFromClient());
+
     }
 
     public Game acceptUpdateFromClient() throws IOException, ClassNotFoundException {
 //        BufferedReader in = new BufferedReader(new InputStreamReader(
 //                skt.getInputStream()));
 
+        System.out.println("entered acceputupdatefromclient");
+        System.out.println(
+                "skt inputstream = " + skt.getInputStream().available());
         ois = new ObjectInputStream(skt.getInputStream());
+        System.out.println("ois contents: " + ois.available());
         //System.out.println("b");
 //        System.out.print("Received string: ");
 
@@ -130,14 +141,13 @@ public class ScrabbleServer {
 //        out.flush();
     }
 
-    public static void main(String args[]) throws IOException, ClassNotFoundException {
-
-        ScrabbleServer ss = new ScrabbleServer(1);
-        ss.createGame(GameSize.TWO_PLAYER);
-
-        //ss.createServer();
-        ss.runServer();
-
+//    public static void main(String args[]) throws IOException, ClassNotFoundException {
+//
+//        ScrabbleServer ss = new ScrabbleServer(1);
+//        ss.createGame(GameSize.TWO_PLAYER);
+//
+//        //ss.createServer();
+//        ss.runServer();
 //        ScrabbleBoard currBoard = new ScrabbleBoard();
 //        boolean gameOver = false;
 //        boolean newGame = true;
@@ -184,6 +194,6 @@ public class ScrabbleServer {
 //            System.out.println(e);
 //            System.out.print("Whoops! It didn't work!\n");
 //        }
-    }
-
 }
+
+//}
