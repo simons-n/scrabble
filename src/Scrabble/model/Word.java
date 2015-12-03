@@ -38,9 +38,20 @@ public class Word {
 
     }
 
+    public void clearTilesInWord() {
+        //clear the list when turn is ended
+        this.tilesInWord.clear();
+    }
+
+    public void removeTileInWord() {
+        //use this when a tile is placed on the board then taken off the board in same turn
+
+    }
+
     public void setTilesInWord(ArrayList<Tile> tilesInWord, Tile placedTile) {
         this.tilesInWord = tilesInWord;
-        //add the tiles that are placed from the GUI
+        //when a tile is placed onto the board add it to the tilesInWord
+
     }
 
     /**

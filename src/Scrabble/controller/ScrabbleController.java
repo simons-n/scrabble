@@ -130,6 +130,13 @@ public class ScrabbleController implements ActionListener {
 //        } else if (e.getSource() == view.getDirectionsBtn()) {
 //            view.getDirectionsPanel().setVisible(true);
 //        }
+        } else if (e.getSource() == view.getUndoBtn()) {
+            //remove the tile from board using a stack
+            //clear stack when turn is ended
+
+        } else if (e.getSource() == view.getRedoBtn()) {
+            //keeps a stack of all the things undone
+            //clear stack when turn is ended
         } else if (tileSelected != null) {
             for (int x = 0; x < 15; x++) {
                 for (int y = 0; y < 15; y++) {

@@ -46,6 +46,9 @@ public class ScrabbleBoard extends JFrame {
     private final JButton swapBtn = new JButton("Swap");
     private final JButton passBtn = new JButton("Pass");
     private final JButton shuffleBtn = new JButton("Shuffle");
+
+    private final JButton undoBtn = new JButton("Undo");
+    private final JButton redoBtn = new JButton("Redo");
     private final JPanel leftPanel = new JPanel();
     private final JTextArea scoresLabel = new JTextArea(10, 10);
     private final JTextArea letterDistribLabel = new JTextArea(20, 10);
@@ -105,6 +108,8 @@ public class ScrabbleBoard extends JFrame {
         actionPanel.add(passBtn);
         shuffleBtn.setBackground(Color.PINK);
         actionPanel.add(shuffleBtn);
+        actionPanel.add(redoBtn);
+        actionPanel.add(undoBtn);
         actionPanel.add(tileBagLabel);
 
         //put into frame
@@ -113,6 +118,14 @@ public class ScrabbleBoard extends JFrame {
         add(actionPanel, BorderLayout.EAST);
         add(board, BorderLayout.CENTER);
         pack();
+    }
+
+    public JButton getUndoBtn() {
+        return undoBtn;
+    }
+
+    public JButton getRedoBtn() {
+        return redoBtn;
     }
 
     public Game getGame() {
