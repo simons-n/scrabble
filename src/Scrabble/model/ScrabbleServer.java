@@ -62,6 +62,7 @@ public class ScrabbleServer {
 //    }
     public void createGame(GameSize gameSize) {
         this.theGame = new Game(gameSize, new Player("caroline"));
+        System.out.println("created theGame");
     }
 
     public Game getTheGame() {
@@ -77,6 +78,8 @@ public class ScrabbleServer {
                 // send the game to the clients
                 os = skt.getOutputStream();
                 oos = new ObjectOutputStream(os);
+                System.out.println(
+                        "this is the game in scrabbleserver: " + getTheGame());
                 oos.writeObject(getTheGame());
 
                 sentGame = true;

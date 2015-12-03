@@ -168,8 +168,9 @@ public class StartBoxController implements ActionListener {
             System.out.println("finished creating server");
 
             //this.theGame = scrabbleServer.createGame(gameSize, gameCreator);
+            System.out.println("this is the scrabble server" + scrabbleServer);
             scrabbleServer.createGame(gameSize);
-            System.out.println("created theGame");
+
             this.theGame = scrabbleServer.getTheGame();
             //this.theGame = new Game(gameSize, gameCreator);
             System.out.println("got the game");
