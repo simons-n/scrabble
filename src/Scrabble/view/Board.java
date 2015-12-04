@@ -64,6 +64,7 @@ public class Board extends javax.swing.JPanel {
                 } else {
 
                     this.grid[x][y] = new JLabel(backgroundImage);
+                    this.grid[x][y].setToolTipText("regular");
                     this.grid[x][y].setPreferredSize(new Dimension(30, 30));
                     this.grid[x][y].setBorder(BorderFactory.createLineBorder(
                             Color.WHITE));
@@ -76,6 +77,7 @@ public class Board extends javax.swing.JPanel {
 
     public void addTWS(JLabel[][] grid, int x, int y) {
         grid[x][y] = new JLabel(tripleWordImage);
+        grid[x][y].setToolTipText("triple word");
         grid[x][y].setPreferredSize(new Dimension(30, 30));
         grid[x][y].setBorder(BorderFactory.createLineBorder(
                 Color.WHITE));
@@ -85,6 +87,7 @@ public class Board extends javax.swing.JPanel {
 
     public void addTLS(JLabel[][] grid, int x, int y) {
         grid[x][y] = new JLabel(tripleLetterImage);
+        grid[x][y].setToolTipText("triple letter");
         grid[x][y].setPreferredSize(new Dimension(30, 30));
         grid[x][y].setBorder(BorderFactory.createLineBorder(
                 Color.WHITE));
@@ -93,6 +96,7 @@ public class Board extends javax.swing.JPanel {
 
     public void addDWS(JLabel[][] grid, int x, int y) {
         grid[x][y] = new JLabel(doubleWordImage);
+        grid[x][y].setToolTipText("double word");
         grid[x][y].setPreferredSize(new Dimension(30, 30));
         grid[x][y].setBorder(BorderFactory.createLineBorder(
                 Color.WHITE));
@@ -101,6 +105,7 @@ public class Board extends javax.swing.JPanel {
 
     public void addDLS(JLabel[][] grid, int x, int y) {
         grid[x][y] = new JLabel(doubleLetterImage);
+        grid[x][y].setToolTipText("double letter");
         grid[x][y].setPreferredSize(new Dimension(30, 30));
         grid[x][y].setBorder(BorderFactory.createLineBorder(
                 Color.WHITE));
@@ -109,6 +114,7 @@ public class Board extends javax.swing.JPanel {
 
     public void addStar(JLabel[][] grid, int x, int y) {
         grid[x][y] = new JLabel(starImage);
+        grid[x][y].setToolTipText("star");
         grid[x][y].setPreferredSize(new Dimension(30, 30));
         grid[x][y].setBorder(BorderFactory.createLineBorder(
                 Color.WHITE));
