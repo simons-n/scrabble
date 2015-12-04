@@ -25,24 +25,23 @@ public class ClientServerTest {
 
     public static void main(String[] args) throws IOException {
 
-        // create a server
-        ScrabbleServer ss = new ScrabbleServer(1);
-        ss.createServer();
-
-        // create a client and connect it to the server
-//        ScrabbleClient client = new ScrabbleClient("134.82.132.197");
-        // create a player
-        Player jenna = new Player("Jenna");
-
-        // send player to the server
-        client.updateServer(jenna);
-
-        // server accepts client's update
-        ss.acceptUpdateFromClient(jenna);
-
-        // server updates player
-        ss.updateClients(jenna);
-
+//        // create a server
+//        ScrabbleServer ss = new ScrabbleServer(1);
+//        ss.createServer();
+//
+//        // create a client and connect it to the server
+////        ScrabbleClient client = new ScrabbleClient("134.82.132.197");
+//        // create a player
+//        Player jenna = new Player("Jenna");
+//
+//        // send player to the server
+//        client.updateServer(jenna);
+//
+//        // server accepts client's update
+//        ss.acceptUpdateFromClient(jenna);
+//
+//        // server updates player
+//        ss.updateClients(jenna);
     }
 
 }
