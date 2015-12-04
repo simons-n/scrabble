@@ -53,7 +53,7 @@ public class ScrabbleServer {
     }
 
     public ScrabbleServer() {
-
+        createGame(GameSize.ONE_PLAYER);
     }
 
 //    public Game createGame(GameSize gameSize, Player creator) {

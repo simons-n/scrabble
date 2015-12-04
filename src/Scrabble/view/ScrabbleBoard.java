@@ -68,10 +68,10 @@ public class ScrabbleBoard extends JFrame {
                 Color.BLACK);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         tileBag = game.getTileBag();
+        this.playerBoard = player.getMyBoard();
 
         //center panel
-        Board board = new Board();
-
+        //Board board = new Board();
         //left panel
         leftPanel.setSize(new Dimension(60, 300));
         leftPanel.setLayout(new GridLayout(2, 1));
@@ -116,7 +116,8 @@ public class ScrabbleBoard extends JFrame {
         add(handView, BorderLayout.SOUTH);
         add(leftPanel, BorderLayout.WEST);
         add(actionPanel, BorderLayout.EAST);
-        add(board, BorderLayout.CENTER);
+        //add(board, BorderLayout.CENTER);
+        add(playerBoard, BorderLayout.CENTER);
         pack();
     }
 

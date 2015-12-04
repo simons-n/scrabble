@@ -34,7 +34,7 @@ public class Player {
     private ArrayList<Tile> discardPile;
     private Game game;
     private ScrabbleBoard myScrabbleBoard;
-    private Board myBoard;
+    private Board myBoard = new Board();
     private Board mainBoard;
     private TileBag tileBag;
     private ScrabbleServer scrabbleServer;

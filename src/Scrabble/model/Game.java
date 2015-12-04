@@ -38,6 +38,7 @@ public class Game implements Serializable {
     public Game(GameSize gameSize) {
         //this.mainBoard = new ScrabbleBoard(this);
         this.gameSize = gameSize;
+        setTheBoard(mainBoard);
     }
 
     public Game(GameSize gameSize, Player gameOwner) {

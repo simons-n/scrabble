@@ -204,6 +204,7 @@ public class HandView extends javax.swing.JPanel {
             this.remove(hand[handLocation]);
         }
         hand[handLocation] = new JLabel(aTileImage);
+        hand[handLocation].setToolTipText("A");
         hand[handLocation].setPreferredSize(new Dimension(30, 30));
         add(hand[handLocation]);
         this.revalidate();
@@ -215,6 +216,7 @@ public class HandView extends javax.swing.JPanel {
             this.remove(hand[handLocation]);
         }
         hand[handLocation] = new JLabel(bTileImage);
+        hand[handLocation].setToolTipText("B");
         hand[handLocation].setPreferredSize(new Dimension(30, 30));
         add(hand[handLocation]);
         this.revalidate();
@@ -226,6 +228,7 @@ public class HandView extends javax.swing.JPanel {
             this.remove(hand[handLocation]);
         }
         hand[handLocation] = new JLabel(cTileImage);
+        hand[handLocation].setToolTipText("C");
         hand[handLocation].setPreferredSize(new Dimension(30, 30));
         add(hand[handLocation]);
         this.revalidate();
@@ -237,6 +240,7 @@ public class HandView extends javax.swing.JPanel {
             this.remove(hand[handLocation]);
         }
         hand[handLocation] = new JLabel(dTileImage);
+        hand[handLocation].setToolTipText("D");
         hand[handLocation].setPreferredSize(new Dimension(30, 30));
         add(hand[handLocation]);
         this.revalidate();
@@ -247,6 +251,7 @@ public class HandView extends javax.swing.JPanel {
             this.remove(hand[handLocation]);
         }
         hand[handLocation] = new JLabel(eTileImage);
+        hand[handLocation].setToolTipText("E");
         hand[handLocation].setPreferredSize(new Dimension(30, 30));
         add(hand[handLocation]);
         this.revalidate();
@@ -258,6 +263,7 @@ public class HandView extends javax.swing.JPanel {
             this.remove(hand[handLocation]);
         }
         hand[handLocation] = new JLabel(fTileImage);
+        hand[handLocation].setToolTipText("F");
         hand[handLocation].setPreferredSize(new Dimension(30, 30));
         add(hand[handLocation]);
         this.revalidate();
@@ -268,6 +274,7 @@ public class HandView extends javax.swing.JPanel {
             this.remove(hand[handLocation]);
         }
         hand[handLocation] = new JLabel(gTileImage);
+        hand[handLocation].setToolTipText("G");
         hand[handLocation].setPreferredSize(new Dimension(30, 30));
         add(hand[handLocation]);
         this.revalidate();
@@ -278,6 +285,7 @@ public class HandView extends javax.swing.JPanel {
             this.remove(hand[handLocation]);
         }
         hand[handLocation] = new JLabel(hTileImage);
+        hand[handLocation].setToolTipText("H");
         hand[handLocation].setPreferredSize(new Dimension(30, 30));
         add(hand[handLocation]);
         this.revalidate();
@@ -288,6 +296,7 @@ public class HandView extends javax.swing.JPanel {
             this.remove(hand[handLocation]);
         }
         hand[handLocation] = new JLabel(iTileImage);
+        hand[handLocation].setToolTipText("I");
         hand[handLocation].setPreferredSize(new Dimension(30, 30));
         add(hand[handLocation]);
         this.revalidate();
@@ -298,6 +307,7 @@ public class HandView extends javax.swing.JPanel {
             this.remove(hand[handLocation]);
         }
         hand[handLocation] = new JLabel(jTileImage);
+        hand[handLocation].setToolTipText("J");
         hand[handLocation].setPreferredSize(new Dimension(30, 30));
         add(hand[handLocation]);
         this.revalidate();
@@ -308,6 +318,7 @@ public class HandView extends javax.swing.JPanel {
             this.remove(hand[handLocation]);
         }
         hand[handLocation] = new JLabel(kTileImage);
+        hand[handLocation].setToolTipText("K");
         hand[handLocation].setPreferredSize(new Dimension(30, 30));
         add(hand[handLocation]);
         this.revalidate();
@@ -318,6 +329,7 @@ public class HandView extends javax.swing.JPanel {
             this.remove(hand[handLocation]);
         }
         hand[handLocation] = new JLabel(lTileImage);
+        hand[handLocation].setToolTipText("L");
         hand[handLocation].setPreferredSize(new Dimension(30, 30));
         add(hand[handLocation]);
         this.revalidate();
@@ -328,6 +340,7 @@ public class HandView extends javax.swing.JPanel {
             this.remove(hand[handLocation]);
         }
         hand[handLocation] = new JLabel(mTileImage);
+        hand[handLocation].setToolTipText("M");
         hand[handLocation].setPreferredSize(new Dimension(30, 30));
         add(hand[handLocation]);
         this.revalidate();
@@ -338,6 +351,7 @@ public class HandView extends javax.swing.JPanel {
             this.remove(hand[handLocation]);
         }
         hand[handLocation] = new JLabel(nTileImage);
+        hand[handLocation].setToolTipText("N");
         hand[handLocation].setPreferredSize(new Dimension(30, 30));
         add(hand[handLocation]);
         this.revalidate();
@@ -348,6 +362,7 @@ public class HandView extends javax.swing.JPanel {
             this.remove(hand[handLocation]);
         }
         hand[handLocation] = new JLabel(oTileImage);
+        hand[handLocation].setToolTipText("O");
         hand[handLocation].setPreferredSize(new Dimension(30, 30));
         add(hand[handLocation]);
         this.revalidate();
@@ -358,6 +373,7 @@ public class HandView extends javax.swing.JPanel {
             this.remove(hand[handLocation]);
         }
         hand[handLocation] = new JLabel(pTileImage);
+        hand[handLocation].setToolTipText("P");
         hand[handLocation].setPreferredSize(new Dimension(30, 30));
         add(hand[handLocation]);
         this.revalidate();
@@ -368,6 +384,7 @@ public class HandView extends javax.swing.JPanel {
             this.remove(hand[handLocation]);
         }
         hand[handLocation] = new JLabel(qTileImage);
+        hand[handLocation].setToolTipText("Q");
         hand[handLocation].setPreferredSize(new Dimension(30, 30));
         add(hand[handLocation]);
         this.revalidate();
@@ -378,6 +395,7 @@ public class HandView extends javax.swing.JPanel {
             this.remove(hand[handLocation]);
         }
         hand[handLocation] = new JLabel(rTileImage);
+        hand[handLocation].setToolTipText("R");
         hand[handLocation].setPreferredSize(new Dimension(30, 30));
         add(hand[handLocation]);
         this.revalidate();
@@ -388,6 +406,7 @@ public class HandView extends javax.swing.JPanel {
             this.remove(hand[handLocation]);
         }
         hand[handLocation] = new JLabel(sTileImage);
+        hand[handLocation].setToolTipText("S");
         hand[handLocation].setPreferredSize(new Dimension(30, 30));
         add(hand[handLocation]);
         this.revalidate();
@@ -398,6 +417,7 @@ public class HandView extends javax.swing.JPanel {
             this.remove(hand[handLocation]);
         }
         hand[handLocation] = new JLabel(tTileImage);
+        hand[handLocation].setToolTipText("T");
         hand[handLocation].setPreferredSize(new Dimension(30, 30));
         add(hand[handLocation]);
         this.revalidate();
@@ -408,6 +428,7 @@ public class HandView extends javax.swing.JPanel {
             this.remove(hand[handLocation]);
         }
         hand[handLocation] = new JLabel(uTileImage);
+        hand[handLocation].setToolTipText("U");
         hand[handLocation].setPreferredSize(new Dimension(30, 30));
         add(hand[handLocation]);
         this.revalidate();
@@ -418,6 +439,7 @@ public class HandView extends javax.swing.JPanel {
             this.remove(hand[handLocation]);
         }
         hand[handLocation] = new JLabel(vTileImage);
+        hand[handLocation].setToolTipText("V");
         hand[handLocation].setPreferredSize(new Dimension(30, 30));
         add(hand[handLocation]);
         this.revalidate();
@@ -428,6 +450,7 @@ public class HandView extends javax.swing.JPanel {
             this.remove(hand[handLocation]);
         }
         hand[handLocation] = new JLabel(wTileImage);
+        hand[handLocation].setToolTipText("W");
         hand[handLocation].setPreferredSize(new Dimension(30, 30));
         add(hand[handLocation]);
         this.revalidate();
@@ -438,6 +461,7 @@ public class HandView extends javax.swing.JPanel {
             this.remove(hand[handLocation]);
         }
         hand[handLocation] = new JLabel(xTileImage);
+        hand[handLocation].setToolTipText("X");
         hand[handLocation].setPreferredSize(new Dimension(30, 30));
         add(hand[handLocation]);
         this.revalidate();
@@ -448,6 +472,7 @@ public class HandView extends javax.swing.JPanel {
             this.remove(hand[handLocation]);
         }
         hand[handLocation] = new JLabel(yTileImage);
+        hand[handLocation].setToolTipText("Y");
         hand[handLocation].setPreferredSize(new Dimension(30, 30));
         add(hand[handLocation]);
         this.revalidate();
@@ -458,6 +483,7 @@ public class HandView extends javax.swing.JPanel {
             this.remove(hand[handLocation]);
         }
         hand[handLocation] = new JLabel(zTileImage);
+        hand[handLocation].setToolTipText("Z");
         hand[handLocation].setPreferredSize(new Dimension(30, 30));
         add(hand[handLocation]);
         this.revalidate();
