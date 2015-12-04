@@ -57,7 +57,7 @@ public class Player {
         System.out.println(
                 "this is the scrabbleServer in player: " + scrabbleServer);
         this.game = this.scrabbleServer.getTheGame();
-        this.mainBoard = game.getTheBoard();
+        //this.mainBoard = game.getTheBoard();
         this.tileBag = this.game.getTileBag();
         this.myHand = new Hand(newHand(), this);
     }
