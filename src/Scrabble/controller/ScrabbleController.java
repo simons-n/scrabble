@@ -25,6 +25,7 @@ import Scrabble.view.Board;
 import Scrabble.view.HandView;
 import Scrabble.view.ScrabbleBoard;
 import java.awt.Component;
+import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -188,10 +189,15 @@ public class ScrabbleController implements ActionListener, MouseListener {
                 tileSelected = jLabelHand[i];
                 System.out.println(
                         "tile selected " + tileSelected.getToolTipText());
-                handView.remove(jLabelHand[i]);
-                handView.setJLabelHand(jLabelHand);
-                handView = view.getHandView();
+                Container parent = jLabelHand[i].getParent();
+                parent.remove(jLabelHand[i]);
+                parent.revalidate();
+                parent.repaint();
+                System.out.println(
+                        "parent is: " + parent + "name is: " + parent.getName());
 
+                //handView.setJLabelHand(jLabelHand);
+                //handView = view.getHandView();
             }
         }
 
@@ -213,14 +219,14 @@ public class ScrabbleController implements ActionListener, MouseListener {
         // add spaceSelected to tileSelected and set tileSelected and spaceSelected back to null
         if (tileSelected != null && spaceSelected != null) {
             System.out.println("trying to place tile on board");
-//            board.remove(
-//                    grid[gridXCoord][gridYCoord]);
+            board.remove(
+                    grid[gridXCoord][gridYCoord]);
             grid[gridXCoord][gridYCoord] = tileSelected;
 
             switch (grid[gridXCoord][gridYCoord].getToolTipText()) {
                 case "A":
-//                    grid[gridXCoord][gridYCoord] = new JLabel(
-//                            handView.getaTileImage());
+                    grid[gridXCoord][gridYCoord] = new JLabel(
+                            handView.getaTileImage());
                     board = new Board(handView.getaTileImage(), gridXCoord,
                                       gridYCoord);
                     player.setMyBoard(board);
@@ -331,7 +337,7 @@ public class ScrabbleController implements ActionListener, MouseListener {
                             handView.getBlankTileImage());
                     break;
             }
-            //board.add(grid[gridXCoord][gridYCoord]);
+//            board.add(grid[gridXCoord][gridYCoord]);
 
             board.setGrid(grid);
             //player.setMyBoard(board);
