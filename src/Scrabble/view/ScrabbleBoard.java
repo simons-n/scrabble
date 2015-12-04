@@ -18,6 +18,7 @@ package Scrabble.view;
 import Scrabble.model.Game;
 import Scrabble.model.Hand;
 import Scrabble.model.Player;
+import Scrabble.model.Stack;
 import Scrabble.model.TileBag;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -48,7 +49,6 @@ public class ScrabbleBoard extends JFrame {
     private final JButton shuffleBtn = new JButton("Shuffle");
 
     private final JButton undoBtn = new JButton("Undo");
-    private final JButton redoBtn = new JButton("Redo");
     private final JPanel leftPanel = new JPanel();
     private final JTextArea scoresLabel = new JTextArea(10, 10);
     private final JTextArea letterDistribLabel = new JTextArea(20, 10);
@@ -58,6 +58,7 @@ public class ScrabbleBoard extends JFrame {
     private HandView handView;
     private Player player;
     private Game game;
+    private Stack undo = new Stack(9);
 
     public ScrabbleBoard(Player player) {
 
@@ -108,7 +109,6 @@ public class ScrabbleBoard extends JFrame {
         actionPanel.add(passBtn);
         shuffleBtn.setBackground(Color.PINK);
         actionPanel.add(shuffleBtn);
-        actionPanel.add(redoBtn);
         actionPanel.add(undoBtn);
         actionPanel.add(tileBagLabel);
 
@@ -122,10 +122,6 @@ public class ScrabbleBoard extends JFrame {
 
     public JButton getUndoBtn() {
         return undoBtn;
-    }
-
-    public JButton getRedoBtn() {
-        return redoBtn;
     }
 
     public Game getGame() {
@@ -178,6 +174,7 @@ public class ScrabbleBoard extends JFrame {
         return mainBoard;
     }
 
+    //When tile is added to the board, add the tile to the undo stack with its location by using the push function
 //    /**
 //     * @param args the command line arguments
 //     */

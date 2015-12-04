@@ -81,8 +81,7 @@ public class ScrabbleController implements ActionListener {
     }
 
     public void updateViewFromModel() {
-        //this only updates the board not hand
-        // when shuffle is pressed change HandView to HandView(Hand myhand)
+        //if turn ended, check by creating boolean, clear stack
         handView.setHand(hand);
         view.repaint();
         //
@@ -131,11 +130,9 @@ public class ScrabbleController implements ActionListener {
 //            view.getDirectionsPanel().setVisible(true);
 //        }
         } else if (e.getSource() == view.getUndoBtn()) {
-            //remove the tile from board using a stack
-            //clear stack when turn is ended
-
-        } else if (e.getSource() == view.getRedoBtn()) {
-            //keeps a stack of all the things undone
+            //pop the stack to get the tile with it's location
+            // add tile back in to hand, to update handview
+            //change the location of the tile to a background square **** figure out how to know if it was a TLW etc
             //clear stack when turn is ended
         } else if (tileSelected != null) {
             for (int x = 0; x < 15; x++) {
