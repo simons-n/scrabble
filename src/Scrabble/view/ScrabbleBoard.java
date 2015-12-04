@@ -197,4 +197,7 @@ public class ScrabbleBoard extends JFrame {
 //Pass button (or skip turn)
 //Swap Tiles button
 //display how many tiles are left in bag
+    public Board getPlayerBoard() {
+        return playerBoard;
+    }
 }

@@ -26,7 +26,7 @@ import javax.swing.JOptionPane;
  */
 public class Game implements Serializable {
 
-    Board mainBoard;
+    Board mainBoard = new Board();
     GameSize gameSize;
     transient TileBag tileBag = new TileBag();
     ArrayList<Player> playerList = new ArrayList();
@@ -68,7 +68,7 @@ public class Game implements Serializable {
     public void playGame() {
     }
 
-    public boolean hasEnoughPlayers() {
+    public boolean getHasEnoughPlayers() {
         if (playerList.size() == gameSize.getValue()) {
             return true;
         }

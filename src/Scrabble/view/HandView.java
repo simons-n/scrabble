@@ -20,8 +20,6 @@ import Scrabble.model.Tile;
 import Scrabble.model.TileBag;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -32,7 +30,7 @@ import javax.swing.JLabel;
  * @author jms107
  */
 public class HandView extends javax.swing.JPanel {
-    private JLabel[] hand;
+    private JLabel[] jLabelHand;
     private ImageIcon aTileImage = new ImageIcon("Images/aTile.png");
     private ImageIcon bTileImage = new ImageIcon("Images/bTile.png");
     private ImageIcon cTileImage = new ImageIcon("Images/cTile.png");
@@ -85,7 +83,7 @@ public class HandView extends javax.swing.JPanel {
 //        return newHand;
 //    }
         //public Hand setHand(Hand myHand) {  //use this one during the game when updated view
-        this.hand = new JLabel[7];
+        this.jLabelHand = new JLabel[7];
         this.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
         javax.swing.border.Border grayBorder = BorderFactory.createLineBorder(
                 java.awt.Color.WHITE);
@@ -94,7 +92,7 @@ public class HandView extends javax.swing.JPanel {
             Tile tile = myHand.getTile(x);
             drawTile(tile, x);
         }
-        createTileListeners();
+//        createTileListeners();
     }
 
     public void setHand(Hand myHand) {
@@ -118,85 +116,85 @@ public class HandView extends javax.swing.JPanel {
     public void findTileInHand(Tile tile, int handLocation) {
         switch (tile.getLetter()) {
             case A:
-                addATile(this.hand, handLocation);
+                addATile(this.jLabelHand, handLocation);
                 break;
             case B:
-                addBTile(this.hand, handLocation);
+                addBTile(this.jLabelHand, handLocation);
                 break;
             case C:
-                addCTile(this.hand, handLocation);
+                addCTile(this.jLabelHand, handLocation);
                 break;
             case D:
-                addDTile(this.hand, handLocation);
+                addDTile(this.jLabelHand, handLocation);
                 break;
             case E:
-                addETile(this.hand, handLocation);
+                addETile(this.jLabelHand, handLocation);
                 break;
             case F:
-                addFTile(this.hand, handLocation);
+                addFTile(this.jLabelHand, handLocation);
                 break;
             case G:
-                addGTile(this.hand, handLocation);
+                addGTile(this.jLabelHand, handLocation);
                 break;
             case H:
-                addHTile(this.hand, handLocation);
+                addHTile(this.jLabelHand, handLocation);
                 break;
             case I:
-                addITile(this.hand, handLocation);
+                addITile(this.jLabelHand, handLocation);
                 break;
             case J:
-                addJTile(this.hand, handLocation);
+                addJTile(this.jLabelHand, handLocation);
                 break;
             case K:
-                addKTile(this.hand, handLocation);
+                addKTile(this.jLabelHand, handLocation);
                 break;
             case L:
-                addLTile(this.hand, handLocation);
+                addLTile(this.jLabelHand, handLocation);
                 break;
             case M:
-                addMTile(this.hand, handLocation);
+                addMTile(this.jLabelHand, handLocation);
                 break;
             case N:
-                addNTile(this.hand, handLocation);
+                addNTile(this.jLabelHand, handLocation);
                 break;
             case O:
-                addOTile(this.hand, handLocation);
+                addOTile(this.jLabelHand, handLocation);
                 break;
             case P:
-                addPTile(this.hand, handLocation);
+                addPTile(this.jLabelHand, handLocation);
                 break;
             case Q:
-                addQTile(this.hand, handLocation);
+                addQTile(this.jLabelHand, handLocation);
                 break;
             case R:
-                addRTile(this.hand, handLocation);
+                addRTile(this.jLabelHand, handLocation);
                 break;
             case S:
-                addSTile(this.hand, handLocation);
+                addSTile(this.jLabelHand, handLocation);
                 break;
             case T:
-                addTTile(this.hand, handLocation);
+                addTTile(this.jLabelHand, handLocation);
                 break;
             case U:
-                addUTile(this.hand, handLocation);
+                addUTile(this.jLabelHand, handLocation);
                 break;
             case V:
-                addVTile(this.hand, handLocation);
+                addVTile(this.jLabelHand, handLocation);
                 break;
             case W:
-                addWTile(this.hand, handLocation);
+                addWTile(this.jLabelHand, handLocation);
                 break;
             case X:
-                addXTile(this.hand, handLocation);
+                addXTile(this.jLabelHand, handLocation);
                 break;
             case Y:
-                addYTile(this.hand, handLocation);
+                addYTile(this.jLabelHand, handLocation);
                 break;
             case Z:
-                addZTile(this.hand, handLocation);
+                addZTile(this.jLabelHand, handLocation);
                 break;
             default:
-                addBlankTile(this.hand, handLocation);
+                addBlankTile(this.jLabelHand, handLocation);
                 break;
         }
     }
@@ -475,36 +473,44 @@ public class HandView extends javax.swing.JPanel {
         this.revalidate();
     }
 
-    public JLabel[] getHand() {
-        return hand;
+    public JLabel[] getJLabelHand() {
+        return jLabelHand;
     }
 
-    public void createTileListeners() {
-        for (JLabel tile : hand) {
-            tile.addMouseListener(new MouseListener() {
-
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                }
-
-                @Override
-                public void mousePressed(MouseEvent e) {
-                }
-
-                @Override
-                public void mouseReleased(MouseEvent e) {
-                }
-
-                @Override
-                public void mouseEntered(MouseEvent e) {
-                }
-
-                @Override
-                public void mouseExited(MouseEvent e) {
-                }
-            });
+    @Override
+    public String toString() {
+        String s = "";
+        for (Tile tile : tilesInHand) {
+            s += tile.toString();
         }
-        System.out.println("created listeners");
+        return s;
     }
 
+//    public void createTileListeners() {
+//        for (JLabel tile : jLabelHand) {
+//            tile.addMouseListener(new MouseListener() {
+//
+//                @Override
+//                public void mouseClicked(MouseEvent e) {
+//                }
+//
+//                @Override
+//                public void mousePressed(MouseEvent e) {
+//                }
+//
+//                @Override
+//                public void mouseReleased(MouseEvent e) {
+//                }
+//
+//                @Override
+//                public void mouseEntered(MouseEvent e) {
+//                }
+//
+//                @Override
+//                public void mouseExited(MouseEvent e) {
+//                }
+//            });
+//        }
+//        //System.out.println("created listeners");
+//    }
 }

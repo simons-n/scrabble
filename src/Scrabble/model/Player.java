@@ -54,6 +54,8 @@ public class Player {
         this.name = name;
         //this.inGame = true;
         this.scrabbleServer = server;
+        System.out.println(
+                "this is the scrabbleServer in player: " + scrabbleServer);
         this.game = this.scrabbleServer.getTheGame();
         this.mainBoard = game.getTheBoard();
         this.tileBag = this.game.getTileBag();
@@ -89,6 +91,10 @@ public class Player {
 
     public String getName() {
         return name;
+    }
+
+    public Board getMyBoard() {
+        return myBoard;
     }
 
     public int getTotalScore() {
