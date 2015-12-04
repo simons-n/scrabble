@@ -24,6 +24,7 @@ import Scrabble.model.Word;
 import Scrabble.view.Board;
 import Scrabble.view.HandView;
 import Scrabble.view.ScrabbleBoard;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -75,10 +76,11 @@ public class ScrabbleController implements ActionListener, MouseListener {
         this.view.getPlayBtn().addActionListener(this);
         this.view.getPassBtn().addActionListener(this);
 
-        addMouseListeners();
+        addBoardMouseListeners();
+        addHandMouseListeners();
     }
 
-    public void addMouseListeners() {
+    public void addBoardMouseListeners() {
         // add mouse listeners to board
         for (int i = 0; i < 15; i++) {
             for (int j = 0; j < 15; j++) {
@@ -86,6 +88,9 @@ public class ScrabbleController implements ActionListener, MouseListener {
             }
         }
 
+    }
+
+    public void addHandMouseListeners() {
         // add mouse listeners to tiles in hand
         for (JLabel tileLabel : this.jLabelHand) {
             tileLabel.addMouseListener(this);
@@ -110,6 +115,9 @@ public class ScrabbleController implements ActionListener, MouseListener {
         //this only updates the board not handhandView.addMouseListener();
         // when shuffle is pressed change HandView to HandView(Hand myhand)
         handView.setHand(hand);
+        board.setGrid(grid);
+        view.setPlayerBoard(board);
+        addHandMouseListeners();
         view.repaint();
         //
         // when pass is pressed change view to next players hand
@@ -181,6 +189,8 @@ public class ScrabbleController implements ActionListener, MouseListener {
                 System.out.println(
                         "tile selected " + tileSelected.getToolTipText());
                 handView.remove(jLabelHand[i]);
+                handView.setJLabelHand(jLabelHand);
+                handView = view.getHandView();
 
             }
         }
@@ -206,16 +216,143 @@ public class ScrabbleController implements ActionListener, MouseListener {
 //            board.remove(
 //                    grid[gridXCoord][gridYCoord]);
             grid[gridXCoord][gridYCoord] = tileSelected;
+
+            switch (grid[gridXCoord][gridYCoord].getToolTipText()) {
+                case "A":
+//                    grid[gridXCoord][gridYCoord] = new JLabel(
+//                            handView.getaTileImage());
+                    board = new Board(handView.getaTileImage(), gridXCoord,
+                                      gridYCoord);
+                    player.setMyBoard(board);
+                    break;
+                case "B":
+                    grid[gridXCoord][gridYCoord] = new JLabel(
+                            handView.getbTileImage());
+                    break;
+                case "C":
+                    grid[gridXCoord][gridYCoord] = new JLabel(
+                            handView.getcTileImage());
+                    break;
+                case "D":
+
+                    grid[gridXCoord][gridYCoord] = new JLabel(
+                            handView.getdTileImage());
+                    break;
+                case "E":
+                    grid[gridXCoord][gridYCoord] = new JLabel(
+                            handView.geteTileImage());
+                    break;
+                case "F":
+                    grid[gridXCoord][gridYCoord] = new JLabel(
+                            handView.getfTileImage());
+                    break;
+                case "G":
+                    grid[gridXCoord][gridYCoord] = new JLabel(
+                            handView.getgTileImage());
+                    break;
+                case "H":
+                    grid[gridXCoord][gridYCoord] = new JLabel(
+                            handView.gethTileImage());
+                    break;
+                case "I":
+                    grid[gridXCoord][gridYCoord] = new JLabel(
+                            handView.getiTileImage());
+                    break;
+                case "J":
+                    grid[gridXCoord][gridYCoord] = new JLabel(
+                            handView.getjTileImage());
+                    break;
+                case "K":
+                    grid[gridXCoord][gridYCoord] = new JLabel(
+                            handView.getkTileImage());
+                    break;
+                case "L":
+                    grid[gridXCoord][gridYCoord] = new JLabel(
+                            handView.getlTileImage());
+                    break;
+                case "M":
+                    grid[gridXCoord][gridYCoord] = new JLabel(
+                            handView.getmTileImage());
+                    break;
+                case "N":
+                    grid[gridXCoord][gridYCoord] = new JLabel(
+                            handView.getnTileImage());
+                    break;
+                case "O":
+                    grid[gridXCoord][gridYCoord] = new JLabel(
+                            handView.getoTileImage());
+                    break;
+                case "P":
+                    grid[gridXCoord][gridYCoord] = new JLabel(
+                            handView.getpTileImage());
+                    break;
+                case "Q":
+                    grid[gridXCoord][gridYCoord] = new JLabel(
+                            handView.getqTileImage());
+                    break;
+                case "R":
+                    grid[gridXCoord][gridYCoord] = new JLabel(
+                            handView.getrTileImage());
+                    break;
+                case "S":
+                    grid[gridXCoord][gridYCoord] = new JLabel(
+                            handView.getsTileImage());
+                    break;
+                case "T":
+                    grid[gridXCoord][gridYCoord] = new JLabel(
+                            handView.gettTileImage());
+                    break;
+                case "U":
+                    grid[gridXCoord][gridYCoord] = new JLabel(
+                            handView.getuTileImage());
+                    break;
+                case "V":
+                    grid[gridXCoord][gridYCoord] = new JLabel(
+                            handView.getvTileImage());
+                    break;
+                case "W":
+                    grid[gridXCoord][gridYCoord] = new JLabel(
+                            handView.getwTileImage());
+                    break;
+                case "X":
+                    grid[gridXCoord][gridYCoord] = new JLabel(
+                            handView.getxTileImage());
+                    break;
+                case "Y":
+                    grid[gridXCoord][gridYCoord] = new JLabel(
+                            handView.getyTileImage());
+                    break;
+                case "Z":
+                    grid[gridXCoord][gridYCoord] = new JLabel(
+                            handView.getzTileImage());
+                    break;
+                default:
+                    grid[gridXCoord][gridYCoord] = new JLabel(
+                            handView.getBlankTileImage());
+                    break;
+            }
+            //board.add(grid[gridXCoord][gridYCoord]);
+
             board.setGrid(grid);
+            //player.setMyBoard(board);
+//            game.setTheBoard(board);
+            updateViewFromModel();
 
             System.out.println("placed(?) tile on board");
-            System.out.println(grid[gridXCoord][gridYCoord].getToolTipText());
+            System.out.println(
+                    "supposed to be " + grid[gridXCoord][gridYCoord].getToolTipText());
+            System.out.println(
+                    "actually" + view.getPlayerBoard().getGrid()[gridXCoord][gridYCoord].getToolTipText());
 
             tileSelected = null;
             spaceSelected = null;
             gridXCoord = 0;
             gridYCoord = 0;
+
+            ((Component) e.getSource()).removeMouseListener(this);
         }
+
+        updateViewFromModel();
     }
 
     @Override

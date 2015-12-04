@@ -120,6 +120,10 @@ public class ScrabbleBoard extends JFrame {
         return this.game;
     }
 
+    public void setPlayerBoard(Board board) {
+        this.playerBoard = board;
+    }
+
     public void setMyBoard() {
         JLabel[][] newGrid = mainBoard.getGrid();
         playerBoard.setGrid(newGrid);

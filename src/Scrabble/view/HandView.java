@@ -108,6 +108,10 @@ public class HandView extends javax.swing.JPanel {
         }
     }
 
+    public void setJLabelHand(JLabel[] hand) {
+        this.jLabelHand = hand;
+    }
+
     public void drawTile(Tile newTile, int handLocation) {
         this.isDrawing = true;
         findTileInHand(newTile, handLocation);
@@ -494,6 +498,7 @@ public class HandView extends javax.swing.JPanel {
             this.remove(hand[handLocation]);
         }
         hand[handLocation] = new JLabel(blankTileImage);
+        hand[handLocation].setToolTipText("BLANK");
         hand[handLocation].setPreferredSize(new Dimension(30, 30));
         add(hand[handLocation]);
         this.revalidate();
@@ -539,4 +544,127 @@ public class HandView extends javax.swing.JPanel {
 //        }
 //        //System.out.println("created listeners");
 //    }
+    public JLabel[] getjLabelHand() {
+        return jLabelHand;
+    }
+
+    public ImageIcon getaTileImage() {
+        return aTileImage;
+    }
+
+    public ImageIcon getbTileImage() {
+        return bTileImage;
+    }
+
+    public ImageIcon getcTileImage() {
+        return cTileImage;
+    }
+
+    public ImageIcon getdTileImage() {
+        return dTileImage;
+    }
+
+    public ImageIcon geteTileImage() {
+        return eTileImage;
+    }
+
+    public ImageIcon getfTileImage() {
+        return fTileImage;
+    }
+
+    public ImageIcon getgTileImage() {
+        return gTileImage;
+    }
+
+    public ImageIcon gethTileImage() {
+        return hTileImage;
+    }
+
+    public ImageIcon getiTileImage() {
+        return iTileImage;
+    }
+
+    public ImageIcon getjTileImage() {
+        return jTileImage;
+    }
+
+    public ImageIcon getkTileImage() {
+        return kTileImage;
+    }
+
+    public ImageIcon getlTileImage() {
+        return lTileImage;
+    }
+
+    public ImageIcon getmTileImage() {
+        return mTileImage;
+    }
+
+    public ImageIcon getnTileImage() {
+        return nTileImage;
+    }
+
+    public ImageIcon getoTileImage() {
+        return oTileImage;
+    }
+
+    public ImageIcon getpTileImage() {
+        return pTileImage;
+    }
+
+    public ImageIcon getqTileImage() {
+        return qTileImage;
+    }
+
+    public ImageIcon getrTileImage() {
+        return rTileImage;
+    }
+
+    public ImageIcon getsTileImage() {
+        return sTileImage;
+    }
+
+    public ImageIcon gettTileImage() {
+        return tTileImage;
+    }
+
+    public ImageIcon getuTileImage() {
+        return uTileImage;
+    }
+
+    public ImageIcon getvTileImage() {
+        return vTileImage;
+    }
+
+    public ImageIcon getwTileImage() {
+        return wTileImage;
+    }
+
+    public ImageIcon getxTileImage() {
+        return xTileImage;
+    }
+
+    public ImageIcon getyTileImage() {
+        return yTileImage;
+    }
+
+    public ImageIcon getzTileImage() {
+        return zTileImage;
+    }
+
+    public ImageIcon getBlankTileImage() {
+        return blankTileImage;
+    }
+
+    public ArrayList<Tile> getTilesInHand() {
+        return tilesInHand;
+    }
+
+    public TileBag getTileBag() {
+        return tileBag;
+    }
+
+    public boolean isIsDrawing() {
+        return isDrawing;
+    }
 }
