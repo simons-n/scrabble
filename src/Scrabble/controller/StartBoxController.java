@@ -67,20 +67,21 @@ public class StartBoxController implements ActionListener {
                 if (theGame == null) {
                     System.out.println("game is null");
                 }
-                System.out.println(
-                        "got the game, size of game is " + theGame.getGameSize().getValue());
+//                System.out.println(
+//                        "got the game, size of game is " + theGame.getGameSize().getValue());
 
                 String name = JOptionPane.showInputDialog(null,
                                                           "What's your name?",
                                                           "Enter Name",
                                                           JOptionPane.WARNING_MESSAGE);
+
                 Player newPlayer = new Player(name, scrabbleServer);
                 theGame.addPlayer(newPlayer);
                 theGame.setCurPlayer(newPlayer);
 
                 newPlayer.setClientServer(client);
                 System.out.println("Added player: " + newPlayer);
-                if (theGame.hasEnoughPlayers()) {
+                if (theGame.getHasEnoughPlayers()) {
                     System.out.println("starting game");
                     for (Player player : theGame.getPlayerList()) {
                         player.createScrabbleMain();
@@ -134,6 +135,7 @@ public class StartBoxController implements ActionListener {
 
             //set default to two-player
             GameSize gameSize = GameSize.TWO_PLAYER;
+            System.out.println("pre-GameSize: " + gameSize.getValue());
 
             if (size == 1) {
                 gameSize = GameSize.ONE_PLAYER;
@@ -146,8 +148,14 @@ public class StartBoxController implements ActionListener {
             try {
                 System.out.println("x");
                 if (gameSize.getValue() != 1) {
+                    System.out.println(
+                            "entered if. gamesize: " + gameSize.getValue());
                     try {
-                        scrabbleServer = new ScrabbleServer(gameSize.getValue());
+                        System.out.println(
+                                "entered try. gameSize: " + gameSize.getValue());
+                        scrabbleServer = new ScrabbleServer(gameSize);
+                        System.out.println(
+                                "scrabbleServer made, here it is! " + scrabbleServer);
                     } catch (ClassNotFoundException ex) {
                         Logger.getLogger(StartBoxController.class.getName()).log(
                                 Level.SEVERE,
@@ -160,6 +168,7 @@ public class StartBoxController implements ActionListener {
                 }
                 System.out.println("a");
             } catch (IOException ex) {
+                System.out.println("scrabbleServer not made!");
                 Logger.getLogger(StartBoxController.class.getName()).log(
                         Level.SEVERE,
                         null,
@@ -168,8 +177,9 @@ public class StartBoxController implements ActionListener {
             System.out.println("finished creating server");
 
             //this.theGame = scrabbleServer.createGame(gameSize, gameCreator);
-            scrabbleServer.createGame(gameSize);
-            System.out.println("created theGame");
+            System.out.println("this is the scrabble server" + scrabbleServer);
+            //scrabbleServer.createGame(gameSize);
+            //System.out.println("created theGame");
             this.theGame = scrabbleServer.getTheGame();
             //this.theGame = new Game(gameSize, gameCreator);
             System.out.println("got the game");
@@ -191,7 +201,7 @@ public class StartBoxController implements ActionListener {
             System.out.println(theGame.getNumConnectedPlayers());
             System.out.println(gameSize.getValue());
 
-            if (theGame.hasEnoughPlayers()) {
+            if (theGame.getHasEnoughPlayers()) {
                 System.out.println("hopefully Scrabble window pops up");
                 for (Player player : theGame.getPlayerList()) {
                     player.createScrabbleMain();

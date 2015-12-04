@@ -21,6 +21,7 @@ import Scrabble.model.Player;
 import Scrabble.model.Tile;
 import Scrabble.model.TileBag;
 import Scrabble.model.Word;
+import Scrabble.view.Board;
 import Scrabble.view.HandView;
 import Scrabble.view.ScrabbleBoard;
 import java.awt.event.ActionEvent;
@@ -37,10 +38,11 @@ import javax.swing.JLabel;
  *
  * @author jms107
  */
-public class ScrabbleController implements ActionListener {
+public class ScrabbleController implements ActionListener, MouseListener {
 // connects model to view
 
     private ScrabbleBoard view;
+    private Board board;
     private HandView handView;
     private static TileBag tilebag = new TileBag();
     private static Hand hand;
@@ -48,9 +50,14 @@ public class ScrabbleController implements ActionListener {
     private Word word;
     private ArrayList<Tile> tilesInHand = new ArrayList<>();
     private JLabel tileSelected = null;
+    private JLabel spaceSelected = null;
+    private int gridXCoord;
+    private int gridYCoord;
     //private Player player = new Player("Jenna", 0);
     private Player player;
     private Game game;
+    private JLabel[] jLabelHand;
+    private JLabel[][] grid;
 
     public ScrabbleController(ScrabbleBoard view) {
         this.view = view;
@@ -58,12 +65,31 @@ public class ScrabbleController implements ActionListener {
         this.game = player.getGame();
         this.handView = view.getHandView();
         this.hand = player.getMyHand();
+        this.jLabelHand = this.handView.getJLabelHand();
+        this.board = player.getMyBoard();
+        this.grid = board.getGrid();
+        //this.grid = view.getPlayerBoard().getGrid();
         //this.hand = player.getMyHand();
         this.view.getShuffleBtn().addActionListener(this);
         this.view.getSwapBtn().addActionListener(this);
         this.view.getPlayBtn().addActionListener(this);
         this.view.getPassBtn().addActionListener(this);
 
+        addMouseListeners();
+    }
+
+    public void addMouseListeners() {
+        // add mouse listeners to board
+        for (int i = 0; i < 15; i++) {
+            for (int j = 0; j < 15; j++) {
+                player.getMyBoard().getGrid()[i][j].addMouseListener(this);
+            }
+        }
+
+        // add mouse listeners to tiles in hand
+        for (JLabel tileLabel : this.jLabelHand) {
+            tileLabel.addMouseListener(this);
+        }
     }
 
     public void createScrabbleController() {
@@ -149,14 +175,73 @@ public class ScrabbleController implements ActionListener {
     }
 
     public void mouseClicked(MouseEvent e) {
-        System.out.println("handlist: " + handView.getHand());
-        System.out.println("moueseevent source: " + e);
-        for (int i = 0; i < handView.getHand().length; i++) {
-            if (e.getSource() == handView.getHand()[i]) {
-                tileSelected = handView.getHand()[i];
-                handView.remove(handView.getHand()[i]);
+        System.out.println("handlist: " + handView);
+        System.out.println("mouse event source: " + e);
+
+        // if tile clicked in hand
+        for (int i = 0; i < jLabelHand.length; i++) {
+            if ((JLabel) e.getSource() == jLabelHand[i]) {
+                tileSelected = jLabelHand[i];
+                System.out.println(
+                        "tile selected " + tileSelected.getToolTipText());
+                handView.remove(jLabelHand[i]);
+
             }
         }
+
+        // if space clicked on board
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
+                if ((JLabel) e.getSource() == grid[i][j]) {
+                    spaceSelected = player.getMyBoard().getGrid()[i][j];
+                    gridXCoord = i;
+                    gridYCoord = j;
+                    System.out.println("x coord " + gridXCoord);
+                    System.out.println("y coord " + gridYCoord);
+                    System.out.println(
+                            "space selected " + spaceSelected.getToolTipText());
+                }
+            }
+        }
+
+        // add spaceSelected to tileSelected and set tileSelected and spaceSelected back to null
+        if (tileSelected != null && spaceSelected != null) {
+            System.out.println("trying to place tile on board");
+//            board.remove(
+//                    grid[gridXCoord][gridYCoord]);
+            grid[gridXCoord][gridYCoord] = tileSelected;
+            board.setGrid(grid);
+
+            System.out.println("placed(?) tile on board");
+            System.out.println(grid[gridXCoord][gridYCoord].getToolTipText());
+
+            tileSelected = null;
+            spaceSelected = null;
+            gridXCoord = 0;
+            gridYCoord = 0;
+        }
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+        System.out.println("mouse pressed");
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        System.out.println("mouse released");
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        //System.out.println("mouse entered");
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        //System.out.println("mouse exited");
     }
 
 }

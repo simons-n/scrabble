@@ -82,6 +82,8 @@ public class ScrabbleClient {
 
     public void acceptInfoFromServer() throws IOException, ClassNotFoundException {
         ois = new ObjectInputStream(skt.getInputStream());
+        System.out.println(
+                "Bytes available in input stream in client: " + ois.available());
         this.theGame = (Game) ois.readObject();
 
         System.out.println("accepted game from server");
