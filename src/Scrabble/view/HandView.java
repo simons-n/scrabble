@@ -446,7 +446,7 @@ public class HandView extends javax.swing.JPanel {
         hand[handLocation].setToolTipText("V");
         hand[handLocation].setPreferredSize(new Dimension(30, 30));
         add(hand[handLocation]);
-        this.revalidate();
+//        this.revalidate();
     }
 
     public void addWTile(JLabel[] hand, int handLocation) {
