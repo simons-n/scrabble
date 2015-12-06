@@ -27,13 +27,11 @@ import Scrabble.view.Board;
 import Scrabble.view.HandView;
 import Scrabble.view.ScrabbleBoard;
 import java.awt.Component;
-import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
@@ -53,7 +51,6 @@ public class ScrabbleController implements ActionListener, MouseListener {
     private static Hand hand;
     //private Player player = Game.getCurPlayer();
     private Word word;
-    private ArrayList<Tile> tilesInHand = new ArrayList<>();
     private JLabel tileSelected = null;
     private JLabel spaceSelected = null;
     private int gridXCoord;
@@ -118,8 +115,11 @@ public class ScrabbleController implements ActionListener, MouseListener {
     }
 
     public void updateViewFromModel() {
-        //if turn ended, check by creating boolean, clear stack
-        handView.setHand(hand);
+        //this only updates the board not handhandView.addMouseListener();
+        // when shuffle is pressed change HandView to HandView(Hand myhand)
+
+        handView.setJLabelHand(handView.setHand(hand));
+        System.out.println("jlabelhand after updated = " + handView);
         board.setGrid(grid);
         view.setPlayerBoard(board);
         addHandMouseListeners();
@@ -201,8 +201,8 @@ public class ScrabbleController implements ActionListener, MouseListener {
     }
 
     public void mouseClicked(MouseEvent e) {
-        System.out.println("handlist: " + handView);
-        System.out.println("mouse event source: " + e);
+        //System.out.println("handlist: " + handView);
+        //System.out.println("mouse event source: " + e);
 
         // if tile clicked in hand
         for (int i = 0; i < jLabelHand.length; i++) {
@@ -210,13 +210,39 @@ public class ScrabbleController implements ActionListener, MouseListener {
                 tileSelected = jLabelHand[i];
                 System.out.println(
                         "tile selected " + tileSelected.getToolTipText());
-                Container parent = jLabelHand[i].getParent();
-                parent.remove(jLabelHand[i]);
-                parent.revalidate();
-                parent.repaint();
+                System.out.println("index of tile: " + i);
+                System.out.println();
+                System.out.println("pre-handsize: " + hand.getHandSize());
                 System.out.println(
-                        "parent is: " + parent + "name is: " + parent.getName());
+                        "pre-jlabelhandsize: " + handView.getJLabelHand().length);
+                System.out.println("pre-hand: " + hand);
+                System.out.println("pre-jLabelHand: " + handView);
+                System.out.println();
 
+                int indexNewHand = 0;
+                JLabel[] newJLabelHand = new JLabel[jLabelHand.length - 1];
+                for (int a = 0; a < jLabelHand.length; a++) {
+                    if (jLabelHand[a] != tileSelected) {
+                        newJLabelHand[indexNewHand] = jLabelHand[a];
+                        indexNewHand += 1;
+                    }
+                }
+                handView.remove(jLabelHand[i]);
+
+                handView.setJLabelHand(newJLabelHand);
+                jLabelHand = newJLabelHand;
+
+                //jLabelHand = handView.getJLabelHand();
+                hand.removeTile(hand.getTile(i));
+                handView.revalidate();
+                handView.repaint();
+
+                System.out.println("post-handsize: " + hand.getHandSize());
+                System.out.println(
+                        "post-jlabelhandsize: " + handView.getJLabelHand().length);
+                System.out.println("post-hand: " + hand);
+                System.out.println("post-jLabelHand: " + handView);
+                break;
                 //handView.setJLabelHand(jLabelHand);
                 //handView = view.getHandView();
             }
@@ -448,7 +474,7 @@ public class ScrabbleController implements ActionListener, MouseListener {
             //board.setGrid(grid);
             //player.setMyBoard(board);
 //            game.setTheBoard(board);
-            updateViewFromModel();
+            //updateViewFromModel();
 
             System.out.println("placed(?) tile on board");
             System.out.println(
@@ -470,13 +496,12 @@ public class ScrabbleController implements ActionListener, MouseListener {
     @Override
     public void mousePressed(MouseEvent e) {
 
-        System.out.println("mouse pressed");
-
+        System.out.println();
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        System.out.println("mouse released");
+        System.out.println();
     }
 
     @Override

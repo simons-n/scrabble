@@ -43,6 +43,10 @@ public class Hand {
         return this.tilesInHand.get(x);
     }
 
+    public int getHandSize() {
+        return this.tilesInHand.size();
+    }
+
     public boolean containsTile(Tile tile) {
         boolean contains = false;
         for (int x = 0; x < tilesInHand.size(); x++) {
@@ -57,8 +61,42 @@ public class Hand {
         this.tilesInHand.add(tile);
     }
 
-    public void removeTile(Tile tile) {
-        this.tilesInHand.remove(tile);
+    public void removeTile(Tile tileToRemove) {
+        ArrayList<Tile> newTiles = new ArrayList<Tile>(tilesInHand.size() - 1);
+        for (int i = 0; i < tilesInHand.size(); i++) {
+            if (tilesInHand.get(i) != tileToRemove) {
+                newTiles.add(tilesInHand.get(i));
+            }
+        }
+//        int index = tilesInHand.indexOf(tile);
+//        ArrayList<Tile> newTiles = new ArrayList<Tile>(tilesInHand.size());
+//
+//        for (int i = 0; i < tilesInHand.size(); i++) {
+////            System.out.println("index is " + i);
+////            System.out.println("tilesInHand is " + tilesInHand.size());
+//            if (i != index) {
+//                newTiles.add(tilesInHand.get(i));
+//            }
+//
+//        }
+        this.tilesInHand = newTiles;
+
+//        this.tilesInHand.remove(tile);
+//        setTilesInHand();
+        //this.tilesInHand.set(tilesInHand.size()-1, null);
+    }
+
+    public void setTilesInHand() {
+//        System.out.println("//////");
+//        System.out.println("handSize = " + getHandSize());
+//        for (int x = 0; x < tilesInHand.size() - 1; x++) {
+//            System.out.println("hand[" + x + "] = " + tilesInHand.get(x));
+//        }
+        ArrayList<Tile> newTiles = new ArrayList<Tile>(tilesInHand.size() - 1);
+        for (int i = 0; i < tilesInHand.size() - 2; i++) {
+            newTiles.add(tilesInHand.get(i));
+        }
+        tilesInHand = newTiles;
     }
 
     public void switchTiles(Tile myTile, Tile pickedUpTile) {
@@ -137,8 +175,17 @@ public class Hand {
     @Override
     public String toString() {
         String s = "";
-        for (Tile tile : this.tilesInHand) {
-            s += tile.getLetter();
+//        for (Tile tile : this.tilesInHand) {
+//            if (tile == null) {
+//                s += "null";
+//            } else {
+//                s += tile.getLetter();
+//            }
+//        }
+        for (int i = 0; i < tilesInHand.size(); i++) {
+            if (Tile.class.isInstance(this.tilesInHand.get(i))) {
+                s += this.tilesInHand.get(i).getLetter();
+            }
         }
         return s;
     }
