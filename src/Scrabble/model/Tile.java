@@ -25,11 +25,28 @@ public class Tile implements Serializable {
 
     private Val letter;
     private int score;
+    private int x;
+    private int y;
 
     public Tile(Val letter) { //use getOrdinal to get index position of enum
         //use getValue to get the letter
         this.letter = letter;
         this.score = letter.getScore();
+    }
+
+    public Tile(Val letter, int x, int y) {
+        this.letter = letter;
+        this.score = letter.getScore();
+        this.x = x;
+        this.y = y;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
     }
 
     public int getScore() {

@@ -16,11 +16,11 @@
 package Scrabble.view;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.GridLayout;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  *
@@ -28,6 +28,7 @@ import javax.swing.JLabel;
  */
 public class Board extends javax.swing.JPanel {
     private JLabel[][] grid;
+    private JPanel[][] squares;
 
     private ImageIcon backgroundImage = new ImageIcon(
             "Images/BackgroundSquare.png");
@@ -40,6 +41,7 @@ public class Board extends javax.swing.JPanel {
     public Board() {
 
         this.grid = new JLabel[15][15];
+        this.squares = new JPanel[15][15];
         this.setLayout(new GridLayout(15, 15));
         //this.setLayout(null);
 
@@ -50,121 +52,40 @@ public class Board extends javax.swing.JPanel {
 
         for (int x = 0; x < 15; x++) {
             for (int y = 0; y < 15; y++) {
-                if ((x == 0 & y == 0) || (x == 0 & y == 14) || (x == 14 & y == 0) || (x == 14 & y == 14) || (x == 14 & y == 7) || (x == 7 & y == 14) || (x == 0 & y == 7) || (x == 7 & y == 0)) {
-                    addTWS(this.grid, x, y);
-                } else if (x == 7 & y == 7) {
-                    addStar(this.grid, x, y);
-                } else if (((x != 0 & x != 14) & (y != 0 & y != 14) & (x != 7 & y != 7) & (x != 6 & y != 6) & (x != 8 & y != 8) & (x != 5 & y != 5) & (x != 9 & y != 9) & y == x) || (x == 13 & y == 1) || (x == 12 & y == 2) || (x == 11 & y == 3) || (x == 10 & y == 4) || (y == 13 & x == 1) || (y == 12 & x == 2) || (y == 11 & x == 3) || (y == 10 & x == 4)) {
-                    addDWS(this.grid, x, y);
-                } else if ((x == 6 & y == 6) || (x == 8 & y == 8) || (x == 6 & y == 8) || (x == 8 & y == 6) || (x == 0 & y == 3) || (x == 0 & y == 11) || (x == 11 & y == 0) || (x == 3 & y == 0) || (x == 14 & y == 3) || (x == 14 & y == 11) || (x == 11 & y == 14) || (x == 3 & y == 14) || (x == 6 & y == 2) || (x == 7 & y == 3) || (x == 8 & y == 2) || (x == 12 & y == 6) || (x == 12 & y == 8) || (x == 11 & y == 7) || (y == 6 & x == 2) || (y == 7 & x == 3) || (y == 8 & x == 2) || (y == 12 & x == 6) || (y == 12 & x == 8) || (y == 11 & x == 7)) {
-                    addDLS(this.grid, x, y);
-
-                } else if ((x == 5 & y == 5) || (x == 9 & y == 9) || (x == 5 & y == 9) || (x == 9 & y == 5) || (x == 1 & y == 5) || (x == 1 & y == 9) || (x == 13 & y == 5) || (x == 13 & y == 9) || (y == 1 & x == 5) || (y == 1 & x == 9) || (y == 13 & x == 5) || (y == 13 & x == 9)) {
-                    addTLS(this.grid, x, y);
-
-                } else {
-
-                    this.grid[x][y] = new JLabel(backgroundImage);
-                    this.grid[x][y].setToolTipText("regular");
-                    this.grid[x][y].setPreferredSize(new Dimension(30, 30));
-                    this.grid[x][y].setBorder(BorderFactory.createLineBorder(
-                            Color.WHITE));
-                    add(this.grid[x][y]);
-                }
+                JPanel panel = new JPanel();
+                panel.setBackground(Color.WHITE);
+                JLabel label = new JLabel(getLabel(x, y));
+                panel.setSize(37, 40);
+                panel.setBorder(grayBorder);
+                panel.add(label);
+                squares[x][y] = panel;
+                grid[x][y] = label;
+                add(panel);
 
             }
         }
     }
 
-    public Board(ImageIcon icon, int xCoord, int yCoord) {
-        this.grid = new JLabel[15][15];
-        this.setLayout(new GridLayout(15, 15));
-        //this.setLayout(null);
+    public ImageIcon getLabel(int x, int y) {
+        ImageIcon boardLabel = null;
+        if ((x == 0 & y == 0) || (x == 0 & y == 14) || (x == 14 & y == 0) || (x == 14 & y == 14) || (x == 14 & y == 7) || (x == 7 & y == 14) || (x == 0 & y == 7) || (x == 7 & y == 0)) {
+            boardLabel = tripleWordImage;
+        } else if (x == 7 & y == 7) {
+            boardLabel = starImage;
+        } else if (((x != 0 & x != 14) & (y != 0 & y != 14) & (x != 7 & y != 7) & (x != 6 & y != 6) & (x != 8 & y != 8) & (x != 5 & y != 5) & (x != 9 & y != 9) & y == x) || (x == 13 & y == 1) || (x == 12 & y == 2) || (x == 11 & y == 3) || (x == 10 & y == 4) || (y == 13 & x == 1) || (y == 12 & x == 2) || (y == 11 & x == 3) || (y == 10 & x == 4)) {
+            boardLabel = doubleWordImage;
+        } else if ((x == 6 & y == 6) || (x == 8 & y == 8) || (x == 6 & y == 8) || (x == 8 & y == 6) || (x == 0 & y == 3) || (x == 0 & y == 11) || (x == 11 & y == 0) || (x == 3 & y == 0) || (x == 14 & y == 3) || (x == 14 & y == 11) || (x == 11 & y == 14) || (x == 3 & y == 14) || (x == 6 & y == 2) || (x == 7 & y == 3) || (x == 8 & y == 2) || (x == 12 & y == 6) || (x == 12 & y == 8) || (x == 11 & y == 7) || (y == 6 & x == 2) || (y == 7 & x == 3) || (y == 8 & x == 2) || (y == 12 & x == 6) || (y == 12 & x == 8) || (y == 11 & x == 7)) {
+            boardLabel = doubleLetterImage;
 
-        this.setBackground(Color.WHITE);
-        javax.swing.border.Border grayBorder = BorderFactory.createLineBorder(
-                Color.WHITE);
-        setBorder(grayBorder);
+        } else if ((x == 5 & y == 5) || (x == 9 & y == 9) || (x == 5 & y == 9) || (x == 9 & y == 5) || (x == 1 & y == 5) || (x == 1 & y == 9) || (x == 13 & y == 5) || (x == 13 & y == 9) || (y == 1 & x == 5) || (y == 1 & x == 9) || (y == 13 & x == 5) || (y == 13 & x == 9)) {
+            boardLabel = tripleLetterImage;
 
-        for (int x = 0; x < 15; x++) {
-            for (int y = 0; y < 15; y++) {
-                if (x == xCoord && y == yCoord) {
-                    grid[x][y] = new JLabel(icon);
-                    grid[x][y].setPreferredSize(new Dimension(30, 30));
-                    grid[x][y].setBorder(BorderFactory.createLineBorder(
-                            Color.WHITE));
-                    add(grid[x][y]);
-                }
-                if ((x == 0 & y == 0) || (x == 0 & y == 14) || (x == 14 & y == 0) || (x == 14 & y == 14) || (x == 14 & y == 7) || (x == 7 & y == 14) || (x == 0 & y == 7) || (x == 7 & y == 0)) {
-                    addTWS(this.grid, x, y);
-                } else if (x == 7 & y == 7) {
-                    addStar(this.grid, x, y);
-                } else if (((x != 0 & x != 14) & (y != 0 & y != 14) & (x != 7 & y != 7) & (x != 6 & y != 6) & (x != 8 & y != 8) & (x != 5 & y != 5) & (x != 9 & y != 9) & y == x) || (x == 13 & y == 1) || (x == 12 & y == 2) || (x == 11 & y == 3) || (x == 10 & y == 4) || (y == 13 & x == 1) || (y == 12 & x == 2) || (y == 11 & x == 3) || (y == 10 & x == 4)) {
-                    addDWS(this.grid, x, y);
-                } else if ((x == 6 & y == 6) || (x == 8 & y == 8) || (x == 6 & y == 8) || (x == 8 & y == 6) || (x == 0 & y == 3) || (x == 0 & y == 11) || (x == 11 & y == 0) || (x == 3 & y == 0) || (x == 14 & y == 3) || (x == 14 & y == 11) || (x == 11 & y == 14) || (x == 3 & y == 14) || (x == 6 & y == 2) || (x == 7 & y == 3) || (x == 8 & y == 2) || (x == 12 & y == 6) || (x == 12 & y == 8) || (x == 11 & y == 7) || (y == 6 & x == 2) || (y == 7 & x == 3) || (y == 8 & x == 2) || (y == 12 & x == 6) || (y == 12 & x == 8) || (y == 11 & x == 7)) {
-                    addDLS(this.grid, x, y);
+        } else {
 
-                } else if ((x == 5 & y == 5) || (x == 9 & y == 9) || (x == 5 & y == 9) || (x == 9 & y == 5) || (x == 1 & y == 5) || (x == 1 & y == 9) || (x == 13 & y == 5) || (x == 13 & y == 9) || (y == 1 & x == 5) || (y == 1 & x == 9) || (y == 13 & x == 5) || (y == 13 & x == 9)) {
-                    addTLS(this.grid, x, y);
-
-                } else {
-
-                    this.grid[x][y] = new JLabel(backgroundImage);
-                    this.grid[x][y].setToolTipText("regular");
-                    this.grid[x][y].setPreferredSize(new Dimension(30, 30));
-                    this.grid[x][y].setBorder(BorderFactory.createLineBorder(
-                            Color.WHITE));
-                    add(this.grid[x][y]);
-                }
-
-            }
+            boardLabel = backgroundImage;
         }
-    }
+        return boardLabel;
 
-    public void addTWS(JLabel[][] grid, int x, int y) {
-        grid[x][y] = new JLabel(tripleWordImage);
-        grid[x][y].setToolTipText("triple word");
-        grid[x][y].setPreferredSize(new Dimension(30, 30));
-        grid[x][y].setBorder(BorderFactory.createLineBorder(
-                Color.WHITE));
-        add(grid[x][y]);
-
-    }
-
-    public void addTLS(JLabel[][] grid, int x, int y) {
-        grid[x][y] = new JLabel(tripleLetterImage);
-        grid[x][y].setToolTipText("triple letter");
-        grid[x][y].setPreferredSize(new Dimension(30, 30));
-        grid[x][y].setBorder(BorderFactory.createLineBorder(
-                Color.WHITE));
-        add(grid[x][y]);
-    }
-
-    public void addDWS(JLabel[][] grid, int x, int y) {
-        grid[x][y] = new JLabel(doubleWordImage);
-        grid[x][y].setToolTipText("double word");
-        grid[x][y].setPreferredSize(new Dimension(30, 30));
-        grid[x][y].setBorder(BorderFactory.createLineBorder(
-                Color.WHITE));
-        add(grid[x][y]);
-    }
-
-    public void addDLS(JLabel[][] grid, int x, int y) {
-        grid[x][y] = new JLabel(doubleLetterImage);
-        grid[x][y].setToolTipText("double letter");
-        grid[x][y].setPreferredSize(new Dimension(30, 30));
-        grid[x][y].setBorder(BorderFactory.createLineBorder(
-                Color.WHITE));
-        add(grid[x][y]);
-    }
-
-    public void addStar(JLabel[][] grid, int x, int y) {
-        grid[x][y] = new JLabel(starImage);
-        grid[x][y].setToolTipText("star");
-        grid[x][y].setPreferredSize(new Dimension(30, 30));
-        grid[x][y].setBorder(BorderFactory.createLineBorder(
-                Color.WHITE));
-        add(grid[x][y]);
     }
 
     public JLabel[][] getGrid() {
