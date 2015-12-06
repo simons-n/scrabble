@@ -35,7 +35,9 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 
 /**
  *
@@ -171,21 +173,28 @@ public class ScrabbleController implements ActionListener, MouseListener {
 //        }
         } else if (e.getSource() == view.getUndoBtn()) {
             //pop the stack to get the tile with tile location in grid
-            Tile tile = undoStack.pop();
-            int x = tile.getX();
-            int y = tile.getY();
+            if (undoStack.isEmpty() == false) {
+                Tile tile = undoStack.pop();
+                int x = tile.getX();
+                int y = tile.getY();
 
-            JPanel panel = (JPanel) board.getComponent(
-                    y + x * 15);
-            JLabel boardLabel = (JLabel) panel.getComponent(0);
-            panel.remove(boardLabel);
-            grid[x][y] = new JLabel(board.getLabel(x, y));
-            panel.add(grid[x][y]);
+                JPanel panel = (JPanel) board.getComponent(
+                        y + x * 15);
+                JLabel boardLabel = (JLabel) panel.getComponent(0);
+                panel.remove(boardLabel);
+                JLabel newLabel = new JLabel(board.getLabel(x, y));
+                panel.add(newLabel);
 
-            // add tile back in to hand, to update handview
-            //this.hand.addTileFromBoard(tile);
+                // add tile back in to hand, to update handview
+                this.hand.addTileFromBoard(tile);
             //change the location of the tile to a background square **** figure out how to know if it was a TLW etc
-            //clear stack when turn is ended
+                //clear stack when turn is ended
+            } else {
+                JOptionPane.showMessageDialog(view,
+                                              "You do not have any moves to Undo, you must make a move now.",
+                                              "Error",
+                                              DISPOSE_ON_CLOSE);
+            }
         } else if (tileSelected != null) {
             for (int x = 0; x < 15; x++) {
                 for (int y = 0; y < 15; y++) {
