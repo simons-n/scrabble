@@ -469,13 +469,15 @@ public class ScrabbleController implements ActionListener, MouseListener {
             JLabel boardLabel = (JLabel) panel.getComponent(0);
             panel.remove(boardLabel);
             panel.add(grid[gridXCoord][gridYCoord]);
+
+            board.revalidate();
+            board.repaint();
             //board.add(panel);
 
             //board.setGrid(grid);
             //player.setMyBoard(board);
 //            game.setTheBoard(board);
             //updateViewFromModel();
-
             System.out.println("placed(?) tile on board");
             System.out.println(
                     "supposed to be " + grid[gridXCoord][gridYCoord].getToolTipText());
