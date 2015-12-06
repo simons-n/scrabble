@@ -35,6 +35,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -132,8 +133,12 @@ public class ScrabbleController implements ActionListener, MouseListener {
         if (e.getSource() == view.getPlayBtn()) //check validity, score word, and end turn
         {
             //word.setTilesInWord(null, null);   Still have to figure out how we are going to figure out what word they made
-            word.check();
-            word.scoreWord();
+            if (word.check() == true) {
+                word.scoreWord();
+            } else {
+                JOptionPane.showMessageDialog(null,
+                                              "That's not a valid word! Please try again.");
+            }
 
         } else if (e.getSource() == view.getSwapBtn()) //pickUp tile from Bag, switch with tile selected, and end turn
         {
@@ -399,6 +404,10 @@ public class ScrabbleController implements ActionListener, MouseListener {
         }
 
         updateViewFromModel();
+    }
+
+    public JLabel[][] getGrid() {
+        return grid;
     }
 
     @Override
