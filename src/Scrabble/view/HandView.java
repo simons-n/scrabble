@@ -20,7 +20,6 @@ import Scrabble.model.Tile;
 import Scrabble.model.TileBag;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -30,7 +29,7 @@ import javax.swing.JLabel;
  * @author jms107
  */
 public class HandView extends javax.swing.JPanel {
-    private JLabel[] jLabelHand;
+
     private ImageIcon aTileImage = new ImageIcon("Images/aTile.png");
     private ImageIcon bTileImage = new ImageIcon("Images/bTile.png");
     private ImageIcon cTileImage = new ImageIcon("Images/cTile.png");
@@ -59,9 +58,10 @@ public class HandView extends javax.swing.JPanel {
     private ImageIcon zTileImage = new ImageIcon("Images/zTile.png");
     private ImageIcon blankTileImage = new ImageIcon("Images/blankTile.png");
 
-    private ArrayList<Tile> tilesInHand = new ArrayList<>();
+    private JLabel[] jLabelHand;
     private TileBag tileBag;
     private boolean isDrawing;
+    private boolean isTurnOver = false;
 
     public HandView(Hand myHand) { //use this one to start the game
 //        setHand(player.hand);
@@ -95,17 +95,24 @@ public class HandView extends javax.swing.JPanel {
 //        createTileListeners();
     }
 
-    public void setHand(Hand myHand) {
+    public JLabel[] setHand(Hand myHand) {
         this.isDrawing = false;
         for (int x = 0; x < myHand.getTilesInHand().size(); x++) {
             Tile tile = myHand.getTilesInHand().get(x);
-            if (tile == null) {
-                tile = tileBag.draw();
-                myHand.addTileFromBoard(tile);
+            if (isTurnOver == true) {
+                if (tile == null) {
+                    tile = tileBag.draw();
+                    myHand.addTileFromBoard(tile);
+
+                }
+                //with this uncommented, remove works but shuffle doesn't
+                findTileInHand(tile, x);
             }
-            int handLocation = x;
-            findTileInHand(tile, x);
+            //with this uncommented, shuffle works but remove doesn't
+            //findTileInHand(tile, x);
         }
+        return jLabelHand;
+        //setJLabelHand(myHand);
     }
 
     public void setJLabelHand(JLabel[] hand) {
@@ -511,12 +518,13 @@ public class HandView extends javax.swing.JPanel {
     @Override
     public String toString() {
         String s = "";
-        for (Tile tile : tilesInHand) {
-            s += tile.toString();
+        for (JLabel tile : jLabelHand) {
+            if (tile != null) {
+                s += tile.getToolTipText();
+            }
         }
         return s;
     }
-
 //    public void createTileListeners() {
 //        for (JLabel tile : jLabelHand) {
 //            tile.addMouseListener(new MouseListener() {
@@ -544,6 +552,7 @@ public class HandView extends javax.swing.JPanel {
 //        }
 //        //System.out.println("created listeners");
 //    }
+
     public JLabel[] getjLabelHand() {
         return jLabelHand;
     }
@@ -656,10 +665,9 @@ public class HandView extends javax.swing.JPanel {
         return blankTileImage;
     }
 
-    public ArrayList<Tile> getTilesInHand() {
-        return tilesInHand;
-    }
-
+//    public ArrayList<Tile> getTilesInHand() {
+//        return tilesInHand;
+//    }
     public TileBag getTileBag() {
         return tileBag;
     }
@@ -667,4 +675,5 @@ public class HandView extends javax.swing.JPanel {
     public boolean isIsDrawing() {
         return isDrawing;
     }
+
 }

@@ -35,6 +35,7 @@ public class Board extends javax.swing.JPanel {
     private ImageIcon tripleLetterImage = new ImageIcon("Images/tls.png");
     private ImageIcon doubleLetterImage = new ImageIcon("Images/dls.png");
     private ImageIcon tripleWordImage = new ImageIcon("Images/tws.png");
+
     private ImageIcon doubleWordImage = new ImageIcon("Images/dws.png");
     private ImageIcon starImage = new ImageIcon("Images/centerStar.png");
 
@@ -55,7 +56,7 @@ public class Board extends javax.swing.JPanel {
                 JPanel panel = new JPanel();
                 panel.setBackground(Color.WHITE);
                 JLabel label = new JLabel(getLabel(x, y));
-                panel.setSize(37, 40);
+                //panel.setPreferredSize(new Dimension(32, 50));
                 panel.setBorder(grayBorder);
                 panel.add(label);
                 squares[x][y] = panel;
@@ -94,6 +95,30 @@ public class Board extends javax.swing.JPanel {
 
     public void setGrid(JLabel[][] grid) {
         this.grid = grid;
+    }
+
+    public ImageIcon getBackgroundImage() {
+        return backgroundImage;
+    }
+
+    public ImageIcon getTripleLetterImage() {
+        return tripleLetterImage;
+    }
+
+    public ImageIcon getDoubleLetterImage() {
+        return doubleLetterImage;
+    }
+
+    public ImageIcon getTripleWordImage() {
+        return tripleWordImage;
+    }
+
+    public ImageIcon getDoubleWordImage() {
+        return doubleWordImage;
+    }
+
+    public ImageIcon getStarImage() {
+        return starImage;
     }
 
 }
