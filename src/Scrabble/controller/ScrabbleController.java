@@ -219,9 +219,9 @@ public class ScrabbleController implements ActionListener, MouseListener {
         } else if (e.getSource() == view.getUndoBtn()) {
 
             //pop the stack to get the tile with tile location in grid
-            if (undoStack.isEmpty() == false) {
-                this.isUndoing = true;
             if (undoStack.isEmpty() == false && undoCounter == whenBlankTileIsPlayed) {
+                this.isUndoing = true;
+
                 Tile tile = undoStack.pop();
                 int x = tile.getX();
                 int y = tile.getY();
@@ -264,6 +264,7 @@ public class ScrabbleController implements ActionListener, MouseListener {
                 System.out.println("Hand after undo: " + hand);
                 undoCounter++;
             } else if (undoStack.isEmpty() == false) {
+                this.isUndoing = true;
                 System.out.println("Hand before undo: " + hand);
                 Tile tile = undoStack.pop();
                 int x = tile.getX();
@@ -344,7 +345,7 @@ public class ScrabbleController implements ActionListener, MouseListener {
                     Tile newTile = view.createBlankTile();
                     Tile tile = this.hand.getTile(i);
                     this.hand.switchTiles(tile, newTile);
-                    handView.setHand(hand);
+                    handView.setHand(hand, false);
                     view.repaint();
                 }
 
