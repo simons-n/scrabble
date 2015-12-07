@@ -187,6 +187,7 @@ public class StartBoxController implements ActionListener {
             // create gameCreator player
             Player gameCreator = new Player(name,
                                             scrabbleServer);
+            System.out.println("GameOwner: " + theGame.getGameOwner());
             System.out.println("created gameCreator");
             System.out.println(gameCreator);
             System.out.println(gameSize.getValue());
