@@ -20,6 +20,9 @@ import Scrabble.model.Game;
 import Scrabble.model.Player;
 import Scrabble.view.ScrabbleBoard;
 import java.awt.Color;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.UIManager;
 
 /**
@@ -87,8 +90,14 @@ public class ScrabbleMain {
                 //Hand playerHand = player.getMyHand();
                 scrabbleBoardView.setVisible(true);
 
-                ScrabbleController scrabbleController = new ScrabbleController(
-                        scrabbleBoardView);
+                try {
+                    ScrabbleController scrabbleController = new ScrabbleController(
+                            scrabbleBoardView);
+                } catch (IOException ex) {
+                    Logger.getLogger(ScrabbleMain.class.getName()).log(
+                            Level.SEVERE,
+                            null, ex);
+                }
 
             }
         });

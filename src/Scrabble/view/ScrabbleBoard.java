@@ -125,6 +125,10 @@ public class ScrabbleBoard extends JFrame {
         return undoBtn;
     }
 
+    public void refreshScoresLabel() {
+        scoresLabel.setText("SCORES \n Player 1: " + player.getTotalScore());
+    }
+
     public Game getGame() {
         return this.game;
     }

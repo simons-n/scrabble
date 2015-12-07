@@ -147,10 +147,6 @@ public class Player {
         this.name = newName;
     }
 
-    public void setTotalScore(int wordScore) {
-        this.totalScore += wordScore;
-    }
-
     public void pass() {
         // This will pass the turn to the next player in the network, somehow
     }

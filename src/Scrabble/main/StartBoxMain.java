@@ -66,8 +66,9 @@ public class StartBoxMain {
 
                 theView.setVisible(true);
 
-                StartBoxController theController = new StartBoxController(
-                        theView);
+                StartBoxController theController
+                                   = new StartBoxController(
+                                theView);
 
             }
         });

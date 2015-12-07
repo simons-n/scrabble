@@ -159,4 +159,9 @@ public class TileBag extends ArrayList<Tile> {
         return tile;
     }
 
+    public static void main(String[] args) {
+        TileBag tb = new TileBag();
+        System.out.println(tb.size());
+    }
+
 }
