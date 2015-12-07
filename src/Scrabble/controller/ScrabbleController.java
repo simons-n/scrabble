@@ -33,6 +33,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
@@ -61,9 +63,14 @@ public class ScrabbleController implements ActionListener, MouseListener {
     //private Player player = new Player("Jenna", 0);
     private Player player;
     private Game game;
+    private int score = 0;
     private JLabel[] jLabelHand;
     private JLabel[][] grid;
     private JPanel[][] squares;
+    private boolean canPlayWord = true;
+    private ArrayList<String> boardText = new ArrayList<>(Arrays.asList(
+            "Double Word", "Double Letter", "Star", "Square", "Triple Word",
+            "Triple Letter"));
     private Stack undoStack = new Stack(9);
     private boolean isUndoing = false;
 
@@ -77,6 +84,7 @@ public class ScrabbleController implements ActionListener, MouseListener {
         this.board = player.getMyBoard();
         this.grid = board.getGrid();
         this.squares = board.getSquares();
+
         //this.grid = view.getPlayerBoard().getGrid();
         //this.hand = player.getMyHand();
         this.view.getShuffleBtn().addActionListener(this);
@@ -153,8 +161,21 @@ public class ScrabbleController implements ActionListener, MouseListener {
         if (e.getSource() == view.getPlayBtn()) //check validity, score word, and end turn
         {
             //word.setTilesInWord(null, null);   Still have to figure out how we are going to figure out what word they made
+            if (canPlayWord == false) {
+                JOptionPane.showMessageDialog(view,
+                                              "The first word you play has to have a tile on the center star, rearrange your word by pressing the undo button.",
+                                              "Error", DISPOSE_ON_CLOSE);
+            }
             word.check();
-            word.scoreWord();
+            score = word.scoreWord();
+            int newScore = player.getTotalScore() + score;
+            player.setTotalScore(newScore);
+            if (hand.getHandSize() < 7 && word.check() == true) {
+                for (int x = 0; x < hand.getHandSize(); x++) {
+                    Tile tile = tilebag.draw();
+                    hand.addTile(tile);
+                }
+            }
 
         } else if (e.getSource() == view.getSwapBtn()) //pickUp tile from Bag, switch with tile selected, and end turn
         {
@@ -201,6 +222,21 @@ public class ScrabbleController implements ActionListener, MouseListener {
                 JLabel boardLabel = (JLabel) panel.getComponent(0);
                 panel.remove(boardLabel);
                 JLabel newLabel = new JLabel(board.getLabel(x, y));
+                if (board.getLabel(x, y) == board.getTripleWordImage()) {
+                    newLabel.setToolTipText("Triple Word");
+                } else if (board.getLabel(x, y) == board.getTripleLetterImage()) {
+                    newLabel.setToolTipText("Triple Letter");
+
+                } else if (board.getLabel(x, y) == board.getDoubleWordImage()) {
+                    newLabel.setToolTipText("Double Word");
+                } else if (board.getLabel(x, y) == board.getDoubleLetterImage()) {
+                    newLabel.setToolTipText("Double Letter");
+                } else if (board.getLabel(x, y) == board.getStarImage()) {
+                    newLabel.setToolTipText("Star");
+
+                } else if (board.getLabel(x, y) == board.getBackgroundImage()) {
+                    newLabel.setToolTipText("Square");
+                }
 
                 squares[x][y] = panel;
                 grid[x][y] = newLabel;
@@ -305,7 +341,8 @@ public class ScrabbleController implements ActionListener, MouseListener {
         }
 
         // add spaceSelected to tileSelected and set tileSelected and spaceSelected back to null
-        if (tileSelected != null && spaceSelected != null) {
+        if (tileSelected != null && spaceSelected != null && boardText.contains(
+                spaceSelected.getToolTipText())) {
             System.out.println("trying to place tile on board");
             board.remove(
                     grid[gridXCoord][gridYCoord]);

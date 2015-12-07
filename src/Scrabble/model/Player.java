@@ -97,6 +97,10 @@ public class Player {
         return myBoard;
     }
 
+    public void setTotalScore(int newScore) {
+        totalScore = newScore;
+    }
+
     public int getTotalScore() {
         return totalScore;
     }

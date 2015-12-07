@@ -71,6 +71,10 @@ public class Hand {
         this.tilesInHand = biggerHand;
     }
 
+    public void addTile(Tile tile) {
+        this.tilesInHand.add(tile);
+    }
+
     public void removeTile(Tile tileToRemove) {
         ArrayList<Tile> newTiles = new ArrayList<Tile>(tilesInHand.size() - 1);
         for (int i = 0; i < tilesInHand.size(); i++) {
