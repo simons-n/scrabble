@@ -65,6 +65,7 @@ public class ScrabbleController implements ActionListener, MouseListener {
     private JLabel[][] grid;
     private JPanel[][] squares;
     private Stack undoStack = new Stack(9);
+    private boolean isUndoing = false;
 
     public ScrabbleController(ScrabbleBoard view) {
         this.view = view;
@@ -100,6 +101,10 @@ public class ScrabbleController implements ActionListener, MouseListener {
 
     public void addHandMouseListeners() {
         // add mouse listeners to tiles in hand
+        System.out.println("jLabelHand listeners: " + jLabelHand);
+//        for (JLabel tileLabel : handView.getJLabelHand()) {
+//            tileLabel.addMouseListener(this);
+//        }
         for (JLabel tileLabel : this.jLabelHand) {
             tileLabel.addMouseListener(this);
         }
@@ -124,14 +129,19 @@ public class ScrabbleController implements ActionListener, MouseListener {
         // when shuffle is pressed change HandView to HandView(Hand myhand)
 
         //handView.setJLabelHand(handView.setHand(hand));
-        handView.setHand(hand);
+        handView.setHand(hand, isUndoing);
 //        System.out.println("jlabelhand after updated = " + handView);
+        System.out.println("jLabelHand after undo: " + handView);
+        isUndoing = false;
+        jLabelHand = handView.getJLabelHand();
+        //handView.setIsUndoing(isUndoing);
         board.setGrid(grid);
         view.setPlayerBoard(board);
 
         view.repaint();
         //addBoardMouseListeners();
         addHandMouseListeners();
+
         //
         // when pass is pressed change view to next players hand
         // when swap is pressed change HandView to HandView(Hand myhand) *** make the dialog box show up
@@ -180,6 +190,7 @@ public class ScrabbleController implements ActionListener, MouseListener {
         } else if (e.getSource() == view.getUndoBtn()) {
             //pop the stack to get the tile with tile location in grid
             if (undoStack.isEmpty() == false) {
+                this.isUndoing = true;
                 System.out.println("Hand before undo: " + hand);
                 Tile tile = undoStack.pop();
                 int x = tile.getX();
@@ -200,9 +211,14 @@ public class ScrabbleController implements ActionListener, MouseListener {
                 board.revalidate();
 
                 // add tile back in to hand, to update handview
-                //this.hand.addTileFromBoard(tile);
-                //handView.revalidate();
+                for (JLabel jLabelTile : handView.getJLabelHand()) {
+                    handView.remove(jLabelTile);
+                }
+                this.hand.addTileFromBoard(tile);
+
+                handView.revalidate();
                 System.out.println("Hand after undo: " + hand);
+
                 //change the location of the tile to a background square **** figure out how to know if it was a TLW etc
                 //clear stack when turn is ended
             } else {
