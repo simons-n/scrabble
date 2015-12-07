@@ -121,4 +121,8 @@ public class Board extends javax.swing.JPanel {
         return starImage;
     }
 
+    public JPanel[][] getSquares() {
+        return squares;
+    }
+
 }
