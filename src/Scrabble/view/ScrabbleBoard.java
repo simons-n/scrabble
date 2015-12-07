@@ -19,6 +19,7 @@ import Scrabble.model.Game;
 import Scrabble.model.Hand;
 import Scrabble.model.Player;
 import Scrabble.model.Stack;
+import Scrabble.model.Tile;
 import Scrabble.model.TileBag;
 import Scrabble.model.Val;
 import java.awt.BorderLayout;
@@ -60,8 +61,10 @@ public class ScrabbleBoard extends JFrame {
     private Board mainBoard;
     private HandView handView;
     private Player player;
+    private Hand hand;
     private Game game;
     private Stack undo = new Stack(9);
+    private Val val;
 
     public ScrabbleBoard(Player player) {
 
@@ -72,6 +75,7 @@ public class ScrabbleBoard extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         tileBag = game.getTileBag();
         this.playerBoard = player.getMyBoard();
+        this.hand = player.getMyHand();
 
         //center panel
         //Board board = new Board();
@@ -92,9 +96,8 @@ public class ScrabbleBoard extends JFrame {
 
         //bottom panel -- where tiles are added to hand
         player = game.getCurPlayer();
-        Hand myHand = player.getMyHand();
-        System.out.println(myHand);
-        handView = new HandView(myHand);
+        //System.out.println(myHand);
+        handView = new HandView(this.hand);
         //hand.createNewHand(tileBag);
 
         //right panel
@@ -209,7 +212,7 @@ public class ScrabbleBoard extends JFrame {
         return playerBoard;
     }
 
-    public JLabel createBlankTile() {
+    public Tile createBlankTile() {
         String tileStr = JOptionPane.showInputDialog(this,
                                                      "Enter the letter you want this tile to be:",
                                                      "Blank Tile",
@@ -222,122 +225,18 @@ public class ScrabbleBoard extends JFrame {
 
             //System.out.println("tile str : " + upCaseStr);
             try {
-                Val tileValue = Val.valueOf(upCaseStr);
-                switch (upCaseStr) {
-                    case "A":
-                        label = new JLabel(handView.getaTileImage());
-                        break;
-                    case "B":
-                        label = new JLabel(handView.getbTileImage());
-
-                        break;
-                    case "C":
-                        label = new JLabel(handView.getcTileImage());
-
-                        break;
-                    case "D":
-
-                        label = new JLabel(handView.getdTileImage());
-
-                        break;
-                    case "E":
-                        label = new JLabel(handView.geteTileImage());
-
-                        break;
-                    case "F":
-                        label = new JLabel(handView.getfTileImage());
-
-                        break;
-                    case "G":
-                        label = new JLabel(handView.getgTileImage());
-
-                        break;
-                    case "H":
-                        label = new JLabel(handView.gethTileImage());
-
-                        break;
-                    case "I":
-                        label = new JLabel(handView.getiTileImage());
-
-                        break;
-                    case "J":
-                        label = new JLabel(handView.getjTileImage());
-
-                        break;
-                    case "K":
-                        label = new JLabel(handView.getkTileImage());
-
-                        break;
-                    case "L":
-                        label = new JLabel(handView.getlTileImage());
-
-                        break;
-                    case "M":
-                        label = new JLabel(handView.getmTileImage());
-
-                        break;
-                    case "N":
-                        label = new JLabel(handView.getnTileImage());
-
-                        break;
-                    case "O":
-                        label = new JLabel(handView.getoTileImage());
-
-                        break;
-                    case "P":
-                        label = new JLabel(handView.getpTileImage());
-
-                        break;
-                    case "Q":
-                        label = new JLabel(handView.getqTileImage());
-
-                        break;
-                    case "R":
-                        label = new JLabel(handView.getrTileImage());
-
-                        break;
-                    case "S":
-                        label = new JLabel(handView.getsTileImage());
-
-                        break;
-                    case "T":
-                        label = new JLabel(handView.gettTileImage());
-
-                        break;
-                    case "U":
-                        label = new JLabel(handView.getuTileImage());
-
-                        break;
-                    case "V":
-                        label = new JLabel(handView.getvTileImage());
-
-                        break;
-                    case "W":
-                        label = new JLabel(handView.getwTileImage());
-                        break;
-                    case "X":
-                        label = new JLabel(handView.getxTileImage());
-                        break;
-                    case "Y":
-                        label = new JLabel(handView.getyTileImage());
-                        break;
-                    case "Z":
-                        label = new JLabel(handView.getzTileImage());
-                        break;
-                    default:
-                        break;
-
-                }
-                return label;
+                Val tileValue = val.valueOf(upCaseStr);
+                Tile newTile = new Tile(tileValue);
+                return newTile;
 
             } catch (Exception exc) {
                 JOptionPane.showMessageDialog(this,
                                               tileStr + " is an illegal input, you need to only type the letter of a tile.",
                                               "Error",
                                               DISPOSE_ON_CLOSE);
-                createBlankTile();
+                //createBlankTile();
             }
         }
-        return null;
+        return createBlankTile();
     }
 }

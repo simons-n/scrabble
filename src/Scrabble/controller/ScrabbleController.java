@@ -48,7 +48,9 @@ import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
  */
 public class ScrabbleController implements ActionListener, MouseListener {
 // connects model to view
-
+    private int whenBlankTileIsPlayed;
+    private int undoCounter = 0;
+    private int tileSelectedCounter = 0;
     private ScrabbleBoard view;
     private Board board;
     private HandView handView;
@@ -68,6 +70,7 @@ public class ScrabbleController implements ActionListener, MouseListener {
     private JLabel[][] grid;
     private JPanel[][] squares;
     private boolean canPlayWord = true;
+    private Val val;
     private int turnCounter = 1;
     private ArrayList<String> boardText = new ArrayList<>(Arrays.asList(
             "Double Word", "Double Letter", "Star", "Square", "Triple Word",
@@ -161,6 +164,8 @@ public class ScrabbleController implements ActionListener, MouseListener {
                 score = word.scoreWord();
                 int newScore = player.getTotalScore() + score;
                 player.setTotalScore(newScore);
+                undoStack = new Stack(9);
+                tileSelectedCounter = 0;
                 if (hand.getHandSize() < 7 && word.check() == true) {
                     for (int x = 0; x < hand.getHandSize(); x++) {
                         Tile tile = tilebag.draw();
@@ -202,8 +207,51 @@ public class ScrabbleController implements ActionListener, MouseListener {
 //            view.getDirectionsPanel().setVisible(true);
 //        }
         } else if (e.getSource() == view.getUndoBtn()) {
+
             //pop the stack to get the tile with tile location in grid
-            if (undoStack.isEmpty() == false) {
+            if (undoStack.isEmpty() == false && undoCounter == whenBlankTileIsPlayed) {
+                Tile tile = undoStack.pop();
+                int x = tile.getX();
+                int y = tile.getY();
+
+                JPanel panel = (JPanel) board.getComponent(
+                        y + x * 15);
+                JLabel boardLabel = (JLabel) panel.getComponent(0);
+                panel.remove(boardLabel);
+                JLabel newLabel = new JLabel(board.getLabel(x, y));
+                if (board.getLabel(x, y) == board.getTripleWordImage()) {
+                    newLabel.setToolTipText("Triple Word");
+                } else if (board.getLabel(x, y) == board.getTripleLetterImage()) {
+                    newLabel.setToolTipText("Triple Letter");
+
+                } else if (board.getLabel(x, y) == board.getDoubleWordImage()) {
+                    newLabel.setToolTipText("Double Word");
+                } else if (board.getLabel(x, y) == board.getDoubleLetterImage()) {
+                    newLabel.setToolTipText("Double Letter");
+                } else if (board.getLabel(x, y) == board.getStarImage()) {
+                    newLabel.setToolTipText("Star");
+
+                } else if (board.getLabel(x, y) == board.getBackgroundImage()) {
+                    newLabel.setToolTipText("Square");
+                }
+
+                squares[x][y] = panel;
+                grid[x][y] = newLabel;
+                panel.add(newLabel);
+
+                //view.getMyGrid()[x][y].addMouseListener(this);
+                addBoardMouseListeners();
+                board.revalidate();
+
+                Tile blankTile = new Tile(val.BLANK);
+                System.out.println("add blank tile back to hand");
+
+                // add tile back in to hand, to update handview
+                //this.hand.addTileFromBoard(blankTile);
+//                handView.revalidate();
+                System.out.println("Hand after undo: " + hand);
+                undoCounter++;
+            } else if (undoStack.isEmpty() == false) {
                 System.out.println("Hand before undo: " + hand);
                 Tile tile = undoStack.pop();
                 int x = tile.getX();
@@ -271,10 +319,19 @@ public class ScrabbleController implements ActionListener, MouseListener {
         // if tile clicked in hand
         for (int i = 0; i < jLabelHand.length; i++) {
             if ((JLabel) e.getSource() == jLabelHand[i]) {
-                tileSelected = jLabelHand[i];
-                if (tileSelected.getToolTipText() == "Blank") {
-                    tileSelected = view.createBlankTile();
+
+                System.out.println(
+                        "TileSelected is :" + jLabelHand[i].getToolTipText());
+                if (jLabelHand[i].getToolTipText() == "BLANK") {
+                    whenBlankTileIsPlayed = tileSelectedCounter;
+                    Tile newTile = view.createBlankTile();
+                    Tile tile = this.hand.getTile(i);
+                    this.hand.switchTiles(tile, newTile);
+                    handView.setHand(hand);
+                    view.repaint();
                 }
+
+                tileSelected = jLabelHand[i];
                 System.out.println(
                         "tile selected " + tileSelected.getToolTipText());
                 System.out.println("index of tile: " + i);
@@ -561,6 +618,7 @@ public class ScrabbleController implements ActionListener, MouseListener {
                     undoStack.push(tile);
                     break;
             }
+            tileSelectedCounter++;
             //http://stackoverflow.com/questions/2561690/placing-component-on-glass-pane/2562685#2562685
             JPanel panel = (JPanel) board.getComponent(
                     gridYCoord + gridXCoord * 15);
