@@ -46,7 +46,7 @@ public class ScrabbleController implements ActionListener, MouseListener {
     private ScrabbleBoard view;
     private Board board;
     private HandView handView;
-    private static TileBag tilebag = new TileBag();
+    private static TileBag tilebag;
     private static Hand hand;
     //private Player player = Game.getCurPlayer();
     private Word word;
@@ -80,6 +80,7 @@ public class ScrabbleController implements ActionListener, MouseListener {
         this.jLabelHand = this.handView.getJLabelHand();
         this.board = player.getMyBoard();
         this.grid = board.getGrid();
+        tilebag = game.getTileBag();
 
         word = new Word(grid, game, boardText);
         this.squares = board.getSquares();
@@ -142,6 +143,9 @@ public class ScrabbleController implements ActionListener, MouseListener {
         jLabelHand = handView.getJLabelHand();
         //handView.setIsUndoing(isUndoing);
         board.setGrid(grid);
+
+        handView.repaint();
+        handView.revalidate();
         view.setPlayerBoard(board);
 
         view.repaint();
@@ -173,13 +177,6 @@ public class ScrabbleController implements ActionListener, MouseListener {
             int newScore = player.getTotalScore() + score;
             player.setTotalScore(newScore);
             view.refreshScoresLabel();
-            System.out.println("player current score " + player.getTotalScore());
-            if (hand.getHandSize() < 7 && word.check() == true) {
-                for (int x = 0; x < hand.getHandSize(); x++) {
-                    Tile tile = tilebag.draw();
-                    hand.addTile(tile);
-                }
-            }
 
         } else if (e.getSource() == view.getSwapBtn()) //pickUp tile from Bag, switch with tile selected, and end turn
         {
@@ -191,6 +188,23 @@ public class ScrabbleController implements ActionListener, MouseListener {
         } else if (e.getSource() == view.getPassBtn()) {
             System.out.println("Player passed their turn");
 
+            System.out.println("player current score " + player.getTotalScore());
+            System.out.println("tile bag size " + tilebag.getTileBagSize());
+            int tilesDrawn = 0;
+            while (hand.getHandSize() < 7) {
+                {
+                    System.out.println("hand size " + hand.getHandSize());
+                    tilesDrawn++;
+                    Tile tile = tilebag.draw();
+                    hand.addTile(tile);
+                }
+                handView.setHand(hand, isUndoing);
+                jLabelHand = handView.getJLabelHand();
+                handView.repaint();
+                handView.revalidate();
+            }
+            view.refreshTileBagLabel(tilebag);
+
             view.repaint();
             view.revalidate();
 
@@ -198,9 +212,8 @@ public class ScrabbleController implements ActionListener, MouseListener {
             gridXCoord = -1;
             gridYCoord = -1;
 
-            bonusType.clear();
-            letterForBonus.clear();
-
+//            bonusType.clear();
+//            letterForBonus.clear();
             //change current player to next player, and end turn
 //            try {
 //
@@ -575,11 +588,10 @@ public class ScrabbleController implements ActionListener, MouseListener {
             System.out.println(
                     "actually" + view.getPlayerBoard().getGrid()[gridXCoord][gridYCoord].getToolTipText());
 
-            if (boardText.contains(spaceSelected.getToolTipText())) {
-                bonusType.add(spaceSelected.getToolTipText());
-                letterForBonus.add(tileSelected.getToolTipText());
-            }
-
+//            if (boardText.contains(spaceSelected.getToolTipText())) {
+//                bonusType.add(spaceSelected.getToolTipText());
+//                letterForBonus.add(tileSelected.getToolTipText());
+//            }
             tileSelected = null;
             spaceSelected = null;
 //            gridXCoord = 0;

@@ -183,12 +183,11 @@ public class Word {
             score += tileVal.getScore();
         }
 
-        for (int j = 0; j < bonusType.size(); j++) {
-            if () {
-
-            }
-        }
-
+//        for (int j = 0; j < bonusType.size(); j++) {
+//            if () {
+//
+//            }
+//        }
         return score;
     }
 

@@ -129,6 +129,11 @@ public class ScrabbleBoard extends JFrame {
         scoresLabel.setText("SCORES \n Player 1: " + player.getTotalScore());
     }
 
+    public void refreshTileBagLabel(TileBag tb) {
+        tileBagLabel.setText(
+                "      TILES LEFT \n          " + tb.getTileBagSizeStr());
+    }
+
     public Game getGame() {
         return this.game;
     }
