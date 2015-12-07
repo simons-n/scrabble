@@ -173,18 +173,12 @@ public class ScrabbleController implements ActionListener, MouseListener {
                                               "The first word you play has to have a tile on the center star, rearrange your word by pressing the undo button.",
                                               "Error", DISPOSE_ON_CLOSE);
             } else {
-                word.check();
-                score = word.scoreWord();
                 int newScore = player.getTotalScore() + score;
                 player.setTotalScore(newScore);
+                view.refreshScoresLabel();
                 undoStack = new Stack(9);
-                if (hand.getHandSize() < 7 && word.check() == true) {
-                    for (int x = 0; x < hand.getHandSize(); x++) {
-                        Tile tile = tilebag.draw();
-                        hand.addTile(tile);
-                    }
-                }
-                turnCounter++;
+
+                //turnCounter++;
             }
 
         } else if (e.getSource() == view.getSwapBtn()) //pickUp tile from Bag, switch with tile selected, and end turn
@@ -200,18 +194,23 @@ public class ScrabbleController implements ActionListener, MouseListener {
             System.out.println("player current score " + player.getTotalScore());
             System.out.println("tile bag size " + tilebag.getTileBagSize());
             int tilesDrawn = 0;
+
             while (hand.getHandSize() < 7) {
-                {
-                    System.out.println("hand size " + hand.getHandSize());
-                    tilesDrawn++;
-                    Tile tile = tilebag.draw();
-                    hand.addTile(tile);
-                }
-                handView.setHand(hand, isUndoing);
-                jLabelHand = handView.getJLabelHand();
-                handView.repaint();
-                handView.revalidate();
+                System.out.println("hand size " + hand.getHandSize());
+                tilesDrawn++;
+                Tile tile = tilebag.draw();
+                hand.addTile(tile);
+                System.out.println("hand after tiles drawn: " + hand);
+
             }
+            for (JLabel jLabelTile : handView.getJLabelHand()) {
+                handView.remove(jLabelTile);
+            }
+            System.out.println("length of hand: " + hand.getHandSize());
+
+            //handView.drawAtEndOfTurn(hand);
+            //jLabelHand = handView.getJLabelHand()
+            handView.revalidate();
             view.refreshTileBagLabel(tilebag);
 
             view.repaint();
@@ -236,7 +235,8 @@ public class ScrabbleController implements ActionListener, MouseListener {
 //
 //            game.setTheBoard(view.getMainBoard());
 //            game.updatePlayerBoards();
-        } else if (e.getSource() == view.getShuffleBtn()) {
+        } else if (e.getSource()
+                   == view.getShuffleBtn()) {
             System.out.println("tried to shuffle");
             System.out.println("pre-hand: " + hand);
             this.hand.shuffle();
@@ -245,7 +245,8 @@ public class ScrabbleController implements ActionListener, MouseListener {
 //        } else if (e.getSource() == view.getDirectionsBtn()) {
 //            view.getDirectionsPanel().setVisible(true);
 //        }
-        } else if (e.getSource() == view.getUndoBtn()) {
+        } else if (e.getSource()
+                   == view.getUndoBtn()) {
 
             //pop the stack to get the tile with tile location in grid
             if (undoStack.isEmpty() == false) { //add the check to see if it was blank is true
@@ -355,7 +356,9 @@ public class ScrabbleController implements ActionListener, MouseListener {
                                               "Error",
                                               DISPOSE_ON_CLOSE);
             }
-        } else if (tileSelected != null) {
+
+        } else if (tileSelected
+                   != null) {
             for (int x = 0; x < 15; x++) {
                 for (int y = 0; y < 15; y++) {
                     if (e.getSource() == view.getMyGrid()[x][y]) {
@@ -366,6 +369,7 @@ public class ScrabbleController implements ActionListener, MouseListener {
                 }
             }
         }
+
         updateViewFromModel();
     }
 

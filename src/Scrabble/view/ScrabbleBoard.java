@@ -58,6 +58,7 @@ public class ScrabbleBoard extends JFrame {
     private final JTextArea letterDistribLabel = new JTextArea(20, 10);
     private final JTextArea tileBagLabel = new JTextArea(10, 10);
     private Board playerBoard;
+
     private Board mainBoard;
     private HandView handView;
     private Player player;
@@ -97,7 +98,7 @@ public class ScrabbleBoard extends JFrame {
         //bottom panel -- where tiles are added to hand
         player = game.getCurPlayer();
         //System.out.println(myHand);
-        handView = new HandView(this.hand);
+        this.handView = new HandView(this.hand);
         //hand.createNewHand(tileBag);
 
         //right panel
@@ -125,6 +126,10 @@ public class ScrabbleBoard extends JFrame {
         //add(board, BorderLayout.CENTER);
         add(playerBoard, BorderLayout.CENTER);
         pack();
+    }
+
+    public void setHandView(HandView handView) {
+        this.handView = handView;
     }
 
     public JButton getUndoBtn() {
