@@ -32,6 +32,7 @@ public class Hand {
     private Val val;
     private Game game;
     private int index;
+    private boolean isUndoing;
 
     public Hand(ArrayList<Tile> tilesInHand, Player player) {
         this.tilesInHand = tilesInHand;
@@ -47,6 +48,10 @@ public class Hand {
         return this.tilesInHand.size();
     }
 
+    public boolean getIsUndoing() {
+        return this.isUndoing;
+    }
+
     public boolean containsTile(Tile tile) {
         boolean contains = false;
         for (int x = 0; x < tilesInHand.size(); x++) {
@@ -58,7 +63,12 @@ public class Hand {
     }
 
     public void addTileFromBoard(Tile tile) {
-        this.tilesInHand.add(tile);
+        ArrayList<Tile> biggerHand = new ArrayList<Tile>(tilesInHand.size() + 1);
+        for (int i = 0; i < tilesInHand.size(); i++) {
+            biggerHand.add(tilesInHand.get(i));
+        }
+        biggerHand.add(tile);
+        this.tilesInHand = biggerHand;
     }
 
     public void addTile(Tile tile) {
