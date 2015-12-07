@@ -672,6 +672,8 @@ public class ScrabbleController implements ActionListener, MouseListener {
 
     public JLabel[][] getGrid() {
         return grid;
+    }
+
     public void canPlayWord() {
         if (gridXCoord != 7 && gridYCoord != 7 && turnCounter == 1) {
             canPlayWord = false;
