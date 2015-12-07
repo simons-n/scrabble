@@ -257,6 +257,13 @@ public class ScrabbleController implements ActionListener, MouseListener {
 
                 Tile blankTile = new Tile(val.BLANK);
                 System.out.println("add blank tile back to hand");
+                for (JLabel jLabelTile : handView.getJLabelHand()) {
+                    handView.remove(jLabelTile);
+                }
+                this.hand.addTileFromBoard(tile);
+
+                handView.revalidate();
+                System.out.println("Hand after undo: " + hand);
 
                 // add tile back in to hand, to update handview
                 //this.hand.addTileFromBoard(blankTile);
