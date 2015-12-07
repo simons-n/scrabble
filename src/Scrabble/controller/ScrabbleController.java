@@ -63,6 +63,7 @@ public class ScrabbleController implements ActionListener, MouseListener {
     private Game game;
     private JLabel[] jLabelHand;
     private JLabel[][] grid;
+    private JPanel[][] squares;
     private Stack undoStack = new Stack(9);
 
     public ScrabbleController(ScrabbleBoard view) {
@@ -74,6 +75,7 @@ public class ScrabbleController implements ActionListener, MouseListener {
         this.jLabelHand = this.handView.getJLabelHand();
         this.board = player.getMyBoard();
         this.grid = board.getGrid();
+        this.squares = board.getSquares();
         //this.grid = view.getPlayerBoard().getGrid();
         //this.hand = player.getMyHand();
         this.view.getShuffleBtn().addActionListener(this);
@@ -128,7 +130,7 @@ public class ScrabbleController implements ActionListener, MouseListener {
         view.setPlayerBoard(board);
 
         view.repaint();
-        addBoardMouseListeners();
+        //addBoardMouseListeners();
         addHandMouseListeners();
         //
         // when pass is pressed change view to next players hand
@@ -189,13 +191,14 @@ public class ScrabbleController implements ActionListener, MouseListener {
                 panel.remove(boardLabel);
                 JLabel newLabel = new JLabel(board.getLabel(x, y));
                 panel.add(newLabel);
-                view.getMyGrid()[x][y].addMouseListener(this);
+                grid[x][y] = newLabel;
+                //view.getMyGrid()[x][y].addMouseListener(this);
+                addBoardMouseListeners();
                 board.revalidate();
 
                 // add tile back in to hand, to update handview
-                this.hand.addTileFromBoard(tile);
-                handView.revalidate();
-
+                //this.hand.addTileFromBoard(tile);
+                //handView.revalidate();
                 System.out.println("Hand after undo: " + hand);
                 //change the location of the tile to a background square **** figure out how to know if it was a TLW etc
                 //clear stack when turn is ended
