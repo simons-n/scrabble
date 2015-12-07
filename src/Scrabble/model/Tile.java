@@ -27,7 +27,6 @@ public class Tile implements Serializable {
     private int score;
     private int x;
     private int y;
-    private boolean justPlayed;
 
     public Tile(Val letter) { //use getOrdinal to get index position of enum
         //use getValue to get the letter

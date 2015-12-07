@@ -130,18 +130,21 @@ public class Player {
         this.myHand = myHand;
     }
 
-    public void playWord(Word word) {
-        if (word.check()) {
-            this.totalScore += word.scoreWord();
-        }
-
-    }
-
+//    public void playWord(Word word) {
+//        if (word.check()) {
+//            this.totalScore += word.scoreWord();
+//        }
+//
+//    }
 //    public Hand getHandView() {
 //        return HandView.setHand(myHand);
 //    }
     public void setName(String newName) {
         this.name = newName;
+    }
+
+    public void setTotalScore(int wordScore) {
+        this.totalScore += wordScore;
     }
 
     public void pass() {

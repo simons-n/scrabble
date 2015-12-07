@@ -32,6 +32,7 @@ public class Game implements Serializable {
     ArrayList<Player> playerList = new ArrayList();
     Player curPlayer;
     transient Player gameOwner;
+    private ArrayList<String> wordsPlayed = new ArrayList();
 
     //make game take no parameters
     //create an addPlayer class to add player to the game once it is already created
@@ -44,6 +45,14 @@ public class Game implements Serializable {
     public Game(GameSize gameSize, Player gameOwner) {
         this.gameSize = gameSize;
         this.gameOwner = gameOwner;
+    }
+
+    public void addWordToWordsPlayedList(String wordToAdd) {
+        wordsPlayed.add(wordToAdd);
+    }
+
+    public ArrayList<String> getWordsPlayed() {
+        return wordsPlayed;
     }
 
     public void setTheBoard(Board board) {

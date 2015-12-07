@@ -31,11 +31,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -62,6 +58,7 @@ public class ScrabbleController implements ActionListener, MouseListener {
     private JLabel[] jLabelHand;
     private JLabel[][] grid;
     private Stack undoStack = new Stack(9);
+    private int mostRecentScore = 0;
 
     public ScrabbleController(ScrabbleBoard view) {
         this.view = view;
@@ -72,6 +69,7 @@ public class ScrabbleController implements ActionListener, MouseListener {
         this.jLabelHand = this.handView.getJLabelHand();
         this.board = player.getMyBoard();
         this.grid = board.getGrid();
+        word = new Word(grid, game);
         //this.grid = view.getPlayerBoard().getGrid();
         //this.hand = player.getMyHand();
         this.view.getShuffleBtn().addActionListener(this);
@@ -135,13 +133,44 @@ public class ScrabbleController implements ActionListener, MouseListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == view.getPlayBtn()) //check validity, score word, and end turn
         {
-            //word.setTilesInWord(null, null);   Still have to figure out how we are going to figure out what word they made
-            if (word.check() == true) {
-                word.scoreWord();
-            } else {
-                JOptionPane.showMessageDialog(null,
-                                              "That's not a valid word! Please try again.");
-            }
+//            int xDirStart = word.findStartOfWordXDir(gridXCoord, gridYCoord);
+//            System.out.println("x dir start" + xDirStart);
+//            int xDirEnd = word.findEndOfWordXDir(gridXCoord, gridYCoord);
+//            System.out.println("x dir end" + xDirEnd);
+//            int yDir = word.findStartOfWordYDir(gridXCoord, gridYCoord);
+//            System.out.println("y dir start " + yDir);
+//            String xDirWord = word.getXDirWordFromGrid(xDirStart, xDirEnd, yDir);
+//            System.out.println("xDirWord is " + xDirWord);
+
+//            int yDirStart = word.findStartOfWordHorizDir(gridXCoord, gridYCoord);
+//            System.out.println("y dir start" + yDirStart);
+//            int yDirEnd = word.findEndOfWordHorizDir(gridXCoord, gridYCoord);
+//            System.out.println("y dir end" + yDirEnd);
+//            int xDir = word.findStartOfWordVertDir(gridXCoord, gridYCoord);
+//            System.out.println("x dir start " + xDir);
+//            String yDirWord = word.getHorizDirWordFromGrid(yDirStart, yDirEnd, xDir);
+//            System.out.println("yDirWord is " + yDirWord);
+//
+//            Word wordToScore = null;
+//            try {
+//                wordToScore = new Word(yDirWord);
+//            } catch (IOException ex) {
+//                Logger.getLogger(ScrabbleController.class.getName()).log(
+//                        Level.SEVERE,
+//                        null,
+//                        ex);
+//            }
+//            //word.setTilesInWord(null, null);   Still have to figure out how we are going to figure out what word they made
+//            if (wordToScore.check() == true) {
+//                System.out.println("it's a word!");
+//                System.out.println("score of word " + wordToScore.scoreWord());
+//
+//                mostRecentScore = wordToScore.scoreWord();
+//            } else {
+//                JOptionPane.showMessageDialog(null,
+//                                              "That's not a valid word! Please try again.");
+//            }
+            mostRecentScore = word.scoreWord(gridXCoord, gridYCoord);
 
         } else if (e.getSource() == view.getSwapBtn()) //pickUp tile from Bag, switch with tile selected, and end turn
         {
@@ -151,20 +180,26 @@ public class ScrabbleController implements ActionListener, MouseListener {
 //            game.setTheBoard(view.getMainBoard());
 //            game.updatePlayerBoards();
         } else if (e.getSource() == view.getPassBtn()) {
-            //change current player to next player, and end turn
-            try {
 
-                player.getClientServer().updateServer();
-            } catch (IOException ex) {
-                Logger.getLogger(ScrabbleController.class.getName()).log(
-                        Level.SEVERE,
-                        null,
-                        ex);
+            player.setTotalScore(mostRecentScore);
+            while (hand.getHandSize() < 7) {
+                hand.addTile(tilebag.draw());
+                handView.setJLabelHand(handView.setHand(hand));
             }
 
-            game.setTheBoard(view.getMainBoard());
-            game.updatePlayerBoards();
-
+            //change current player to next player, and end turn
+//            try {
+//
+//                player.getClientServer().updateServer();
+//            } catch (IOException ex) {
+//                Logger.getLogger(ScrabbleController.class.getName()).log(
+//                        Level.SEVERE,
+//                        null,
+//                        ex);
+//            }
+//
+//            game.setTheBoard(view.getMainBoard());
+//            game.updatePlayerBoards();
         } else if (e.getSource() == view.getShuffleBtn()) {
             System.out.println("tried to shuffle");
             System.out.println("pre-hand: " + hand);
@@ -186,6 +221,7 @@ public class ScrabbleController implements ActionListener, MouseListener {
             panel.remove(boardLabel);
             grid[x][y] = new JLabel(board.getLabel(x, y));
             panel.add(grid[x][y]);
+            addBoardMouseListeners();
 
             // add tile back in to hand, to update handview
             //this.hand.addTileFromBoard(tile);
@@ -491,8 +527,8 @@ public class ScrabbleController implements ActionListener, MouseListener {
 
             tileSelected = null;
             spaceSelected = null;
-            gridXCoord = 0;
-            gridYCoord = 0;
+//            gridXCoord = 0;
+//            gridYCoord = 0;
 
             ((Component) e.getSource()).removeMouseListener(this);
         }
