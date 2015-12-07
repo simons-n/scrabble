@@ -48,9 +48,6 @@ import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
  */
 public class ScrabbleController implements ActionListener, MouseListener {
 // connects model to view
-    private int whenBlankTileIsPlayed;
-    private int undoCounter = 0;
-    private int tileSelectedCounter = 0;
     private ScrabbleBoard view;
     private Board board;
     private HandView handView;
@@ -175,7 +172,6 @@ public class ScrabbleController implements ActionListener, MouseListener {
                 int newScore = player.getTotalScore() + score;
                 player.setTotalScore(newScore);
                 undoStack = new Stack(9);
-                tileSelectedCounter = 0;
                 if (hand.getHandSize() < 7 && word.check() == true) {
                     for (int x = 0; x < hand.getHandSize(); x++) {
                         Tile tile = tilebag.draw();
@@ -219,7 +215,7 @@ public class ScrabbleController implements ActionListener, MouseListener {
         } else if (e.getSource() == view.getUndoBtn()) {
 
             //pop the stack to get the tile with tile location in grid
-            if (undoStack.isEmpty() == false && undoCounter == whenBlankTileIsPlayed) {
+            if (undoStack.isEmpty() == false) { //add the check to see if it was blank is true
                 this.isUndoing = true;
 
                 Tile tile = undoStack.pop();
@@ -269,7 +265,6 @@ public class ScrabbleController implements ActionListener, MouseListener {
                 //this.hand.addTileFromBoard(blankTile);
 //                handView.revalidate();
                 System.out.println("Hand after undo: " + hand);
-                undoCounter++;
             } else if (undoStack.isEmpty() == false) {
                 this.isUndoing = true;
                 System.out.println("Hand before undo: " + hand);
@@ -348,7 +343,6 @@ public class ScrabbleController implements ActionListener, MouseListener {
                 System.out.println(
                         "TileSelected is :" + jLabelHand[i].getToolTipText());
                 if (jLabelHand[i].getToolTipText() == "BLANK") {
-                    whenBlankTileIsPlayed = tileSelectedCounter;
                     Tile newTile = view.createBlankTile();
                     Tile tile = this.hand.getTile(i);
                     this.hand.switchTiles(tile, newTile);
