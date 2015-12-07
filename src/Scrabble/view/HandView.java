@@ -61,6 +61,7 @@ public class HandView extends javax.swing.JPanel {
     private JLabel[] jLabelHand;
     private TileBag tileBag;
     private boolean isDrawing;
+    private Hand playerHand;
     private boolean isTurnOver = false;
 
     public HandView(Hand myHand) { //use this one to start the game
@@ -83,6 +84,7 @@ public class HandView extends javax.swing.JPanel {
 //        return newHand;
 //    }
         //public Hand setHand(Hand myHand) {  //use this one during the game when updated view
+        this.playerHand = myHand;
         this.jLabelHand = new JLabel[7];
         this.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
         javax.swing.border.Border grayBorder = BorderFactory.createLineBorder(
@@ -95,8 +97,13 @@ public class HandView extends javax.swing.JPanel {
 //        createTileListeners();
     }
 
-    public JLabel[] setHand(Hand myHand) {
+    public JLabel[] setHand(Hand myHand, boolean isUndo) {
+        this.playerHand = myHand;
         this.isDrawing = false;
+        if (isUndo == true) {
+            return setHandAfterUndo(myHand);
+        }
+        JLabel[] handToAddTo = null;
         for (int x = 0; x < myHand.getTilesInHand().size(); x++) {
             Tile tile = myHand.getTilesInHand().get(x);
             if (isTurnOver == true) {
@@ -106,13 +113,31 @@ public class HandView extends javax.swing.JPanel {
 
                 }
                 //with this uncommented, remove works but shuffle doesn't
-                findTileInHand(tile, x);
+                findTileInHand(jLabelHand, tile, x, false);
             }
             //with this uncommented, shuffle works but remove doesn't
-            findTileInHand(tile, x);
+
+//            if (isUndoing == true) {
+//                handToAddTo = new JLabel[playerHand.getHandSize() + 1];
+//            } else {
+//                handToAddTo = jLabelHand;
+//            }
+            findTileInHand(jLabelHand, tile, x, false);
         }
+//        isUndoing = false;
+//        jLabelHand = handToAddTo;
         return jLabelHand;
         //setJLabelHand(myHand);
+    }
+
+    public JLabel[] setHandAfterUndo(Hand myHand) {
+        JLabel[] newLabelHand = new JLabel[myHand.getHandSize()];
+        for (int x = 0; x < myHand.getTilesInHand().size(); x++) {
+            Tile tile = myHand.getTilesInHand().get(x);
+            findTileInHand(newLabelHand, tile, x, true);
+        }
+        jLabelHand = newLabelHand;
+        return jLabelHand;
     }
 
     public void setJLabelHand(JLabel[] hand) {
@@ -121,97 +146,99 @@ public class HandView extends javax.swing.JPanel {
 
     public void drawTile(Tile newTile, int handLocation) {
         this.isDrawing = true;
-        findTileInHand(newTile, handLocation);
+        findTileInHand(jLabelHand, newTile, handLocation, false);
     }
 
-    public void findTileInHand(Tile tile, int handLocation) {
+    public void findTileInHand(JLabel[] handToAddTo, Tile tile, int handLocation,
+                               boolean isUndoing) {
+
         switch (tile.getLetter()) {
             case A:
-                addATile(this.jLabelHand, handLocation);
+                addATile(handToAddTo, handLocation, isUndoing);
                 break;
             case B:
-                addBTile(this.jLabelHand, handLocation);
+                addBTile(handToAddTo, handLocation, isUndoing);
                 break;
             case C:
-                addCTile(this.jLabelHand, handLocation);
+                addCTile(handToAddTo, handLocation, isUndoing);
                 break;
             case D:
-                addDTile(this.jLabelHand, handLocation);
+                addDTile(handToAddTo, handLocation, isUndoing);
                 break;
             case E:
-                addETile(this.jLabelHand, handLocation);
+                addETile(handToAddTo, handLocation, isUndoing);
                 break;
             case F:
-                addFTile(this.jLabelHand, handLocation);
+                addFTile(handToAddTo, handLocation, isUndoing);
                 break;
             case G:
-                addGTile(this.jLabelHand, handLocation);
+                addGTile(handToAddTo, handLocation, isUndoing);
                 break;
             case H:
-                addHTile(this.jLabelHand, handLocation);
+                addHTile(handToAddTo, handLocation, isUndoing);
                 break;
             case I:
-                addITile(this.jLabelHand, handLocation);
+                addITile(handToAddTo, handLocation, isUndoing);
                 break;
             case J:
-                addJTile(this.jLabelHand, handLocation);
+                addJTile(handToAddTo, handLocation, isUndoing);
                 break;
             case K:
-                addKTile(this.jLabelHand, handLocation);
+                addKTile(handToAddTo, handLocation, isUndoing);
                 break;
             case L:
-                addLTile(this.jLabelHand, handLocation);
+                addLTile(handToAddTo, handLocation, isUndoing);
                 break;
             case M:
-                addMTile(this.jLabelHand, handLocation);
+                addMTile(handToAddTo, handLocation, isUndoing);
                 break;
             case N:
-                addNTile(this.jLabelHand, handLocation);
+                addNTile(handToAddTo, handLocation, isUndoing);
                 break;
             case O:
-                addOTile(this.jLabelHand, handLocation);
+                addOTile(handToAddTo, handLocation, isUndoing);
                 break;
             case P:
-                addPTile(this.jLabelHand, handLocation);
+                addPTile(handToAddTo, handLocation, isUndoing);
                 break;
             case Q:
-                addQTile(this.jLabelHand, handLocation);
+                addQTile(handToAddTo, handLocation, isUndoing);
                 break;
             case R:
-                addRTile(this.jLabelHand, handLocation);
+                addRTile(handToAddTo, handLocation, isUndoing);
                 break;
             case S:
-                addSTile(this.jLabelHand, handLocation);
+                addSTile(handToAddTo, handLocation, isUndoing);
                 break;
             case T:
-                addTTile(this.jLabelHand, handLocation);
+                addTTile(handToAddTo, handLocation, isUndoing);
                 break;
             case U:
-                addUTile(this.jLabelHand, handLocation);
+                addUTile(handToAddTo, handLocation, isUndoing);
                 break;
             case V:
-                addVTile(this.jLabelHand, handLocation);
+                addVTile(handToAddTo, handLocation, isUndoing);
                 break;
             case W:
-                addWTile(this.jLabelHand, handLocation);
+                addWTile(handToAddTo, handLocation, isUndoing);
                 break;
             case X:
-                addXTile(this.jLabelHand, handLocation);
+                addXTile(handToAddTo, handLocation, isUndoing);
                 break;
             case Y:
-                addYTile(this.jLabelHand, handLocation);
+                addYTile(handToAddTo, handLocation, isUndoing);
                 break;
             case Z:
-                addZTile(this.jLabelHand, handLocation);
+                addZTile(handToAddTo, handLocation, isUndoing);
                 break;
             default:
-                addBlankTile(this.jLabelHand, handLocation);
+                addBlankTile(handToAddTo, handLocation, isUndoing);
                 break;
         }
     }
 
-    public void addATile(JLabel[] hand, int handLocation) {
-        if (this.isDrawing == false) {
+    public void addATile(JLabel[] hand, int handLocation, boolean isUndoing) {
+        if (this.isDrawing == false && isUndoing == false) {
             this.remove(hand[handLocation]);
         }
         hand[handLocation] = new JLabel(aTileImage);
@@ -222,8 +249,8 @@ public class HandView extends javax.swing.JPanel {
 
     }
 
-    public void addBTile(JLabel[] hand, int handLocation) {
-        if (this.isDrawing == false) {
+    public void addBTile(JLabel[] hand, int handLocation, boolean isUndoing) {
+        if (this.isDrawing == false && isUndoing == false) {
             this.remove(hand[handLocation]);
         }
         hand[handLocation] = new JLabel(bTileImage);
@@ -234,8 +261,8 @@ public class HandView extends javax.swing.JPanel {
 
     }
 
-    public void addCTile(JLabel[] hand, int handLocation) {
-        if (this.isDrawing == false) {
+    public void addCTile(JLabel[] hand, int handLocation, boolean isUndoing) {
+        if (this.isDrawing == false && isUndoing == false) {
             this.remove(hand[handLocation]);
         }
         hand[handLocation] = new JLabel(cTileImage);
@@ -246,8 +273,8 @@ public class HandView extends javax.swing.JPanel {
 
     }
 
-    public void addDTile(JLabel[] hand, int handLocation) {
-        if (this.isDrawing == false) {
+    public void addDTile(JLabel[] hand, int handLocation, boolean isUndoing) {
+        if (this.isDrawing == false && isUndoing == false) {
             this.remove(hand[handLocation]);
         }
         hand[handLocation] = new JLabel(dTileImage);
@@ -257,8 +284,8 @@ public class HandView extends javax.swing.JPanel {
         this.revalidate();
     }
 
-    public void addETile(JLabel[] hand, int handLocation) {
-        if (this.isDrawing == false) {
+    public void addETile(JLabel[] hand, int handLocation, boolean isUndoing) {
+        if (this.isDrawing == false && isUndoing == false) {
             this.remove(hand[handLocation]);
         }
         hand[handLocation] = new JLabel(eTileImage);
@@ -269,8 +296,8 @@ public class HandView extends javax.swing.JPanel {
 
     }
 
-    public void addFTile(JLabel[] hand, int handLocation) {
-        if (this.isDrawing == false) {
+    public void addFTile(JLabel[] hand, int handLocation, boolean isUndoing) {
+        if (this.isDrawing == false && isUndoing == false) {
             this.remove(hand[handLocation]);
         }
         hand[handLocation] = new JLabel(fTileImage);
@@ -280,8 +307,8 @@ public class HandView extends javax.swing.JPanel {
         this.revalidate();
     }
 
-    public void addGTile(JLabel[] hand, int handLocation) {
-        if (this.isDrawing == false) {
+    public void addGTile(JLabel[] hand, int handLocation, boolean isUndoing) {
+        if (this.isDrawing == false && isUndoing == false) {
             this.remove(hand[handLocation]);
         }
         hand[handLocation] = new JLabel(gTileImage);
@@ -291,8 +318,8 @@ public class HandView extends javax.swing.JPanel {
         this.revalidate();
     }
 
-    public void addHTile(JLabel[] hand, int handLocation) {
-        if (this.isDrawing == false) {
+    public void addHTile(JLabel[] hand, int handLocation, boolean isUndoing) {
+        if (this.isDrawing == false && isUndoing == false) {
             this.remove(hand[handLocation]);
         }
         hand[handLocation] = new JLabel(hTileImage);
@@ -302,8 +329,8 @@ public class HandView extends javax.swing.JPanel {
         this.revalidate();
     }
 
-    public void addITile(JLabel[] hand, int handLocation) {
-        if (this.isDrawing == false) {
+    public void addITile(JLabel[] hand, int handLocation, boolean isUndoing) {
+        if (this.isDrawing == false && isUndoing == false) {
             this.remove(hand[handLocation]);
         }
         hand[handLocation] = new JLabel(iTileImage);
@@ -313,8 +340,8 @@ public class HandView extends javax.swing.JPanel {
         this.revalidate();
     }
 
-    public void addJTile(JLabel[] hand, int handLocation) {
-        if (this.isDrawing == false) {
+    public void addJTile(JLabel[] hand, int handLocation, boolean isUndoing) {
+        if (this.isDrawing == false && isUndoing == false) {
             this.remove(hand[handLocation]);
         }
         hand[handLocation] = new JLabel(jTileImage);
@@ -324,8 +351,8 @@ public class HandView extends javax.swing.JPanel {
         this.revalidate();
     }
 
-    public void addKTile(JLabel[] hand, int handLocation) {
-        if (this.isDrawing == false) {
+    public void addKTile(JLabel[] hand, int handLocation, boolean isUndoing) {
+        if (this.isDrawing == false && isUndoing == false) {
             this.remove(hand[handLocation]);
         }
         hand[handLocation] = new JLabel(kTileImage);
@@ -335,8 +362,8 @@ public class HandView extends javax.swing.JPanel {
         this.revalidate();
     }
 
-    public void addLTile(JLabel[] hand, int handLocation) {
-        if (this.isDrawing == false) {
+    public void addLTile(JLabel[] hand, int handLocation, boolean isUndoing) {
+        if (this.isDrawing == false && isUndoing == false) {
             this.remove(hand[handLocation]);
         }
         hand[handLocation] = new JLabel(lTileImage);
@@ -346,8 +373,8 @@ public class HandView extends javax.swing.JPanel {
         this.revalidate();
     }
 
-    public void addMTile(JLabel[] hand, int handLocation) {
-        if (this.isDrawing == false) {
+    public void addMTile(JLabel[] hand, int handLocation, boolean isUndoing) {
+        if (this.isDrawing == false && isUndoing == false) {
             this.remove(hand[handLocation]);
         }
         hand[handLocation] = new JLabel(mTileImage);
@@ -357,8 +384,8 @@ public class HandView extends javax.swing.JPanel {
         this.revalidate();
     }
 
-    public void addNTile(JLabel[] hand, int handLocation) {
-        if (this.isDrawing == false) {
+    public void addNTile(JLabel[] hand, int handLocation, boolean isUndoing) {
+        if (this.isDrawing == false && isUndoing == false) {
             this.remove(hand[handLocation]);
         }
         hand[handLocation] = new JLabel(nTileImage);
@@ -368,8 +395,8 @@ public class HandView extends javax.swing.JPanel {
         this.revalidate();
     }
 
-    public void addOTile(JLabel[] hand, int handLocation) {
-        if (this.isDrawing == false) {
+    public void addOTile(JLabel[] hand, int handLocation, boolean isUndoing) {
+        if (this.isDrawing == false && isUndoing == false) {
             this.remove(hand[handLocation]);
         }
         hand[handLocation] = new JLabel(oTileImage);
@@ -379,8 +406,8 @@ public class HandView extends javax.swing.JPanel {
         this.revalidate();
     }
 
-    public void addPTile(JLabel[] hand, int handLocation) {
-        if (this.isDrawing == false) {
+    public void addPTile(JLabel[] hand, int handLocation, boolean isUndoing) {
+        if (this.isDrawing == false && isUndoing == false) {
             this.remove(hand[handLocation]);
         }
         hand[handLocation] = new JLabel(pTileImage);
@@ -390,8 +417,8 @@ public class HandView extends javax.swing.JPanel {
         this.revalidate();
     }
 
-    public void addQTile(JLabel[] hand, int handLocation) {
-        if (this.isDrawing == false) {
+    public void addQTile(JLabel[] hand, int handLocation, boolean isUndoing) {
+        if (this.isDrawing == false && isUndoing == false) {
             this.remove(hand[handLocation]);
         }
         hand[handLocation] = new JLabel(qTileImage);
@@ -401,8 +428,8 @@ public class HandView extends javax.swing.JPanel {
         this.revalidate();
     }
 
-    public void addRTile(JLabel[] hand, int handLocation) {
-        if (this.isDrawing == false) {
+    public void addRTile(JLabel[] hand, int handLocation, boolean isUndoing) {
+        if (this.isDrawing == false && isUndoing == false) {
             this.remove(hand[handLocation]);
         }
         hand[handLocation] = new JLabel(rTileImage);
@@ -412,8 +439,8 @@ public class HandView extends javax.swing.JPanel {
         this.revalidate();
     }
 
-    public void addSTile(JLabel[] hand, int handLocation) {
-        if (this.isDrawing == false) {
+    public void addSTile(JLabel[] hand, int handLocation, boolean isUndoing) {
+        if (this.isDrawing == false && isUndoing == false) {
             this.remove(hand[handLocation]);
         }
         hand[handLocation] = new JLabel(sTileImage);
@@ -423,8 +450,8 @@ public class HandView extends javax.swing.JPanel {
         this.revalidate();
     }
 
-    public void addTTile(JLabel[] hand, int handLocation) {
-        if (this.isDrawing == false) {
+    public void addTTile(JLabel[] hand, int handLocation, boolean isUndoing) {
+        if (this.isDrawing == false && isUndoing == false) {
             this.remove(hand[handLocation]);
         }
         hand[handLocation] = new JLabel(tTileImage);
@@ -434,8 +461,8 @@ public class HandView extends javax.swing.JPanel {
         this.revalidate();
     }
 
-    public void addUTile(JLabel[] hand, int handLocation) {
-        if (this.isDrawing == false) {
+    public void addUTile(JLabel[] hand, int handLocation, boolean isUndoing) {
+        if (this.isDrawing == false && isUndoing == false) {
             this.remove(hand[handLocation]);
         }
         hand[handLocation] = new JLabel(uTileImage);
@@ -445,8 +472,8 @@ public class HandView extends javax.swing.JPanel {
         this.revalidate();
     }
 
-    public void addVTile(JLabel[] hand, int handLocation) {
-        if (this.isDrawing == false) {
+    public void addVTile(JLabel[] hand, int handLocation, boolean isUndoing) {
+        if (this.isDrawing == false && isUndoing == false) {
             this.remove(hand[handLocation]);
         }
         hand[handLocation] = new JLabel(vTileImage);
@@ -456,8 +483,8 @@ public class HandView extends javax.swing.JPanel {
 //        this.revalidate();
     }
 
-    public void addWTile(JLabel[] hand, int handLocation) {
-        if (this.isDrawing == false) {
+    public void addWTile(JLabel[] hand, int handLocation, boolean isUndoing) {
+        if (this.isDrawing == false && isUndoing == false) {
             this.remove(hand[handLocation]);
         }
         hand[handLocation] = new JLabel(wTileImage);
@@ -467,8 +494,8 @@ public class HandView extends javax.swing.JPanel {
         this.revalidate();
     }
 
-    public void addXTile(JLabel[] hand, int handLocation) {
-        if (this.isDrawing == false) {
+    public void addXTile(JLabel[] hand, int handLocation, boolean isUndoing) {
+        if (this.isDrawing == false && isUndoing == false) {
             this.remove(hand[handLocation]);
         }
         hand[handLocation] = new JLabel(xTileImage);
@@ -478,8 +505,8 @@ public class HandView extends javax.swing.JPanel {
         this.revalidate();
     }
 
-    public void addYTile(JLabel[] hand, int handLocation) {
-        if (this.isDrawing == false) {
+    public void addYTile(JLabel[] hand, int handLocation, boolean isUndoing) {
+        if (this.isDrawing == false && isUndoing == false) {
             this.remove(hand[handLocation]);
         }
         hand[handLocation] = new JLabel(yTileImage);
@@ -489,8 +516,8 @@ public class HandView extends javax.swing.JPanel {
         this.revalidate();
     }
 
-    public void addZTile(JLabel[] hand, int handLocation) {
-        if (this.isDrawing == false) {
+    public void addZTile(JLabel[] hand, int handLocation, boolean isUndoing) {
+        if (this.isDrawing == false && isUndoing == false) {
             this.remove(hand[handLocation]);
         }
         hand[handLocation] = new JLabel(zTileImage);
@@ -500,8 +527,8 @@ public class HandView extends javax.swing.JPanel {
         this.revalidate();
     }
 
-    public void addBlankTile(JLabel[] hand, int handLocation) {
-        if (this.isDrawing == false) {
+    public void addBlankTile(JLabel[] hand, int handLocation, boolean isUndoing) {
+        if (this.isDrawing == false && isUndoing == false) {
             this.remove(hand[handLocation]);
         }
         hand[handLocation] = new JLabel(blankTileImage);
@@ -672,8 +699,11 @@ public class HandView extends javax.swing.JPanel {
         return tileBag;
     }
 
-    public boolean isIsDrawing() {
+    public boolean getIsDrawing() {
         return isDrawing;
     }
 
+//    public void setIsUndoing(boolean isUndo) {
+//        this.isUndoing = isUndo;
+//    }
 }
