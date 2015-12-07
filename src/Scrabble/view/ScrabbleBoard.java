@@ -19,7 +19,9 @@ import Scrabble.model.Game;
 import Scrabble.model.Hand;
 import Scrabble.model.Player;
 import Scrabble.model.Stack;
+import Scrabble.model.Tile;
 import Scrabble.model.TileBag;
+import Scrabble.model.Val;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -28,8 +30,10 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.border.Border;
 
 /**
@@ -57,8 +61,10 @@ public class ScrabbleBoard extends JFrame {
     private Board mainBoard;
     private HandView handView;
     private Player player;
+    private Hand hand;
     private Game game;
     private Stack undo = new Stack(9);
+    private Val val;
 
     public ScrabbleBoard(Player player) {
 
@@ -69,6 +75,7 @@ public class ScrabbleBoard extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         tileBag = game.getTileBag();
         this.playerBoard = player.getMyBoard();
+        this.hand = player.getMyHand();
 
         //center panel
         //Board board = new Board();
@@ -89,9 +96,8 @@ public class ScrabbleBoard extends JFrame {
 
         //bottom panel -- where tiles are added to hand
         player = game.getCurPlayer();
-        Hand myHand = player.getMyHand();
-        System.out.println(myHand);
-        handView = new HandView(myHand);
+        //System.out.println(myHand);
+        handView = new HandView(this.hand);
         //hand.createNewHand(tileBag);
 
         //right panel
@@ -204,5 +210,33 @@ public class ScrabbleBoard extends JFrame {
 //display how many tiles are left in bag
     public Board getPlayerBoard() {
         return playerBoard;
+    }
+
+    public Tile createBlankTile() {
+        String tileStr = JOptionPane.showInputDialog(this,
+                                                     "Enter the letter you want this tile to be:",
+                                                     "Blank Tile",
+                                                     DISPOSE_ON_CLOSE);
+        if (tileStr == null) {
+            //do nothing
+        } else {
+            String upCaseStr = tileStr.toUpperCase();
+            JLabel label = null;
+
+            //System.out.println("tile str : " + upCaseStr);
+            try {
+                Val tileValue = val.valueOf(upCaseStr);
+                Tile newTile = new Tile(tileValue);
+                return newTile;
+
+            } catch (Exception exc) {
+                JOptionPane.showMessageDialog(this,
+                                              tileStr + " is an illegal input, you need to only type the letter of a tile.",
+                                              "Error",
+                                              DISPOSE_ON_CLOSE);
+                //createBlankTile();
+            }
+        }
+        return createBlankTile();
     }
 }
