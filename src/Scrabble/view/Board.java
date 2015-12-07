@@ -56,6 +56,21 @@ public class Board extends javax.swing.JPanel {
                 JPanel panel = new JPanel();
                 panel.setBackground(Color.WHITE);
                 JLabel label = new JLabel(getLabel(x, y));
+                if (getLabel(x, y) == tripleWordImage) {
+                    label.setToolTipText("Triple Word");
+                } else if (getLabel(x, y) == tripleLetterImage) {
+                    label.setToolTipText("Triple Letter");
+
+                } else if (getLabel(x, y) == doubleWordImage) {
+                    label.setToolTipText("Double Word");
+                } else if (getLabel(x, y) == doubleLetterImage) {
+                    label.setToolTipText("Double Letter");
+                } else if (getLabel(x, y) == starImage) {
+                    label.setToolTipText("Star");
+
+                } else if (getLabel(x, y) == backgroundImage) {
+                    label.setToolTipText("Square");
+                }
                 //panel.setPreferredSize(new Dimension(32, 50));
                 panel.setBorder(grayBorder);
                 panel.add(label);
