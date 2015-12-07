@@ -637,7 +637,6 @@ public class ScrabbleController implements ActionListener, MouseListener {
                     undoStack.push(tile);
                     break;
             }
-            tileSelectedCounter++;
             //http://stackoverflow.com/questions/2561690/placing-component-on-glass-pane/2562685#2562685
             JPanel panel = (JPanel) board.getComponent(
                     gridYCoord + gridXCoord * 15);
