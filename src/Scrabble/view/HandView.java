@@ -109,7 +109,7 @@ public class HandView extends javax.swing.JPanel {
                 findTileInHand(tile, x);
             }
             //with this uncommented, shuffle works but remove doesn't
-            //findTileInHand(tile, x);
+            findTileInHand(tile, x);
         }
         return jLabelHand;
         //setJLabelHand(myHand);
