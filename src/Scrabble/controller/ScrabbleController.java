@@ -190,8 +190,11 @@ public class ScrabbleController implements ActionListener, MouseListener {
                 JLabel boardLabel = (JLabel) panel.getComponent(0);
                 panel.remove(boardLabel);
                 JLabel newLabel = new JLabel(board.getLabel(x, y));
-                panel.add(newLabel);
+
+                squares[x][y] = panel;
                 grid[x][y] = newLabel;
+                panel.add(newLabel);
+
                 //view.getMyGrid()[x][y].addMouseListener(this);
                 addBoardMouseListeners();
                 board.revalidate();
