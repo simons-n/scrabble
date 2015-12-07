@@ -194,6 +194,9 @@ public class ScrabbleController implements ActionListener, MouseListener {
             System.out.println("player current score " + player.getTotalScore());
             System.out.println("tile bag size " + tilebag.getTileBagSize());
             int tilesDrawn = 0;
+            for (JLabel jLabelTile : handView.getJLabelHand()) {
+                handView.remove(jLabelTile);
+            }
 
             while (hand.getHandSize() < 7) {
                 System.out.println("hand size " + hand.getHandSize());
@@ -203,9 +206,8 @@ public class ScrabbleController implements ActionListener, MouseListener {
                 System.out.println("hand after tiles drawn: " + hand);
 
             }
-            for (JLabel jLabelTile : handView.getJLabelHand()) {
-                handView.remove(jLabelTile);
-            }
+
+            handView.setHand(hand, true);
             System.out.println("length of hand: " + hand.getHandSize());
 
             //handView.drawAtEndOfTurn(hand);
@@ -219,6 +221,7 @@ public class ScrabbleController implements ActionListener, MouseListener {
             score = 0;
             gridXCoord = -1;
             gridYCoord = -1;
+            turnCounter++;
 
 //            bonusType.clear();
 //            letterForBonus.clear();
