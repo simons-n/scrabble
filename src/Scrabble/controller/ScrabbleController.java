@@ -120,12 +120,15 @@ public class ScrabbleController implements ActionListener, MouseListener {
         //this only updates the board not handhandView.addMouseListener();
         // when shuffle is pressed change HandView to HandView(Hand myhand)
 
-        handView.setJLabelHand(handView.setHand(hand));
-        System.out.println("jlabelhand after updated = " + handView);
+        //handView.setJLabelHand(handView.setHand(hand));
+        handView.setHand(hand);
+//        System.out.println("jlabelhand after updated = " + handView);
         board.setGrid(grid);
         view.setPlayerBoard(board);
-        addHandMouseListeners();
+
         view.repaint();
+        addBoardMouseListeners();
+        addHandMouseListeners();
         //
         // when pass is pressed change view to next players hand
         // when swap is pressed change HandView to HandView(Hand myhand) *** make the dialog box show up
@@ -174,6 +177,7 @@ public class ScrabbleController implements ActionListener, MouseListener {
         } else if (e.getSource() == view.getUndoBtn()) {
             //pop the stack to get the tile with tile location in grid
             if (undoStack.isEmpty() == false) {
+                System.out.println("Hand before undo: " + hand);
                 Tile tile = undoStack.pop();
                 int x = tile.getX();
                 int y = tile.getY();
@@ -184,10 +188,15 @@ public class ScrabbleController implements ActionListener, MouseListener {
                 panel.remove(boardLabel);
                 JLabel newLabel = new JLabel(board.getLabel(x, y));
                 panel.add(newLabel);
+                view.getMyGrid()[x][y].addMouseListener(this);
+                board.revalidate();
 
                 // add tile back in to hand, to update handview
                 this.hand.addTileFromBoard(tile);
-            //change the location of the tile to a background square **** figure out how to know if it was a TLW etc
+                handView.revalidate();
+
+                System.out.println("Hand after undo: " + hand);
+                //change the location of the tile to a background square **** figure out how to know if it was a TLW etc
                 //clear stack when turn is ended
             } else {
                 JOptionPane.showMessageDialog(view,
@@ -264,10 +273,10 @@ public class ScrabbleController implements ActionListener, MouseListener {
                     spaceSelected = player.getMyBoard().getGrid()[i][j];
                     gridXCoord = i;
                     gridYCoord = j;
-                    System.out.println("x coord " + gridXCoord);
-                    System.out.println("y coord " + gridYCoord);
-                    System.out.println(
-                            "space selected " + spaceSelected.getToolTipText());
+//                    System.out.println("x coord " + gridXCoord);
+//                    System.out.println("y coord " + gridYCoord);
+//                    System.out.println(
+//                            "space selected " + spaceSelected.getToolTipText());
                 }
             }
         }
