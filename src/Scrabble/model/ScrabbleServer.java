@@ -60,6 +60,11 @@ public class ScrabbleServer {
 //        this.theGame = new Game(gameSize, creator);
 //        return this.theGame;
 //    }
+    /**
+     * Creates the Game
+     *
+     * @param gameSize
+     */
     public void createGame(GameSize gameSize) {
         this.theGame = new Game(gameSize, new Player("caroline"));
 

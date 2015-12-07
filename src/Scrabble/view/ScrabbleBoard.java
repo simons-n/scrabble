@@ -75,7 +75,7 @@ public class ScrabbleBoard extends JFrame {
         //left panel
         leftPanel.setSize(new Dimension(60, 300));
         leftPanel.setLayout(new GridLayout(2, 1));
-        scoresLabel.setText("SCORES \n Player 1: 0 \n Player 2: 0"); // get players scores from scoring method from word class, and get amount of players from JOptionPane
+        scoresLabel.setText("SCORES \n Player 1: " + player.getTotalScore());// \n Player 2: 0"); // get players scores from scoring method from word class, and get amount of players from JOptionPane
         scoresLabel.setEditable(false);
         scoresLabel.setBorder(blackBorder);
         scoresLabel.setBackground(Color.PINK);
