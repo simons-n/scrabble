@@ -137,19 +137,6 @@ public class Player {
         this.myHand = myHand;
     }
 
-    /**
-     * Checks if the word is valid then scores the word and adds it to the
-     * players total score. This is called when the play button is pressed
-     *
-     * @param word
-     */
-    public void playWord(Word word) {
-        if (word.check()) {
-            this.totalScore += word.scoreWord();
-        }
-
-    }
-
     public void setName(String newName) {
         this.name = newName;
     }
