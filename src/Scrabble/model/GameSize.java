@@ -2,20 +2,21 @@
  * CSCI205 - Software Engineering and Design
  * Fall 2015
  *
- * Name: NAMES of team members
+ * Name: Jenna Slusar, Caroline Whitman, and Nick Simons
  * Date: Nov 20, 2015
  * Time: 10:35:00 AM
  *
  * Project: csci205FinalProject
  * Package: Scrabble.model
  * File: GameSize
- * Description:
- *
+ * Description: An enum that is used in networking to create the size of the game.
  * ****************************************
  */
 package Scrabble.model;
 
 /**
+ * This enum is called in the startbox class when the JOptionPane window prompts
+ * the user for the number of players.
  *
  * @author calw001
  */

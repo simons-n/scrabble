@@ -2,14 +2,14 @@
  * CSCI205 - Software Engineering and Design
  * Fall 2015
  *
- * Name: NAMES of team members
+ * Name: Jenna Slusar, Caroline Whitman, Nick Simons
  * Date: Nov 18, 2015
  * Time: 10:16:20 AM
  *
  * Project: csci205FinalProject
  * Package: Scrabble.view
  * File: HandView
- * Description:
+ * Description: Creates the players hand that they see in the GUI
  *
  * ****************************************
  */
@@ -64,26 +64,7 @@ public class HandView extends javax.swing.JPanel {
     private Hand playerHand;
     private boolean isTurnOver = false;
 
-    public HandView(Hand myHand) { //use this one to start the game
-//        setHand(player.hand);
-        //}
-
-//    public Hand createNewHand(TileBag tilebag) {
-//        Hand newHand = new Hand(tilesInHand);
-//        this.hand = new JLabel[7];
-//        this.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
-//        //this.setBackground(java.awt.Color.PINK);
-//        javax.swing.border.Border grayBorder = BorderFactory.createLineBorder(
-//                java.awt.Color.WHITE);
-//        setBorder(grayBorder);
-//        for (int x = 0; x < 7; x++) {
-//            Tile newTile = tilebag.draw();//get tiles from tile bag
-//            newHand.addTileFromBoard(newTile); //addTiles to hand class
-//            drawTile(newTile, x);
-//        }
-//        return newHand;
-//    }
-        //public Hand setHand(Hand myHand) {  //use this one during the game when updated view
+    public HandView(Hand myHand) {
         this.playerHand = myHand;
         this.jLabelHand = new JLabel[7];
         this.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
@@ -94,9 +75,16 @@ public class HandView extends javax.swing.JPanel {
             Tile tile = myHand.getTile(x);
             drawTile(tile, x);
         }
-//        createTileListeners();
     }
 
+    /**
+     * This method is called to update the GUI after the first hand is created,
+     * which is why isDrawing is false.
+     *
+     * @param myHand
+     * @param isUndo
+     * @return
+     */
     public JLabel[] setHand(Hand myHand, boolean isUndo) {
         this.playerHand = myHand;
         this.isDrawing = false;
@@ -115,21 +103,20 @@ public class HandView extends javax.swing.JPanel {
                 //with this uncommented, remove works but shuffle doesn't
                 findTileInHand(jLabelHand, tile, x, false);
             }
-            //with this uncommented, shuffle works but remove doesn't
 
-//            if (isUndoing == true) {
-//                handToAddTo = new JLabel[playerHand.getHandSize() + 1];
-//            } else {
-//                handToAddTo = jLabelHand;
-//            }
             findTileInHand(jLabelHand, tile, x, false);
         }
-//        isUndoing = false;
-//        jLabelHand = handToAddTo;
         return jLabelHand;
-        //setJLabelHand(myHand);
     }
 
+    /**
+     * This method is called after the undo button is pressed, it adds JLabel
+     * tiles to the new JLabel hand while isUndooing is true, so no JLabels are
+     * removed
+     *
+     * @param myHand
+     * @return
+     */
     public void drawAtEndOfTurn(Hand myHand) {
         JLabel[] newLabelHand = this.getJLabelHand();
         for (int x = 0; x < newLabelHand.length; x++) {
@@ -152,11 +139,27 @@ public class HandView extends javax.swing.JPanel {
         this.jLabelHand = hand;
     }
 
+    /**
+     * This method is called to create the new hand, which is why isDrawing is
+     * true because it is drawing new JLabels
+     *
+     * @param newTile
+     * @param handLocation
+     */
     public void drawTile(Tile newTile, int handLocation) {
         this.isDrawing = true;
         findTileInHand(jLabelHand, newTile, handLocation, false);
     }
 
+    /**
+     * This method chooses which tile JLabel is to be added to the JLabel hand
+     * by using a switch
+     *
+     * @param handToAddTo
+     * @param tile
+     * @param handLocation
+     * @param isUndoing
+     */
     public void findTileInHand(JLabel[] handToAddTo, Tile tile, int handLocation,
                                boolean isUndoing) {
 
@@ -245,6 +248,19 @@ public class HandView extends javax.swing.JPanel {
         }
     }
 
+    /**
+     * each add a tile method removes the JLabel from the hand at the location
+     * param given, if it is not undoing(the undo button pressed) and not
+     * drawing(creating the first hand). Then changes the JLabel to a new JLabel
+     * of the specific tile and adds it to the hand, which updates the GUI
+     *
+     * We realize that this could be refactored more because its the same code
+     * over and over again, we would have refactored it if we had time
+     *
+     * @param hand
+     * @param handLocation
+     * @param isUndoing
+     */
     public void addATile(JLabel[] hand, int handLocation, boolean isUndoing) {
         if (this.isDrawing == false && isUndoing == false) {
             this.remove(hand[handLocation]);
@@ -488,7 +504,7 @@ public class HandView extends javax.swing.JPanel {
         hand[handLocation].setToolTipText("V");
         hand[handLocation].setPreferredSize(new Dimension(30, 30));
         add(hand[handLocation]);
-//        this.revalidate();
+        this.revalidate();
     }
 
     public void addWTile(JLabel[] hand, int handLocation, boolean isUndoing) {
@@ -560,33 +576,6 @@ public class HandView extends javax.swing.JPanel {
         }
         return s;
     }
-//    public void createTileListeners() {
-//        for (JLabel tile : jLabelHand) {
-//            tile.addMouseListener(new MouseListener() {
-//
-//                @Override
-//                public void mouseClicked(MouseEvent e) {
-//                }
-//
-//                @Override
-//                public void mousePressed(MouseEvent e) {
-//                }
-//
-//                @Override
-//                public void mouseReleased(MouseEvent e) {
-//                }
-//
-//                @Override
-//                public void mouseEntered(MouseEvent e) {
-//                }
-//
-//                @Override
-//                public void mouseExited(MouseEvent e) {
-//                }
-//            });
-//        }
-//        //System.out.println("created listeners");
-//    }
 
     public JLabel[] getjLabelHand() {
         return jLabelHand;
@@ -700,9 +689,6 @@ public class HandView extends javax.swing.JPanel {
         return blankTileImage;
     }
 
-//    public ArrayList<Tile> getTilesInHand() {
-//        return tilesInHand;
-//    }
     public TileBag getTileBag() {
         return tileBag;
     }
@@ -710,8 +696,4 @@ public class HandView extends javax.swing.JPanel {
     public boolean getIsDrawing() {
         return isDrawing;
     }
-
-//    public void setIsUndoing(boolean isUndo) {
-//        this.isUndoing = isUndo;
-//    }
 }

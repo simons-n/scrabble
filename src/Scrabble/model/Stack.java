@@ -9,14 +9,18 @@
  * Project: csci205FinalProject
  * Package: Scrabble.model
  * File: Stack
- * Description:
- *
+ * Description: Creates a stack array of tile objects.
  * ****************************************
  */
 package Scrabble.model;
 
 /**
- * http://www.tutorialspoint.com/javaexamples/data_stack.htm
+ * Creates a stack array of tile objects. Used for the undo button
+ *
+ * This code was based off of information found at tutorialspoint.com
+ *
+ * @see
+ * <http://www.tutorialspoint.com/javaexamples/data_stack.htm>
  *
  * @author jms107
  */
