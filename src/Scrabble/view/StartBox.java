@@ -2,14 +2,14 @@
  * CSCI205 - Software Engineering and Design
  * Fall 2015
  *
- * Name: NAMES of team members
+ * Name: Jenna Slusar, Caroline Whitman, Nick Simons
  * Date: Nov 17, 2015
  * Time: 6:20:40 PM
  *
  * Project: csci205FinalProject
  * Package: Scrabble.view
  * File: StartBox
- * Description:
+ * Description: This is the original start GUI that runs the game.
  *
  * ****************************************
  */
@@ -18,6 +18,9 @@ package Scrabble.view;
 import javax.swing.JButton;
 
 /**
+ *
+ * You can start a new game, add an existing one, and get the IP of an existing
+ * game to join, but this is mostly for networking
  *
  * @author calw001
  */

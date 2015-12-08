@@ -9,8 +9,7 @@
  * Project: csci205FinalProject
  * Package: Scrabble.model
  * File: Player
- * Description: The actor playing the Scrabble game, and holds all the functions a player can do
- *
+ * Description: A class that holds the players name, hand, score, board, and turn.
  * ****************************************
  */
 package Scrabble.model;
@@ -54,14 +53,17 @@ public class Player {
         this.name = name;
         //this.inGame = true;
         this.scrabbleServer = server;
-        System.out.println(
-                "this is the scrabbleServer in player: " + scrabbleServer);
         this.game = this.scrabbleServer.getTheGame();
         this.mainBoard = game.getTheBoard();
         this.tileBag = this.game.getTileBag();
         this.myHand = new Hand(newHand(), this);
     }
 
+    /**
+     * This method creates the scrabbleBoard (we realize that it is probably not
+     * best to call a main method here, but couldn't figure out anything else to
+     * do)
+     */
     public void createScrabbleMain() {
         ScrabbleMain newScrabbleMain = new ScrabbleMain(this);
         String[] a = {""};
@@ -76,11 +78,6 @@ public class Player {
         this.myScrabbleBoard = scrabbleBoard;
     }
 
-//    public Player(String name, int totalScore, Hand myHand) {
-//        this.name = name;
-//        this.totalScore = totalScore;
-//        this.myHand = myHand;
-//    }
     public void setMyBoard(Board newBoard) {
         this.myBoard = newBoard;
     }
@@ -121,6 +118,12 @@ public class Player {
         return skipTurn;
     }
 
+    /**
+     * This creates a new list of tiles that are drawn randomly from the tile
+     * bag and added to the hand
+     *
+     * @return hand
+     */
     public ArrayList<Tile> newHand() {
         ArrayList<Tile> hand = new ArrayList<>(7);
         for (int i = 0; i < 7; i++) {
@@ -134,6 +137,12 @@ public class Player {
         this.myHand = myHand;
     }
 
+    /**
+     * Checks if the word is valid then scores the word and adds it to the
+     * players total score. This is called when the play button is pressed
+     *
+     * @param word
+     */
     public void playWord(Word word) {
         if (word.check()) {
             this.totalScore += word.scoreWord();
@@ -141,30 +150,9 @@ public class Player {
 
     }
 
-//    public Hand getHandView() {
-//        return HandView.setHand(myHand);
-//    }
     public void setName(String newName) {
         this.name = newName;
     }
-
-    public void pass() {
-        // This will pass the turn to the next player in the network, somehow
-    }
-
-//    public void switchTilesInHand() {
-//        setSkipTurn();
-//        for (Tile tile : discardPile) {
-//            myHand.addTileFromBag(tileBag);
-//        }
-//        for (Tile tile : discardPile) {
-//            tileBag.addTile(tile);
-//        }
-//    }
-    public void shuffleTiles() {
-
-    }
-    //rearrange tiles will be handled in GUI
 
     public boolean isInGame() {
         return inGame;

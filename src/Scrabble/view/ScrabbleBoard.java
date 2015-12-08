@@ -41,11 +41,9 @@ import javax.swing.border.Border;
  * @author jms107
  */
 public class ScrabbleBoard extends JFrame {
-    //private ArrayList<Tile> tilesInBag = new ArrayList<>();
-    private TileBag tileBag;// = new TileBag();
 
-    //private final JPanel handPanel = new JPanel();
-    //private final JLabel handLabel = new JLabel();
+    private TileBag tileBag;
+
     private final JPanel actionPanel = new JPanel();
     private final JButton playBtn = new JButton("Play Word");
     private final JButton swapBtn = new JButton("Swap");
@@ -77,9 +75,6 @@ public class ScrabbleBoard extends JFrame {
         this.playerBoard = player.getMyBoard();
         this.hand = player.getMyHand();
 
-        //center panel
-        //Board board = new Board();
-        //left panel
         leftPanel.setSize(new Dimension(60, 300));
         leftPanel.setLayout(new GridLayout(2, 1));
         scoresLabel.setText("SCORES \n Player 1: " + player.getTotalScore());// \n Player 2: 0"); // get players scores from scoring method from word class, and get amount of players from JOptionPane
@@ -96,13 +91,11 @@ public class ScrabbleBoard extends JFrame {
 
         //bottom panel -- where tiles are added to hand
         player = game.getCurPlayer();
-        //System.out.println(myHand);
         handView = new HandView(this.hand);
-        //hand.createNewHand(tileBag);
 
         //right panel
         actionPanel.setLayout(new GridLayout(8, 1));
-        String size = tileBag.getTileBagSizeStr();// try to center letters or bold them
+        String size = tileBag.getTileBagSizeStr();
         tileBagLabel.setText("      TILES LEFT \n          " + size); // get the number of tiles from size of bag using getTileBagSize() //should equal 93!! fix
         tileBagLabel.setEditable(false);
         tileBagLabel.setBorder(blackBorder);
@@ -122,7 +115,6 @@ public class ScrabbleBoard extends JFrame {
         add(handView, BorderLayout.SOUTH);
         add(leftPanel, BorderLayout.WEST);
         add(actionPanel, BorderLayout.EAST);
-        //add(board, BorderLayout.CENTER);
         add(playerBoard, BorderLayout.CENTER);
         pack();
     }
@@ -185,47 +177,29 @@ public class ScrabbleBoard extends JFrame {
         return mainBoard;
     }
 
-    //When tile is added to the board, add the tile to the undo stack with its location by using the push function
-//    /**
-//     * @param args the command line arguments
-//     */
-//    public static void main(String[] args) {
-//        SwingUtilities.invokeLater(new Runnable() {
-//            @Override
-//            public void run() {
-//                ScrabbleBoard window = new ScrabbleBoard();
-//                window.setBackground(Color.BLUE);
-//                window.setTitle("Scrabble Game");
-//                window.setSize(900, 600);
-//                window.setVisible(true);
-//
-//            }
-//        });
-    //create GUI
-//display scores of all players
-//display player's hand
-//Play word button
-//Pass button (or skip turn)
-//Swap Tiles button
-//display how many tiles are left in bag
     public Board getPlayerBoard() {
         return playerBoard;
     }
 
+    /**
+     * This is called when a blank tile is selected to move onto the board. It
+     * switches the tile to whatever letter you want.
+     *
+     * @return newTile
+     */
     public Tile createBlankTile() {
         String tileStr = JOptionPane.showInputDialog(this,
                                                      "Enter the letter you want this tile to be:",
                                                      "Blank Tile",
                                                      DISPOSE_ON_CLOSE);
         if (tileStr == null) {
-            //do nothing
+            //do nothing, when cancel is pressed
         } else {
-            String upCaseStr = tileStr.toUpperCase();
+            String upCaseStr = tileStr.toUpperCase(); // makes it so you can enter a lower case or uppercase letter
             JLabel label = null;
 
-            //System.out.println("tile str : " + upCaseStr);
             try {
-                Val tileValue = val.valueOf(upCaseStr);
+                Val tileValue = val.valueOf(upCaseStr); // checks if letter is actually a tile val
                 Tile newTile = new Tile(tileValue);
                 return newTile;
 
@@ -234,7 +208,6 @@ public class ScrabbleBoard extends JFrame {
                                               tileStr + " is an illegal input, you need to only type the letter of a tile.",
                                               "Error",
                                               DISPOSE_ON_CLOSE);
-                //createBlankTile();
             }
         }
         return createBlankTile();
