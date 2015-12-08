@@ -95,7 +95,7 @@ public class Word {
 
         //check if word played is horizontal
         if (vertStart == vertEnd) {
-            System.out.println("word is horizontal");
+
             wordPlayed = getHorizDirWordFromGrid(horizStart, horizEnd, vertStart);
             if (check(wordPlayed) == false) {
                 JOptionPane.showMessageDialog(null,
@@ -105,7 +105,7 @@ public class Word {
             totalTurnScore += calculateScore(wordPlayed);
 
             for (int i = horizStart; i < horizEnd + 1; i++) {
-                System.out.println("checking crosses");
+
                 int start = findStartOfWordVertDir(vertStart, i);
                 int end = findEndOfWordVertDir(vertStart, i);
                 String crossWord = "";
@@ -113,7 +113,6 @@ public class Word {
 
                 if (start == end || crossWord.length() == 0) {
 
-                    System.out.println("score " + totalTurnScore);
                     return totalTurnScore;
                 }
 
@@ -131,9 +130,9 @@ public class Word {
             }
         } //check if word played is vertical
         else if (horizStart == horizEnd) {
-            System.out.println("word is vertical");
+
             wordPlayed = getVertDirWordFromGrid(vertStart, vertEnd, horizStart);
-            System.out.println("word is " + wordPlayed);
+
             if (!check(wordPlayed)) {
                 JOptionPane.showMessageDialog(null,
                                               wordPlayed + " is not a valid word! Please try again.");
@@ -141,16 +140,14 @@ public class Word {
             }
             totalTurnScore += calculateScore(wordPlayed);
 
-            System.out.println(totalTurnScore);
-
             for (int j = vertStart; j < vertEnd; j++) {
                 int start;
                 int end;
-                System.out.println("checking crosses");
+
                 start = findStartOfWordHorizDir(j, horizStart);
-                System.out.println("start " + start);
+
                 end = findEndOfWordHorizDir(horizStart, j);
-                System.out.println("end " + end);
+
                 String crossWord = "";
                 crossWord = getHorizDirWordFromGrid(start, end, j);
 
@@ -194,19 +191,17 @@ public class Word {
     public String getVertDirWordFromGrid(int xDirStart, int xDirEnd, int y) {
         this.word = "";
         for (int i = xDirStart; i < xDirEnd + 1; i++) {
-            System.out.println("word is " + this.word);
 
-            System.out.println(i + ", " + y);
             this.word += grid[i][y].getToolTipText();
         }
-        System.out.println(word);
+
         return this.word.toUpperCase();
     }
 
     public int findStartOfWordVertDir(int x, int y) {
-        System.out.println("start of x");
+
         while (!boardText.contains(grid[x][y].getToolTipText()) && (x > 0)) {
-            System.out.println(grid[x][y].getToolTipText());
+
             x--;
         }
         if (x != 0) {
@@ -218,9 +213,8 @@ public class Word {
     }
 
     public int findEndOfWordVertDir(int x, int y) {
-        System.out.println("end of x");
+
         while ((!boardText.contains(grid[x][y].getToolTipText())) && (x < grid.length - 1)) {
-            System.out.println(grid[x][y].getToolTipText());
 
             x++;
         }
@@ -234,11 +228,10 @@ public class Word {
     public String getHorizDirWordFromGrid(int yDirStart, int yDirEnd, int x) {
         this.word = "";
         for (int i = yDirStart; i < yDirEnd + 1; i++) {
-            System.out.println("word is " + this.word);
-            System.out.println(x + ", " + i);
+
             this.word += grid[x][i].getToolTipText();
         }
-        System.out.println(word);
+
         return this.word.toUpperCase();
     }
 

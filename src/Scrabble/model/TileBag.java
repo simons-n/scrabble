@@ -173,7 +173,7 @@ public class TileBag extends ArrayList<Tile> {
      */
     public Tile draw() {
         Random generator = new Random();
-        System.out.println("in draw " + getTileBagSize());
+
         int index = generator.nextInt(getTileBagSize());
         Tile tile = this.get(index);
         removeTile(tile);

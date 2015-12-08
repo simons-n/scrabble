@@ -137,7 +137,7 @@ public class StartBoxController implements ActionListener {
 
             // number of players to wait
             int size = Integer.valueOf(n);
-            System.out.println("size " + size);
+            //System.out.println("size " + size);
 
             try {
                 existingIP = InetAddress.getLocalHost();
@@ -150,7 +150,7 @@ public class StartBoxController implements ActionListener {
 
             //set default to two-player
             GameSize gameSize = GameSize.TWO_PLAYER;
-            System.out.println("pre-GameSize: " + gameSize.getValue());
+            //System.out.println("pre-GameSize: " + gameSize.getValue());
 
             if (size == 1) {
                 gameSize = GameSize.ONE_PLAYER;
@@ -161,16 +161,16 @@ public class StartBoxController implements ActionListener {
             }
 
             try {
-                System.out.println("x");
+                //System.out.println("x");
                 if (gameSize.getValue() != 1) {
-                    System.out.println(
-                            "entered if. gamesize: " + gameSize.getValue());
+                    //System.out.println(
+                    //"entered if. gamesize: " + gameSize.getValue());
                     try {
-                        System.out.println(
-                                "entered try. gameSize: " + gameSize.getValue());
+                        //System.out.println(
+                        //"entered try. gameSize: " + gameSize.getValue());
                         scrabbleServer = new ScrabbleServer(gameSize);
-                        System.out.println(
-                                "scrabbleServer made, here it is! " + scrabbleServer);
+                        //System.out.println(
+                        //"scrabbleServer made, here it is! " + scrabbleServer);
                     } catch (ClassNotFoundException ex) {
                         Logger.getLogger(StartBoxController.class.getName()).log(
                                 Level.SEVERE,
@@ -181,31 +181,31 @@ public class StartBoxController implements ActionListener {
                     // create a dummy server so I can get the Game
                     scrabbleServer = new ScrabbleServer();
                 }
-                System.out.println("a");
+                //System.out.println("a");
             } catch (IOException ex) {
-                System.out.println("scrabbleServer not made!");
+                //System.out.println("scrabbleServer not made!");
                 Logger.getLogger(StartBoxController.class.getName()).log(
                         Level.SEVERE,
                         null,
                         ex);
             }
-            System.out.println("finished creating server");
+            //System.out.println("finished creating server");
 
             //this.theGame = scrabbleServer.createGame(gameSize, gameCreator);
-            System.out.println("this is the scrabble server" + scrabbleServer);
+            //System.out.println("this is the scrabble server" + scrabbleServer);
             //scrabbleServer.createGame(gameSize);
             //System.out.println("created theGame");
             this.theGame = scrabbleServer.getTheGame();
             //this.theGame = new Game(gameSize, gameCreator);
-            System.out.println("got the game");
+            //System.out.println("got the game");
 
             // create gameCreator player
             Player gameCreator = new Player(name,
                                             scrabbleServer);
             //System.out.println("GameOwner: " + theGame.getGameOwner());
             //System.out.println("created gameCreator");
-            System.out.println(gameCreator);
-            System.out.println(gameSize.getValue());
+//            System.out.println(gameCreator);
+//            System.out.println(gameSize.getValue());
 
             // add gameCreator to the game
             this.theGame.addPlayer(gameCreator);
@@ -214,9 +214,8 @@ public class StartBoxController implements ActionListener {
             // set gameCreator to curPlayer so program will be happy
             this.theGame.setCurPlayer(gameCreator);
 
-            System.out.println(theGame.getNumConnectedPlayers());
-            System.out.println(gameSize.getValue());
-
+//            System.out.println(theGame.getNumConnectedPlayers());
+//            System.out.println(gameSize.getValue());
             if (theGame.getHasEnoughPlayers()) {
                 for (Player player : theGame.getPlayerList()) {
                     player.createScrabbleMain();

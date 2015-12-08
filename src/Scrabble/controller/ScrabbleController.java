@@ -135,7 +135,6 @@ public class ScrabbleController implements ActionListener, MouseListener {
         //handView.setJLabelHand(handView.setHand(hand));
         handView.setHand(hand, isUndoing);
 //        System.out.println("jlabelhand after updated = " + handView);
-        System.out.println("jLabelHand after undo: " + handView);
         isUndoing = false;
         jLabelHand = handView.getJLabelHand();
         //handView.setIsUndoing(isUndoing);
@@ -187,24 +186,20 @@ public class ScrabbleController implements ActionListener, MouseListener {
         } else if (e.getSource() == view.getPassBtn()) {
             System.out.println("Player passed their turn");
 
-            System.out.println("player current score " + player.getTotalScore());
-            System.out.println("tile bag size " + tilebag.getTileBagSize());
             int tilesDrawn = 0;
             for (JLabel jLabelTile : handView.getJLabelHand()) {
                 handView.remove(jLabelTile);
             }
 
             while (hand.getHandSize() < 7) {
-                System.out.println("hand size " + hand.getHandSize());
+
                 tilesDrawn++;
                 Tile tile = tilebag.draw();
                 hand.addTile(tile);
-                System.out.println("hand after tiles drawn: " + hand);
 
             }
 
             handView.setHand(hand, true);
-            System.out.println("length of hand: " + hand.getHandSize());
 
             //handView.drawAtEndOfTurn(hand);
             //jLabelHand = handView.getJLabelHand()
@@ -236,10 +231,8 @@ public class ScrabbleController implements ActionListener, MouseListener {
 //            game.updatePlayerBoards();
         } else if (e.getSource()
                    == view.getShuffleBtn()) {
-            System.out.println("tried to shuffle");
-            System.out.println("pre-hand: " + hand);
+
             this.hand.shuffle();
-            System.out.println("post-hand: " + hand);
 
 //        } else if (e.getSource() == view.getDirectionsBtn()) {
 //            view.getDirectionsPanel().setVisible(true);
@@ -285,22 +278,20 @@ public class ScrabbleController implements ActionListener, MouseListener {
                 board.revalidate();
 
                 Tile blankTile = new Tile(val.BLANK);
-                System.out.println("add blank tile back to hand");
+
                 for (JLabel jLabelTile : handView.getJLabelHand()) {
                     handView.remove(jLabelTile);
                 }
                 this.hand.addTileFromBoard(tile);
 
                 handView.revalidate();
-                System.out.println("Hand after undo: " + hand);
 
                 // add tile back in to hand, to update handview
                 //this.hand.addTileFromBoard(blankTile);
 //                handView.revalidate();
-                System.out.println("Hand after undo: " + hand);
             } else if (undoStack.isEmpty() == false) {
                 this.isUndoing = true;
-                System.out.println("Hand before undo: " + hand);
+
                 Tile tile = undoStack.pop();
                 int x = tile.getX();
                 int y = tile.getY();
@@ -345,7 +336,6 @@ public class ScrabbleController implements ActionListener, MouseListener {
                 this.hand.addTileFromBoard(tile);
 
                 handView.revalidate();
-                System.out.println("Hand after undo: " + hand);
 
                 //change the location of the tile to a background square **** figure out how to know if it was a TLW etc
                 //clear stack when turn is ended
@@ -372,6 +362,12 @@ public class ScrabbleController implements ActionListener, MouseListener {
         updateViewFromModel();
     }
 
+    /**
+     * @see
+     * <a href = "http://stackoverflow.com/questions/2561690/placing-component-on-glass-pane/2562685#2562685">
+     * http://stackoverflow.com/questions/2561690/placing-component-on-glass-pane/2562685#2562685</a>
+     * @param e
+     */
     public void mouseClicked(MouseEvent e) {
         //System.out.println("handlist: " + handView);
         //System.out.println("mouse event source: " + e);
@@ -380,8 +376,6 @@ public class ScrabbleController implements ActionListener, MouseListener {
         for (int i = 0; i < jLabelHand.length; i++) {
             if ((JLabel) e.getSource() == jLabelHand[i]) {
 
-                System.out.println(
-                        "TileSelected is :" + jLabelHand[i].getToolTipText());
                 if (jLabelHand[i].getToolTipText() == "BLANK") {
                     Tile newTile = view.createBlankTile();
                     Tile tile = this.hand.getTile(i);
@@ -391,17 +385,6 @@ public class ScrabbleController implements ActionListener, MouseListener {
                 }
 
                 tileSelected = jLabelHand[i];
-                System.out.println(
-                        "tile selected " + tileSelected.getToolTipText());
-                System.out.println("index of tile: " + i);
-                System.out.println();
-                System.out.println(
-                        "pre-handsize: " + hand.getHandSize());
-                System.out.println(
-                        "pre-jlabelhandsize: " + handView.getJLabelHand().length);
-                System.out.println("pre-hand: " + hand);
-                System.out.println("pre-jLabelHand: " + handView);
-                System.out.println();
 
                 int indexNewHand = 0;
                 JLabel[] newJLabelHand = new JLabel[jLabelHand.length - 1];
@@ -421,15 +404,8 @@ public class ScrabbleController implements ActionListener, MouseListener {
                 handView.revalidate();
                 handView.repaint();
 
-                System.out.println(
-                        "post-handsize: " + hand.getHandSize());
-                System.out.println(
-                        "post-jlabelhandsize: " + handView.getJLabelHand().length);
-                System.out.println("post-hand: " + hand);
-                System.out.println("post-jLabelHand: " + handView);
                 break;
-                //handView.setJLabelHand(jLabelHand);
-                //handView = view.getHandView();
+
             }
         }
 
@@ -440,10 +416,7 @@ public class ScrabbleController implements ActionListener, MouseListener {
                     spaceSelected = player.getMyBoard().getGrid()[i][j];
                     gridXCoord = i;
                     gridYCoord = j;
-//                    System.out.println("x coord " + gridXCoord);
-//                    System.out.println("y coord " + gridYCoord);
-//                    System.out.println(
-//                            "space selected " + spaceSelected.getToolTipText());
+
                 }
             }
         }
@@ -676,7 +649,7 @@ public class ScrabbleController implements ActionListener, MouseListener {
                     undoStack.push(tile);
                     break;
             }
-            //http://stackoverflow.com/questions/2561690/placing-component-on-glass-pane/2562685#2562685
+            // see javadoc for source
             JPanel panel = (JPanel) board.getComponent(
                     gridYCoord + gridXCoord * 15);
             JLabel boardLabel = (JLabel) panel.getComponent(0);
@@ -686,22 +659,9 @@ public class ScrabbleController implements ActionListener, MouseListener {
             board.revalidate();
             board.repaint();
             canPlayWord();
-            //board.add(panel);
 
-            System.out.println("placed(?) tile on board");
-            System.out.println(
-                    "supposed to be " + grid[gridXCoord][gridYCoord].getToolTipText());
-            System.out.println(
-                    "actually" + view.getPlayerBoard().getGrid()[gridXCoord][gridYCoord].getToolTipText());
-
-//            if (boardText.contains(spaceSelected.getToolTipText())) {
-//                bonusType.add(spaceSelected.getToolTipText());
-//                letterForBonus.add(tileSelected.getToolTipText());
-//            }
             tileSelected = null;
             spaceSelected = null;
-//            gridXCoord = 0;
-//            gridYCoord = 0;
 
             ((Component) e.getSource()).removeMouseListener(this);
         }
@@ -736,22 +696,21 @@ public class ScrabbleController implements ActionListener, MouseListener {
     @Override
     public void mousePressed(MouseEvent e) {
 
-        System.out.println();
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        System.out.println();
+
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        //System.out.println("mouse entered");
+
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        //System.out.println("mouse exited");
+
     }
 
 }
