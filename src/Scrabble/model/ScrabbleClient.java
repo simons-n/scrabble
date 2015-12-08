@@ -2,14 +2,14 @@
  * CSCI205 - Software Engineering and Design
  * Fall 2015
  *
- * Name: NAMES of team members
+ * Name: Jenna Slusar, Nick Simons, Caroline Whitman
  * Date: Nov 11, 2015
  * Time: 9:09:49 PM
  *
  * Project: csci205FinalProject
  * Package: Scrabble.model
  * File: ScrabbleClient
- * Description:
+ * Description: creates a client to allow for networking
  *
  * ****************************************
  */
@@ -24,6 +24,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Creates a client for the Scrabble game
  *
  * @author calw001
  */
@@ -37,6 +38,14 @@ public class ScrabbleClient {
     private transient ObjectOutputStream oos;
     private transient ObjectInputStream ois;
 
+    /**
+     * Create a ScrabbleClient object and given an ipAddress, connect to the
+     * server
+     *
+     * @param ipAddress, a String
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     public ScrabbleClient(String ipAddress) throws IOException, ClassNotFoundException {
         connectToServer(ipAddress);
         //runClient();
@@ -46,6 +55,13 @@ public class ScrabbleClient {
         return this.theGame;
     }
 
+    /**
+     * Connects the client to the server socket.
+     *
+     * @param ipAddress, a String
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     public void connectToServer(String ipAddress) throws IOException, ClassNotFoundException {
         //while (true) {
         if (clientCreated == false) {
@@ -63,6 +79,13 @@ public class ScrabbleClient {
         //}
     }
 
+    /**
+     * Keeps the client server running throughout the game, constantly trying to
+     * update the server and accept information from the server.
+     *
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     public void runClient() throws IOException, ClassNotFoundException {
         while (true) {
             updateServer();
@@ -70,6 +93,11 @@ public class ScrabbleClient {
         }
     }
 
+    /**
+     * Updates the server--sends the modified gameObject to the server.
+     *
+     * @throws IOException
+     */
     public void updateServer() throws IOException {
 
         os = skt.getOutputStream();
@@ -80,6 +108,12 @@ public class ScrabbleClient {
 
     }
 
+    /**
+     * Accepts a game object from the server to update the player board
+     *
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     public void acceptInfoFromServer() throws IOException, ClassNotFoundException {
         ois = new ObjectInputStream(skt.getInputStream());
         System.out.println(
@@ -89,10 +123,17 @@ public class ScrabbleClient {
         System.out.println("accepted game from server");
     }
 
+    /**
+     * Tests the ScrabbleClient by trying to connect to the server
+     *
+     * @param args
+     * @throws IOException
+     */
     public static void main(String args[]) throws IOException {
 
         ScrabbleClient client;
         try {
+            // this IP address needs to be the IP address of the computer running the server program
             client = new ScrabbleClient("134.82.132.197");
 
             //Game game = new Game(GameSize.TWO_PLAYER, new Player("Caroline"));

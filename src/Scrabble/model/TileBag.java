@@ -24,7 +24,11 @@ import java.util.Random;
  */
 public class TileBag extends ArrayList<Tile> {
 
+    /**
+     * Creates a tile bag with the correct starting number of tiles
+     */
     public TileBag() {
+        //adds the starting number of each tile to the bag
 
         // 9 A tiles
         for (int i = 0; i < 9; i++) {
@@ -131,26 +135,42 @@ public class TileBag extends ArrayList<Tile> {
         return this.size();
     }
 
+    /**
+     * Returns a string representation of the tile bag size
+     *
+     * @return String, the size of the bag
+     */
     public String getTileBagSizeStr() {
         int size = getTileBagSize();
         String sizeStr = "-" + size + "-";
         return sizeStr;
     }
 
-//    public void setTilesInBag(ArrayList<Tile> tilesInBag) {
-//        this.tilesInBag = tilesInBag;
-//
-//    }
+    /**
+     * Adds a tile to the tile bag
+     *
+     * @param tile, the tile to add
+     */
     public void addTile(Tile tile) {
         this.add(tile);
 
     }
 
+    /**
+     * Removes a tile from the tile bag
+     *
+     * @param tile, the tile to remove
+     */
     public void removeTile(Tile tile) {
         this.remove(tile);
 
     }
 
+    /**
+     * Draws a random tile from the tile bag
+     *
+     * @return a randomly selected tile from the bag
+     */
     public Tile draw() {
         Random generator = new Random();
         System.out.println("in draw " + getTileBagSize());
@@ -160,9 +180,11 @@ public class TileBag extends ArrayList<Tile> {
         return tile;
     }
 
-    public static void main(String[] args) {
-        TileBag tb = new TileBag();
-        System.out.println(tb.size());
-    }
-
+    /**
+     * Tests the tile bag class
+     */
+//    public static void main(String[] args) {
+//        TileBag tb = new TileBag();
+//        System.out.println(tb.size());
+//    }
 }
