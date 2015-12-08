@@ -2,14 +2,14 @@
  * CSCI205 - Software Engineering and Design
  * Fall 2015
  *
- * Name: NAMES of team members
+ * Name: Jenna Slusar, Nick Simons, Caroline Whitman
  * Date: Nov 11, 2015
  * Time: 9:07:10 PM
  *
  * Project: csci205FinalProject
  * Package: Scrabble.model
  * File: ScrabbleServer
- * Description:
+ * Description: Creates a server to allow for networking
  *
  * ****************************************
  */
@@ -23,13 +23,16 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 /**
+ * Creates a server
  *
  * @author calw001
  */
 public class ScrabbleServer {
 
     /**
-     * http://www.cise.ufl.edu/~amyles/tutorials/tcpchat/
+     * @see
+     * <a href = "http://www.cise.ufl.edu/~amyles/tutorials/tcpchat/">
+     * http://www.cise.ufl.edu/~amyles/tutorials/tcpchat/</a>
      *
      * @param args
      */
@@ -45,6 +48,14 @@ public class ScrabbleServer {
     private transient ObjectInputStream ois;
     private transient OutputStream os;
 
+    /**
+     * Creates a server object given the desired size of the game. Also creates
+     * the game itself.
+     *
+     * @param gameSize, the desired size of the game
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     public ScrabbleServer(GameSize gameSize) throws IOException, ClassNotFoundException {
         this.maxPlayers = gameSize.getValue();
         createGame(gameSize);
@@ -52,6 +63,10 @@ public class ScrabbleServer {
         //createServer();
     }
 
+    /**
+     * Creates a dummy server object for a one-player game. Does not create a
+     * real server.
+     */
     public ScrabbleServer() {
         createGame(GameSize.ONE_PLAYER);
     }
@@ -63,7 +78,7 @@ public class ScrabbleServer {
     /**
      * Creates the Game
      *
-     * @param gameSize
+     * @param gameSize, the desired size of the game to create
      */
     public void createGame(GameSize gameSize) {
         this.theGame = new Game(gameSize, new Player("caroline"));
@@ -74,6 +89,13 @@ public class ScrabbleServer {
         return this.theGame;
     }
 
+    /**
+     * Runs the server and continously reads in information and tries to updates
+     * the clients.
+     *
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     public void runServer() throws IOException, ClassNotFoundException {
         srvr = new ServerSocket(1025);
 //        while (true) {
@@ -102,6 +124,13 @@ public class ScrabbleServer {
 
     }
 
+    /**
+     * Creates an input stream to accept data being sent from clients
+     *
+     * @return the updated Game object
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     public Game acceptUpdateFromClient() throws IOException, ClassNotFoundException {
 //        BufferedReader in = new BufferedReader(new InputStreamReader(
 //                skt.getInputStream()));
@@ -129,6 +158,12 @@ public class ScrabbleServer {
         return updatedGame;
     }
 
+    /**
+     * Creates an output stream to send game updates to the clients
+     *
+     * @param updatedGame, the updated Game
+     * @throws IOException
+     */
     public void updateClients(Game updatedGame) throws IOException {
 
         os = skt.getOutputStream();

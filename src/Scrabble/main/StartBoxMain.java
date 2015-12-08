@@ -2,14 +2,14 @@
  * CSCI205 - Software Engineering and Design
  * Fall 2015
  *
- * Name: NAMES of team members
+ * Name: Jenna Slusar, Nick Simons, Caroline Whitman
  * Date: Nov 18, 2015
  * Time: 9:59:26 AM
  *
  * Project: csci205FinalProject
  * Package: Scrabble.main
  * File: StartAGameMain
- * Description:
+ * Description: Runs the Scrabble Program
  *
  * ****************************************
  */
@@ -20,6 +20,8 @@ import Scrabble.view.StartBox;
 import javax.swing.UIManager;
 
 /**
+ *
+ * Run this to start the Scrabble Game.
  *
  * @author calw001
  *

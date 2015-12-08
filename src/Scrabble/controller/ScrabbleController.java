@@ -108,11 +108,7 @@ public class ScrabbleController implements ActionListener, MouseListener {
     }
 
     public void addHandMouseListeners() {
-        // add mouse listeners to tiles in hand
-        System.out.println("jLabelHand listeners: " + jLabelHand);
-//        for (JLabel tileLabel : handView.getJLabelHand()) {
-//            tileLabel.addMouseListener(this);
-//        }
+
         for (JLabel tileLabel : this.jLabelHand) {
             tileLabel.addMouseListener(this);
         }
