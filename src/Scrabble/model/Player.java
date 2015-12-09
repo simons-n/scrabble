@@ -113,6 +113,10 @@ public class Player {
         return game;
     }
 
+    public void setGame(Game game) {
+        this.game = game;
+    }
+
     public ScrabbleClient getClientServer() {
         return clientServer;
     }

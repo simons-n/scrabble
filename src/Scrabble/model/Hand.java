@@ -52,6 +52,10 @@ public class Hand {
         return this.isUndoing;
     }
 
+    public void setBag(TileBag bag) {
+        this.bag = bag;
+    }
+
     public boolean containsTile(Tile tile) {
         boolean contains = false;
         for (int x = 0; x < tilesInHand.size(); x++) {
