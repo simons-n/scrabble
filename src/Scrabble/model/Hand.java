@@ -52,16 +52,16 @@ public class Hand {
         return this.isUndoing;
     }
 
+    public void setBag(TileBag bag) {
+        this.bag = bag;
+    }
+
     /**
      * Checks to see if the tiles in the hand contains the param
      *
      * @param tile
      * @return contains
      */
-    public void setBag(TileBag bag) {
-        this.bag = bag;
-    }
-
     public boolean containsTile(Tile tile) {
         boolean contains = false;
         for (int x = 0; x < tilesInHand.size(); x++) {
