@@ -2,15 +2,14 @@
  * CSCI205 - Software Engineering and Design
  * Fall 2015
  *
- * Name: NAMES of team members
+ * Name: Jenna Slusar, Caroline Whitman, and Nick Simons
  * Date: Nov 20, 2015
  * Time: 10:30:23 AM
  *
  * Project: csci205FinalProject
  * Package: Scrabble.model
  * File: Game
- * Description:
- *
+ * Description: This class connects all of the model classes and is created in startbox.
  * ****************************************
  */
 package Scrabble.model;
@@ -21,6 +20,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
+ * Only one Game class is made, but it connects all of the other model classes
  *
  * @author calw001
  */
@@ -71,13 +71,21 @@ public class Game implements Serializable {
         return gameOwner;
     }
 
+    /**
+     * Returns the size of the list of players, to get the number of players
+     * connected
+     *
+     * @return playerList.size()
+     */
     public int getNumConnectedPlayers() {
         return playerList.size();
     }
 
-    public void playGame() {
-    }
-
+    /**
+     * Checks if the number of players equals the correct size of the game.
+     *
+     * @return true, if they're equal, else false
+     */
     public boolean getHasEnoughPlayers() {
         if (playerList.size() == gameSize.getValue()) {
             return true;
@@ -85,6 +93,11 @@ public class Game implements Serializable {
         return false;
     }
 
+    /**
+     * Adds players to the player list, unless the game is already full.
+     *
+     * @param playerToAdd
+     */
     public void addPlayer(Player playerToAdd) {
         if (playerList.size() < gameSize.getValue()) {
             playerList.add(playerToAdd);
@@ -105,6 +118,9 @@ public class Game implements Serializable {
         return playerList;
     }
 
+    /**
+     * Sets each player's board in the player list to the mainBoard.
+     */
     public void updatePlayerBoards() {
         for (Player player : playerList) {
             player.setMyBoard(mainBoard);
@@ -122,11 +138,4 @@ public class Game implements Serializable {
     public Game getGame() {
         return this;
     }
-
-//    public static void main(String[] args) {
-//        Game g = new Game(GameSize.TWO_PLAYER, new Player("Caroline"));
-//        g.addPlayer(new Player("Jenna"));
-//        String[] a = {""};
-//        ScrabbleMain.main(a);
-//    }
 }

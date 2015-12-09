@@ -9,8 +9,7 @@
  * Project: csci205FinalProject
  * Package: Scrabble.model
  * File: Hand
- * Description: Represents the tiles that are in your hand to play
- *
+ * Description: Represents the tiles that are in your hand to play.
  * ****************************************
  */
 package Scrabble.model;
@@ -22,6 +21,7 @@ import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 
 /**
+ * Hand is an arrayList of seven tiles
  *
  * @author jms107
  */
@@ -32,7 +32,7 @@ public class Hand {
     private Val val;
     private Game game;
     private int index;
-    private boolean isUndoing;
+    private boolean isUndoing; //is the boolean to get the undo button to work, by not removing the JLabel when added back into the hand
 
     public Hand(ArrayList<Tile> tilesInHand, Player player) {
         this.tilesInHand = tilesInHand;
@@ -52,6 +52,12 @@ public class Hand {
         return this.isUndoing;
     }
 
+    /**
+     * Checks to see if the tiles in the hand contains the param
+     *
+     * @param tile
+     * @return contains
+     */
     public void setBag(TileBag bag) {
         this.bag = bag;
     }
@@ -66,6 +72,13 @@ public class Hand {
         return contains;
     }
 
+    /**
+     * This method is used in undo because in order to add the tile back to the
+     * hand you have to make the size of the hand bigger because when the tile
+     * was removed from the hand originally the hand size was decreased by 1.
+     *
+     * @param tile
+     */
     public void addTileFromBoard(Tile tile) {
         ArrayList<Tile> biggerHand = new ArrayList<Tile>(tilesInHand.size() + 1);
         for (int i = 0; i < tilesInHand.size(); i++) {
@@ -75,41 +88,32 @@ public class Hand {
         this.tilesInHand = biggerHand;
     }
 
+    /**
+     * Adds a tile to the list of tiles in tilesInHand
+     *
+     * @param tile
+     */
     public void addTile(Tile tile) {
         this.tilesInHand.add(tile);
     }
 
+    /**
+     * This changes the list of tiles by removing the param from the list. This
+     * is called when the tile is clicked to be placed on the board.
+     *
+     * @param tileToRemove
+     */
     public void removeTile(Tile tileToRemove) {
-        ArrayList<Tile> newTiles = new ArrayList<Tile>(tilesInHand.size() - 1);
+        ArrayList<Tile> newTiles = new ArrayList<Tile>(tilesInHand.size() - 1);//creates a sammler list to be used to place all the tiles from the old hand minus the one removed into
         for (int i = 0; i < tilesInHand.size(); i++) {
             if (tilesInHand.get(i) != tileToRemove) {
                 newTiles.add(tilesInHand.get(i));
             }
         }
-//        int index = tilesInHand.indexOf(tile);
-//        ArrayList<Tile> newTiles = new ArrayList<Tile>(tilesInHand.size());
-//
-//        for (int i = 0; i < tilesInHand.size(); i++) {
-////            System.out.println("index is " + i);
-////            System.out.println("tilesInHand is " + tilesInHand.size());
-//            if (i != index) {
-//                newTiles.add(tilesInHand.get(i));
-//            }
-//
-//        }
         this.tilesInHand = newTiles;
-
-//        this.tilesInHand.remove(tile);
-//        setTilesInHand();
-        //this.tilesInHand.set(tilesInHand.size()-1, null);
     }
 
     public void setTilesInHand() {
-//        System.out.println("//////");
-//        System.out.println("handSize = " + getHandSize());
-//        for (int x = 0; x < tilesInHand.size() - 1; x++) {
-//            System.out.println("hand[" + x + "] = " + tilesInHand.get(x));
-//        }
         ArrayList<Tile> newTiles = new ArrayList<Tile>(tilesInHand.size() - 1);
         for (int i = 0; i < tilesInHand.size() - 2; i++) {
             newTiles.add(tilesInHand.get(i));
@@ -117,57 +121,64 @@ public class Hand {
         tilesInHand = newTiles;
     }
 
+    /**
+     * This method is called when the swap button is pressed. It gets the index
+     * in the hand of which tile in the hand needs to be swapped. Removes that
+     * tile from the hand and adds the picked up tile in its place. Also adds
+     * the tile from the hand to the tile bag and removes the picked up tile
+     * from the tile bag.
+     *
+     * @param myTile
+     * @param pickedUpTile
+     */
     public void switchTiles(Tile myTile, Tile pickedUpTile) {
-        System.out.println("Pre-hand :" + tilesInHand);
 
         for (int x = 0; x < tilesInHand.size(); x++) {
             if (tilesInHand.get(x).getLetter() == myTile.getLetter()) {
-                System.out.println("x is: " + x);
                 index = x;
             }
         }
-        System.out.println("The index of your tile is: " + index);
         tilesInHand.remove(index);
         tilesInHand.add(index, pickedUpTile);
-        System.out.println("Post-hand: " + tilesInHand);
         bag.removeTile(pickedUpTile);
         bag.addTile(myTile);
     }
 
+    /**
+     * Shuffles the tiles in the list using the Collections API
+     */
     public void shuffle() {
-        System.out.println("it shuffled the list");
         Collections.shuffle(tilesInHand);
 
         //randomly change the positions of tiles in array
     }
 
+    /**
+     * Used when the swap button is pressed in the GUI. Prompts the user for a
+     * tile that is a tile and in their hand that they would like to swap, and
+     * swaps it with a random tile from the tile bag.
+     */
     public void createSwap() {
-        System.out.println("tried to create switch");
 
         String tileStr = JOptionPane.showInputDialog(view,
                                                      "Type the letter of the tile you would like to swap (or blank for a blank tile): ",
                                                      "Swap",
                                                      DISPOSE_ON_CLOSE);
         if (tileStr == null) {
-            //do nothing
+            //do nothing, when cancel button is pressed
         } else {
-            String upCaseStr = tileStr.toUpperCase();
-            System.out.println("tile str : " + upCaseStr);
+            String upCaseStr = tileStr.toUpperCase(); //you can input lower case or upper case
             try {
-                Val tileValue = val.valueOf(upCaseStr);
+                Val tileValue = val.valueOf(upCaseStr); // checks if string is a tile value
                 Tile tile = new Tile(tileValue);
-                boolean contains = containsTile(tile);
+                boolean contains = containsTile(tile);  //checks if actually have tile in hand
                 if (contains == true) {
-                    System.out.println("went through if statement");
-                    System.out.println(
-                            "The tile they want to switch is: " + tile);
-                    Tile newTile = bag.draw();
-                    System.out.println("The new tile from bag is: " + newTile);
+                    Tile newTile = bag.draw(); //gets a random tile from the tile bag
                     JOptionPane.showMessageDialog(view,
                                                   "Your new tile is:   " + newTile.toString(),
                                                   "New Tile",
                                                   DISPOSE_ON_CLOSE);
-                    switchTiles(tile, newTile);
+                    switchTiles(tile, newTile); //switches tiles in hand
                 } else {
                     JOptionPane.showMessageDialog(view,
                                                   "You do not have a " + tile.toString() + " tile in your hand to swap. You have to choose a tile in your hand.",
@@ -193,13 +204,6 @@ public class Hand {
     @Override
     public String toString() {
         String s = "";
-//        for (Tile tile : this.tilesInHand) {
-//            if (tile == null) {
-//                s += "null";
-//            } else {
-//                s += tile.getLetter();
-//            }
-//        }
         for (int i = 0; i < tilesInHand.size(); i++) {
             if (Tile.class.isInstance(this.tilesInHand.get(i))) {
                 s += this.tilesInHand.get(i).getLetter();
