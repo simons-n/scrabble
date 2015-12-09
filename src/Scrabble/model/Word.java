@@ -122,7 +122,7 @@ public class Word {
                     return 0;
                 }
 
-                if (!hasBeenPlayed(crossWord)) {
+                if (!checkHasBeenPlayed(crossWord)) {
 
                     totalTurnScore += calculateScore(crossWord);
                 }
@@ -162,7 +162,7 @@ public class Word {
                     return 0;
                 }
 
-                if (!hasBeenPlayed(crossWord)) {
+                if (!checkHasBeenPlayed(crossWord)) {
 
                     totalTurnScore += calculateScore(crossWord);
                 }
@@ -271,7 +271,7 @@ public class Word {
         return dictionary.containsKey(word);
     }
 
-    public boolean hasBeenPlayed(String word) {
+    public boolean checkHasBeenPlayed(String word) {
         if (game.getWordsPlayed().indexOf(word) > 0) {
             return true;
         }
