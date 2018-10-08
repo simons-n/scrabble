@@ -1,0 +1,62 @@
+%% I suggest using this file as a template for your homework solutions
+
+%% you can use percentage sign (%) to comment things out of a .tex document
+%% template for homework solutions
+\documentclass[12pt]{article}
+
+\usepackage{amssymb}
+
+\pagestyle{empty}
+
+%% page layout
+\setlength{\topmargin}{-25mm}
+\addtolength{\textheight}{3cm}
+\setlength{\textwidth}{17cm}
+\addtolength{\oddsidemargin}{-2.1cm}
+\setlength{\parindent}{1cm}
+\def\baselinestretch{1.2}
+
+%% user defined commands
+\newcommand{\qed}{~\Box}
+
+\begin{document}
+
+%% you can edit the following to produce a suitable header for your document
+\begin{tabbing}
+Mathematics 241/0 \hspace{9cm} \= {\bf Name:} Pete Brooksbank \\
+Spring Semester, 2016 \>  {\bf Week 0, Set A} 
+\end{tabbing}
+\vspace*{7mm}
+
+Here is a short example that illustrates how to use \LaTeX~ to present a mathematical proof.
+This is a lovely proof by Euclid of the infinitude of the prime numbers, and
+uses a ``proof technique" that we will encounter shortly in the course.
+%% you can force breaks of varying amounts in displayed text using the following command
+\vspace*{5mm}
+
+%% the mathematical environment is opened and closed using the dollar sign ($)
+%% use this environment for any sort of mathematical expression. 
+\noindent {\bf Problem 1.} {\em Prove that there are infinitely many prime numbers.}
+%% use the following command to space out your text
+\vspace*{3mm}
+
+\noindent {\bf Solution:}  We give the usual ``proof by contradiction".
+Suppose that there are only finitely many prime numbers, say $q_1,\ldots,q_n$,
+and consider the number 
+%% you can display equations like this ...
+\[
+N=1+q_1q_2\ldots q_n.
+\]
+Observe that $N>q_i$ for all $i$, so $N$ is not prime. It is therefore divisible by a prime,
+say $q_j$. Then, however, $q_j$ divides $q_1\ldots q_n$ and $N=1+q_1\ldots q_n$,
+so it therefore divides the difference $(1+q_1\ldots q_n)-(q_1\ldots q_n)=1$.
+This contradicts the fact that $q_j$ is prime.
+$\qed$
+%% the user-defined \qed command produces a nice box to signal the end of a solution.
+
+%% there are a few standard LaTeX commands in this document, for example:
+%% \to
+%% \tau, \rho
+%% you will find many more standard commands on the links on Blackboard
+
+\end{document}

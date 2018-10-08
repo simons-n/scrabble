@@ -1,0 +1,175 @@
+// Devon Wasson
+// Lab 2
+// CSCI315
+// 9/8/15
+
+#include <sys/types.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <ctype.h>
+
+#define BUFFER_SIZE 1024
+#define READ_END 0
+#define WRITE_END 1
+
+int Pipe(int pipefd[2]);
+int Read(int fd, void *buf, size_t count);
+int Write(int fd, const void *buf, size_t count); 
+pid_t Fork(void);
+
+int main(void)
+{
+	
+
+	char write_msg[BUFFER_SIZE] = "Greetings  I    am   a   friend.";	
+	char read_msg[BUFFER_SIZE];
+	int fd[2];  //parent to child
+	int fd2[2]; //child to parent
+	pid_t pid;
+	int status;
+
+	char endMessage[BUFFER_SIZE];
+	int sizeOfMessage;
+
+	/* create the pipe */
+	if (Pipe(fd) == -1){
+		fprintf(stderr, "Pipe 1 failed");
+		return 1;	
+	}
+	/* create the second pipe */
+	if (Pipe(fd2) == -1){
+		fprintf(stderr, "Pipe 2 failed");
+		return 1;	
+	}
+
+
+	/* fork child process */
+	pid = Fork();
+
+	if (pid < 0){ /* error occured */
+		fprintf(stderr, "Fork Failed");
+		return 1;
+	}
+	if (pid > 0){/* parent process */
+		/* close the unused end of the pipe */
+		close (fd[READ_END]);
+		close (fd2[WRITE_END]);
+
+		while(1){
+
+			printf("Please input a string: ");
+			fgets(write_msg, BUFFER_SIZE, stdin);		
+
+			sizeOfMessage = strlen(write_msg)+1; //get size of str
+
+			/* write to the pipe */
+			Write(fd[WRITE_END], &sizeOfMessage, sizeof(int));
+			Write(fd[WRITE_END], &write_msg , sizeOfMessage);
+
+			memset(endMessage, 0, sizeof(endMessage));			
+
+			Read(fd2[READ_END], &sizeOfMessage, sizeof(int));
+			Read(fd2[READ_END], &endMessage, sizeOfMessage);
+
+			printf("%s\n", endMessage);
+
+		}
+
+
+		close (fd[WRITE_END]);
+		close (fd2[READ_END]);
+		wait(&status);
+	
+	
+	}
+
+	else{ /* child process */
+		/* close the unused end of the pipe */
+		close (fd[WRITE_END]);
+		close (fd2[READ_END]);
+
+		while(1){
+			//read the message into read_msg
+			Read(fd[READ_END], &sizeOfMessage, sizeof(int));
+			Read(fd[READ_END], &read_msg, sizeOfMessage);
+			//endMessage[0] = 0; //clear buffer
+			memset(endMessage, 0, sizeOfMessage);
+
+			/* defines what we write into, and the pointer to the token */
+			char *s = strtok(read_msg, " ");
+
+			/* for each token, add it to endMessage */
+			while(s){
+				strcat(endMessage, s);
+				strcat(endMessage, " ");
+				s = strtok(NULL, " ");
+			}
+
+			//write to the other end
+			sizeOfMessage = strlen(endMessage);
+			Write(fd2[WRITE_END], &sizeOfMessage, sizeof(int));
+			Write(fd2[WRITE_END], &endMessage, sizeOfMessage);	
+			
+		}
+
+		/* close the write end of the pipe */
+		close(fd[READ_END]);
+		close(fd2[WRITE_END]);
+
+			
+	}
+
+	return 0;
+}
+
+int Pipe(int pipefd[2])
+{ /* wrapper for pipe */
+	int toReturn;
+	if ((toReturn = pipe(pipefd)) == -1){
+		perror("Pipe error: ");
+		exit(-1);
+	}
+	else{
+		return toReturn;
+	}
+
+}
+
+int Read(int fd, void *buf, size_t count)
+{ /* wrapper for read */
+	int toReturn;
+	if ((toReturn = read(fd, buf, count)) == -1){
+		perror("Read error: ");
+		exit(-1);
+	}
+	else{
+		return toReturn;
+	}
+}
+
+int Write(int fd, const void *buf, size_t count)
+{ /* wrapper for write */
+	int toReturn;
+	if ((toReturn = write(fd, buf, count)) == -1){
+		perror("Write error: ");
+		exit(-1);
+	}
+	else{
+		return toReturn;
+	}
+}
+
+pid_t Fork(void){
+/* wrapper for fork */
+	pid_t toReturn;
+	if ((toReturn = fork()) == -1){
+		perror("Fork error: ");
+		exit(-1);		
+	}
+	else{
+		return toReturn;
+	}
+
+}

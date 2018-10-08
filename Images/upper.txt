@@ -1,0 +1,86 @@
+#include <sys/types.h>
+#include <stdio.h>
+#include <string.h>
+#include <unistd.h>
+#include "wrapper.h"
+
+#define BUFFER_SIZE 25
+#define READ_END 0
+#define WRITE_END 1
+
+
+
+int main(void) {
+ char p_write_msg[BUFFER_SIZE] = "greetings";
+ char c_read_msg[BUFFER_SIZE];
+ char p_read_msg[BUFFER_SIZE];
+ char c_write_msg[BUFFER_SIZE];
+ int p2c[2];
+ int c2p[2];
+ pid_t pid;
+
+	/* create the pipe */
+ 	Pipe(p2c);
+ 	Pipe(c2p);
+
+
+	/* fork a child process */
+	pid = fork();
+
+	if (pid < 0) { /* error occurred */
+		fprintf(stderr, "Fork Failed");
+		return 1;
+	}
+
+	if (pid > 0) { /* parent process */
+		/* close the unused end of the pipe */
+		close(p2c[READ_END]);
+		close(c2p[WRITE_END]);
+
+		/* write to the pipe one charecter at a time */
+		//write(fd[WRITE_END], write_msg, strlen(write_msg)+1);
+		int i;
+		for ( i = 0; i <= strlen(p_write_msg) ; i++ ) {
+			Write(p2c[WRITE_END], &p_write_msg[i], 1);
+		}
+
+		/* close the write end of the pipe */
+		close(p2c[WRITE_END]);
+
+		int x ;
+
+		for (x = 0 ; x<= strlen(p_read_msg) ; x++) {
+			read(c2p[READ_END], &p_read_msg[x], 1);
+		}
+
+		close(c2p[READ_END]);
+
+
+	}
+	else { /* child process */
+		/* close the unused end of the pipe */
+		close(p2c[WRITE_END]);
+		close(c2p[READ_END]);
+
+		/* read from the pipe */
+		int j ;
+		//read(fd[READ_END], read_msg, BUFFER_SIZE);
+		for (j = 0 ; j<= strlen(c_read_msg) ; j++) {
+			Read(p2c[READ_END], &c_read_msg[j], 1 );
+			c_write_msg[j] = toupper(c_read_msg[j]);
+			printf("After converting the message is\n %s",c_write_msg);
+
+		//int y = 0 ;
+
+		//for ( y = 0; y <= strlen(p_write_msg) ; y++ ) {
+			//Write(c2p[WRITE_END], &c_write_msg[y], 1);
+
+		}
+		
+		
+		/* close the write end of the pipe */
+		close(p2c[READ_END]);
+		close(c2p[WRITE_END]);
+	}
+	return 0;
+}

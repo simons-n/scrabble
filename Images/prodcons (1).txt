@@ -1,0 +1,139 @@
+/*
+ * Copyright (c) 2013 Bucknell University
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 as
+ * published by the Free Software Foundation;
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ *
+ * Author: L. Felipe Perrone (perrone@bucknell.edu)
+ */
+
+#include <stdlib.h>
+#include <stdio.h>
+#include <stdbool.h> 
+#include <unistd.h>
+#include <pthread.h>
+
+#include "circular-list.h" 
+
+/* SCALE_FACTOR is a constant for you to experiment with:
+ * if you choose a very large SCALE_FACTOR, your threads
+ * might spend a long time sleeping. If you choose it to be
+ * too small, your threads will not sleep at all. Note
+ * that in the producer and consumer functions, the sleep
+ * time is computed as the INTEGER DIVISION below:
+ *
+ *  usleep(SCALE_FACTOR * rand_r(&seed) / RAND_MAX
+ *
+ *  where RAND_MAX is the largest random numver returned
+ *  by rand_r. If the numerator is smaller than RAND_MAX,
+ *  the quotient of the integer division is ZERO!
+ */
+#define SCALE_FACTOR 20000000000
+
+// global variables -----------------------
+
+struct circular_list mylist;
+
+// end of global variables ----------------
+
+void *producer (void *param) {
+  item i;
+  
+  unsigned int seed = (intptr_t)param;
+  
+  while (true) {
+    
+    // sleep for random period of time
+	int a=rand_r(&seed)/100000;
+        usleep(a); 
+    
+    // generate a random number
+    i = (item) (((double) rand_r(&seed)) / 100000);
+	
+    if (circular_list_insert(&mylist, i) == -1) {
+      printf("PRODUCER: error condition\n");
+    } else {
+      printf("PRODUCER: produced value %lf\n", i);
+    }
+  }
+}
+
+void *consumer (void *param) {
+  item i;
+  unsigned int  seed = (intptr_t)param;
+
+  
+  while (true) {
+    
+    // sleep for random period of time
+    int a=rand_r(&seed)/100000;
+    usleep(a); 
+    
+
+    if (circular_list_remove(&mylist, &i) == -1) {
+      printf("CONSUMER: error condition\n");
+    } else {
+      printf("CONSUMER: consumed value %lf\n", i);
+    }
+  }
+}
+
+int main (int argc, char *argv[]) {
+	
+  // get command line arguments
+if(argc<4){
+   printf("not enough arguments. Args: num_prods num_cons sleep_time\n");
+   exit(-1);
+   }
+   int numprod= atoi(argv[1]);
+  
+  int numcons= atoi(argv[2]);
+
+  int sleeptime= atoi(argv[3]);
+  
+  
+  // if error in command line argument usage, terminate with helpful
+  // message
+  
+  // initialize buffer
+
+  circular_list_create(&mylist, 20);
+  
+  // create producer thread(s)
+      
+    	pthread_t thread_id[numprod];
+    	int i;
+    	
+   	 for(i=0;i<numprod;i++)
+    {
+		
+        pthread_create(&thread_id[i], NULL , producer, (void *)(intptr_t)i);
+    }  
+		
+        
+      
+  
+  // create consumer thread(s)
+	pthread_t thread_id2[numcons];
+    	int b;
+    	
+   	 for(b=0;b<numcons;b++)
+    {
+        pthread_create(&thread_id2[b], NULL , consumer, (void *)(intptr_t)b);
+    }  
+  
+  sleep(sleeptime);
+  
+  // exit
+  return (0);
+}
