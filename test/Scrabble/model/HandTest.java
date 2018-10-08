@@ -144,7 +144,7 @@ public class HandTest {
             assertTrue(
                     resultHand.get(i).getLetter() == expectedHand.get(i).getLetter());
         }
-        fail("no")
+        fail("no");
     }
 
     /**
